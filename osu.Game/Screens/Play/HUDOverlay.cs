@@ -13,6 +13,7 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Primitives;
 using osu.Framework.Input.Bindings;
 using osu.Framework.Input.Events;
+using osu.Framework.Testing;
 using osu.Game.Configuration;
 using osu.Game.Input;
 using osu.Game.Input.Bindings;
@@ -355,6 +356,24 @@ namespace osu.Game.Screens.Play
                 case HUDVisibilityMode.Always:
                     ShowHud.Value = true;
                     break;
+            }
+            if (ShowHud.Value == false)
+            {
+                //Suspend();
+                TopRightElements.Suspend();
+                //BottomRightElements.Suspend();
+                TopLeftElements.Suspend();
+                rulesetComponents.Suspend();
+                mainComponents.Suspend();
+            }
+            else
+            {
+               TopRightElements.Resume();
+                //BottomRightElements.Resume();
+                TopLeftElements.Resume();
+                rulesetComponents.Resume();
+                mainComponents.Resume();
+                //Resume();
             }
         }
 

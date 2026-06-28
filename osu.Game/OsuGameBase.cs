@@ -414,7 +414,8 @@ namespace osu.Game
                         (GlobalCursorDisplay = new GlobalCursorDisplay
                         {
                             RelativeSizeAxes = Axes.Both
-                        }).WithChild(content = new OsuTooltipContainer(GlobalCursorDisplay.MenuCursor)
+                        })
+                        .WithChild(content = new OsuTooltipContainer(GlobalCursorDisplay.MenuCursor)
                         {
                             RelativeSizeAxes = Axes.Both
                         }),

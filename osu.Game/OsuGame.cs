@@ -150,6 +150,7 @@ namespace osu.Game
         private Container leftFloatingOverlayContent;
 
         private Container topMostOverlayContent;
+        private Container fpsOverlayContent;
 
         private Container footerBasedOverlayContent;
 
@@ -330,7 +331,7 @@ namespace osu.Game
         public void CloseAllOverlays(bool hideToolbar = true)
         {
             foreach (var overlay in focusedOverlays)
-                overlay.Hide();
+            { overlay.Hide(); }
 
             ScreenFooter.ActiveOverlay?.Hide();
 
@@ -1144,6 +1145,7 @@ namespace osu.Game
                     }
                 },
                 topMostOverlayContent = new Container { RelativeSizeAxes = Axes.Both },
+                fpsOverlayContent = new Container { RelativeSizeAxes = Axes.Both },
                 idleTracker,
                 new ConfineMouseTracker()
             });
@@ -1158,7 +1160,7 @@ namespace osu.Game
                 Anchor = Anchor.BottomRight,
                 Origin = Anchor.BottomRight,
                 Margin = new MarginPadding(5),
-            }, topMostOverlayContent.Add);
+            }, fpsOverlayContent.Add);
 
             if (!IsDeployedBuild)
                 loadComponentSingleFile(devBuildBanner = new DevBuildBanner(), ScreenContainer.Add);
@@ -1195,12 +1197,12 @@ namespace osu.Game
             onScreenDisplay.BeginTracking(this, LocalConfig);
 
             loadComponentSingleFile(onScreenDisplay, Add, true);
-
+            Container dummy = new Container();
             loadComponentSingleFile<INotificationOverlay>(Notifications.With(d =>
             {
                 d.Anchor = Anchor.TopRight;
                 d.Origin = Anchor.TopRight;
-            }), rightFloatingOverlayContent.Add, true);
+            }), dummy.Add, true);
 
             loadComponentSingleFile(legacyImportManager, Add);
 
@@ -1312,6 +1314,35 @@ namespace osu.Game
             // this MUST happen after `applyConfigMigrations()` call, as it relies on comparing the previous version.
             // debug / local compilations will reset to a non-release string.
             LocalConfig.SetValue(OsuSetting.Version, version);
+
+            //skibidi!
+            ScreenStack.ScreenPushed += (_, newScreen) =>
+            {
+                if (newScreen is Player)
+                {
+                    overlayContent.Suspend();
+                    ///overlayOffsetContainer.Suspend();
+                    topMostOverlayContent.Suspend();
+                    leftFloatingOverlayContent.Suspend();
+                    rightFloatingOverlayContent.Suspend();
+                    footerBasedOverlayContent.Suspend();
+                    logoContainer.Suspend();
+                }
+            };
+
+            ScreenStack.ScreenExited += (exitedScreen, _) =>
+            {
+                if (exitedScreen is Player)
+                {
+                    overlayContent.Resume();
+                    ///overlayOffsetContainer.Resume();
+                    topMostOverlayContent.Resume();
+                    leftFloatingOverlayContent.Resume();
+                    rightFloatingOverlayContent.Resume();
+                    footerBasedOverlayContent.Resume();
+                    logoContainer.Resume();
+                }
+            };
         }
 
         /// <summary>
@@ -1415,7 +1446,7 @@ namespace osu.Game
                 return;
 
             // Show above all other overlays.
-            if (overlay.IsLoaded)
+            if (overlay.IsLoaded && overlayContent.Contains(overlay))
                 overlayContent.ChangeChildDepth(overlay, (float)-Clock.CurrentTime);
             else
                 overlay.Depth = (float)-Clock.CurrentTime;

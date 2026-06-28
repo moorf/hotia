@@ -34,19 +34,20 @@ namespace osu.Game.Rulesets.Taiko.Skinning.Argon
             set
             {
                 accentColour = value;
-
-                ring.Colour = AccentColour.MultiplyAlpha(0.5f);
-                ring2.Colour = AccentColour;
+                circle.Colour = value;
+                //ring.Colour = AccentColour.MultiplyAlpha(0.5f);
+                //ring2.Colour = AccentColour;
             }
         }
 
         [Resolved]
         private DrawableHitObject drawableHitObject { get; set; } = null!;
 
-        private readonly Drawable flash;
+        //private readonly Drawable flash;
 
-        private readonly RingPiece ring;
-        private readonly RingPiece ring2;
+        //private readonly RingPiece ring;
+        //private readonly RingPiece ring2;
+        private readonly Drawable circle;
 
         protected ArgonCirclePiece()
         {
@@ -56,22 +57,22 @@ namespace osu.Game.Rulesets.Taiko.Skinning.Argon
 
             AddRangeInternal(new[]
             {
-                new Circle
+                circle = new FastCircle
                 {
                     RelativeSizeAxes = Axes.Both,
                     Colour = new Color4(0, 0, 0, 190)
                 },
-                ring = new RingPiece(20 / 70f),
-                ring2 = new RingPiece(5 / 70f),
-                flash = new Circle
-                {
-                    Name = "Flash layer",
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    RelativeSizeAxes = Axes.Both,
-                    Blending = BlendingParameters.Additive,
-                    Alpha = 0,
-                },
+                //ring = new RingPiece(20 / 70f),
+                //ring2 = new RingPiece(5 / 70f),
+                //flash = new Circle
+                //{
+                //    Name = "Flash layer",
+                //    Anchor = Anchor.Centre,
+                //    Origin = Anchor.Centre,
+                //    RelativeSizeAxes = Axes.Both,
+                //    Blending = BlendingParameters.Additive,
+                //    Alpha = 0,
+                //},
             });
         }
 
@@ -85,33 +86,33 @@ namespace osu.Game.Rulesets.Taiko.Skinning.Argon
 
         private void updateStateTransforms(DrawableHitObject h, ArmedState state)
         {
-            if (h.HitObject is not Hit)
-                return;
+            //if (h.HitObject is not Hit)
+            //    return;
 
-            switch (state)
-            {
-                case ArmedState.Hit:
-                    using (BeginAbsoluteSequence(h.HitStateUpdateTime))
-                    {
-                        flash.FadeTo(0.9f).FadeOut(500, Easing.OutQuint);
-                    }
+            //switch (state)
+            //{
+            //    case ArmedState.Hit:
+            //        using (BeginAbsoluteSequence(h.HitStateUpdateTime))
+            //        {
+            //            flash.FadeTo(0.9f).FadeOut(500, Easing.OutQuint);
+            //        }
 
-                    break;
-            }
+            //        break;
+            //}
         }
 
         protected override void OnNewBeat(int beatIndex, TimingControlPoint timingPoint, EffectControlPoint effectPoint, ChannelAmplitudes amplitudes)
         {
-            if (!effectPoint.KiaiMode)
-                return;
+            //if (!effectPoint.KiaiMode)
+            //    return;
 
-            if (drawableHitObject.State.Value == ArmedState.Idle)
-            {
-                flash
-                    .FadeTo(kiai_flash_opacity)
-                    .Then()
-                    .FadeOut(timingPoint.BeatLength * 0.75, Easing.OutSine);
-            }
+            //if (drawableHitObject.State.Value == ArmedState.Idle)
+            //{
+            //    flash
+            //        .FadeTo(kiai_flash_opacity)
+            //        .Then()
+            //        .FadeOut(timingPoint.BeatLength * 0.75, Easing.OutSine);
+            //}
         }
 
         protected override void Dispose(bool isDisposing)

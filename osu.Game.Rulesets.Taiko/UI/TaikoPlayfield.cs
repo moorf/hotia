@@ -5,19 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using osu.Framework.Allocation;
+using osu.Framework.Audio;
+using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics;
-using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Judgements;
 using osu.Game.Rulesets.Objects;
+using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
-using osu.Game.Rulesets.UI;
-using osu.Game.Rulesets.UI.Scrolling;
-using osu.Game.Rulesets.Taiko.Objects.Drawables;
 using osu.Game.Rulesets.Taiko.Judgements;
 using osu.Game.Rulesets.Taiko.Objects;
+using osu.Game.Rulesets.Taiko.Objects.Drawables;
 using osu.Game.Rulesets.Taiko.Scoring;
+using osu.Game.Rulesets.UI;
+using osu.Game.Rulesets.UI.Scrolling;
 using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Taiko.UI
@@ -37,6 +39,7 @@ namespace osu.Game.Rulesets.Taiko.UI
         private Container<KiaiHitExplosion> kiaiExplosionContainer = null!;
         private JudgementContainer<DrawableTaikoJudgement> judgementContainer = null!;
         private ScrollingHitObjectContainer drumRollHitContainer = null!;
+        private SkinnableDrawable drumSampleDrawable;
         internal Drawable HitTarget = null!;
 
         private JudgementPooler<DrawableTaikoJudgement> judgementPooler = null!;
@@ -50,6 +53,10 @@ namespace osu.Game.Rulesets.Taiko.UI
         /// with bar lines in the editor.
         /// </remarks>
         private BarLinePlayfield barLinePlayfield = null!;
+
+        [Resolved]
+        private AudioManager audio { get; set; } = null!;
+
 
         [BackgroundDependencyLoader]
         private void load(OsuColour colours)
@@ -171,14 +178,25 @@ namespace osu.Game.Rulesets.Taiko.UI
                     RelativeSizeAxes = Axes.Both,
                 },
                 drumRollHitContainer.CreateProxy(),
-                new SkinnableDrawable(new TaikoSkinComponentLookup(TaikoSkinComponents.DrumSamplePlayer), _ => new DrumSamplePlayer())
+                drumSampleDrawable = new SkinnableDrawable(new TaikoSkinComponentLookup(TaikoSkinComponents.DrumSamplePlayer), _ => new DrumSamplePlayer())
                 {
                     RelativeSizeAxes = Axes.Both,
                 },
+
                 // this is added at the end of the hierarchy to receive input before taiko objects.
                 // but is proxied below everything to not cover visual effects such as hit explosions.
                 inputDrum,
             };
+            audio.VolumeSample.BindValueChanged(v =>
+            {
+                if (v.NewValue <= 0)
+                    drumSampleDrawable?.Expire();
+                else if (drumSampleDrawable == null || !drumSampleDrawable.IsAlive)
+                    drumSampleDrawable = new SkinnableDrawable(new TaikoSkinComponentLookup(TaikoSkinComponents.DrumSamplePlayer), _ => new DrumSamplePlayer())
+                    {
+                        RelativeSizeAxes = Axes.Both,
+                    };
+            }, true);
 
             RegisterPool<Hit, DrawableHit>(50);
             RegisterPool<Hit.StrongNestedHit, DrawableHit.StrongNestedHit>(50);

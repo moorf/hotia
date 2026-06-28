@@ -20,15 +20,15 @@ namespace osu.Game.Rulesets.Taiko.Skinning.Argon
                 new Color4(167, 0, 0, 255)
             );
 
-            AddInternal(new SpriteIcon
-            {
-                Anchor = Anchor.Centre,
-                Origin = Anchor.Centre,
-                RelativeSizeAxes = Axes.Both,
-                Icon = FontAwesome.Solid.AngleLeft,
-                Size = new Vector2(ICON_SIZE),
-                Scale = new Vector2(0.8f, 1)
-            });
+            //AddInternal(new SpriteIcon
+            //{
+            //    Anchor = Anchor.Centre,
+            //    Origin = Anchor.Centre,
+            //    RelativeSizeAxes = Axes.Both,
+            //    Icon = FontAwesome.Solid.AngleLeft,
+            //    Size = new Vector2(ICON_SIZE),
+            //    Scale = new Vector2(0.8f, 1)
+            //});
         }
     }
 }
