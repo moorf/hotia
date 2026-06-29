@@ -6,6 +6,7 @@ It runs much better on mobile now, and even better if you turn off HUD.
 
 This is taiko-first -- turning off hitsounds give tiny bit more fps. Argon taiko hit object is also simplified for a small performance gain.
 
+# YOU SHOULD TRY RUNNING THIS WITH HUD DISABLED TOO, FPS GAINS ARE BIG
 
 [**Latest release**](https://github.com/moorf/hotsu/releases/latest)
 
