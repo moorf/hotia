@@ -1,7 +1,9 @@
 <p align="center">
   <img width="500" alt="hotia! logo" src="assets/hotia.png">
 </p>
-Hotia - unofficial project based on osu! sourcecode, with performance in mind. Get 2x performance (at least in taiko) now!
+Hotia - independent fork of osu! with performance in mind. Hotia is not in any way affiliated or endorsed by osu! or its maintainers.
+
+Get 2x performance (at least in taiko) now!
 
 Small changes done with the main goal - *making it run good on mobile*.
 
