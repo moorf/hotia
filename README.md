@@ -23,4 +23,4 @@ Please also note that game resources are covered by a separate licence. Please s
 
 ## Building
 
-Clone moorf/hotsu and moorf/osu-framework, then run UseLocalFramework script, then build.
+Clone moorf/hotia, moorf/hotia-framework  moorf/hotia-resources, then run UseLocalFramework and UseLocalResources scripts, then move to hotia folder and execute "dotnet build".

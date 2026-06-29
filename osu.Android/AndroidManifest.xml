@@ -7,7 +7,7 @@
 				 android:icon="@mipmap/ic_launcher"
 				 android:roundIcon="@mipmap/ic_launcher">
         <provider android:name="androidx.core.content.FileProvider"
-                  android:authorities="org.moorf.hotsu.fileprovider"
+                  android:authorities="org.moorf.hotia.fileprovider"
                   android:grantUriPermissions="true"
                   android:exported="false">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
