@@ -75,7 +75,7 @@ _**italic with underscore, bold with asterisk**_";
         {
             AddStep("Add Link", () =>
             {
-                markdownContainer.Text = "[Welcome to osu!](https://osu.ppy.sh)";
+                markdownContainer.Text = "[Welcome to hotia!](https://osu.hotia.org)";
             });
         }
 
@@ -84,7 +84,7 @@ _**italic with underscore, bold with asterisk**_";
         {
             AddStep("Add Link with inline text", () =>
             {
-                markdownContainer.Text = "Hey, [welcome to osu!](https://osu.ppy.sh) Please enjoy the game.";
+                markdownContainer.Text = "Hey, [welcome to hotia!](https://osu.hotia.org) Please enjoy the game.";
             });
         }
 
@@ -223,7 +223,7 @@ Line below";
         {
             AddStep("Add long mixed list", () =>
             {
-                markdownContainer.Text = @"1. The osu! World Cup is a country-based team tournament played on the osu! game mode.
+                markdownContainer.Text = @"1. The hotia! World Cup is a country-based team tournament played on the hotia! game mode.
    - While this competition is planned as a 4 versus 4 setup, this may change depending on the number of incoming registrations.
 2. Beatmap scoring is based on Score V2.
 3. The beatmaps for each round will be announced by the map selectors in advance on the Sunday before the actual matches take place. Only these beatmaps will be used during the respective matches.
@@ -243,7 +243,7 @@ Line below";
 14. If a player disconnects between maps and the team cannot provide a replacement, the match can be delayed 10 minutes at maximum.
 15. All players and referees must be treated with respect. Instructions of the referees and tournament Management are to be followed. Decisions labeled as final are not to be objected.
 16. Disrupting the match by foul play, insulting and provoking other players or referees, delaying the match or other deliberate inappropriate misbehavior is strictly prohibited.
-17. The multiplayer chatrooms are subject to the [osu! community rules](/wiki/Rules).
+17. The multiplayer chatrooms are subject to the [hotia! community rules](/wiki/Rules).
     - Breaking the chat rules will result in a silence. Silenced players can not participate in multiplayer matches and must be exchanged for the time being.
 18. **The seeding method will be revealed after all the teams have played their Qualifier rounds.**
 19. Unexpected incidents are handled by the tournament management. Referees may allow higher tolerance depending on the circumstances. This is up to their discretion.

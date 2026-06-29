@@ -222,7 +222,7 @@ namespace osu.Game.Tournament.IPC
         private string? findFromLocalAppData()
         {
             Logger.Log("Trying to find stable in %LOCALAPPDATA%");
-            string stableInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"osu!");
+            string stableInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"hotia!");
 
             if (ipcFileExistsInDirectory(stableInstallPath))
                 return stableInstallPath;
@@ -251,7 +251,7 @@ namespace osu.Game.Tournament.IPC
 
 #pragma warning disable CA1416
                 using (RegistryKey? key = Registry.ClassesRoot.OpenSubKey("osu"))
-                    stableInstallPath = key?.OpenSubKey(@"shell\open\command")?.GetValue(string.Empty)?.ToString()?.Split('"')[1].Replace("osu!.exe", "");
+                    stableInstallPath = key?.OpenSubKey(@"shell\open\command")?.GetValue(string.Empty)?.ToString()?.Split('"')[1].Replace("hotia!.exe", "");
 #pragma warning restore CA1416
 
                 if (ipcFileExistsInDirectory(stableInstallPath))

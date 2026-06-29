@@ -59,7 +59,7 @@ namespace osu.Game.Rulesets.Catch.Difficulty
 
             double clockRate = ModUtils.CalculateRateWithMods(score.Mods);
 
-            // this is the same as osu!, so there's potential to share the implementation... maybe
+            // this is the same as hotia!, so there's potential to share the implementation... maybe
             double preempt = IBeatmapDifficultyInfo.DifficultyRange(difficulty.ApproachRate, 1800, 1200, 450) / clockRate;
 
             double approachRate = preempt > 1200.0 ? -(preempt - 1800.0) / 120.0 : -(preempt - 1200.0) / 150.0 + 5.0;

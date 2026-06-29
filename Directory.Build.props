@@ -1,4 +1,4 @@
-﻿<!-- Contains required properties for osu!framework projects. -->
+﻿<!-- Contains required properties for hotia!framework projects. -->
 <Project>
   <PropertyGroup Label="C#">
     <LangVersion>12.0</LangVersion>

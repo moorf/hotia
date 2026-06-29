@@ -12,7 +12,7 @@ namespace osu.Game.Rulesets.Osu.Edit.Checks
 {
     public class CheckLowDiffOverlaps : ICheck
     {
-        // For the lowest difficulties, the osu! Ranking Criteria encourages overlapping ~180 BPM 1/2, but discourages ~180 BPM 1/1.
+        // For the lowest difficulties, the hotia! Ranking Criteria encourages overlapping ~180 BPM 1/2, but discourages ~180 BPM 1/1.
         private const double should_overlap_threshold = 150; // 200 BPM 1/2
         private const double should_probably_overlap_threshold = 175; // 170 BPM 1/2
         private const double should_not_overlap_threshold = 250; // 120 BPM 1/2 = 240 BPM 1/1

@@ -87,7 +87,7 @@ namespace osu.Game.Screens.Menu
         private RulesetStore rulesets { get; set; }
 
         /// <summary>
-        /// Whether the <see cref="Track"/> is provided by osu! resources, rather than a user beatmap.
+        /// Whether the <see cref="Track"/> is provided by hotia! resources, rather than a user beatmap.
         /// Only valid during or after <see cref="LogoArriving"/>.
         /// </summary>
         protected bool UsingThemedIntro { get; private set; }
@@ -112,8 +112,8 @@ namespace osu.Game.Screens.Menu
         {
             // prevent user from changing beatmap while the intro is still running.
             beatmap = Beatmap.BeginLease(false);
-
-            MenuVoice = config.GetBindable<bool>(OsuSetting.MenuVoice);
+            MenuVoice = new Bindable<bool>(false);
+            //MenuVoice = config.GetBindable<bool>(OsuSetting.MenuVoice);
             MenuMusic = config.GetBindable<bool>(OsuSetting.MenuMusic);
 
             if (api.LocalUser.Value.IsSupporter)
@@ -143,7 +143,7 @@ namespace osu.Game.Screens.Menu
             // we generally want a song to be playing on startup, so use the intro music even if a user has specified not to if no other track is available.
             if (initialBeatmap == null)
             {
-                // Intro beatmaps are generally made using the osu! ruleset.
+                // Intro beatmaps are generally made using the hotia! ruleset.
                 // It might not be present in test projects for other rulesets.
                 bool osuRulesetPresent = rulesets.GetRuleset(0) != null;
 
@@ -329,7 +329,7 @@ namespace osu.Game.Screens.Menu
             if (!resuming)
             {
                 // generally this can never be null
-                // an exception is running ruleset tests, where the osu! ruleset may not be present (causing importing the intro to fail).
+                // an exception is running ruleset tests, where the hotia! ruleset may not be present (causing importing the intro to fail).
                 if (initialBeatmap != null)
                     beatmap.Value = initialBeatmap;
                 Track = beatmap.Value.Track;

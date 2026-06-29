@@ -190,7 +190,7 @@ namespace osu.Game.Beatmaps.Formats
             SampleControlPoint? lastRelevantSamplePoint = null;
             DifficultyControlPoint? lastRelevantDifficultyPoint = null;
 
-            // In osu!taiko and osu!mania, a scroll speed is stored as "slider velocity" in legacy formats.
+            // In hotia!taiko and hotia!mania, a scroll speed is stored as "slider velocity" in legacy formats.
             // In that case, a scrolling speed change is a global effect and per-hit object difficulty control points are ignored.
             bool scrollSpeedEncodedAsSliderVelocity = onlineRulesetID == 1 || onlineRulesetID == 3;
 
@@ -238,8 +238,8 @@ namespace osu.Game.Beatmaps.Formats
                     timingPointProperties.SliderVelocity = 1;
 
                     // Kiai flag cannot be specified on the first timing point in the beatmap:
-                    // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/GameModes/Edit/Forms/TimingEntry.cs#L492-L495
-                    // That fact is also codified in the ranking criteria (https://osu.ppy.sh/wiki/en/Ranking_criteria#rules.2).
+                    // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/GameModes/Edit/Forms/TimingEntry.cs#L492-L495
+                    // That fact is also codified in the ranking criteria (https://osu.hotia.org/wiki/en/Ranking_criteria#rules.2).
                     // This is doing a thing slightly different from that in two major aspects:
                     // - It applies to only groups with timing points, not to any control point groups.
                     // - It applies to all groups with timing points that specify kiai time, not only the first one.
@@ -443,7 +443,7 @@ namespace osu.Game.Beatmaps.Formats
 
                 case 3:
                     int totalColumns = (int)Math.Max(1, beatmap.Difficulty.CircleSize);
-                    // compare: https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameModes/Play/Rulesets/Mania/Stage/StageMania_Calculations.cs#L159
+                    // compare: https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameModes/Play/Rulesets/Mania/Stage/StageMania_Calculations.cs#L159
                     position.X = (int)Math.Floor((((IHasXPosition)hitObject).X + 0.5f) * (512f / totalColumns));
                     break;
             }

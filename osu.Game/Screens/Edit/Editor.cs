@@ -71,7 +71,7 @@ namespace osu.Game.Screens.Edit
         /// An offset applied to waveform visuals to align them with expectations.
         /// </summary>
         /// <remarks>
-        /// Historically, osu! beatmaps have an assumption of full system latency baked in.
+        /// Historically, hotia! beatmaps have an assumption of full system latency baked in.
         /// This comes from a culmination of stable's platform offset, average hardware playback
         /// latency, and users having their universal offsets tweaked to previous beatmaps.
         ///
@@ -1001,7 +1001,7 @@ namespace osu.Game.Screens.Edit
                 return;
 
             // This is an initial implementation just to get an idea of how people used this function.
-            // There are a couple of differences from osu!stable's implementation which will require more work to match:
+            // There are a couple of differences from hotia!stable's implementation which will require more work to match:
             // - The "clipboard" is not populated during the duplication process.
             // - The duplicated hitobjects are inserted after the original pattern (add one beat_length and then quantize using beat snap).
             // - The duplicated hitobjects are selected (but this is also applied for all paste operations so should be changed there).

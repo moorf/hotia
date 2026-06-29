@@ -10,7 +10,7 @@ using osu.Game.Tournament.IO;
 namespace osu.Game.Tournament.Models
 {
     /// <summary>
-    /// Holds the path to locate the osu! stable cutting-edge installation.
+    /// Holds the path to locate the hotia! stable cutting-edge installation.
     /// </summary>
     [Serializable]
     public class StableInfo

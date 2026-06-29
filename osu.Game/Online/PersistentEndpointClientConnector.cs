@@ -144,10 +144,10 @@ namespace osu.Game.Online
         private async Task handleErrorAndDelay(Exception exception, CancellationToken cancellationToken)
         {
             // random stagger factor to avoid mass incidental synchronisation
-            // compare: https://github.com/peppy/osu-stable-reference/blob/013c3010a9d495e3471a9c59518de17006f9ad89/osu!/Online/BanchoClient.cs#L331
+            // compare: https://github.com/peppy/osu-stable-reference/blob/013c3010a9d495e3471a9c59518de17006f9ad89/hotia!/Online/BanchoClient.cs#L331
             int thisDelay = (int)(retryDelay * RNG.NextDouble(0.75, 1.25));
             // exponential backoff with upper limit
-            // compare: https://github.com/peppy/osu-stable-reference/blob/013c3010a9d495e3471a9c59518de17006f9ad89/osu!/Online/BanchoClient.cs#L539
+            // compare: https://github.com/peppy/osu-stable-reference/blob/013c3010a9d495e3471a9c59518de17006f9ad89/hotia!/Online/BanchoClient.cs#L539
             retryDelay = Math.Min(120000, (int)(retryDelay * 1.5));
 
             Logger.Log($"{ClientName} connect attempt failed. Next attempt in {thisDelay / 1000:N0} seconds.\n{exception}", LoggingTarget.Network);

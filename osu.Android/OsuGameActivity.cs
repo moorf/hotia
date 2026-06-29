@@ -44,7 +44,7 @@ namespace osu.Android
         "application/download",
         "application/x-zip",
         "application/x-zip-compressed",
-        // newer official mime types (see https://osu.ppy.sh/wiki/en/osu%21_File_Formats).
+        // newer official mime types (see https://osu.hotia.org/wiki/en/osu%21_File_Formats).
         "application/x-osu-beatmap-archive",
         "application/x-osu-skin-archive",
         "application/x-osu-replay",

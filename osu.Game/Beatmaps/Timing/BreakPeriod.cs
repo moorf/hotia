@@ -15,7 +15,7 @@ namespace osu.Game.Beatmaps.Timing
 
         /// <summary>
         /// The minimum gap between the end of the break and the next object.
-        /// Based on osu! preempt time at AR=10.
+        /// Based on hotia! preempt time at AR=10.
         /// See also: https://github.com/ppy/osu/issues/14330#issuecomment-1002158551
         /// </summary>
         public const double GAP_AFTER_BREAK = 450;

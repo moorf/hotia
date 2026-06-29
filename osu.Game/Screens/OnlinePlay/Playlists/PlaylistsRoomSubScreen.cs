@@ -568,7 +568,7 @@ namespace osu.Game.Screens.OnlinePlay.Playlists
 
             if (item.NewValue.Freestyle)
             {
-                // If freestyle is active, attempt to preserve the user ruleset style but only if the online item is from the osu! ruleset
+                // If freestyle is active, attempt to preserve the user ruleset style but only if the online item is from the hotia! ruleset
                 // (i.e. the beatmap is generally always convertible to the current ruleset, excluding custom rulesets).
                 if (item.NewValue.RulesetID > 0)
                     UserRuleset.Value = null;

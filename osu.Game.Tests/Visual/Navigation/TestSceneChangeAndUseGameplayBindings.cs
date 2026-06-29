@@ -38,7 +38,7 @@ namespace osu.Game.Tests.Visual.Navigation
             AddUntilStep("wait for osu subsection", () => osuBindingSubsection?.IsLoaded == true);
             AddStep("scroll to section", () => keyBindingPanel.SectionsContainer.ScrollTo(osuBindingSubsection));
             AddWaitStep("wait for scroll to end", 3);
-            AddStep("start rebinding first osu! key", () =>
+            AddStep("start rebinding first hotia! key", () =>
             {
                 var button = osuBindingSubsection.ChildrenOfType<KeyBindingRow>().First();
 

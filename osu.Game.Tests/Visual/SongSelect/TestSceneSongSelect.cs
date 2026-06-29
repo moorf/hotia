@@ -100,7 +100,7 @@ namespace osu.Game.Tests.Visual.SongSelect
 
             LoadSongSelect();
             AddStep("subscribe to screen pushed", () => Stack.ScreenPushed += onScreenPushed);
-            AddStep("click osu! cookie", () =>
+            AddStep("click hotia! cookie", () =>
             {
                 InputManager.MoveMouseTo(this.ChildrenOfType<OsuLogo>().Single());
                 InputManager.Click(MouseButton.Left);
@@ -429,7 +429,7 @@ namespace osu.Game.Tests.Visual.SongSelect
             AddAssert("mod select not visible", () => this.ChildrenOfType<ModSelectOverlay>().Single().State.Value, () => Is.EqualTo(Visibility.Hidden));
 
             AddUntilStep("wait for player", () => Stack.CurrentScreen is PlayerLoader);
-            AddAssert("osu! cookie visible", () => this.ChildrenOfType<OsuLogo>().Single().Alpha, () => Is.Not.Zero);
+            AddAssert("hotia! cookie visible", () => this.ChildrenOfType<OsuLogo>().Single().Alpha, () => Is.Not.Zero);
         }
 
         [Test]
@@ -686,7 +686,7 @@ namespace osu.Game.Tests.Visual.SongSelect
         }
 
         /// <summary>
-        /// tests that clicking the osu! logo immediately after selecting a different difficulty
+        /// tests that clicking the hotia! logo immediately after selecting a different difficulty
         /// (before the selection debounce completes) starts the correct beatmap.
         /// this tests the fix for https://github.com/ppy/osu/issues/36074
         /// </summary>

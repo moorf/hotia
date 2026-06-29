@@ -1214,7 +1214,7 @@ namespace osu.Game.Tests.Beatmaps.Formats
                 var working = new TestWorkingBeatmap(decoder.Decode(stream));
                 var playable = working.GetPlayableBeatmap(ruleset.RulesetInfo, Array.Empty<Mod>());
 
-                // There's no good way to figure out these values other than to compare (in code) with osu!stable...
+                // There's no good way to figure out these values other than to compare (in code) with hotia!stable...
 
                 Assert.That(((IHasComboInformation)playable.HitObjects[0]).ComboIndexWithOffsets, Is.EqualTo(1));
                 Assert.That(((IHasComboInformation)playable.HitObjects[2]).ComboIndexWithOffsets, Is.EqualTo(2));

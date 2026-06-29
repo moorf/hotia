@@ -9,7 +9,7 @@ namespace osu.Game.Rulesets.Osu.Skinning
 {
     /// <summary>
     /// A sprite which is displayed within the playfield, but historically was not considered part of the playfield.
-    /// Performs scale adjustment to undo the scale applied by <see cref="PlayfieldAdjustmentContainer"/> (osu! ruleset specifically).
+    /// Performs scale adjustment to undo the scale applied by <see cref="PlayfieldAdjustmentContainer"/> (hotia! ruleset specifically).
     /// </summary>
     public partial class NonPlayfieldSprite : Sprite
     {

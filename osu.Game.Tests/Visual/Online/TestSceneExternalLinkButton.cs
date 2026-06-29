@@ -15,7 +15,7 @@ namespace osu.Game.Tests.Visual.Online
             Child = new OsuContextMenuContainer
             {
                 RelativeSizeAxes = Axes.Both,
-                Child = new ExternalLinkButton("https://osu.ppy.sh/home")
+                Child = new ExternalLinkButton("https://osu.hotia.org/home")
                 {
                     Size = new Vector2(50),
                     Anchor = Anchor.Centre,

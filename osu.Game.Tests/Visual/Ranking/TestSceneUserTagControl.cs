@@ -96,7 +96,7 @@ namespace osu.Game.Tests.Visual.Ranking
         [Test]
         public void TestRulesetSupport()
         {
-            AddStep("show for osu! beatmap", () =>
+            AddStep("show for hotia! beatmap", () =>
             {
                 var working = CreateWorkingBeatmap(new OsuRuleset().RulesetInfo);
                 working.BeatmapInfo.OnlineID = 42;

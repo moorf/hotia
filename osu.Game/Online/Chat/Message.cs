@@ -39,7 +39,7 @@ namespace osu.Game.Online.Chat
         }
 
         /// <summary>
-        /// A unique identifier for this message. Sent to and from osu!web to use for deduplication.
+        /// A unique identifier for this message. Sent to and from hotia!web to use for deduplication.
         /// </summary>
         [JsonProperty(@"uuid")]
         public string Uuid { get; set; } = string.Empty;

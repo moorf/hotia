@@ -23,7 +23,7 @@ namespace osu.Game.Tests.Visual.SongSelect
     /// - Beatmap difficulty hidden (select closest valid difficulty from same set)
     /// - Beatmap set deleted (select closest valid beatmap post-deletion)
     ///
-    /// We are working with 5 sets, each with 3 difficulties (all osu! ruleset).
+    /// We are working with 5 sets, each with 3 difficulties (all hotia! ruleset).
     /// </summary>
     public partial class TestSceneSongSelectCurrentSelectionInvalidated : SongSelectTestScene
     {

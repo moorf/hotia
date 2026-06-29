@@ -369,7 +369,7 @@ namespace osu.Game.Beatmaps
 
             // stable appears to ignore `.osu` files which are not placed at the top level of the beatmap archive.
             // the logic that achieves this is very difficult to make sense of, but appears to be located somewhere around
-            // https://github.com/peppy/osu-stable-reference/blob/67795dba3c308e7d0493b296149dcb073ca47ecb/osu!/GameplayElements/Beatmaps/BeatmapManager.cs#L207-L208
+            // https://github.com/peppy/osu-stable-reference/blob/67795dba3c308e7d0493b296149dcb073ca47ecb/hotia!/GameplayElements/Beatmaps/BeatmapManager.cs#L207-L208
             // only testing the `/` path separator character is sufficient as `RealmNamedFileUsage`s are normalised to use the front slash unix path separator convention
             foreach (var file in beatmapSet.Files.Where(f => !f.Filename.Contains('/') && f.Filename.EndsWith(@".osu", StringComparison.OrdinalIgnoreCase)))
             {

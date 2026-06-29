@@ -163,7 +163,7 @@ namespace osu.Game.Tests.Visual.Multiplayer
             AddStep("set empty filter criteria", () => container.Filter.Value = new LoungeFilterCriteria());
             AddUntilStep("5 rooms visible", () => container.DrawableRooms.Count(r => r.IsPresent) == 5);
 
-            AddStep("filter osu! rooms", () => container.Filter.Value = new LoungeFilterCriteria { Ruleset = new OsuRuleset().RulesetInfo });
+            AddStep("filter hotia! rooms", () => container.Filter.Value = new LoungeFilterCriteria { Ruleset = new OsuRuleset().RulesetInfo });
             AddUntilStep("2 rooms visible", () => container.DrawableRooms.Count(r => r.IsPresent) == 2);
 
             AddStep("filter catch rooms", () => container.Filter.Value = new LoungeFilterCriteria { Ruleset = new CatchRuleset().RulesetInfo });

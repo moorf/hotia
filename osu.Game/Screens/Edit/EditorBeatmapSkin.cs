@@ -53,7 +53,7 @@ namespace osu.Game.Screens.Edit
                 // due to the foibles of how `IHasComboInformation` / `ComboIndexWithOffsets` work,
                 // the actual effective first combo colour that will be used on the beatmap is the one with index 1, not 0.
                 // see also: `IHasComboInformation.UpdateComboInformation`,
-                // https://github.com/peppy/osu-stable-reference/blob/46cd3a10af7cc6cc96f4eba92ef1812dc8c3a27e/osu!/GameModes/Edit/Forms/SongSetup.cs#L233-L234.
+                // https://github.com/peppy/osu-stable-reference/blob/46cd3a10af7cc6cc96f4eba92ef1812dc8c3a27e/hotia!/GameModes/Edit/Forms/SongSetup.cs#L233-L234.
                 for (int i = 0; i < comboColours.Count; ++i)
                     ComboColours.Add(comboColours[(i + 1) % comboColours.Count]);
             }

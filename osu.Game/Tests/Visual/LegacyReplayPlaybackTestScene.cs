@@ -23,7 +23,7 @@ using osu.Game.Screens.Play;
 namespace osu.Game.Tests.Visual
 {
     /// <summary>
-    /// The goal of this abstract test class is to exercise correct playback of replays sourced from previous osu! versions.
+    /// The goal of this abstract test class is to exercise correct playback of replays sourced from previous hotia! versions.
     /// Use <see cref="RunTest"/> to exercise that property.
     /// </summary>
     [HeadlessTest]
@@ -34,7 +34,7 @@ namespace osu.Game.Tests.Visual
         private readonly List<JudgementResult> results = new List<JudgementResult>();
 
         /// <summary>
-        /// This is provided as a convenience for testing behaviour against osu!stable.
+        /// This is provided as a convenience for testing behaviour against hotia!stable.
         /// Setting this field to a non-null path will cause beatmap files and replays used in all test cases
         /// to be exported to disk so that they can be cross-checked against stable.
         /// </summary>

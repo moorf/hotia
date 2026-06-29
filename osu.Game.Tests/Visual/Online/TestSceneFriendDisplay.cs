@@ -255,7 +255,7 @@ namespace osu.Game.Tests.Visual.Online
                 Username = "Evast",
                 Id = 8195163,
                 CountryCode = CountryCode.BY,
-                CoverUrl = "https://assets.ppy.sh/user-profile-covers/8195163/4a8e2ad5a02a2642b631438cfa6c6bd7e2f9db289be881cb27df18331f64144c.jpeg",
+                CoverUrl = "https://assets.hotia.org/user-profile-covers/8195163/4a8e2ad5a02a2642b631438cfa6c6bd7e2f9db289be881cb27df18331f64144c.jpeg",
                 WasRecentlyOnline = false,
                 LastVisit = DateTimeOffset.Now
             }

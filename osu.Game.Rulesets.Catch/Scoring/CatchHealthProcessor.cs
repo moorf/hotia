@@ -25,9 +25,9 @@ namespace osu.Game.Rulesets.Catch.Scoring
         protected override bool CheckDefaultFailCondition(JudgementResult result)
         {
             // matches stable.
-            // see: https://github.com/peppy/osu-stable-reference/blob/46cd3a10af7cc6cc96f4eba92ef1812dc8c3a27e/osu!/GameModes/Play/Rulesets/Ruleset.cs#L967
+            // see: https://github.com/peppy/osu-stable-reference/blob/46cd3a10af7cc6cc96f4eba92ef1812dc8c3a27e/hotia!/GameModes/Play/Rulesets/Ruleset.cs#L967
             // the above early-return skips the failure check at the end of the same method:
-            // https://github.com/peppy/osu-stable-reference/blob/46cd3a10af7cc6cc96f4eba92ef1812dc8c3a27e/osu!/GameModes/Play/Rulesets/Ruleset.cs#L1232
+            // https://github.com/peppy/osu-stable-reference/blob/46cd3a10af7cc6cc96f4eba92ef1812dc8c3a27e/hotia!/GameModes/Play/Rulesets/Ruleset.cs#L1232
             // making it impossible to fail on a tiny droplet regardless of result.
             if (result.Type == HitResult.SmallTickMiss)
                 return false;

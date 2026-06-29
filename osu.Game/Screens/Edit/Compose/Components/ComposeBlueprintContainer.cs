@@ -198,7 +198,7 @@ namespace osu.Game.Screens.Edit.Compose.Components
                     {
                         Anchor = Anchor.BottomLeft,
                         Origin = Anchor.BottomLeft,
-                        // This is currently using the osu! hitcircle icon as a default in order
+                        // This is currently using the hotia! hitcircle icon as a default in order
                         // not to break any custom rulesets that depend on there being a defined
                         // new combo button.
                         // Could consider removing it and let rulesets specify their own buttons/icons.

@@ -95,7 +95,7 @@ namespace osu.Game.Screens.Select
         protected bool SupportScoping { init => scopedBeatmapSet.Disabled = !value; }
 
         /// <summary>
-        /// Whether the osu! logo should be shown at the bottom-right of the screen.
+        /// Whether the hotia! logo should be shown at the bottom-right of the screen.
         /// </summary>
         protected bool ShowOsuLogo { get; init; } = true;
 
@@ -1039,7 +1039,7 @@ namespace osu.Game.Screens.Select
                     // in most circumstances this is handled already by the carousel itself, but there are cases where it will not be.
                     // one of which is filtering out all visible beatmaps and attempting to start gameplay.
                     // in that case, users still expect a `Select` press to advance to gameplay anyway, using the ambient selected beatmap if there is one,
-                    // which matches the behaviour resulting from clicking the osu! cookie in that scenario.
+                    // which matches the behaviour resulting from clicking the hotia! cookie in that scenario.
                     ensureGlobalBeatmapValid();
                     SelectAndRun(Beatmap.Value.BeatmapInfo, OnStart);
                     return true;

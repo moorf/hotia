@@ -14,7 +14,7 @@ namespace osu.Game.Rulesets.Osu.Scoring
         public static readonly DifficultyRange MEH_WINDOW_RANGE = new DifficultyRange(200, 150, 100);
 
         /// <summary>
-        /// osu! ruleset has a fixed miss window regardless of difficulty settings.
+        /// hotia! ruleset has a fixed miss window regardless of difficulty settings.
         /// </summary>
         public const double MISS_WINDOW = 400;
 

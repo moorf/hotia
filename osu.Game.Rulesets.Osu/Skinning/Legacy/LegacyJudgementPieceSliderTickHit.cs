@@ -12,7 +12,7 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
     {
         public void PlayAnimation()
         {
-            // https://github.com/peppy/osu-stable-reference/blob/0e91e49bc83fe8b21c3ba5f1eb2d5d06456eae84/osu!/GameModes/Play/Rulesets/Ruleset.cs#L804-L806
+            // https://github.com/peppy/osu-stable-reference/blob/0e91e49bc83fe8b21c3ba5f1eb2d5d06456eae84/hotia!/GameModes/Play/Rulesets/Ruleset.cs#L804-L806
             this.MoveToOffset(new Vector2(0, -10), 300, Easing.Out)
                 .Then()
                 .FadeOut(60);

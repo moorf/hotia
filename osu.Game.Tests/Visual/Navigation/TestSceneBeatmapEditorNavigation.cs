@@ -195,7 +195,7 @@ namespace osu.Game.Tests.Visual.Navigation
             AddStep("open editor", () => ((SoloSongSelect)Game.ScreenStack.CurrentScreen).Edit(beatmapSet.Beatmaps.First(beatmap => beatmap.Ruleset.OnlineID == 0)));
 
             AddUntilStep("wait for editor open", () => Game.ScreenStack.CurrentScreen is Editor editor && editor.ReadyForUse);
-            AddAssert("editor ruleset is osu!", () => Game.Ruleset.Value, () => Is.EqualTo(new OsuRuleset().RulesetInfo));
+            AddAssert("editor ruleset is hotia!", () => Game.Ruleset.Value, () => Is.EqualTo(new OsuRuleset().RulesetInfo));
 
             AddStep("test gameplay", () => getEditor().TestGameplay());
             AddUntilStep("wait for player", () =>
@@ -206,7 +206,7 @@ namespace osu.Game.Tests.Visual.Navigation
                 Game.CloseAllOverlays();
                 return Game.ScreenStack.CurrentScreen is EditorPlayer editorPlayer && editorPlayer.IsLoaded;
             });
-            AddAssert("gameplay ruleset is osu!", () => Game.Ruleset.Value, () => Is.EqualTo(new OsuRuleset().RulesetInfo));
+            AddAssert("gameplay ruleset is hotia!", () => Game.Ruleset.Value, () => Is.EqualTo(new OsuRuleset().RulesetInfo));
 
             AddStep("exit to song select", () => Game.PerformFromScreen(_ => { }, typeof(SoloSongSelect).Yield()));
             AddUntilStep("wait for song select", () => Game.ScreenStack.CurrentScreen is SoloSongSelect);
@@ -355,7 +355,7 @@ namespace osu.Game.Tests.Visual.Navigation
             });
             AddStep("click on catch", () =>
             {
-                var item = getEditor().ChildrenOfType<Menu.DrawableMenuItem>().Single(i => i.Item.Text.Value.ToString() == "osu!catch");
+                var item = getEditor().ChildrenOfType<Menu.DrawableMenuItem>().Single(i => i.Item.Text.Value.ToString() == "hotia!catch");
                 item.TriggerClick();
             });
             AddAssert("save dialog displayed", () => Game.ChildrenOfType<DialogOverlay>().Single().CurrentDialog is SaveRequiredPopupDialog);

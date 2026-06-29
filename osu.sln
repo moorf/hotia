@@ -108,6 +108,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework.Android", "..
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework.iOS", "..\osu-framework\osu.Framework.iOS\osu.Framework.iOS.csproj", "{E1DFB3B0-C04B-454F-B8CB-C43D79768C87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Game.Resources", "..\osu-resources\osu.Game.Resources\osu.Game.Resources.csproj", "{B58F2DE5-4A8F-4039-8544-09BA2F2CF6C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -278,6 +280,10 @@ Global
 		{E1DFB3B0-C04B-454F-B8CB-C43D79768C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1DFB3B0-C04B-454F-B8CB-C43D79768C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1DFB3B0-C04B-454F-B8CB-C43D79768C87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B58F2DE5-4A8F-4039-8544-09BA2F2CF6C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B58F2DE5-4A8F-4039-8544-09BA2F2CF6C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B58F2DE5-4A8F-4039-8544-09BA2F2CF6C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B58F2DE5-4A8F-4039-8544-09BA2F2CF6C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

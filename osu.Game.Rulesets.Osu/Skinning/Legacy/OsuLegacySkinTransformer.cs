@@ -145,9 +145,9 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
 
                     Texture? getSliderPointTexture(HitResult result)
                     {
-                        // https://github.com/peppy/osu-stable-reference/blob/0e91e49bc83fe8b21c3ba5f1eb2d5d06456eae84/osu!/GameModes/Play/Rulesets/Ruleset.cs#L799
+                        // https://github.com/peppy/osu-stable-reference/blob/0e91e49bc83fe8b21c3ba5f1eb2d5d06456eae84/hotia!/GameModes/Play/Rulesets/Ruleset.cs#L799
                         if (GetConfig<SkinConfiguration.LegacySetting, decimal>(SkinConfiguration.LegacySetting.Version)?.Value < 2m)
-                            // Note that osu!stable used sliderpoint30 for heads and repeats, and sliderpoint10 for ticks, but the mapping is intentionally changed here so that each texture represents one type of HitResult.
+                            // Note that hotia!stable used sliderpoint30 for heads and repeats, and sliderpoint10 for ticks, but the mapping is intentionally changed here so that each texture represents one type of HitResult.
                             return GetTexture(result == HitResult.LargeTickHit ? "sliderpoint30" : "sliderpoint10");
 
                         return null;
@@ -306,7 +306,7 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
                             break;
 
                         case OsuSkinConfiguration.HitCircleOverlayAboveNumber:
-                            // See https://osu.ppy.sh/help/wiki/Skinning/skin.ini#%5Bgeneral%5D
+                            // See https://osu.hotia.org/help/wiki/Skinning/skin.ini#%5Bgeneral%5D
                             // HitCircleOverlayAboveNumer (with typo) should still be supported for now.
                             return base.GetConfig<OsuSkinConfiguration, TValue>(OsuSkinConfiguration.HitCircleOverlayAboveNumber) ??
                                    base.GetConfig<OsuSkinConfiguration, TValue>(OsuSkinConfiguration.HitCircleOverlayAboveNumer);

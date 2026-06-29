@@ -88,7 +88,7 @@ namespace osu.Game.Tests.Visual.Beatmaps
             beatmap.Availability = new BeatmapSetOnlineAvailability
             {
                 DownloadDisabled = true,
-                ExternalLink = "https://osu.ppy.sh",
+                ExternalLink = "https://osu.hotia.org",
             };
 
             return beatmap;

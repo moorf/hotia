@@ -24,7 +24,7 @@ using osuTK;
 namespace osu.Game.Database
 {
     /// <summary>
-    /// Exporter for osu!stable legacy beatmap archives.
+    /// Exporter for hotia!stable legacy beatmap archives.
     /// Converts all beatmaps in the set to legacy format and exports it as a legacy package.
     /// </summary>
     public class LegacyBeatmapExporter : LegacyArchiveExporter<BeatmapSetInfo>

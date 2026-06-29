@@ -21,7 +21,9 @@ using osu.Framework.Utils;
 using osu.Game.Beatmaps.ControlPoints;
 using osu.Game.Graphics.Backgrounds;
 using osu.Game.Graphics.Containers;
+using osu.Game.Graphics.Sprites;
 using osu.Game.Overlays;
+using osu.Game.Screens.OnlinePlay.Components;
 using osuTK;
 using osuTK.Graphics;
 using osuTK.Input;
@@ -29,19 +31,19 @@ using osuTK.Input;
 namespace osu.Game.Screens.Menu
 {
     /// <summary>
-    /// osu! logo and its attachments (pulsing, visualiser etc.)
+    /// hotia! logo and its attachments (pulsing, visualiser etc.)
     /// </summary>
     public partial class OsuLogo : BeatSyncedContainer
     {
         private const double transition_length = 300;
 
         /// <summary>
-        /// The osu! logo sprite has a shadow included in its texture.
+        /// The hotia! logo sprite has a shadow included in its texture.
         /// This adjustment vector is used to match the precise edge of the border of the logo.
         /// </summary>
         public static readonly Vector2 SCALE_ADJUST = new Vector2(0.94f);
 
-        private readonly Sprite logo;
+        private readonly Container logo;
         private readonly CircularContainer logoContainer;
         private readonly Container logoBounceContainer;
         private readonly Container logoBeatContainer;
@@ -77,7 +79,7 @@ namespace osu.Game.Screens.Menu
 
         public bool IsTracking { get; set; }
 
-        private readonly Sprite ripple;
+        private readonly Circle ripple;
 
         private readonly Container rippleContainer;
 
@@ -137,12 +139,14 @@ namespace osu.Game.Screens.Menu
                                     RelativeSizeAxes = Axes.Both,
                                     Children = new Drawable[]
                                     {
-                                        ripple = new Sprite
+                                        ripple = new Circle
                                         {
                                             Anchor = Anchor.Centre,
                                             Origin = Anchor.Centre,
                                             Blending = BlendingParameters.Additive,
-                                            Alpha = 0
+                                            Alpha = 0,
+                                            Colour = Color4.HotPink,
+                                            RelativeSizeAxes = Axes.Both,
                                         }
                                     }
                                 },
@@ -174,6 +178,7 @@ namespace osu.Game.Screens.Menu
                                                             Anchor = Anchor.Centre,
                                                             Origin = Anchor.Centre,
                                                             RelativeSizeAxes = Axes.Both,
+                                                            
                                                             Scale = SCALE_ADJUST,
                                                             Masking = true,
                                                             Children = new Drawable[]
@@ -188,7 +193,7 @@ namespace osu.Game.Screens.Menu
                                                                         new Box
                                                                         {
                                                                             RelativeSizeAxes = Axes.Both,
-                                                                            Colour = ColourInfo.GradientVertical(Color4Extensions.FromHex(@"ff66ab"), Color4Extensions.FromHex(@"cc5289")),
+                                                                            Colour = ColourInfo.GradientVertical(Color4Extensions.FromHex(@"111111"), Color4Extensions.FromHex(@"cc5252")), //ff66ab//cc5289
                                                                         },
                                                                         triangles = new TrianglesV2
                                                                         {
@@ -197,7 +202,7 @@ namespace osu.Game.Screens.Menu
                                                                             Thickness = 0.009f,
                                                                             ScaleAdjust = 3,
                                                                             SpawnRatio = 1.4f,
-                                                                            Colour = ColourInfo.GradientVertical(Color4Extensions.FromHex(@"ff66ab"), Color4Extensions.FromHex(@"b6346f")),
+                                                                            Colour = ColourInfo.GradientVertical(Color4Extensions.FromHex(@"111111"), Color4Extensions.FromHex(@"b63434")),//b6346f
                                                                             RelativeSizeAxes = Axes.Both,
                                                                         },
                                                                     }
@@ -211,11 +216,40 @@ namespace osu.Game.Screens.Menu
                                                                 },
                                                             },
                                                         },
-                                                        logo = new Sprite
+                                                        logo = new Container
                                                         {
+                                                            Size = new Vector2(512),
                                                             Anchor = Anchor.Centre,
                                                             Origin = Anchor.Centre,
-                                                        },
+                                                            Children = new Drawable[]
+                                                            {
+                                                                new OsuSpriteText
+                                                                {
+                                                                    Anchor = Anchor.Centre,
+                                                                    Origin = Anchor.Centre,
+                                                                    Text = "hotia!",
+                                                                    Font = FontUsage.Default.With(size: 144, weight: "Bold"),
+                                                                    UseFullGlyphHeight = true,
+                                                                    Colour = Color4.White,
+                                                                },
+                                                                new CircularContainer {
+                                                                    RelativeSizeAxes = Axes.Both,
+                                                                    Colour = Color4.White,
+                                                                    Anchor = Anchor.Centre,
+                                                                    Origin = Anchor.Centre,
+                                                                    Scale = new Vector2(0.997f),
+                                                                    Masking = true,
+                                                                    BorderThickness = 18,
+                                                                    BorderColour = Color4.White,
+                                                                    Child = new Box
+                                                                    {
+                                                                        AlwaysPresent = true,
+                                                                        Alpha = 0,
+                                                                        RelativeSizeAxes = Axes.Both
+                                                                    },
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 },
                                                 impactContainer = new CircularContainer
@@ -282,8 +316,8 @@ namespace osu.Game.Screens.Menu
             SampleBeat = audio.Samples.Get(@"Menu/osu-logo-heartbeat");
             SampleDownbeat = audio.Samples.Get(@"Menu/osu-logo-downbeat");
 
-            logo.Texture = textures.Get(@"Menu/logo");
-            ripple.Texture = textures.Get(@"Menu/logo");
+            //logo.Texture = textures.Get(@"Menu/fountain-star");
+            //ripple.Texture = textures.Get(@"Menu/logo");
         }
 
         private int lastBeatIndex;

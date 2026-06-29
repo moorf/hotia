@@ -20,7 +20,7 @@ namespace osu.Game.Tests.Visual
         [Test]
         public void TestOutrageouslyLargeLeadInTime()
         {
-            // "graciously borrowed" from https://osu.ppy.sh/beatmapsets/948643#osu/1981090
+            // "graciously borrowed" from https://osu.hotia.org/beatmapsets/948643#osu/1981090
             const double lead_in_time = 2147272727;
             const double hit_circle_time = 100;
 

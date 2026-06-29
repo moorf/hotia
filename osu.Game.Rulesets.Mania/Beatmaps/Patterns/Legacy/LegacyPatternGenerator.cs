@@ -85,7 +85,7 @@ namespace osu.Game.Rulesets.Mania.Beatmaps.Patterns.Legacy
         private double? conversionDifficulty;
 
         /// <summary>
-        /// A difficulty factor used for various conversion methods from osu!stable.
+        /// A difficulty factor used for various conversion methods from hotia!stable.
         /// </summary>
         protected double ConversionDifficulty
         {

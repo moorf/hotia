@@ -664,7 +664,7 @@ namespace osu.Game.Screens.Select
 
         /// <summary>
         /// Helper function for building a UTC date from only the year, month and day.
-        /// UTC is used to keep consistent search results with osu!web.
+        /// UTC is used to keep consistent search results with hotia!web.
         /// </summary>
         private static DateTimeOffset dateTimeOffsetFromDateOnly(int year, int month, int day) =>
             new DateTimeOffset(year, month, day, 0, 0, 0, TimeSpan.Zero);

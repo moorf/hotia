@@ -85,7 +85,7 @@ namespace osu.Game.Rulesets.Mania.Beatmaps
                 {
                     int countSliderOrSpinner = difficulty.EndTimeObjectCount;
 
-                    // In osu!stable, this division appears as if it happens on floats, but due to release-mode
+                    // In hotia!stable, this division appears as if it happens on floats, but due to release-mode
                     // optimisations, it actually ends up happening on doubles.
                     double percentSpecialObjects = (double)countSliderOrSpinner / difficulty.TotalObjectCount;
 

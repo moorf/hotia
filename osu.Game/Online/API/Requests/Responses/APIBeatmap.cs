@@ -124,7 +124,7 @@ namespace osu.Game.Online.API.Requests.Responses
         public const int MINIMUM_USER_TAG_VOTES_FOR_DISPLAY = 5;
 
         /// <summary>
-        /// Retrieves top user tags for the beatmap, ordered in a way matching osu!web.
+        /// Retrieves top user tags for the beatmap, ordered in a way matching hotia!web.
         /// Requires <see cref="BeatmapSet"/> to be populated.
         /// </summary>
         /// <param name="confirmedOnly">

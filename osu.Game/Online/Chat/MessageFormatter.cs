@@ -13,16 +13,16 @@ namespace osu.Game.Online.Chat
 {
     public static class MessageFormatter
     {
-        // [[Performance Points]] -> wiki:Performance Points (https://osu.ppy.sh/wiki/Performance_Points)
+        // [[Performance Points]] -> wiki:Performance Points (https://osu.hotia.org/wiki/Performance_Points)
         private static readonly Regex wiki_regex = new Regex(@"\[\[(?<text>[^\]]+)\]\]");
 
-        // (test)[https://osu.ppy.sh/b/1234] -> test (https://osu.ppy.sh/b/1234)
+        // (test)[https://osu.hotia.org/b/1234] -> test (https://osu.hotia.org/b/1234)
         private static readonly Regex old_link_regex = new Regex(@"\((?<text>(((?<=\\)[\(\)])|[^\(\)])*(((?<open>\()(((?<=\\)[\(\)])|[^\(\)])*)+((?<close-open>\))(((?<=\\)[\(\)])|[^\(\)])*)+)*(?(open)(?!)))\)\[(?<url>[a-z]+://[^ ]+)\]");
 
-        // [https://osu.ppy.sh/b/1234 Beatmap [Hard] (poop)] -> Beatmap [hard] (poop) (https://osu.ppy.sh/b/1234)
+        // [https://osu.hotia.org/b/1234 Beatmap [Hard] (poop)] -> Beatmap [hard] (poop) (https://osu.hotia.org/b/1234)
         private static readonly Regex new_link_regex = new Regex(@"\[(?<url>[a-z]+://[^ ]+) (?<text>(((?<=\\)[\[\]])|[^\[\]])*(((?<open>\[)(((?<=\\)[\[\]])|[^\[\]])*)+((?<close-open>\])(((?<=\\)[\[\]])|[^\[\]])*)+)*(?(open)(?!)))\]");
 
-        // [test](https://osu.ppy.sh/b/1234) -> test (https://osu.ppy.sh/b/1234) aka correct markdown format
+        // [test](https://osu.hotia.org/b/1234) -> test (https://osu.hotia.org/b/1234) aka correct markdown format
         private static readonly Regex markdown_link_regex = new Regex(@"\[(?<text>(((?<=\\)[\[\]])|[^\[\]])*(((?<open>\[)(((?<=\\)[\[\]])|[^\[\]])*)+((?<close-open>\])(((?<=\\)[\[\]])|[^\[\]])*)+)*(?(open)(?!)))\]\((?<url>[a-z]+://[^ ]+)(\s+(?<title>""([^""]|(?<=\\)"")*""))?\)");
 
         // advanced, RFC-compatible regular expression that matches any possible URL, *but* allows certain invalid characters that are widely used
@@ -60,7 +60,7 @@ namespace osu.Game.Online.Chat
                                     .Split('/').Last(); // only keep domain name, ignoring protocol.
         }
 
-        private static string websiteRootUrl = "osu.ppy.sh";
+        private static string websiteRootUrl = "osu.hotia.org";
 
         private static void handleMatches(Regex regex, string display, string link, MessageFormatterResult result, int startIndex = 0, LinkAction? linkActionOverride = null, char[]? escapeChars = null)
         {
@@ -115,7 +115,7 @@ namespace osu.Game.Online.Chat
                 var link = new Link(linkText, index, indexLength, details.Action, details.Argument);
 
                 // sometimes an already-processed formatted link can reduce to a simple URL, too
-                // (example: [mean example - https://osu.ppy.sh](https://osu.ppy.sh))
+                // (example: [mean example - https://osu.hotia.org](https://osu.hotia.org))
                 // therefore we need to check if any of the pre-existing links contains the raw one we found
                 if (result.Links.All(existingLink => !existingLink.Overlaps(link)))
                     result.Links.Add(link);
@@ -158,10 +158,10 @@ namespace osu.Game.Online.Chat
                                     return new LinkDetails(LinkAction.External, url);
 
                                 if (args.Length > 4 && int.TryParse(args[4], out int id))
-                                    // https://osu.ppy.sh/beatmapsets/1154158#osu/2768184
+                                    // https://osu.hotia.org/beatmapsets/1154158#osu/2768184
                                     return new LinkDetails(LinkAction.OpenBeatmap, id.ToString());
 
-                                // https://osu.ppy.sh/beatmapsets/1154158#whatever
+                                // https://osu.hotia.org/beatmapsets/1154158#whatever
                                 string trimmed = mainArg.Split('#').First();
                                 if (int.TryParse(trimmed, out id))
                                     return new LinkDetails(LinkAction.OpenBeatmapSet, id.ToString());
@@ -184,11 +184,11 @@ namespace osu.Game.Online.Chat
                                 switch (args.Length)
                                 {
                                     case 4:
-                                        // https://osu.ppy.sh/home/changelog
+                                        // https://osu.hotia.org/home/changelog
                                         return new LinkDetails(LinkAction.OpenChangelog, string.Empty);
 
                                     case 6:
-                                        // https://osu.ppy.sh/home/changelog/lazer/2021.1006
+                                        // https://osu.hotia.org/home/changelog/lazer/2021.1006
                                         return new LinkDetails(LinkAction.OpenChangelog, $"{args[4]}/{args[5]}");
                                 }
 
@@ -200,7 +200,7 @@ namespace osu.Game.Online.Chat
 
                                 if (args.Length == 5)
                                 {
-                                    // https://osu.ppy.sh/multiplayer/rooms/{id}
+                                    // https://osu.hotia.org/multiplayer/rooms/{id}
                                     // route used for both multiplayer and playlists
                                     return new LinkDetails(LinkAction.JoinRoom, args[4]);
                                 }

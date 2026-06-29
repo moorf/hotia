@@ -43,7 +43,7 @@ namespace osu.Game.Online.API
 
         /// <summary>
         /// The API response version.
-        /// See: https://osu.ppy.sh/docs/index.html#api-versions
+        /// See: https://osu.hotia.org/docs/index.html#api-versions
         /// </summary>
         public int APIVersion { get; }
 

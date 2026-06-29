@@ -20,7 +20,7 @@ namespace osu.Game.Users
             CornerRadius = 6;
         }
 
-        // Matches osu!web styling.
+        // Matches hotia!web styling.
         protected override Drawable? CreateBackground() => Empty();
 
         protected override Drawable CreateLayout() => new FillFlowContainer

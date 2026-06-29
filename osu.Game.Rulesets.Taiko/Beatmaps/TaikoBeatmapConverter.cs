@@ -19,10 +19,10 @@ namespace osu.Game.Rulesets.Taiko.Beatmaps
     internal class TaikoBeatmapConverter : BeatmapConverter<TaikoHitObject>
     {
         /// <summary>
-        /// A speed multiplier applied globally to osu!taiko.
+        /// A speed multiplier applied globally to hotia!taiko.
         /// </summary>
         /// <remarks>
-        /// osu! is generally slower than taiko, so a factor was historically added to increase speed for converts.
+        /// hotia! is generally slower than taiko, so a factor was historically added to increase speed for converts.
         /// This must be used everywhere slider length or beat length is used in taiko.
         ///
         /// Of note, this has never been exposed to the end user, and is considered a hidden internal multiplier.
@@ -30,13 +30,13 @@ namespace osu.Game.Rulesets.Taiko.Beatmaps
         public const float VELOCITY_MULTIPLIER = 1.4f;
 
         /// <summary>
-        /// Because swells are easier in taiko than spinners are in osu!,
+        /// Because swells are easier in taiko than spinners are in hotia!,
         /// legacy taiko multiplies a factor when converting the number of required hits.
         /// </summary>
         private const float swell_hit_multiplier = 1.65f;
 
         /// <summary>
-        /// Base osu! slider scoring distance.
+        /// Base hotia! slider scoring distance.
         /// </summary>
         private const float osu_base_scoring_distance = 100;
 
@@ -102,7 +102,7 @@ namespace osu.Game.Rulesets.Taiko.Beatmaps
 
         protected override IEnumerable<TaikoHitObject> ConvertHitObject(HitObject obj, IBeatmap beatmap, CancellationToken cancellationToken)
         {
-            // Old osu! used hit sounding to determine various hit type information
+            // Old hotia! used hit sounding to determine various hit type information
             IList<HitSampleInfo> samples = obj.Samples;
 
             switch (obj)
@@ -212,7 +212,7 @@ namespace osu.Game.Rulesets.Taiko.Beatmaps
 
             double osuVelocity = taikoVelocity * (1000f / beatLength);
 
-            // osu-stable always uses the speed-adjusted beatlength to determine the osu! velocity, but only uses it for conversion if beatmap version < 8
+            // osu-stable always uses the speed-adjusted beatlength to determine the hotia! velocity, but only uses it for conversion if beatmap version < 8
             if (beatmap.BeatmapVersion >= 8)
                 beatLength = timingPoint.BeatLength;
 

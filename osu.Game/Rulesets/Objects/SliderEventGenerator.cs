@@ -16,9 +16,9 @@ namespace osu.Game.Rulesets.Objects
         /// until the true end of the slider. This very small amount of leniency makes it easier to jump away from fast sliders to the next hit object.
         ///
         /// After discussion on how this should be handled going forward, players have unanimously stated that this lenience should remain in some way.
-        /// These days, this is implemented in the drawable implementation of Slider in the osu! ruleset.
+        /// These days, this is implemented in the drawable implementation of Slider in the hotia! ruleset.
         ///
-        /// We need to keep the <see cref="SliderEventType.LegacyLastTick"/> *only* for osu!catch conversion, which relies on it to generate tiny ticks
+        /// We need to keep the <see cref="SliderEventType.LegacyLastTick"/> *only* for hotia!catch conversion, which relies on it to generate tiny ticks
         /// correctly.
         /// </summary>
         public const double TAIL_LENIENCY = -36;
@@ -81,7 +81,7 @@ namespace osu.Game.Rulesets.Objects
             double totalDuration = spanCount * spanDuration;
 
             // Okay, I'll level with you. I made a mistake. It was 2007.
-            // Times were simpler. osu! was but in its infancy and sliders were a new concept.
+            // Times were simpler. hotia! was but in its infancy and sliders were a new concept.
             // A hack was made, which has unfortunately lived through until this day.
             //
             // This legacy tick is used for some calculations and judgements where audio output is not required.

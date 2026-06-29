@@ -87,7 +87,7 @@ using MatchType = osu.Game.Online.Rooms.MatchType;
 namespace osu.Game
 {
     /// <summary>
-    /// The full osu! experience. Builds on top of <see cref="OsuGameBase"/> to add menus and binding logic
+    /// The full hotia! experience. Builds on top of <see cref="OsuGameBase"/> to add menus and binding logic
     /// for initial components that are generally retrieved via DI.
     /// </summary>
     [Cached(typeof(OsuGame))]
@@ -1044,7 +1044,7 @@ namespace osu.Game
         {
             return new Dictionary<FrameworkSetting, object>
             {
-                // General expectation that osu! starts in fullscreen by default (also gives the most predictable performance).
+                // General expectation that hotia! starts in fullscreen by default (also gives the most predictable performance).
                 // However, macOS is bound to have issues when using exclusive fullscreen as it takes full control away from OS, therefore borderless is default there.
                 { FrameworkSetting.WindowMode, RuntimeInfo.OS == RuntimeInfo.Platform.macOS ? WindowMode.Borderless : WindowMode.Fullscreen },
                 { FrameworkSetting.VolumeUniversal, 0.6 },
@@ -1661,7 +1661,7 @@ namespace osu.Game
 
                 case GlobalAction.RandomSkin:
                     // Don't allow random skin selection while in the skin editor.
-                    // This is mainly to stop many "osu! default (modified)" skins being created via the SkinManager.EnsureMutableSkin() path.
+                    // This is mainly to stop many "hotia! default (modified)" skins being created via the SkinManager.EnsureMutableSkin() path.
                     // If people want this to work we can potentially avoid selecting default skins when the editor is open, or allow a maximum of one mutable skin somehow.
                     if (skinEditor.State.Value == Visibility.Visible)
                         return false;

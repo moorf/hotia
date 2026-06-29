@@ -3,10 +3,10 @@
     <metadata>
         <id>osulazer</id>
         <version>0.0.0</version>
-        <title>osu!</title>
+        <title>hotia!</title>
         <authors>ppy Pty Ltd</authors>
         <owners>Dean Herbert</owners>
-        <projectUrl>https://osu.ppy.sh/</projectUrl>
+        <projectUrl>https://osu.hotia.org/</projectUrl>
         <iconUrl>https://github.com/ppy/osu/blob/master/assets/lazer-nuget.png?raw=true</iconUrl>
         <icon>icon.png</icon>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>

@@ -26,7 +26,7 @@ using osu.Game.Beatmaps.ControlPoints;
 namespace osu.Game.Screens.Menu
 {
     /// <summary>
-    /// Button designed specifically for the osu!next main menu.
+    /// Button designed specifically for the hotia!next main menu.
     /// In order to correctly flow, we have to use a negative margin on the parent container (due to the parallelogram shape).
     /// </summary>
     public partial class MainMenuButton : BeatSyncedContainer, IStateful<ButtonState>

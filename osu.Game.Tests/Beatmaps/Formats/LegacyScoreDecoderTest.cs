@@ -404,7 +404,7 @@ namespace osu.Game.Tests.Beatmaps.Formats
             // and we want to emulate a stable score here
             using (var sw = new SerializationWriter(memoryStream, true))
             {
-                sw.Write((byte)0); // ruleset id (osu!)
+                sw.Write((byte)0); // ruleset id (hotia!)
                 sw.Write(20240116); // version (anything below `LegacyScoreEncoder.FIRST_LAZER_VERSION` is stable)
                 sw.Write(string.Empty.ComputeMD5Hash()); // beatmap hash, irrelevant to this test
                 sw.Write("username"); // irrelevant to this test
@@ -482,7 +482,7 @@ namespace osu.Game.Tests.Beatmaps.Formats
             // that does not have everything that `LegacyScoreEncoder` now writes to the replay
             using (var sw = new SerializationWriter(memoryStream, true))
             {
-                sw.Write((byte)0); // ruleset id (osu!)
+                sw.Write((byte)0); // ruleset id (hotia!)
                 sw.Write(LegacyScoreEncoder.FIRST_LAZER_VERSION); // version
                 sw.Write(string.Empty.ComputeMD5Hash()); // beatmap hash, irrelevant to this test
                 sw.Write("username"); // irrelevant to this test

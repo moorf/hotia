@@ -70,7 +70,7 @@ using RuntimeInfo = osu.Framework.RuntimeInfo;
 namespace osu.Game
 {
     /// <summary>
-    /// The most basic <see cref="Game"/> that can be used to host osu! components and systems.
+    /// The most basic <see cref="Game"/> that can be used to host hotia! components and systems.
     /// Unlike <see cref="OsuGame"/>, this class will not load any kind of UI, allowing it to be used
     /// for provide dependencies to test cases without interfering with them.
     /// </summary>
@@ -78,9 +78,9 @@ namespace osu.Game
     public partial class OsuGameBase : Framework.Game, ICanAcceptFiles, IBeatSyncProvider
     {
 #if DEBUG
-        public const string GAME_NAME = "osu! (development)";
+        public const string GAME_NAME = "hotia! (development)";
 #else
-        public const string GAME_NAME = "osu!";
+        public const string GAME_NAME = "hotia!";
 #endif
 
         public const string OSU_PROTOCOL = "osu://";
@@ -593,7 +593,7 @@ namespace osu.Game
         /// <exception cref="TimeoutException"></exception>
         public bool MigrateUserData(string path)
         {
-            Logger.Log($@"Migrating osu! data from ""{Storage.GetFullPath(string.Empty)}"" to ""{path}""...");
+            Logger.Log($@"Migrating hotia! data from ""{Storage.GetFullPath(string.Empty)}"" to ""{path}""...");
 
             IDisposable realmBlocker = null;
 

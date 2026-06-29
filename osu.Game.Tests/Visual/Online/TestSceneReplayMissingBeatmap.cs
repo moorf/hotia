@@ -30,7 +30,7 @@ namespace osu.Game.Tests.Visual.Online
                     Artist = "xi",
                     Covers = new BeatmapSetOnlineCovers
                     {
-                        Card = "https://assets.ppy.sh/beatmaps/173612/covers/card@2x.jpg"
+                        Card = "https://assets.hotia.org/beatmaps/173612/covers/card@2x.jpg"
                     },
                     OnlineID = 173612
                 }

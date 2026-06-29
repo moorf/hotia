@@ -27,7 +27,7 @@ namespace osu.Game.Screens.Footer
         public ScreenBackButton BackButton { get; private set; } = null!;
 
         /// <summary>
-        /// Called when logo tracking begins, intended to bring the osu! logo to the frontmost visually.
+        /// Called when logo tracking begins, intended to bring the hotia! logo to the frontmost visually.
         /// </summary>
         public Action<bool>? RequestLogoInFront { private get; init; }
 

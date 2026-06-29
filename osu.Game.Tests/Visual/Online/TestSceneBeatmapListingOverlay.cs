@@ -194,7 +194,7 @@ namespace osu.Game.Tests.Visual.Online
 
         /// <summary>
         /// During pagination, the first beatmap of the second page may be a duplicate of the last beatmap from the previous page.
-        /// This is currently the case with osu!web API due to ES relevance score's presence in the response cursor.
+        /// This is currently the case with hotia!web API due to ES relevance score's presence in the response cursor.
         /// See: https://github.com/ppy/osu-web/issues/9270
         /// </summary>
         [Test]

@@ -12,18 +12,18 @@ using osuTK.Graphics;
 namespace osu.Game.Skinning
 {
     /// <summary>
-    /// A skin that looks like osu!stable as it was around 2008.
+    /// A skin that looks like hotia!stable as it was around 2008.
     /// </summary>
     /// <remarks>
-    /// "Around 2008" was chosen as the cutoff for this skin because that's when the look of core gameplay settled into its final design (until <see cref="DefaultLegacySkin"/>). Skin elements from later versions of osu! were preferred as long as they only fixed bugs or applied minor tweaks to 2008 elements.
+    /// "Around 2008" was chosen as the cutoff for this skin because that's when the look of core gameplay settled into its final design (until <see cref="DefaultLegacySkin"/>). Skin elements from later versions of hotia! were preferred as long as they only fixed bugs or applied minor tweaks to 2008 elements.
     /// </remarks>
     public class RetroSkin : LegacySkin
     {
         public static SkinInfo CreateInfo() => new SkinInfo
         {
             ID = Skinning.SkinInfo.RETRO_SKIN,
-            Name = "osu! \"retro\" (2008)",
-            Creator = "team osu!",
+            Name = "hotia! \"retro\" (2008)",
+            Creator = "team hotia!",
             Protected = true,
             InstantiationInfo = typeof(RetroSkin).GetInvariantInstantiationInfo(),
         };

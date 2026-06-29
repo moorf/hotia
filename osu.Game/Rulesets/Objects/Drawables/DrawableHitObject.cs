@@ -172,8 +172,8 @@ namespace osu.Game.Rulesets.Objects.Drawables
         /// </para>
         /// <para>
         /// This sample volume floor is present in stable, although it is set at 8% rather than 5%.
-        /// See: https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/osu!/Audio/AudioEngine.cs#L1070,
-        /// https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/osu!/Audio/AudioEngine.cs#L1404-L1405.
+        /// See: https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/hotia!/Audio/AudioEngine.cs#L1070,
+        /// https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/hotia!/Audio/AudioEngine.cs#L1404-L1405.
         /// The reason why it is 5% here is that the 8% cap was enforced in a silent manner
         /// (i.e. the minimum selectable volume in the editor was 5%, but it would be played at 8% anyways),
         /// which is confusing and arbitrary, so we're just doing 5% here at the cost of sacrificing strict parity.

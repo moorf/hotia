@@ -22,7 +22,7 @@ namespace osu.Game.Rulesets.Catch.Objects
     public class JuiceStreamPath
     {
         /// <summary>
-        /// The height of legacy osu!standard playfield.
+        /// The height of legacy hotia!standard playfield.
         /// The sliders converted by <see cref="ConvertToSliderPath"/> are vertically contained in this height.
         /// </summary>
         internal const float OSU_PLAYFIELD_HEIGHT = 384;

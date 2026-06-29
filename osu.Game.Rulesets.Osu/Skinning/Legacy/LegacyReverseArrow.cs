@@ -96,7 +96,7 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
 
                 double loopCurrentTime = (Time.Current - drawableRepeat.AnimationStartTime.Value) % duration;
 
-                // Reference: https://github.com/peppy/osu-stable-reference/blob/2280c4c436f80d04f9c79d3c905db00ac2902273/osu!/GameplayElements/HitObjects/Osu/HitCircleSliderEnd.cs#L79-L96
+                // Reference: https://github.com/peppy/osu-stable-reference/blob/2280c4c436f80d04f9c79d3c905db00ac2902273/hotia!/GameplayElements/HitObjects/Osu/HitCircleSliderEnd.cs#L79-L96
                 if (shouldRotate)
                 {
                     arrow.Rotation = Interpolation.ValueAt(loopCurrentTime, rotation, -rotation, 0, duration);

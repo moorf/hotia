@@ -83,7 +83,7 @@ namespace osu.Game.Tests.Visual.UserInterface
         [Test]
         public void TestNumericHotkeys()
         {
-            AddStep("set osu! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
+            AddStep("set hotia! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
             AddStep("create content", () => Child = new ModPresetColumn
             {
                 Anchor = Anchor.Centre,
@@ -112,7 +112,7 @@ namespace osu.Game.Tests.Visual.UserInterface
         [Test]
         public void TestBasicOperation()
         {
-            AddStep("set osu! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
+            AddStep("set hotia! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
             AddStep("create content", () => Child = new ModPresetColumn
             {
                 Anchor = Anchor.Centre,
@@ -136,7 +136,7 @@ namespace osu.Game.Tests.Visual.UserInterface
             })));
             AddUntilStep("2 panels visible", () => this.ChildrenOfType<ModPresetPanel>().Count() == 2);
 
-            AddStep("add another osu! preset", () => Realm.Write(r => r.Add(new ModPreset
+            AddStep("add another hotia! preset", () => Realm.Write(r => r.Add(new ModPreset
             {
                 Name = "hdhr",
                 Mods = new Mod[]
@@ -155,14 +155,14 @@ namespace osu.Game.Tests.Visual.UserInterface
             }));
             AddUntilStep("1 panel visible", () => this.ChildrenOfType<ModPresetPanel>().Count() == 1);
 
-            AddStep("set osu! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
+            AddStep("set hotia! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
             AddUntilStep("4 panels visible", () => this.ChildrenOfType<ModPresetPanel>().Count() == 4);
         }
 
         [Test]
         public void TestSoftDeleteSupport()
         {
-            AddStep("set osu! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
+            AddStep("set hotia! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
             AddStep("clear mods", () => SelectedMods.Value = Array.Empty<Mod>());
             AddStep("create content", () => Child = new ModPresetColumn
             {
@@ -441,7 +441,7 @@ namespace osu.Game.Tests.Visual.UserInterface
 
             AddUntilStep("items loaded", () => modPresetColumn.IsLoaded && modPresetColumn.ItemsLoaded);
 
-            AddStep("set osu! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
+            AddStep("set hotia! ruleset", () => Ruleset.Value = rulesets.GetRuleset(0));
             AddStep("set text filter", () => modPresetColumn.SearchTerm = "First");
             AddUntilStep("one panel visible", () => modPresetColumn.ChildrenOfType<ModPresetPanel>().Count(panel => panel.IsPresent), () => Is.EqualTo(1));
 

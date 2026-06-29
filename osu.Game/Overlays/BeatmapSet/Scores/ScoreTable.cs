@@ -59,7 +59,7 @@ namespace osu.Game.Overlays.BeatmapSet.Scores
         /// <summary>
         /// The names of the statistics that appear in the table. If multiple HitResults have the same
         /// DisplayName (for example, "slider end" is the name for both <see cref="HitResult.SliderTailHit"/> and <see cref="HitResult.SmallTickHit"/>
-        /// in osu!) the name will only be listed once.
+        /// in hotia!) the name will only be listed once.
         /// </summary>
         private readonly List<LocalisableString> statisticResultNames = new List<LocalisableString>();
 

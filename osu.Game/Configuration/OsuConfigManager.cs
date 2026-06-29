@@ -102,7 +102,7 @@ namespace osu.Game.Configuration
             // Audio
             SetDefault(OsuSetting.VolumeInactive, 0.25, 0, 1, 0.01);
 
-            SetDefault(OsuSetting.MenuVoice, true);
+            SetDefault(OsuSetting.MenuVoice, false); //true
             SetDefault(OsuSetting.MenuMusic, true);
             SetDefault(OsuSetting.MenuTips, true);
 

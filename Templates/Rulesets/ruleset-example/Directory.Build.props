@@ -1,4 +1,4 @@
-<!-- Contains required properties for osu!framework projects. -->
+<!-- Contains required properties for hotia!framework projects. -->
 <Project>
   <PropertyGroup>
     <ApplicationManifest>$(MSBuildThisFileDirectory)app.manifest</ApplicationManifest>

@@ -13,7 +13,7 @@ namespace osu.Game.Graphics.Containers.Markdown
         public LocalisableString TooltipText { get; }
 
         public OsuMarkdownImage(LinkInline linkInline)
-            : base($"https://osu.ppy.sh/media-url?url={linkInline.Url}")
+            : base($"https://osu.hotia.org/media-url?url={linkInline.Url}")
         {
             TooltipText = linkInline.Title;
         }

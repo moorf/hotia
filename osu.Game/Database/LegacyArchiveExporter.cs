@@ -25,7 +25,7 @@ namespace osu.Game.Database
         where TModel : RealmObject, IHasNamedFiles, IHasGuidPrimaryKey
     {
         /// <summary>
-        /// Whether to always use Shift-JIS encoding for archive filenames (like osu!stable did).
+        /// Whether to always use Shift-JIS encoding for archive filenames (like hotia!stable did).
         /// </summary>
         protected virtual bool UseFixedEncoding => true;
 

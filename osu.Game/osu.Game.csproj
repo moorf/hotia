@@ -5,7 +5,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Label="Nuget">
-    <Title>osu!</Title>
+    <Title>hotia!</Title>
     <PackageId>ppy.osu.Game</PackageId>
     <Version>0.0.0</Version>
     <PackageIcon>icon.png</PackageIcon>
@@ -39,7 +39,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Realm" Version="20.1.0" />
-    <PackageReference Include="ppy.osu.Game.Resources" Version="2026.523.0" />
     <PackageReference Include="Sentry" Version="6.6.0" />
     <PackageReference Include="SharpCompress" Version="0.49.1" />
     <PackageReference Include="NUnit" Version="4.5.1" />
@@ -54,5 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\osu-framework\osu.Framework\osu.Framework.csproj" />
+    <ProjectReference Include="..\..\osu-resources\osu.Game.Resources\osu.Game.Resources.csproj" />
   </ItemGroup>
 </Project>

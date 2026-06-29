@@ -22,7 +22,7 @@ namespace osu.Game.IO.Archives
     public sealed class ZipArchiveReader : ArchiveReader
     {
         /// <summary>
-        /// Archives created by osu!stable still write out as Shift-JIS.
+        /// Archives created by hotia!stable still write out as Shift-JIS.
         /// We want to force this fallback rather than leave it up to the library/system.
         /// In the future we may want to change exports to set the zip UTF-8 flag and use that instead.
         /// </summary>

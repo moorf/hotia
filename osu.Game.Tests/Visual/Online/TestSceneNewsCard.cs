@@ -43,7 +43,7 @@ namespace osu.Game.Tests.Visual.Online
                         Title = "This post has a full-url image! (HTML entity: &amp;) (non-clickable)",
                         Preview = "boom (HTML entity: &amp;)",
                         Author = "user (HTML entity: &amp;)",
-                        FirstImage = "https://assets.ppy.sh/artists/88/header.jpg",
+                        FirstImage = "https://assets.hotia.org/artists/88/header.jpg",
                         PublishedAt = DateTimeOffset.Now
                     })
                 }

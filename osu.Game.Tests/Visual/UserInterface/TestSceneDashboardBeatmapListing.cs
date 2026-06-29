@@ -69,7 +69,7 @@ namespace osu.Game.Tests.Visual.UserInterface
                 },
                 Covers = new BeatmapSetOnlineCovers
                 {
-                    Cover = "https://assets.ppy.sh/beatmaps/1189904/covers/cover.jpg?1595456608",
+                    Cover = "https://assets.hotia.org/beatmaps/1189904/covers/cover.jpg?1595456608",
                 },
                 Ranked = DateTimeOffset.Now
             },
@@ -84,7 +84,7 @@ namespace osu.Game.Tests.Visual.UserInterface
                 },
                 Covers = new BeatmapSetOnlineCovers
                 {
-                    Cover = "https://assets.ppy.sh/beatmaps/1189904/covers/cover.jpg?1595456608",
+                    Cover = "https://assets.hotia.org/beatmaps/1189904/covers/cover.jpg?1595456608",
                 },
                 Ranked = DateTimeOffset.Now
             }
@@ -103,7 +103,7 @@ namespace osu.Game.Tests.Visual.UserInterface
                 },
                 Covers = new BeatmapSetOnlineCovers
                 {
-                    Cover = "https://assets.ppy.sh/beatmaps/1189904/covers/cover.jpg?1595456608",
+                    Cover = "https://assets.hotia.org/beatmaps/1189904/covers/cover.jpg?1595456608",
                 },
                 Ranked = DateTimeOffset.Now
             },
@@ -118,7 +118,7 @@ namespace osu.Game.Tests.Visual.UserInterface
                 },
                 Covers = new BeatmapSetOnlineCovers
                 {
-                    Cover = "https://assets.ppy.sh/beatmaps/1189904/covers/cover.jpg?1595456608",
+                    Cover = "https://assets.hotia.org/beatmaps/1189904/covers/cover.jpg?1595456608",
                 },
                 Ranked = DateTimeOffset.Now
             }

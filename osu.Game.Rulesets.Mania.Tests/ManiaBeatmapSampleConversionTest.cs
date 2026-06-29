@@ -22,7 +22,7 @@ namespace osu.Game.Rulesets.Mania.Tests
 
         [TestCase("convert-samples")]
         [TestCase("mania-samples")]
-        [TestCase("mania-slider")] // e.g. second and fourth notes of https://osu.ppy.sh/beatmapsets/73883#mania/216407
+        [TestCase("mania-slider")] // e.g. second and fourth notes of https://osu.hotia.org/beatmapsets/73883#mania/216407
         [TestCase("slider-convert-samples")]
         [TestCase("spinner-convert-samples")]
         public void Test(string name) => base.Test(name);
@@ -53,7 +53,7 @@ namespace osu.Game.Rulesets.Mania.Tests
     public struct SampleConvertValue : IEquatable<SampleConvertValue>
     {
         /// <summary>
-        /// A sane value to account for osu!stable using ints everywhere.
+        /// A sane value to account for hotia!stable using ints everywhere.
         /// </summary>
         private const float conversion_lenience = 2;
 

@@ -40,7 +40,7 @@ namespace osu.Game.Tests.Visual.Matchmaking
                     Id = 2,
                     Colour = "99EB47",
                     CountryCode = CountryCode.AU,
-                    CoverUrl = @"https://assets.ppy.sh/user-profile-covers/2/baba245ef60834b769694178f8f6d4f6166c5188c740de084656ad2b80f1eea7.jpeg",
+                    CoverUrl = @"https://assets.hotia.org/user-profile-covers/2/baba245ef60834b769694178f8f6d4f6166c5188c740de084656ad2b80f1eea7.jpeg",
                     Statistics = new UserStatistics { GlobalRank = null, CountryRank = null }
                 }
             })
@@ -153,7 +153,7 @@ namespace osu.Game.Tests.Visual.Matchmaking
                         Id = 2,
                         Colour = "99EB47",
                         CountryCode = CountryCode.AU,
-                        CoverUrl = @"https://assets.ppy.sh/user-profile-covers/2/baba245ef60834b769694178f8f6d4f6166c5188c740de084656ad2b80f1eea7.jpeg",
+                        CoverUrl = @"https://assets.hotia.org/user-profile-covers/2/baba245ef60834b769694178f8f6d4f6166c5188c740de084656ad2b80f1eea7.jpeg",
                         Statistics = new UserStatistics { GlobalRank = null, CountryRank = null }
                     }
                 })

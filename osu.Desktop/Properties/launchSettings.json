@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "osu! Desktop": {
+    "hotia! Desktop": {
       "commandName": "Project"
     },
-    "osu! Tournament": {
+    "hotia! Tournament": {
       "commandName": "Project",
       "commandLineArgs": "--tournament"
     }

@@ -85,7 +85,7 @@ namespace osu.Game.Rulesets.Catch.Skinning.Legacy
 
         protected void SetTexture(Texture? texture, Texture? overlayTexture)
         {
-            // Sizes are reset due to an arguable osu!framework bug where Sprite retains the size of the first set texture.
+            // Sizes are reset due to an arguable hotia!framework bug where Sprite retains the size of the first set texture.
 
             if (colouredSprite.Texture != texture)
             {

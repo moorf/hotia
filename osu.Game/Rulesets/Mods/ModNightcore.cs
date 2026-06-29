@@ -126,7 +126,7 @@ namespace osu.Game.Rulesets.Mods
 
             private void playBeatFor(int beatIndex, int segmentLength, TimingControlPoint timingPoint)
             {
-                // https://github.com/peppy/osu-stable-reference/blob/6ab0cf1f9f7b3449f5c0d8defcd458aae72cdb88/osu!/Audio/NightcoreBeat.cs#L41
+                // https://github.com/peppy/osu-stable-reference/blob/6ab0cf1f9f7b3449f5c0d8defcd458aae72cdb88/hotia!/Audio/NightcoreBeat.cs#L41
                 if (lastBeat == beatIndex)
                     return;
 
@@ -136,7 +136,7 @@ namespace osu.Game.Rulesets.Mods
 
                 if (beatInSegment == 0)
                 {
-                    // https://github.com/peppy/osu-stable-reference/blob/6ab0cf1f9f7b3449f5c0d8defcd458aae72cdb88/osu!/Audio/NightcoreBeat.cs#L53
+                    // https://github.com/peppy/osu-stable-reference/blob/6ab0cf1f9f7b3449f5c0d8defcd458aae72cdb88/hotia!/Audio/NightcoreBeat.cs#L53
                     bool playFinish = beatIndex > 0 || !timingPoint.OmitFirstBarLine;
 
                     if (playFinish)

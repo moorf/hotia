@@ -37,10 +37,10 @@ namespace osu.Game.Rulesets.Mania.Tests
             // - There is a disparate set of hitwindow ranges for: score V1 non-converts, score V1 converts, and score V2 (regardless of convert)
             // - It is NEVER POSSIBLE to get a MEH result when late; exceeding the OK hit windows will result in a MISS.
             //   Additionally, the OK hit window when late is EXCLUSIVE / OPEN rather than INCLUSIVE / CLOSED.
-            //   Relevant stable source: https://github.com/peppy/osu-stable-reference/blob/996648fba06baf4e7d2e0b248959399444017895/osu!/GameplayElements/HitObjectManagerMania.cs#L737-L751
+            //   Relevant stable source: https://github.com/peppy/osu-stable-reference/blob/996648fba06baf4e7d2e0b248959399444017895/hotia!/GameplayElements/HitObjectManagerMania.cs#L737-L751
             // - There is also a seemingly mania-specific issue wherein key inputs registered before time instant 0 get truncated to time 0,
             //   which is why the beatmaps used below make sure not to cross that boundary (the note starts at t=300ms).
-            //   This is not an issue in osu! or taiko.
+            //   This is not an issue in hotia! or taiko.
             //   The source of this behaviour has not been investigated in detail.
 
             // OD = 5 test cases.

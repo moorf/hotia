@@ -237,13 +237,13 @@ namespace osu.Game.Tests.Visual
         /// <summary>
         /// Returns a sample API beatmap with a populated beatmap set.
         /// </summary>
-        /// <param name="ruleset">The ruleset to create the sample model using. osu! ruleset will be used if not specified.</param>
+        /// <param name="ruleset">The ruleset to create the sample model using. hotia! ruleset will be used if not specified.</param>
         protected APIBeatmap CreateAPIBeatmap(RulesetInfo ruleset = null) => CreateAPIBeatmap(CreateBeatmap(ruleset ?? Ruleset.Value).BeatmapInfo);
 
         /// <summary>
         /// Constructs a sample API beatmap set containing a beatmap.
         /// </summary>
-        /// <param name="ruleset">The ruleset to create the sample model using. osu! ruleset will be used if not specified.</param>
+        /// <param name="ruleset">The ruleset to create the sample model using. hotia! ruleset will be used if not specified.</param>
         protected APIBeatmapSet CreateAPIBeatmapSet(RulesetInfo ruleset = null) => CreateAPIBeatmapSet(CreateBeatmap(ruleset ?? Ruleset.Value).BeatmapInfo);
 
         /// <summary>
@@ -280,9 +280,9 @@ namespace osu.Game.Tests.Visual
                 Status = BeatmapOnlineStatus.Ranked,
                 Covers = new BeatmapSetOnlineCovers
                 {
-                    Cover = "https://assets.ppy.sh/beatmaps/163112/covers/cover.jpg",
-                    Card = "https://assets.ppy.sh/beatmaps/163112/covers/card.jpg",
-                    List = "https://assets.ppy.sh/beatmaps/163112/covers/list.jpg"
+                    Cover = "https://assets.hotia.org/beatmaps/163112/covers/cover.jpg",
+                    Card = "https://assets.hotia.org/beatmaps/163112/covers/card.jpg",
+                    List = "https://assets.hotia.org/beatmaps/163112/covers/list.jpg"
                 },
                 Title = original.Metadata.Title,
                 TitleUnicode = original.Metadata.TitleUnicode,

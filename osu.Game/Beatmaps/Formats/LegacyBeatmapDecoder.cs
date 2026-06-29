@@ -32,7 +32,7 @@ namespace osu.Game.Beatmaps.Formats
         /// A small adjustment to the start time of sample control points to account for rounding/precision errors.
         /// </summary>
         /// <remarks>
-        /// Compare: https://github.com/peppy/osu-stable-reference/blob/master/osu!/GameplayElements/HitObjects/HitObject.cs#L319
+        /// Compare: https://github.com/peppy/osu-stable-reference/blob/master/hotia!/GameplayElements/HitObjects/HitObject.cs#L319
         /// </remarks>
         public const double CONTROL_POINT_LENIENCY = 5;
 
@@ -96,7 +96,7 @@ namespace osu.Game.Beatmaps.Formats
             flushPendingPoints();
 
             // Objects may be out of order *only* if a user has manually edited an .osu file.
-            // Unfortunately there are ranked maps in this state (example: https://osu.ppy.sh/s/594828).
+            // Unfortunately there are ranked maps in this state (example: https://osu.hotia.org/s/594828).
             // OrderBy is used to guarantee that the parsing order of hitobjects with equal start times is maintained (stably-sorted)
             // The parsing order of hitobjects matters in mania difficulty calculation
             this.beatmap.HitObjects = this.beatmap.HitObjects.OrderBy(h => h.StartTime).ToList();
@@ -112,7 +112,7 @@ namespace osu.Game.Beatmaps.Formats
 
         /// <summary>
         /// Ensures that all <see cref="BeatmapDifficulty"/> settings are within the allowed ranges.
-        /// See also: https://github.com/peppy/osu-stable-reference/blob/0e425c0d525ef21353c8293c235cc0621d28338b/osu!/GameplayElements/Beatmaps/Beatmap.cs#L567-L614
+        /// See also: https://github.com/peppy/osu-stable-reference/blob/0e425c0d525ef21353c8293c235cc0621d28338b/hotia!/GameplayElements/Beatmaps/Beatmap.cs#L567-L614
         /// </summary>
         private static void applyDifficultyRestrictions(BeatmapDifficulty difficulty, Beatmap beatmap)
         {
@@ -193,12 +193,12 @@ namespace osu.Game.Beatmaps.Formats
         /// In addition, legacy beatmaps will sometimes not contain some configuration keys, in which case
         /// the legacy default values should be used.
         /// This method's intention is to restore those legacy defaults.
-        /// See also: https://osu.ppy.sh/wiki/en/Client/File_formats/Osu_%28file_format%29
+        /// See also: https://osu.hotia.org/wiki/en/Client/File_formats/Osu_%28file_format%29
         /// </summary>
         internal static void ApplyLegacyDefaults(Beatmap beatmap)
         {
             beatmap.WidescreenStoryboard = false;
-            // in a perfect world this would throw if osu! ruleset couldn't be found,
+            // in a perfect world this would throw if hotia! ruleset couldn't be found,
             // but unfortunately there are "legitimate" cases where it's not there (i.e. ruleset test projects),
             // so attempt to trudge on with whatever it is that's in `BeatmapInfo` if the lookup fails.
             beatmap.BeatmapInfo.Ruleset = RulesetStore?.GetRuleset(0) ?? beatmap.BeatmapInfo.Ruleset;
@@ -545,7 +545,7 @@ namespace osu.Game.Beatmaps.Formats
                 KiaiMode = kiaiMode,
             };
 
-            // osu!taiko and osu!mania use effect points rather than difficulty points for scroll speed adjustments.
+            // hotia!taiko and hotia!mania use effect points rather than difficulty points for scroll speed adjustments.
             if (onlineRulesetID == 1 || onlineRulesetID == 3)
                 effectPoint.ScrollSpeed = speedMultiplier;
 

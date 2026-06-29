@@ -152,7 +152,7 @@ namespace osu.Game.Tests.Visual.Beatmaps
             {
                 DownloadDisabled = true,
             },
-            Preview = @"https://b.ppy.sh/preview/12345.mp3",
+            Preview = @"https://b.hotia.org/preview/12345.mp3",
             PlayCount = 123,
             FavouriteCount = 456,
             BPM = 111,

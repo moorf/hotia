@@ -43,7 +43,7 @@ namespace osu.Game.Tests.Visual.Editing
                 () => Is.EqualTo(2));
 
             setUpEditor(rulesetInfo);
-            AddAssert("ruleset is osu!", () => editorBeatmap.BeatmapInfo.Ruleset.Equals(rulesetInfo));
+            AddAssert("ruleset is hotia!", () => editorBeatmap.BeatmapInfo.Ruleset.Equals(rulesetInfo));
 
             addStepClickLink("00:000", "invalid link", waitForSeek: false);
             AddUntilStep("received 'failed to process'",
@@ -62,7 +62,7 @@ namespace osu.Game.Tests.Visual.Editing
             RulesetInfo rulesetInfo = new OsuRuleset().RulesetInfo;
 
             setUpEditor(rulesetInfo);
-            AddAssert("is osu! ruleset", () => editorBeatmap.BeatmapInfo.Ruleset.Equals(rulesetInfo));
+            AddAssert("is hotia! ruleset", () => editorBeatmap.BeatmapInfo.Ruleset.Equals(rulesetInfo));
 
             addStepClickLink("100:00:000", "long link");
             AddUntilStep("moved to end of track", () => editorClock.CurrentTime, () => Is.EqualTo(editorClock.TrackLength));
@@ -103,7 +103,7 @@ namespace osu.Game.Tests.Visual.Editing
         public void TestUrlDecodingOfArgs()
         {
             setUpEditor(new OsuRuleset().RulesetInfo);
-            AddAssert("is osu! ruleset", () => editorBeatmap.BeatmapInfo.Ruleset.Equals(new OsuRuleset().RulesetInfo));
+            AddAssert("is hotia! ruleset", () => editorBeatmap.BeatmapInfo.Ruleset.Equals(new OsuRuleset().RulesetInfo));
 
             AddStep("jump to encoded link", () => Game.HandleLink("osu://edit/00:14:142%20(1)"));
 

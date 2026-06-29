@@ -143,13 +143,13 @@ namespace osu.Game.Tests.Visual.Playlists
                     MaxAttempts = 10,
                     Playlist =
                     [
-                        // osu! beatmap
+                        // hotia! beatmap
                         new PlaylistItem(importedSet.Beatmaps[0])
                         {
                             RulesetID = new OsuRuleset().RulesetInfo.OnlineID,
                             Freestyle = true,
                         },
-                        // osu! beatmap converted played in taiko
+                        // hotia! beatmap converted played in taiko
                         new PlaylistItem(importedSet.Beatmaps[1])
                         {
                             RulesetID = new TaikoRuleset().RulesetInfo.OnlineID,

@@ -7,7 +7,7 @@ namespace osu.Desktop.LegacyIpc
     /// A difficulty calculation response returned to the legacy client.
     /// </summary>
     /// <remarks>
-    /// Synchronise any changes with osu!stable.
+    /// Synchronise any changes with hotia!stable.
     /// </remarks>
     public class LegacyIpcDifficultyCalculationResponse
     {

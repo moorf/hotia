@@ -29,7 +29,7 @@ namespace osu.Game.Rulesets.Osu.UI
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
 
-            // Calculated from osu!stable as 512 (default gamefield size) / 640 (default window size)
+            // Calculated from hotia!stable as 512 (default gamefield size) / 640 (default window size)
             Size = new Vector2(playfield_size_adjust);
 
             InternalChild = new Container

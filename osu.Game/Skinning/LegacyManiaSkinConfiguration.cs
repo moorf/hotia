@@ -81,7 +81,7 @@ namespace osu.Game.Skinning
 
         public float MinimumColumnWidth => ColumnWidth.Min();
 
-        /// <seealso href="https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinMania.cs#L321-L326"/>
+        /// <seealso href="https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinMania.cs#L321-L326"/>
         public enum LegacySpecialStyle
         {
             None = 0,
@@ -89,12 +89,12 @@ namespace osu.Game.Skinning
             Right = 2,
         }
 
-        /// <seealso href="https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinMania.cs#L328-L336"/>
+        /// <seealso href="https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinMania.cs#L328-L336"/>
         public enum LegacyNoteBodyStyle
         {
             Stretch = 0,
 
-            // listed as the default on https://osu.ppy.sh/wiki/en/Skinning/skin.ini, but is seemingly not according to the source.
+            // listed as the default on https://osu.hotia.org/wiki/en/Skinning/skin.ini, but is seemingly not according to the source.
             // Repeat = 1,
 
             RepeatTop = 2,
@@ -102,7 +102,7 @@ namespace osu.Game.Skinning
             RepeatTopAndBottom = 4,
         }
 
-        /// <seealso href="https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinMania.cs#L338-L343"/>
+        /// <seealso href="https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinMania.cs#L338-L343"/>
         public enum LegacyComboBurstStyle
         {
             Left = 0,

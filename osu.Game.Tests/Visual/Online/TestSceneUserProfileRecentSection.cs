@@ -143,7 +143,7 @@ namespace osu.Game.Tests.Visual.Online
                     User = dummyUser,
                     Type = RecentActivityType.Rank,
                     Rank = 1,
-                    Mode = "osu!",
+                    Mode = "hotia!",
                     Beatmap = dummyBeatmap,
                 },
                 new APIRecentActivity
@@ -166,7 +166,7 @@ namespace osu.Game.Tests.Visual.Online
                 {
                     User = dummyUser,
                     Type = RecentActivityType.RankLost,
-                    Mode = "osu!",
+                    Mode = "hotia!",
                     Beatmap = dummyBeatmap,
                 },
                 new APIRecentActivity

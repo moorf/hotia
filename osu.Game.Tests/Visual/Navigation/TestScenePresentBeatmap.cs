@@ -106,10 +106,10 @@ namespace osu.Game.Tests.Visual.Navigation
             var catchImport = importBeatmap(3, new CatchRuleset().RulesetInfo);
             presentAndConfirm(catchImport);
 
-            // force ruleset to osu!mania
+            // force ruleset to hotia!mania
             presentSecondDifficultyAndConfirm(maniaImport, 2);
 
-            // ruleset is not changed as we can convert osu! beatmap.
+            // ruleset is not changed as we can convert hotia! beatmap.
             presentSecondDifficultyAndConfirm(osuImport, 1, expectedRulesetOnlineID: 3);
 
             // ruleset is changed as we cannot convert.

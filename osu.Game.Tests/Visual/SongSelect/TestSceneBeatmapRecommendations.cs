@@ -132,7 +132,7 @@ namespace osu.Game.Tests.Visual.SongSelect
         {
             BeatmapSetInfo osuSet = null, mixedSet = null;
 
-            AddStep("create osu! beatmapset", () => osuSet = importBeatmapSet(new[] { new OsuRuleset().RulesetInfo }));
+            AddStep("create hotia! beatmapset", () => osuSet = importBeatmapSet(new[] { new OsuRuleset().RulesetInfo }));
             AddStep("create mixed beatmapset", () => mixedSet = importBeatmapSet(new[] { new TaikoRuleset().RulesetInfo, new CatchRuleset().RulesetInfo, new ManiaRuleset().RulesetInfo }));
 
             AddAssert("all sets imported", () => ensureAllBeatmapSetsImported(new[] { osuSet, mixedSet }));
@@ -150,7 +150,7 @@ namespace osu.Game.Tests.Visual.SongSelect
         {
             BeatmapSetInfo osuSet = null, mixedSet = null;
 
-            AddStep("create osu! beatmapset", () => osuSet = importBeatmapSet(new[] { new OsuRuleset().RulesetInfo }));
+            AddStep("create hotia! beatmapset", () => osuSet = importBeatmapSet(new[] { new OsuRuleset().RulesetInfo }));
             AddStep("create mixed beatmapset", () => mixedSet = importBeatmapSet(new[] { new TaikoRuleset().RulesetInfo, new CatchRuleset().RulesetInfo, new TaikoRuleset().RulesetInfo }));
 
             AddAssert("all sets imported", () => ensureAllBeatmapSetsImported(new[] { osuSet, mixedSet }));
@@ -168,7 +168,7 @@ namespace osu.Game.Tests.Visual.SongSelect
         {
             BeatmapSetInfo osuSet = null, maniaSet = null;
 
-            AddStep("create osu! beatmapset", () => osuSet = importBeatmapSet(new[] { new OsuRuleset().RulesetInfo }));
+            AddStep("create hotia! beatmapset", () => osuSet = importBeatmapSet(new[] { new OsuRuleset().RulesetInfo }));
             AddStep("create mania beatmapset", () => maniaSet = importBeatmapSet(Enumerable.Repeat(new ManiaRuleset().RulesetInfo, 10)));
 
             AddAssert("all sets imported", () => ensureAllBeatmapSetsImported(new[] { osuSet, maniaSet }));
@@ -198,19 +198,19 @@ namespace osu.Game.Tests.Visual.SongSelect
 
             checkRecommendedDifficulty(3);
 
-            AddStep("change mode filter to osu!", () => Game.ChildrenOfType<BeatmapSearchRulesetFilterRow>().Single().ChildrenOfType<FilterTabItem<RulesetInfo>>().ElementAt(1).TriggerClick());
+            AddStep("change mode filter to hotia!", () => Game.ChildrenOfType<BeatmapSearchRulesetFilterRow>().Single().ChildrenOfType<FilterTabItem<RulesetInfo>>().ElementAt(1).TriggerClick());
 
             checkRecommendedDifficulty(2);
 
-            AddStep("change mode filter to osu!taiko", () => Game.ChildrenOfType<BeatmapSearchRulesetFilterRow>().Single().ChildrenOfType<FilterTabItem<RulesetInfo>>().ElementAt(2).TriggerClick());
+            AddStep("change mode filter to hotia!taiko", () => Game.ChildrenOfType<BeatmapSearchRulesetFilterRow>().Single().ChildrenOfType<FilterTabItem<RulesetInfo>>().ElementAt(2).TriggerClick());
 
             checkRecommendedDifficulty(3);
 
-            AddStep("change mode filter to osu!catch", () => Game.ChildrenOfType<BeatmapSearchRulesetFilterRow>().Single().ChildrenOfType<FilterTabItem<RulesetInfo>>().ElementAt(3).TriggerClick());
+            AddStep("change mode filter to hotia!catch", () => Game.ChildrenOfType<BeatmapSearchRulesetFilterRow>().Single().ChildrenOfType<FilterTabItem<RulesetInfo>>().ElementAt(3).TriggerClick());
 
             checkRecommendedDifficulty(4);
 
-            AddStep("change mode filter to osu!mania", () => Game.ChildrenOfType<BeatmapSearchRulesetFilterRow>().Single().ChildrenOfType<FilterTabItem<RulesetInfo>>().ElementAt(4).TriggerClick());
+            AddStep("change mode filter to hotia!mania", () => Game.ChildrenOfType<BeatmapSearchRulesetFilterRow>().Single().ChildrenOfType<FilterTabItem<RulesetInfo>>().ElementAt(4).TriggerClick());
 
             checkRecommendedDifficulty(5);
 

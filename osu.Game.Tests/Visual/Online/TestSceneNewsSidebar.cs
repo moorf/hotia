@@ -143,7 +143,7 @@ namespace osu.Game.Tests.Visual.Online
             NewsPosts = Array.Empty<APINewsPost>()
         };
 
-        // see https://osu.ppy.sh/docs/index.html#get-news-listing:
+        // see https://osu.hotia.org/docs/index.html#get-news-listing:
         // "NewsPost collections queried by year will also include posts published in November and December of the previous year if the current date is the same year and before April."
         private static readonly APINewsSidebar metadata_with_multiple_years = new APINewsSidebar
         {

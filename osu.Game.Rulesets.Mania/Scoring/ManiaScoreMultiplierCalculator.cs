@@ -105,7 +105,7 @@ namespace osu.Game.Rulesets.Mania.Scoring
         /// <summary>
         /// <para>
         /// The mod multiplier was changed from 1.0x to 0.9x in https://github.com/ppy/osu/pull/30506
-        /// which was included in the https://osu.ppy.sh/home/changelog/tachyon/2025.718.0 release.
+        /// which was included in the https://osu.hotia.org/home/changelog/tachyon/2025.718.0 release.
         /// The replay version was not bumped in the change, meaning that the only usable indicator
         /// of the mod multiplier changing is the client version.
         /// </para>

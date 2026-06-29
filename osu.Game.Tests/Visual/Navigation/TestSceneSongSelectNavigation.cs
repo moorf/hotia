@@ -259,7 +259,7 @@ namespace osu.Game.Tests.Visual.Navigation
                 InputManager.ReleaseKey(Key.ControlLeft);
             });
             AddStep("show converts", () => Game.LocalConfig.SetValue(OsuSetting.ShowConvertedBeatmaps, true));
-            AddStep("select osu! beatmap", () =>
+            AddStep("select hotia! beatmap", () =>
             {
                 selectedBeatmap = beatmapSet.Beatmaps.First(b => b.Ruleset.OnlineID == 0);
                 Game.Beatmap.Value = Game.BeatmapManager.GetWorkingBeatmap(selectedBeatmap);
@@ -269,7 +269,7 @@ namespace osu.Game.Tests.Visual.Navigation
             AddUntilStep("went back to main menu", () => Game.ScreenStack.CurrentScreen is MainMenu);
             PushAndConfirm(() => new SoloSongSelect());
 
-            AddUntilStep("selected beatmap is still osu! ruleset", () => Game.Beatmap.Value.BeatmapInfo, () => Is.EqualTo(selectedBeatmap));
+            AddUntilStep("selected beatmap is still hotia! ruleset", () => Game.Beatmap.Value.BeatmapInfo, () => Is.EqualTo(selectedBeatmap));
         }
 
         /// <summary>

@@ -22,7 +22,7 @@ namespace osu.Game.Skinning
 
         public void Encode(TextWriter textWriter)
         {
-            // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinOsu.cs#L147-L192
+            // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinOsu.cs#L147-L192
 
             writeSectionHeader(textWriter, LegacyDecoder<SkinConfiguration>.Section.General);
             writeValue(textWriter, @"Name", skin.Configuration.SkinInfo.Name);
@@ -76,14 +76,14 @@ namespace osu.Game.Skinning
             writeGenericValue(textWriter, skin.Configuration.ConfigDictionary, @"ScoreOverlap");
             writeGenericValue(textWriter, skin.Configuration.ConfigDictionary, @"ComboOverlap");
 
-            // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinFruits.cs#L41-L44
+            // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinFruits.cs#L41-L44
             textWriter.WriteLine();
             writeSectionHeader(textWriter, LegacyDecoder<SkinConfiguration>.Section.CatchTheBeat);
             writeGenericColour(textWriter, skin.Configuration.CustomColours, @"HyperDash");
             writeGenericColour(textWriter, skin.Configuration.CustomColours, @"HyperDashAfterImage");
             writeGenericColour(textWriter, skin.Configuration.CustomColours, @"HyperDashFruit");
 
-            // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinMania.cs#L201-L230
+            // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinMania.cs#L201-L230
             foreach (var (keys, maniaConfig) in (skin as LegacySkin)?.ManiaConfigurations ?? [])
             {
                 textWriter.WriteLine();
@@ -128,19 +128,19 @@ namespace osu.Game.Skinning
                 writeValue(textWriter, @"WidthForNoteHeightScale", undoPositionScaleFactor(maniaConfig.WidthForNoteHeightScale).ToString(CultureInfo.InvariantCulture), defaultValue: @"0");
                 writeValue(textWriter, @"ComboBurstStyle", ((int?)maniaConfig.ComboBurstStyle)?.ToString());
 
-                // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinMania.cs#L92-L117
+                // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinMania.cs#L92-L117
                 foreach (string key in maniaConfig.ImageLookups.Keys)
                     writeGenericValue(textWriter, maniaConfig.ImageLookups, key);
 
-                // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinMania.cs#L119-L132
+                // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinMania.cs#L119-L132
                 foreach (string key in maniaConfig.CustomColours.Keys)
                     writeGenericColour(textWriter, maniaConfig.CustomColours, key);
 
-                // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinMania.cs#L134-L142
+                // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinMania.cs#L134-L142
                 foreach (string key in maniaConfig.FlipSettings.Keys)
                     writeGenericValue(textWriter, maniaConfig.FlipSettings, key);
 
-                // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/osu!/Graphics/Skinning/SkinMania.cs#L144-L151
+                // https://github.com/peppy/osu-stable-reference/blob/0b8b19af621dbb282773c22b36cc0453942b98d8/hotia!/Graphics/Skinning/SkinMania.cs#L144-L151
                 writeValue(textWriter, @"NoteBodyStyle", ((int?)maniaConfig.NoteBodyStyle)?.ToString());
                 for (int i = 0; i < keys; ++i)
                     writeValue(textWriter, $@"NoteBodyStyle{i}", ((int?)maniaConfig.ColumnNoteBodyStyles[i])?.ToString());

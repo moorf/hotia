@@ -2,14 +2,14 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageId>ppy.osu.Game.Templates</PackageId>
-    <Title>osu! templates</Title>
+    <Title>hotia! templates</Title>
     <Authors>ppy Pty Ltd</Authors>
     <PackageLicenseUrl>https://github.com/ppy/osu/blob/master/LICENCE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ppy/osu/blob/master/Templates</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ppy/osu</RepositoryUrl>
     <PackageReleaseNotes>Automated release.</PackageReleaseNotes>
     <copyright>Copyright (c) 2025 ppy Pty Ltd</copyright>
-    <Description>Templates to use when creating a ruleset for consumption in osu!.</Description>
+    <Description>Templates to use when creating a ruleset for consumption in hotia!.</Description>
     <PackageTags>dotnet-new;templates;osu</PackageTags>
     <TargetFramework>netstandard2.1</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>

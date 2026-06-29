@@ -116,7 +116,7 @@ namespace osu.Game.Tests.Visual.UserInterface
         {
             Covers = new BeatmapSetOnlineCovers
             {
-                Cover = "https://assets.ppy.sh/beatmaps/1094296/covers/cover@2x.jpg?1581416305"
+                Cover = "https://assets.hotia.org/beatmaps/1094296/covers/cover@2x.jpg?1581416305"
             }
         };
 

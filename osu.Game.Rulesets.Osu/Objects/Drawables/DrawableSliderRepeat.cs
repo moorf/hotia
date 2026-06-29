@@ -173,7 +173,7 @@ namespace osu.Game.Rulesets.Osu.Objects.Drawables
 
             if (hit)
             {
-                // More or less matches stable (see https://github.com/peppy/osu-stable-reference/blob/bb57924c1552adbed11ee3d96cdcde47cf96f2b6/osu!/GameplayElements/HitObjects/Osu/HitCircleOsu.cs#L336-L338)
+                // More or less matches stable (see https://github.com/peppy/osu-stable-reference/blob/bb57924c1552adbed11ee3d96cdcde47cf96f2b6/hotia!/GameplayElements/HitObjects/Osu/HitCircleOsu.cs#L336-L338)
                 AccentColour.Value = Color4.White;
                 Alpha = Interpolation.ValueAt(Time.Current, 1f, 0f, HitStateUpdateTime, HitStateUpdateTime + 700);
                 Arrow.Alpha = 0;

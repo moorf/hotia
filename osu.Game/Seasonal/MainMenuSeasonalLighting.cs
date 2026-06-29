@@ -49,7 +49,7 @@ namespace osu.Game.Seasonal
         [BackgroundDependencyLoader]
         private void load(IBindable<WorkingBeatmap> working, RulesetStore rulesets)
         {
-            // operate in osu! ruleset to keep things simple for now.
+            // operate in hotia! ruleset to keep things simple for now.
             osuRuleset = rulesets.GetRuleset(0);
 
             this.working = working.GetBoundCopy();

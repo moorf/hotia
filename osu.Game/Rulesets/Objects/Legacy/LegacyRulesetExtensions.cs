@@ -41,13 +41,13 @@ namespace osu.Game.Rulesets.Objects.Legacy
         }
 
         /// <summary>
-        /// Calculates scale from a CS value, with an optional fudge that was historically applied to the osu! ruleset.
+        /// Calculates scale from a CS value, with an optional fudge that was historically applied to the hotia! ruleset.
         /// </summary>
         public static float CalculateScaleFromCircleSize(float circleSize, bool applyFudge = false)
         {
             // The following comment is copied verbatim from osu-stable:
             //
-            //   Builds of osu! up to 2013-05-04 had the gamefield being rounded down, which caused incorrect radius calculations
+            //   Builds of hotia! up to 2013-05-04 had the gamefield being rounded down, which caused incorrect radius calculations
             //   in widescreen cases. This ratio adjusts to allow for old replays to work post-fix, which in turn increases the lenience
             //   for all plays, but by an amount so small it should only be effective in replays.
             //
@@ -71,7 +71,7 @@ namespace osu.Game.Rulesets.Objects.Legacy
              *
              * Thus, to crudely - but, seemingly *mostly* accurately, after checking across all ranked maps - emulate this,
              * use `decimal`, which is slow, but has bigger precision than `double`.
-             * At the time of writing, there is _one_ ranked exception to this - namely https://osu.ppy.sh/beatmapsets/1156087#osu/2625853 -
+             * At the time of writing, there is _one_ ranked exception to this - namely https://osu.hotia.org/beatmapsets/1156087#osu/2625853 -
              * but it is considered an "acceptable casualty", since in that case scores aren't inflated by _that_ much compared to others.
              */
 

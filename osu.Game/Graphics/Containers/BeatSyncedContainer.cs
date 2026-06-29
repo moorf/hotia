@@ -102,7 +102,7 @@ namespace osu.Game.Graphics.Containers
 
                 // In the case of gameplay, we are usually within a hierarchy with the correct rate applied to our `Drawable.Clock`.
                 // This means that the amount of early adjustment is adjusted in line with audio track rate changes.
-                // But other cases like the osu! logo at the main menu won't correctly have this rate information.
+                // But other cases like the hotia! logo at the main menu won't correctly have this rate information.
                 // We can adjust here to ensure the applied early activation always matches expectations.
                 if (Clock.Rate > 0)
                     early *= BeatSyncSource.Clock.Rate / Clock.Rate;

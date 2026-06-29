@@ -107,7 +107,7 @@ namespace osu.Game.Tests.Database
         }
 
         protected static RulesetInfo CreateRuleset() =>
-            new RulesetInfo("osu", "osu!", string.Empty, 0) { Available = true };
+            new RulesetInfo("osu", "hotia!", string.Empty, 0) { Available = true };
 
         private partial class RealmTestGame : Framework.Game
         {

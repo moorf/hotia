@@ -46,9 +46,9 @@ namespace osu.Game.Scoring.Legacy
         /// <item><description>30000002: Score stored to replay calculated using the Score V2 algorithm. Legacy scores on this version are candidate to Score V1 -> V2 conversion.</description></item>
         /// <item><description>30000003: First version after converting legacy total score to standardised.</description></item>
         /// <item><description>30000004: Fixed mod multipliers during legacy score conversion. Reconvert all scores.</description></item>
-        /// <item><description>30000005: Introduce combo exponent in the osu! gamemode. Reconvert all scores.</description></item>
+        /// <item><description>30000005: Introduce combo exponent in the hotia! gamemode. Reconvert all scores.</description></item>
         /// <item><description>30000006: Fix edge cases in conversion after combo exponent introduction that lead to NaNs. Reconvert all scores.</description></item>
-        /// <item><description>30000007: Adjust osu!mania combo and accuracy portions and judgement scoring values. Reconvert all scores.</description></item>
+        /// <item><description>30000007: Adjust hotia!mania combo and accuracy portions and judgement scoring values. Reconvert all scores.</description></item>
         /// <item><description>30000008: Add accuracy conversion. Reconvert all scores.</description></item>
         /// <item><description>30000009: Fix edge cases in conversion for scores which have 0.0x mod multiplier on stable. Reconvert all scores.</description></item>
         /// <item><description>30000010: Fix mania score V1 conversion using score V1 accuracy rather than V2 accuracy. Reconvert all scores.</description></item>
@@ -58,8 +58,8 @@ namespace osu.Game.Scoring.Legacy
         /// <see cref="LegacyRulesetExtensions.CalculateDifficultyPeppyStars"/> method. Reconvert all scores.
         /// </description></item>
         /// <item><description>30000013: All local scores will use lazer definitions of ranks for consistency. Recalculates the rank of all scores.</description></item>
-        /// <item><description>30000014: Fix edge cases in conversion for osu! scores on selected beatmaps. Reconvert all scores.</description></item>
-        /// <item><description>30000015: Fix osu! standardised score estimation algorithm violating basic invariants. Reconvert all scores.</description></item>
+        /// <item><description>30000014: Fix edge cases in conversion for hotia! scores on selected beatmaps. Reconvert all scores.</description></item>
+        /// <item><description>30000015: Fix hotia! standardised score estimation algorithm violating basic invariants. Reconvert all scores.</description></item>
         /// <item><description>30000016: Fix taiko standardised score estimation algorithm not including swell tick score gain into bonus portion. Reconvert all scores.</description></item>
         /// <item><description>30000017: Mod score multiplier rebalance. Recalculates the <see cref="ScoreInfo.TotalScore"/> of all scores with <see cref="ScoreInfo.TotalScoreWithoutMods"/> present.</description></item>
         /// </list>

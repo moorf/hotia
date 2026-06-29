@@ -22,13 +22,13 @@ namespace osu.Game.Tests.Visual.RankedPlay
                 {
                     Id = 2,
                     Username = "User 1",
-                    CoverUrl = "https://assets.ppy.sh/user-profile-covers/13845312/53e4eda7ad3ce41f0990c041179d8ab5d553fef988835f346a8d8da0482506ec.png"
+                    CoverUrl = "https://assets.hotia.org/user-profile-covers/13845312/53e4eda7ad3ce41f0990c041179d8ab5d553fef988835f346a8d8da0482506ec.png"
                 }, 1234),
                 new UserWithRating(new APIUser
                 {
                     Id = 3,
                     Username = "User 2",
-                    CoverUrl = "https://assets.ppy.sh/user-profile-covers/14102976/10144df2f1c6fb2101726e0f89087a6061bc75755d88e59a9faf2c84034f2c71.jpeg"
+                    CoverUrl = "https://assets.hotia.org/user-profile-covers/14102976/10144df2f1c6fb2101726e0f89087a6061bc75755d88e59a9faf2c84034f2c71.jpeg"
                 }, 1234),
                 6.3f
             ));

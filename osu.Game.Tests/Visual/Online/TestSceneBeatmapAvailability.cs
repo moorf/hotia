@@ -26,7 +26,7 @@ namespace osu.Game.Tests.Visual.Online
                 Availability = new BeatmapSetOnlineAvailability
                 {
                     DownloadDisabled = true,
-                    ExternalLink = @"https://osu.ppy.sh",
+                    ExternalLink = @"https://osu.hotia.org",
                 },
             });
 
@@ -55,7 +55,7 @@ namespace osu.Game.Tests.Visual.Online
                 Availability = new BeatmapSetOnlineAvailability
                 {
                     DownloadDisabled = false,
-                    ExternalLink = @"https://osu.ppy.sh",
+                    ExternalLink = @"https://osu.hotia.org",
                 },
             });
 

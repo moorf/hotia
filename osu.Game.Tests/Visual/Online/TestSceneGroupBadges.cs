@@ -50,7 +50,7 @@ namespace osu.Game.Tests.Visual.Online
                     {
                         new APIUserGroup { Colour = "#0066FF", ShortName = "PPY", Name = "peppy" },
                         new APIUserGroup { Colour = "#EB47D0", ShortName = "DEV", Name = "Developers" },
-                        new APIUserGroup { Colour = "#999999", ShortName = "ALM", Name = "osu! Alumni" },
+                        new APIUserGroup { Colour = "#999999", ShortName = "ALM", Name = "hotia! Alumni" },
                         new APIUserGroup { Colour = "#A347EB", ShortName = "BN", Name = "Beatmap Nominators", Playmodes = new[] { "osu", "taiko" } },
                         new APIUserGroup { Colour = "#A347EB", ShortName = "BN", Name = "Beatmap Nominators (Probationary)", Playmodes = new[] { "osu", "taiko" }, IsProbationary = true }
                     }

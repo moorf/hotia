@@ -8,7 +8,7 @@ using osu.Game.Graphics;
 namespace osu.Game.Rulesets.Mods
 {
     /// <remarks>
-    /// This mod is used strictly to mark osu!stable scores set with the "Score V2" mod active.
+    /// This mod is used strictly to mark hotia!stable scores set with the "Score V2" mod active.
     /// It should not be used in any real capacity going forward.
     /// </remarks>
     public class ModScoreV2 : Mod
@@ -17,7 +17,7 @@ namespace osu.Game.Rulesets.Mods
         public override string Acronym => @"SV2";
         public override IconUsage? Icon => OsuIcon.ModScoreV2;
         public override ModType Type => ModType.System;
-        public override LocalisableString Description => "Score set on earlier osu! versions with the V2 scoring algorithm active.";
+        public override LocalisableString Description => "Score set on earlier hotia! versions with the V2 scoring algorithm active.";
         public override bool UserPlayable => false;
         public override bool ValidForMultiplayer => false;
         public override bool ValidForMultiplayerAsFreeMod => false;

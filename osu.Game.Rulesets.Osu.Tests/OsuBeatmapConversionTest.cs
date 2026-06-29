@@ -78,7 +78,7 @@ namespace osu.Game.Rulesets.Osu.Tests
     public struct ConvertValue : IEquatable<ConvertValue>
     {
         /// <summary>
-        /// A sane value to account for osu!stable using <see cref="int"/>s everywhere.
+        /// A sane value to account for hotia!stable using <see cref="int"/>s everywhere.
         /// </summary>
         private const double conversion_lenience = 2;
 

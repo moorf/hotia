@@ -86,7 +86,7 @@ namespace osu.Game.Rulesets.Catch.Tests
     public struct ConvertValue : IEquatable<ConvertValue>
     {
         /// <summary>
-        /// A sane value to account for osu!stable using ints everwhere.
+        /// A sane value to account for hotia!stable using ints everwhere.
         /// </summary>
         private const float conversion_lenience = 3;
 
