@@ -1,8 +1,14 @@
-HOTSU - ppy/osu fork with performance in mind.
+HOTSU - ppy/osu fork with performance in mind. Get 2x performance (at least in taiko) now!
 
 Small changes done with the main goal - *making it run good on mobile*.
+
 It runs much better on mobile now, and even better if you turn off HUD.
+
 This is taiko-first -- turning off hitsounds give tiny bit more fps. Argon taiko hit object is also simplified for a small performance gain.
+
+# YOU SHOULD TRY RUNNING THIS WITH HUD DISABLED TOO, FPS GAINS ARE BIG
+
+[**Latest release**](https://github.com/moorf/hotsu/releases/latest)
 
 ## Licence
 
@@ -11,3 +17,7 @@ This is taiko-first -- turning off hitsounds give tiny bit more fps. Argon taiko
 Please note that this *does not cover* the usage of the "hotia!" or "ppy" branding in any software, resources, advertising or promotion, as this is protected by trademark law.
 
 Please also note that game resources are covered by a separate licence. Please see the [ppy/osu-resources](https://github.com/ppy/osu-resources) repository for clarifications.
+
+## Building
+
+Clone moorf/hotsu and moorf/osu-framework, then run UseLocalFramework script, then build.
