@@ -1,4 +1,7 @@
-HOTSU - ppy/osu fork with performance in mind. Get 2x performance (at least in taiko) now!
+<p align="center">
+  <img width="500" alt="hotia! logo" src="assets/hotia.png">
+</p>
+Hotia - unofficial project based on osu! sourcecode, with performance in mind. Get 2x performance (at least in taiko) now!
 
 Small changes done with the main goal - *making it run good on mobile*.
 
@@ -8,7 +11,7 @@ This is taiko-first -- turning off hitsounds give tiny bit more fps. Argon taiko
 
 # YOU SHOULD TRY RUNNING THIS WITH HUD DISABLED TOO, FPS GAINS ARE BIG
 
-[**Latest release**](https://github.com/moorf/hotsu/releases/latest)
+[**Latest release**](https://github.com/moorf/hotia/releases/latest)
 
 ## Licence
 
