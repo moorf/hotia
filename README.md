@@ -1,8 +1,11 @@
-HOTSU - ppy/osu fork with performance in mind.
+HOTSU - ppy/osu fork with performance in mind. Get 2x performance (at least in taiko) now!
 
 Small changes done with the main goal - *making it run good on mobile*.
+
 It runs much better on mobile now, and even better if you turn off HUD.
+
 This is taiko-first -- turning off hitsounds give tiny bit more fps. Argon taiko hit object is also simplified for a small performance gain.
+
 
 [**Latest release**](https://github.com/moorf/hotsu/releases/latest)
 
