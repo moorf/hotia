@@ -11,8 +11,8 @@ namespace osu.Game.Rulesets.Catch
     [Cached]
     public partial class CatchInputManager : RulesetInputManager<CatchAction>
     {
-        public CatchInputManager(RulesetInfo ruleset)
-            : base(ruleset, 0, SimultaneousBindingMode.Unique)
+        public CatchInputManager(RulesetInfo ruleset, bool careAboutMouse = true)
+            : base(ruleset, 0, SimultaneousBindingMode.Unique, careAboutMouse)
         {
         }
     }

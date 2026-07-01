@@ -16,5 +16,16 @@ namespace osu.Game.Online.API.Requests
 
         [JsonProperty("total")]
         public int Total;
+
+    }
+    public class SearchBeatmapSetsResponseDirect : List<APIBeatmapSet>
+    {
+        [JsonProperty("beatmapsets")]
+        public IEnumerable<APIBeatmapSet> BeatmapSets;
+
+        [JsonProperty("total")]
+        public int Total;
+
+
     }
 }

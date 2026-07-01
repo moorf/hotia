@@ -1,6 +1,6 @@
-<Project>
+﻿<Project>
   <ItemGroup>
-    <ProjectReference Include="$(MSBuildThisFileDirectory)..\osu-framework\osu.Framework.Android\osu.Framework.Android.csproj" />
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\hotia-framework\osu.Framework.Android\osu.Framework.Android.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>

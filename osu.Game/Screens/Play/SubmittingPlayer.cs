@@ -143,8 +143,9 @@ namespace osu.Game.Screens.Play
 
                     if (string.IsNullOrEmpty(exception.Message))
                         Logger.Error(exception, $"Failed to retrieve a score submission token.\n\n{whatWillHappen}");
-                    else
-                        Logger.Log($"{getUserFacingAPIError(exception)}\n\n{whatWillHappen}", level: LogLevel.Important);
+                    //else
+                    // hotiaTODO: enable this when there will be server?? (as if)
+                    //Logger.Log($"{getUserFacingAPIError(exception)}\n\n{whatWillHappen}", level: LogLevel.Important);
                 }
 
                 if (shouldExit)

@@ -6,7 +6,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Nuget">
     <Title>hotia!</Title>
-    <PackageId>ppy.osu.Game</PackageId>
+    <PackageId>moorf.hotia.Game</PackageId>
     <Version>0.0.0</Version>
     <PackageIcon>icon.png</PackageIcon>
     <IsPackable>true</IsPackable>
@@ -52,7 +52,7 @@
     <PackageReference Include="System.Runtime.Handles" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\osu-framework\osu.Framework\osu.Framework.csproj" />
-    <ProjectReference Include="..\..\osu-resources\osu.Game.Resources\osu.Game.Resources.csproj" />
+    <ProjectReference Include="..\..\hotia-framework\osu.Framework\osu.Framework.csproj" />
+    <ProjectReference Include="..\..\hotia-resources\osu.Game.Resources\osu.Game.Resources.csproj" />
   </ItemGroup>
 </Project>

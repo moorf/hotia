@@ -163,43 +163,43 @@ namespace osu.Game.Online.API
         {
             while (!cancellationToken.IsCancellationRequested)
             {
-                if (state.Value == APIState.Failing)
-                {
-                    // To recover from a failing state, falling through and running the full reconnection process seems safest for now.
-                    // This could probably be replaced with a ping-style request if we want to avoid the reconnection overheads.
-                    log.Add($@"{nameof(APIAccess)} is in a failing state, waiting a bit before we try again...");
-                    Thread.Sleep(5000);
-                }
+                //if (state.Value == APIState.Failing)
+                //{
+                //    // To recover from a failing state, falling through and running the full reconnection process seems safest for now.
+                //    // This could probably be replaced with a ping-style request if we want to avoid the reconnection overheads.
+                //    log.Add($@"{nameof(APIAccess)} is in a failing state, waiting a bit before we try again...");
+                //    Thread.Sleep(5000);
+                //}
 
-                // Ensure that we have valid credentials.
-                // If not, setting the offline state will allow the game to prompt the user to provide new credentials.
-                if (!HasLogin)
-                {
-                    state.Value = APIState.Offline;
-                    Thread.Sleep(50);
-                    continue;
-                }
+                //// Ensure that we have valid credentials.
+                //// If not, setting the offline state will allow the game to prompt the user to provide new credentials.
+                //if (!HasLogin)
+                //{
+                //    state.Value = APIState.Offline;
+                //    Thread.Sleep(50);
+                //    continue;
+                //}
 
-                Debug.Assert(HasLogin);
+                //Debug.Assert(HasLogin);
 
-                // Ensure that we are in an online state. If not, attempt to connect.
-                if (state.Value != APIState.Online)
-                {
-                    attemptConnect();
+                //// Ensure that we are in an online state. If not, attempt to connect.
+                //if (state.Value != APIState.Online)
+                //{
+                //    attemptConnect();
 
-                    if (state.Value != APIState.Online)
-                    {
-                        Thread.Sleep(50);
-                        continue;
-                    }
-                }
+                //    if (state.Value != APIState.Online)
+                //    {
+                //        Thread.Sleep(50);
+                //        continue;
+                //    }
+                //}
 
-                // hard bail if we can't get a valid access token.
-                if (authentication.RequestAccessToken() == null)
-                {
-                    Logout();
-                    continue;
-                }
+                //// hard bail if we can't get a valid access token.
+                //if (authentication.RequestAccessToken() == null)
+                //{
+                //    Logout();
+                //    continue;
+                //}
 
                 processQueuedRequests();
                 Thread.Sleep(50);
@@ -549,7 +549,7 @@ namespace osu.Game.Online.API
             }
         }
 
-        public bool IsLoggedIn => State.Value > APIState.Offline;
+        public bool IsLoggedIn => true;//State.Value > APIState.Offline;
 
         public void Queue(APIRequest request)
         {
@@ -557,11 +557,11 @@ namespace osu.Game.Online.API
             {
                 request.AttachAPI(this);
 
-                if (state.Value == APIState.Offline)
-                {
-                    request.Fail(new WebException(@"User not logged in"));
-                    return;
-                }
+                //if (state.Value == APIState.Offline)
+                //{
+                //    request.Fail(new WebException(@"User not logged in"));
+                //    return;
+                //}
 
                 queue.Enqueue(request);
             }

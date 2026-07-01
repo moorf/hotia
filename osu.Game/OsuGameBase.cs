@@ -107,7 +107,7 @@ namespace osu.Game
         public virtual bool UseDevelopmentServer => DebugUtils.IsDebugBuild;
 
         public virtual EndpointConfiguration CreateEndpoints() =>
-            UseDevelopmentServer ? new DevelopmentEndpointConfiguration() : new ProductionEndpointConfiguration();
+            new ProductionEndpointConfiguration(); //UseDevelopmentServer ? new DevelopmentEndpointConfiguration() : 
 
         protected override OnlineStore CreateOnlineStore() => new TrustedDomainOnlineStore();
 
@@ -317,6 +317,7 @@ namespace osu.Game
             CurrentLanguage.BindValueChanged(val => frameworkLocale.Value = val.NewValue.ToCultureCode());
 
             dependencies.CacheAs(API ??= new APIAccess(this, LocalConfig, endpoints, VersionHash));
+            var beatmapEndpoint = new EndpointConfiguration();
 
             var defaultBeatmap = new DummyWorkingBeatmap(Audio, Textures);
 

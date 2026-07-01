@@ -8,7 +8,7 @@
 
   <PropertyGroup Label="Nuget">
     <Title>hotia!catch (ruleset)</Title>
-    <PackageId>ppy.osu.Game.Rulesets.Catch</PackageId>
+    <PackageId>moorf.hotia.Game.Rulesets.Catch</PackageId>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 

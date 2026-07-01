@@ -179,8 +179,11 @@ namespace osu.Game
 
         public virtual StableStorage GetStorageForStableInstall() => null;
 
-        private float toolbarOffset => (Toolbar?.Position.Y ?? 0) + (Toolbar?.DrawHeight ?? 0);
-
+        //private float toolbarOffset => (Toolbar?.Position.Y ?? 0) + (Toolbar?.DrawHeight ?? 0);
+        private float toolbarOffset =>
+        Toolbar?.State.Value == Visibility.Visible
+        ? Toolbar.Position.Y + Toolbar.DrawHeight
+        : 0;
         private IdleTracker idleTracker;
 
         /// <summary>
@@ -1149,7 +1152,6 @@ namespace osu.Game
                 idleTracker,
                 new ConfineMouseTracker()
             });
-
             dependencies.Cache(ScreenFooter);
 
             ScreenStack.ScreenPushed += screenPushed;
@@ -1202,7 +1204,7 @@ namespace osu.Game
             {
                 d.Anchor = Anchor.TopRight;
                 d.Origin = Anchor.TopRight;
-            }), dummy.Add, true);
+            }), rightFloatingOverlayContent.Add, true);
 
             loadComponentSingleFile(legacyImportManager, Add);
 
@@ -1320,10 +1322,15 @@ namespace osu.Game
             {
                 if (newScreen is Player)
                 {
+                    if (Settings.IsLoaded) Settings.FinishTransforms(true);
+                    if (Notifications.IsLoaded) Notifications.FinishTransforms(true);
+                    if (Toolbar.IsLoaded) Toolbar.FinishTransforms(true);
+                    overlayContent.FinishTransforms(true);
                     overlayContent.Suspend();
                     ///overlayOffsetContainer.Suspend();
                     topMostOverlayContent.Suspend();
                     leftFloatingOverlayContent.Suspend();
+                    //Scheduler.AddDelayed(() => rightFloatingOverlayContent.Suspend(), 5000);
                     rightFloatingOverlayContent.Suspend();
                     footerBasedOverlayContent.Suspend();
                     logoContainer.Suspend();
@@ -1753,9 +1760,9 @@ namespace osu.Game
             // Content.ToLocalSpace() is used instead of this.ToLocalSpace() to correctly calculate the offset with scaling modes active.
             // Content is a child of a scaling container with ScalingMode.Everything set, while the game itself is never scaled.
             // this avoids a visible jump in the positioning of the screen offset container.
-            if (Settings.IsLoaded && Settings.IsPresent)
+            if (Settings.IsLoaded && Settings.State.Value == Visibility.Visible) //this fixes overlay shifting playfield
                 horizontalOffset += Content.ToLocalSpace(Settings.ScreenSpaceDrawQuad.TopRight).X * SIDE_OVERLAY_OFFSET_RATIO;
-            if (Notifications.IsLoaded && Notifications.IsPresent)
+            if (Notifications.IsLoaded && Notifications.State.Value == Visibility.Visible)
                 horizontalOffset += (Content.ToLocalSpace(Notifications.ScreenSpaceDrawQuad.TopLeft).X - Content.DrawWidth) * SIDE_OVERLAY_OFFSET_RATIO;
 
             ScreenOffsetContainer.X = horizontalOffset;

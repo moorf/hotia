@@ -100,15 +100,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalysis", "CodeAnalysi
 		CodeAnalysis\osu.globalconfig = CodeAnalysis\osu.globalconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework", "..\osu-framework\osu.Framework\osu.Framework.csproj", "{2EEBDD19-F4A1-466E-A8CA-166618E1CA55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework", "..\hotia-framework\osu.Framework\osu.Framework.csproj", "{2EEBDD19-F4A1-466E-A8CA-166618E1CA55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework.NativeLibs", "..\osu-framework\osu.Framework.NativeLibs\osu.Framework.NativeLibs.csproj", "{9AC8205F-BBC2-4F88-AE8C-2A5A03F301CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework.NativeLibs", "..\hotia-framework\osu.Framework.NativeLibs\osu.Framework.NativeLibs.csproj", "{9AC8205F-BBC2-4F88-AE8C-2A5A03F301CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework.Android", "..\osu-framework\osu.Framework.Android\osu.Framework.Android.csproj", "{927DBE5A-EEF8-4ED9-8914-2286060A35F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework.Android", "..\hotia-framework\osu.Framework.Android\osu.Framework.Android.csproj", "{927DBE5A-EEF8-4ED9-8914-2286060A35F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework.iOS", "..\osu-framework\osu.Framework.iOS\osu.Framework.iOS.csproj", "{E1DFB3B0-C04B-454F-B8CB-C43D79768C87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Framework.iOS", "..\hotia-framework\osu.Framework.iOS\osu.Framework.iOS.csproj", "{E1DFB3B0-C04B-454F-B8CB-C43D79768C87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Game.Resources", "..\osu-resources\osu.Game.Resources\osu.Game.Resources.csproj", "{B58F2DE5-4A8F-4039-8544-09BA2F2CF6C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "osu.Game.Resources", "..\hotia-resources\osu.Game.Resources\osu.Game.Resources.csproj", "{B58F2DE5-4A8F-4039-8544-09BA2F2CF6C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

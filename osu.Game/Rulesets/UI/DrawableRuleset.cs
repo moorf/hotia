@@ -15,7 +15,9 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Cursor;
 using osu.Framework.Input;
+using osu.Framework.Input.Bindings;
 using osu.Framework.Input.Events;
+using osu.Framework.Testing.Input;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
 using osu.Game.Graphics.Cursor;
@@ -115,6 +117,8 @@ namespace osu.Game.Rulesets.UI
             }
         }
 
+
+
         /// <summary>
         /// Creates a ruleset visualisation for the provided ruleset and beatmap.
         /// </summary>
@@ -131,10 +135,11 @@ namespace osu.Game.Rulesets.UI
 
             Beatmap = tBeatmap;
             Mods = mods?.ToArray() ?? Array.Empty<Mod>();
-
+            bool hasAutoplay = Mods.Any(m => m is ModAutoplay);
+            KeyBindingInputManager = CreateInputManager(!hasAutoplay);
             RelativeSizeAxes = Axes.Both;
 
-            KeyBindingInputManager = CreateInputManager();
+            //KeyBindingInputManager = CreateInputManager();
             playfieldAdjustmentContainer = CreatePlayfieldAdjustmentContainer();
             playfield = new Lazy<Playfield>(() => CreatePlayfield().With(p =>
             {
@@ -191,7 +196,7 @@ namespace osu.Game.Rulesets.UI
 
             if ((ResumeOverlay = CreateResumeOverlay()) != null)
             {
-                AddInternal(CreateInputManager()
+                AddInternal(CreateInputManager(false) //this was changed but who knows why
                     .WithChild(CreatePlayfieldAdjustmentContainer()
                         .WithChild(ResumeOverlay)));
             }
@@ -347,7 +352,7 @@ namespace osu.Game.Rulesets.UI
         /// Creates a key conversion input manager. An exception will be thrown if a valid <see cref="RulesetInputManager{T}"/> is not returned.
         /// </summary>
         /// <returns>The input manager.</returns>
-        protected abstract PassThroughInputManager CreateInputManager();
+        protected abstract PassThroughInputManager CreateInputManager(bool careAboutMouse = true);
 
         protected virtual ReplayInputHandler CreateReplayInputHandler(Replay replay) => null;
 

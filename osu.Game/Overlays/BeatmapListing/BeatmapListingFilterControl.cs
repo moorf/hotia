@@ -66,8 +66,9 @@ namespace osu.Game.Overlays.BeatmapListing
 
         private ScheduledDelegate queryChangedDebounce;
 
-        private SearchBeatmapSetsRequest getSetsRequest;
-        private SearchBeatmapSetsResponse lastResponse;
+        //private SearchBeatmapSetsRequest getSetsRequest;
+        private SearchBeatmapSetsRequestDirect getSetsRequest;
+        private List<APIBeatmapSet> lastResponse;
 
         [Resolved]
         private IAPIProvider api { get; set; }
@@ -226,28 +227,27 @@ namespace osu.Game.Overlays.BeatmapListing
 
         private void performRequest()
         {
-            getSetsRequest = new SearchBeatmapSetsRequest(
+            getSetsRequest = new SearchBeatmapSetsRequestDirect(
                 searchControl.Query.Value,
-                searchControl.Ruleset.Value,
-                lastResponse?.Cursor,
-                searchControl.General,
-                searchControl.Category.Value,
-                sortControl.Current.Value,
-                sortControl.SortDirection.Value,
-                searchControl.Genre.Value,
-                searchControl.Language.Value,
-                searchControl.Extra,
-                searchControl.Ranks,
-                searchControl.Played.Value,
-                searchControl.ExplicitContent.Value);
-
+                searchControl.Ruleset.Value);
+            //lastResponse?.Cursor,
+            //searchControl.General,
+            //searchControl.Category.Value,
+            //sortControl.Current.Value,
+            //sortControl.SortDirection.Value,
+            //searchControl.Genre.Value,
+            //searchControl.Language.Value,
+            //searchControl.Extra,
+            //searchControl.Ranks,
+            //searchControl.Played.Value,
+            //searchControl.ExplicitContent.Value);
             getSetsRequest.Success += response =>
             {
-                var sets = response.BeatmapSets.ToList();
-
+                //var sets = response.BeatmapSets.ToList();
+                var sets = response;
                 // If the previous request returned a null cursor, the API is indicating we can't paginate further (maybe there are no more beatmaps left).
-                if (sets.Count == 0 || response.Cursor == null)
-                    noMoreResults = true;
+                //if (sets.Count == 0 || response.Cursor == null)
+                noMoreResults = true;
 
                 if (CurrentPage == 0)
                     searchControl.BeatmapSet = sets.FirstOrDefault();

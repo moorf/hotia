@@ -10,9 +10,9 @@ ANDROID_PROPS="osu.Android.props"
 IOS_PROPS="osu.iOS.props"
 SLN="osu.sln"
 
-dotnet remove $GAME_CSPROJ reference ppy.osu.Framework
-dotnet remove $ANDROID_PROPS reference ppy.osu.Framework.Android
-dotnet remove $IOS_PROPS reference ppy.osu.Framework.iOS
+dotnet remove $GAME_CSPROJ reference moorf.hotia.Framework
+dotnet remove $ANDROID_PROPS reference moorf.hotia.Framework.Android
+dotnet remove $IOS_PROPS reference moorf.hotia.Framework.iOS
 
 dotnet sln $SLN add ../osu-framework/osu.Framework/osu.Framework.csproj \
     ../osu-framework/osu.Framework.NativeLibs/osu.Framework.NativeLibs.csproj \

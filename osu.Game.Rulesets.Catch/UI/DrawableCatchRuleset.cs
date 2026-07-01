@@ -51,7 +51,8 @@ namespace osu.Game.Rulesets.Catch.UI
 
         public override PlayfieldAdjustmentContainer CreatePlayfieldAdjustmentContainer() => new CatchPlayfieldAdjustmentContainer();
 
-        protected override PassThroughInputManager CreateInputManager() => new CatchInputManager(Ruleset.RulesetInfo);
+        //protected override PassThroughInputManager CreateInputManager() => new CatchInputManager(Ruleset.RulesetInfo);
+        protected override PassThroughInputManager CreateInputManager(bool careAboutMouse = true) => new CatchInputManager(Ruleset.RulesetInfo, careAboutMouse);
 
         public override DrawableHitObject<CatchHitObject>? CreateDrawableRepresentation(CatchHitObject h) => null;
 

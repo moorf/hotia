@@ -15,16 +15,15 @@ namespace osu.Game.Online.API.Requests
         {
             this.noVideo = noVideo;
         }
-
         protected override WebRequest CreateWebRequest()
         {
-            var req = base.CreateWebRequest();
+            var req = base.CreateBeatmapWebRequest();
             req.Timeout = 60000;
             return req;
         }
 
         protected override string FileExtension => ".osz";
 
-        protected override string Target => $@"beatmapsets/{Model.OnlineID}/download{(noVideo ? "?noVideo=1" : "")}";
+        protected override string Target => $@"d/{Model.OnlineID}{(noVideo ? "?noVideo=1" : "")}";
     }
 }

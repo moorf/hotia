@@ -11,8 +11,8 @@ namespace osu.Game.Rulesets.Taiko
     [Cached] // Used for touch input, see DrumTouchInputArea.
     public partial class TaikoInputManager : RulesetInputManager<TaikoAction>
     {
-        public TaikoInputManager(RulesetInfo ruleset)
-            : base(ruleset, 0, SimultaneousBindingMode.Unique)
+        public TaikoInputManager(RulesetInfo ruleset, bool careAboutMouse = true)
+            : base(ruleset, 0, SimultaneousBindingMode.Unique, careAboutMouse)
         {
         }
     }

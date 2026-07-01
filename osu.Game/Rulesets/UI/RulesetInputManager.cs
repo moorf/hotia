@@ -62,11 +62,15 @@ namespace osu.Game.Rulesets.UI
 
         private readonly Container content;
 
-        protected RulesetInputManager(RulesetInfo ruleset, int variant, SimultaneousBindingMode unique)
+        private Bindable<bool> careAboutMouse = null!;
+
+        protected RulesetInputManager(RulesetInfo ruleset, int variant, SimultaneousBindingMode unique, bool caringAboutMouse = true)
         {
             InternalChild = KeyBindingContainer =
                 CreateKeyBindingContainer(ruleset, variant, unique)
                     .WithChild(content = new Container { RelativeSizeAxes = Axes.Both });
+
+            careAboutMouse = new Bindable<bool>(caringAboutMouse); //hotiaTODO man i really hate this implementation but i couldn't come up with anything better
         }
 
         [BackgroundDependencyLoader(true)]
@@ -142,7 +146,7 @@ namespace osu.Game.Rulesets.UI
             switch (e)
             {
                 case MouseDownEvent:
-                    if (mouseDisabled.Value)
+                    if (mouseDisabled.Value && careAboutMouse.Value)
                         return true; // importantly, block upwards propagation so global bindings also don't fire.
 
                     break;

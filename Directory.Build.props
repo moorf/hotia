@@ -44,13 +44,13 @@
   </PropertyGroup>
   <PropertyGroup Label="Nuget">
     <IsPackable>false</IsPackable>
-    <Authors>ppy Pty Ltd</Authors>
+    <Authors>moorf</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/ppy/osu</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ppy/osu</RepositoryUrl>
     <PackageReleaseNotes>Automated release.</PackageReleaseNotes>
-    <Company>ppy Pty Ltd</Company>
+    <Company>moorf</Company>
     <Copyright>Copyright (c) 2025 ppy Pty Ltd</Copyright>
-    <PackageTags>osu game</PackageTags>
+    <PackageTags>hotia game</PackageTags>
   </PropertyGroup>
 </Project>

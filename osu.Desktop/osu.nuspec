@@ -4,7 +4,7 @@
         <id>osulazer</id>
         <version>0.0.0</version>
         <title>hotia!</title>
-        <authors>ppy Pty Ltd</authors>
+        <Authors>moorf</Authors>
         <owners>Dean Herbert</owners>
         <projectUrl>https://osu.hotia.org/</projectUrl>
         <iconUrl>https://github.com/ppy/osu/blob/master/assets/lazer-nuget.png?raw=true</iconUrl>

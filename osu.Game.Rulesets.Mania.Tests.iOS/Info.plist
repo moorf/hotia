@@ -5,7 +5,7 @@
 	<key>CFBundleName</key>
 	<string>osu.Game.Rulesets.Mania.Tests.iOS</string>
 	<key>CFBundleIdentifier</key>
-	<string>sh.ppy.mania-ruleset-tests</string>
+	<string>org.moorf.mania-ruleset-tests</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>

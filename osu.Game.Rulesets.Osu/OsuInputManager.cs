@@ -49,8 +49,8 @@ namespace osu.Game.Rulesets.Osu
             // this can be expanded to a more complex implementation, but I'd still want to keep it as simple as we can.
             NonPositionalInputQueue.OfType<DrawableHitCircle.HitReceptor>().Any(c => c.CanBeHit() && c.ReceivePositionalInputAt(screenSpacePosition));
 
-        public OsuInputManager(RulesetInfo ruleset)
-            : base(ruleset, 0, SimultaneousBindingMode.Unique)
+        public OsuInputManager(RulesetInfo ruleset, bool careAboutMouse = true)
+            : base(ruleset, 0, SimultaneousBindingMode.Unique, careAboutMouse)
         {
         }
 

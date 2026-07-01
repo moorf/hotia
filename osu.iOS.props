@@ -1,6 +1,6 @@
-<Project>
+﻿<Project>
   <ItemGroup>
-    <ProjectReference Include="$(MSBuildThisFileDirectory)..\osu-framework\osu.Framework.iOS\osu.Framework.iOS.csproj" />
+    <ProjectReference Include="$(MSBuildThisFileDirectory)..\hotia-framework\osu.Framework.iOS\osu.Framework.iOS.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <CodesignKey>iPhone Developer</CodesignKey>

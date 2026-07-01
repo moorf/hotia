@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <PackageType>Template</PackageType>
-    <PackageId>ppy.osu.Game.Templates</PackageId>
+    <PackageId>moorf.hotia.Game.Templates</PackageId>
     <Title>hotia! templates</Title>
-    <Authors>ppy Pty Ltd</Authors>
+    <Authors>moorf</Authors>
     <PackageLicenseUrl>https://github.com/ppy/osu/blob/master/LICENCE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/ppy/osu/blob/master/Templates</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ppy/osu</RepositoryUrl>

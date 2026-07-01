@@ -21,6 +21,7 @@ namespace osu.Game.Online.API
     {
         protected override WebRequest CreateWebRequest() => new OsuJsonWebRequest<T>(Uri);
 
+        protected override WebRequest CreateBeatmapWebRequest() => new OsuJsonWebRequest<T>(BeatmapUri);
         /// <summary>
         /// The deserialised response object. May be null if the request or deserialisation failed.
         /// </summary>
@@ -69,10 +70,11 @@ namespace osu.Game.Online.API
     {
         protected abstract string Target { get; }
 
+        protected virtual string ApiVer { get; } = "/v2";
         protected virtual WebRequest CreateWebRequest() => new OsuWebRequest(Uri);
-
+        protected virtual WebRequest CreateBeatmapWebRequest() => new OsuWebRequest(BeatmapUri);
         protected virtual string Uri => $@"{API!.Endpoints.APIUrl}/api/v2/{Target}";
-
+        protected virtual string BeatmapUri => $@"{API!.Endpoints.BeatmapUrl}/api{ApiVer}/{Target}";
         protected IAPIProvider? API;
 
         protected WebRequest? WebRequest;
@@ -127,7 +129,7 @@ namespace osu.Game.Online.API
             User = API.LocalUser.Value;
 
             if (isFailing) return;
-
+            
             WebRequest = CreateWebRequest();
             WebRequest.Failed += Fail;
             WebRequest.AllowRetryOnTimeout = false;

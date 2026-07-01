@@ -24,7 +24,7 @@ namespace osu.Game.Overlays
         private readonly Container loadingContainer;
         private readonly Container content;
 
-        protected OnlineOverlay(OverlayColourScheme colourScheme, bool requiresSignIn = true)
+        protected OnlineOverlay(OverlayColourScheme colourScheme, bool requiresSignIn = false)
             : base(colourScheme)
         {
             var mainContent = requiresSignIn

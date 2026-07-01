@@ -47,5 +47,7 @@ namespace osu.Game.Online
         /// The endpoint for the SignalR metadata server.
         /// </summary>
         public string MetadataUrl { get; set; } = string.Empty;
+
+        public string BeatmapUrl { get; set; } = string.Empty;
     }
 }

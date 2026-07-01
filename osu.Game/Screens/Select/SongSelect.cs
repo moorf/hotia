@@ -55,6 +55,9 @@ using osu.Game.Utils;
 using osuTK;
 using osuTK.Graphics;
 using osuTK.Input;
+using osu.Framework.Extensions.ObjectExtensions;
+using osu.Game.Rulesets.Objects;
+using osu.Game.Rulesets.UI;
 
 namespace osu.Game.Screens.Select
 {
@@ -87,7 +90,12 @@ namespace osu.Game.Screens.Select
         /// applying looping and preview offsets.
         /// </summary>
         protected bool ControlGlobalMusic { get; init; } = true;
-
+        private Container innerContainer = new Container
+        {
+            RelativeSizeAxes = Axes.Both,
+            Depth = 1,
+            AlwaysPresent = false
+        };
         /// <summary>
         /// Whether this song select instance should allow scoping down to a specific beatmap set,
         /// exposing other difficulties that are otherwise hidden by filter criteria.
@@ -175,7 +183,7 @@ namespace osu.Game.Screens.Select
         private void load(AudioManager audio, OsuConfigManager config)
         {
             errorSample = audio.Samples.Get(@"UI/generic-error");
-
+            innerContainer.Shear = -OsuGame.SHEAR;
             AddRangeInternal(new Drawable[]
             {
                 new GlobalScrollAdjustsVolume(),
@@ -242,6 +250,11 @@ namespace osu.Game.Screens.Select
                                                             new ShearAligningWrapper(titleWedge = new BeatmapTitleWedge
                                                             {
                                                                 TopPadding = TopPadding,
+                                                            }),
+                                                            innerContainer.With(ic =>
+                                                            {
+                                                                ic.RelativeSizeAxes = Axes.Both;
+                                                                ic.Height = 0.4f;
                                                             }),
                                                             new ShearAligningWrapper(detailsArea = new BeatmapDetailsArea()),
                                                         },
@@ -604,6 +617,7 @@ namespace osu.Game.Screens.Select
             if (validSelection)
             {
                 carousel.CurrentBeatmap = currentBeatmap.BeatmapInfo;
+                showPreview();
                 return true;
             }
 
@@ -637,6 +651,69 @@ namespace osu.Game.Screens.Select
             performDebounceSelection();
 
             return validSelection;
+        }
+
+        private void showPreview()
+        {
+            if (Beatmap == null || Beatmap.Value.BeatmapInfo.Ruleset.Name == "dummy") return;
+
+            Ruleset? rulesetInstance = Ruleset.Value.CreateInstance();//Beatmap.Value.BeatmapInfo.Ruleset.CreateInstance();
+            ModAutoplay? createModAutoplay = rulesetInstance.CreateMod<ModAutoplay>();
+            if (createModAutoplay == null) return;
+            
+            Mod[]? autoplayMods = new Mod[] { createModAutoplay };
+            IBeatmap? playableBeatmap = Beatmap.Value.GetPlayableBeatmap(rulesetInstance.RulesetInfo, autoplayMods);
+            DrawableRuleset? drawableRuleset = rulesetInstance.CreateDrawableRulesetWith(playableBeatmap, autoplayMods);
+            if (playableBeatmap == null || drawableRuleset == null || Beatmap.Value.Beatmap == null) return;
+
+            GameplayState? gameplay = new GameplayState(playableBeatmap, rulesetInstance, autoplayMods);
+            Score? score = createModAutoplay.CreateScoreFromReplayData(gameplay.Beatmap, [createModAutoplay]);
+            var clockContainer = new MasterGameplayClockContainer(Beatmap.Value, Beatmap.Value.BeatmapInfo.Metadata.PreviewTime);
+
+            drawableRuleset.FrameStablePlayback = true;
+            drawableRuleset.Cursor?.Dispose();
+            drawableRuleset.Playfield.Colour = Color4.Blue;
+            switch (rulesetInstance.RulesetInfo.ShortName)
+            {
+                case "osu":
+                    break;
+                case "taiko":
+                    drawableRuleset.Scale = new Vector2(0.96f);
+                    break;
+                case "mania":
+                    break;
+                case "fruits":
+                    drawableRuleset.Scale = new Vector2(0.4f);
+                    break;
+                default:
+                    break;
+            }
+            score.Replay.Frames.RemoveAll(f => f.Time <= Beatmap.Value.BeatmapInfo.Metadata.PreviewTime);
+            Schedule(() => drawableRuleset.Cursor?.Hide());
+            clockContainer.Add(drawableRuleset);
+
+            innerContainer.Children = new Drawable[]
+            {
+            new ShearAligningWrapper(new Container
+                {
+                    RelativeSizeAxes = Axes.Both,
+                    Shear = OsuGame.SHEAR,
+                    Masking = true,
+                    CornerRadius = 5,
+                    BorderThickness = 2,
+                    BorderColour = Color4.Black,
+                    Alpha = 0.4f,
+                    Child = new Box
+                    {
+                        RelativeSizeAxes = Axes.Both,
+                        Colour = Color4.Black,
+                    }
+                }),
+            clockContainer
+            };
+
+            Scheduler.AddDelayed(() => drawableRuleset.SetReplayScore(score), 10);
+            drawableRuleset.Show();
         }
 
         private bool checkBeatmapValidForSelection(BeatmapInfo beatmap)

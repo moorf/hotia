@@ -7,7 +7,7 @@ Templates for use when creating hotia! dependent projects. Create a fully-testab
 ```bash
 # install (or update) templates package.
 # this only needs to be done once
-dotnet new install ppy.osu.Game.Templates
+dotnet new install moorf.hotia.Game.Templates
 
 # create an empty freeform ruleset
 dotnet new ruleset -n MyCoolRuleset

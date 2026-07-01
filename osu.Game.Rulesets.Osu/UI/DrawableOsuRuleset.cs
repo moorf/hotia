@@ -63,7 +63,10 @@ namespace osu.Game.Rulesets.Osu.UI
 
         protected override Playfield CreatePlayfield() => new OsuPlayfield();
 
-        protected override PassThroughInputManager CreateInputManager() => new OsuInputManager(Ruleset.RulesetInfo);
+        //protected override PassThroughInputManager CreateInputManager() => new OsuInputManager(Ruleset.RulesetInfo);
+
+
+        protected override PassThroughInputManager CreateInputManager(bool careAboutMouse = true) => new OsuInputManager(Ruleset.RulesetInfo, careAboutMouse);
 
         public override PlayfieldAdjustmentContainer CreatePlayfieldAdjustmentContainer() => new OsuPlayfieldAdjustmentContainer { AlignWithStoryboard = true };
 

@@ -56,6 +56,7 @@ namespace osu.Game.Overlays
         {
             Child = new FillFlowContainer
             {
+                
                 RelativeSizeAxes = Axes.X,
                 AutoSizeAxes = Axes.Y,
                 Direction = FillDirection.Vertical,

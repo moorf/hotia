@@ -13,7 +13,8 @@ namespace osu.Game.Online
         {
             if (!Uri.TryCreate(url, UriKind.Absolute, out Uri? uri) || !uri.Host.EndsWith(@".hotia.org", StringComparison.OrdinalIgnoreCase))
             {
-                Logger.Log($@"Blocking resource lookup from external website: {url}", LoggingTarget.Network, LogLevel.Important);
+                // hotiaTODO: Commenting out to avoid notification posting
+                //Logger.Log($@"Blocking resource lookup from external website: {url}", LoggingTarget.Network, LogLevel.Important);
                 return string.Empty;
             }
 

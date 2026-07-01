@@ -4,6 +4,7 @@
 #nullable disable
 
 using System.Linq;
+using NUnit.Framework.Internal;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
@@ -31,6 +32,8 @@ namespace osu.Game.Overlays
 
         private IBindable<APIUser> apiUser;
 
+        
+
         private (BeatmapSetLookupType type, int id)? lastLookup;
 
         public BeatmapSetOverlay()
@@ -51,17 +54,17 @@ namespace osu.Game.Overlays
                     {
                         Beatmap = { BindTarget = Header.HeaderContent.Picker.Beatmap }
                     },
-                    new ScoresContainer
-                    {
-                        Beatmap = { BindTarget = Header.HeaderContent.Picker.Beatmap }
-                    },
-                    comments = new CommentsSection()
+                    //new ScoresContainer
+                    //{
+                    //    Beatmap = { BindTarget = Header.HeaderContent.Picker.Beatmap }
+                    //},
+                    //comments = new CommentsSection()
                 }
             };
 
             Header.BeatmapSet.BindTo(beatmapSet);
             info.BeatmapSet.BindTo(beatmapSet);
-            comments.BeatmapSet.BindTo(beatmapSet);
+            //comments.BeatmapSet.BindTo(beatmapSet);
 
             Header.HeaderContent.Picker.Beatmap.ValueChanged += b => ScrollFlow.ScrollToStart();
         }
@@ -127,11 +130,15 @@ namespace osu.Game.Overlays
             var req = new GetBeatmapSetRequest(lastLookup.Value.id, lastLookup.Value.type);
             req.Success += res =>
             {
+                osu.Framework.Logging.Logger.Log(req.CompletionState.ToString());
                 beatmapSet.Value = res;
                 if (lastLookup.Value.type == BeatmapSetLookupType.BeatmapId)
                     Header.HeaderContent.Picker.Beatmap.Value = Header.BeatmapSet.Value.Beatmaps.First(b => b.OnlineID == lastLookup.Value.id);
             };
+            //var oldapi = API.Endpoints.WebsiteUrl;
+            //API.Endpoints.WebsiteUrl = "osu.direct"; //hacky but whatever
             API.Queue(req);
+            //API.Endpoints.WebsiteUrl = oldapi; //
         }
 
         private partial class CommentsSection : BeatmapSetLayoutSection

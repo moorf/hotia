@@ -95,7 +95,7 @@ namespace osu.Desktop
             {
                 // This is known to fail in at least the following sandboxed environments:
                 // - macOS (when packaged as an app bundle)
-                // - flatpak (see: https://github.com/flathub/sh.ppy.osu/issues/170)
+                // - flatpak (see: https://github.com/flathub/org.moorf.hotia/issues/170)
                 // There is currently no better way to do this offered by Discord, so the best we can do is simply ignore it for now.
                 Logger.Log($"Failed to register Discord URI scheme: {ex}");
             }
