@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using NUnit.Framework.Internal;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Textures;

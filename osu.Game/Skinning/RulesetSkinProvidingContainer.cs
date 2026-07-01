@@ -57,7 +57,7 @@ namespace osu.Game.Skinning
         [BackgroundDependencyLoader]
         private void load(SkinManager skinManager)
         {
-            InternalChild = new BeatmapSkinProvidingContainer(GetRulesetTransformedSkin(beatmapSkin), GetRulesetTransformedSkin(skinManager.DefaultClassicSkin))
+            InternalChild = new BeatmapSkinProvidingContainer(GetRulesetTransformedSkin(beatmapSkin)) //, GetRulesetTransformedSkin(skinManager.DefaultClassicSkin)
             {
                 Child = Content,
                 BeatmapSkins = BeatmapSkins,

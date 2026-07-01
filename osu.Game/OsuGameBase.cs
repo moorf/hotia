@@ -302,7 +302,7 @@ namespace osu.Game
 
             dependencies.Cache(SkinManager = new SkinManager(Storage, realm, Host, Resources, Audio, Scheduler));
             dependencies.CacheAs<ISkinSource>(SkinManager);
-
+            
             EndpointConfiguration endpoints = CreateEndpoints();
 
             MessageFormatter.WebsiteRootUrl = endpoints.WebsiteUrl;
