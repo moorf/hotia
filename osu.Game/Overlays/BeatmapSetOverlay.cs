@@ -135,10 +135,7 @@ namespace osu.Game.Overlays
                 if (lastLookup.Value.type == BeatmapSetLookupType.BeatmapId)
                     Header.HeaderContent.Picker.Beatmap.Value = Header.BeatmapSet.Value.Beatmaps.First(b => b.OnlineID == lastLookup.Value.id);
             };
-            //var oldapi = API.Endpoints.WebsiteUrl;
-            //API.Endpoints.WebsiteUrl = "osu.direct"; //hacky but whatever
             API.Queue(req);
-            //API.Endpoints.WebsiteUrl = oldapi; //
         }
 
         private partial class CommentsSection : BeatmapSetLayoutSection
