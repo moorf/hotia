@@ -15,10 +15,12 @@ using osu.Framework.Bindables;
 using osu.Framework.Development;
 using osu.Framework.Extensions;
 using osu.Framework.Extensions.Color4Extensions;
+using osu.Framework.Extensions.ObjectExtensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Colour;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Cursor;
+using osu.Framework.Graphics.Primitives;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Input;
@@ -45,6 +47,8 @@ using osu.Game.Overlays.Mods;
 using osu.Game.Overlays.Volume;
 using osu.Game.Rulesets;
 using osu.Game.Rulesets.Mods;
+using osu.Game.Rulesets.Objects;
+using osu.Game.Rulesets.UI;
 using osu.Game.Scoring;
 using osu.Game.Screens.Footer;
 using osu.Game.Screens.Menu;
@@ -55,9 +59,6 @@ using osu.Game.Utils;
 using osuTK;
 using osuTK.Graphics;
 using osuTK.Input;
-using osu.Framework.Extensions.ObjectExtensions;
-using osu.Game.Rulesets.Objects;
-using osu.Game.Rulesets.UI;
 
 namespace osu.Game.Screens.Select
 {
@@ -672,7 +673,7 @@ namespace osu.Game.Screens.Select
 
             drawableRuleset.FrameStablePlayback = true;
             drawableRuleset.Cursor?.Dispose();
-            drawableRuleset.Playfield.Colour = Color4.Blue;
+            var aabb = drawableRuleset.ScreenSpaceDrawQuad.AABB;
             switch (rulesetInstance.RulesetInfo.ShortName)
             {
                 case "osu":
@@ -691,7 +692,6 @@ namespace osu.Game.Screens.Select
             score.Replay.Frames.RemoveAll(f => f.Time <= Beatmap.Value.BeatmapInfo.Metadata.PreviewTime);
             Schedule(() => drawableRuleset.Cursor?.Hide());
             clockContainer.Add(drawableRuleset);
-
             innerContainer.Children = new Drawable[]
             {
             new ShearAligningWrapper(new Container
@@ -708,8 +708,20 @@ namespace osu.Game.Screens.Select
                         RelativeSizeAxes = Axes.Both,
                         Colour = Color4.Black,
                     }
+                    //Child = new Box
+                    //{
+                    //    Position = aabb.Location,
+                    //    Size = aabb.Size,
+                    //    RelativeSizeAxes = Axes.None,
+                    //    BypassAutoSizeAxes = Axes.Both,
+                    //    Anchor = Anchor.TopLeft,
+                    //    RelativePositionAxes = Axes.None,
+                    //    Colour = Color4.Red,
+                    //    Alpha = 0.6f,
+                    //}
                 }),
-            clockContainer
+            clockContainer,
+
             };
 
             Scheduler.AddDelayed(() => drawableRuleset.SetReplayScore(score), 10);
