@@ -1212,7 +1212,7 @@ namespace osu.Game
 
             // dependency on notification overlay, dependent by settings overlay
             loadComponentSingleFile(CreateUpdateManager(), Add, true);
-
+            
             // overlay elements
             loadComponentSingleFile(FirstRunOverlay = new FirstRunSetupOverlay(), footerBasedOverlayContent.Add, true);
             loadComponentSingleFile(new ManageCollectionsDialog(), overlayContent.Add, true);
@@ -1334,6 +1334,7 @@ namespace osu.Game
                     rightFloatingOverlayContent.Suspend();
                     footerBasedOverlayContent.Suspend();
                     logoContainer.Suspend();
+                    dummy.Suspend();
                 }
             };
 
@@ -1348,6 +1349,7 @@ namespace osu.Game
                     rightFloatingOverlayContent.Resume();
                     footerBasedOverlayContent.Resume();
                     logoContainer.Resume();
+                    dummy.Resume();
                 }
             };
         }

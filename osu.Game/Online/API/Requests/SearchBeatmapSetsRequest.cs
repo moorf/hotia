@@ -193,10 +193,12 @@ namespace osu.Game.Online.API.Requests
             //if (General != null && General.Any())
             //    req.AddParameter("c", string.Join('.', General.Select(e => e.ToString().ToSnakeCase())));
 
-            //if (ruleset.OnlineID >= 0)
-            //    req.AddParameter("m", ruleset.OnlineID.ToString());
+            if (ruleset.OnlineID >= 0)
+                req.AddParameter("mode", ruleset.OnlineID.ToString());
 
-            //req.AddParameter("s", SearchCategory.ToString().ToLowerInvariant());
+            var searchCategory = (int)SearchCategory;
+            if(searchCategory < 7)
+                req.AddParameter("status", (searchCategory - 2).ToString()); //ToString().ToLowerInvariant()
 
             //if (Genre != SearchGenre.Any)
             //    req.AddParameter("g", ((int)Genre).ToString());

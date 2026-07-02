@@ -9,37 +9,70 @@ namespace osu.Game.Overlays.BeatmapListing
 {
     public enum SearchCategory
     {
-        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusAny))]
-        Any,
+        //| -2 = graveyard | -1 = wip | 0 = pending | 1 = ranked | 2 = approved | 3 = qualified | 4 = loved
+        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusGraveyard))]
+        Graveyard,
 
-        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusLeaderboard))]
-        [Description("Has Leaderboard")]
-        Leaderboard,
+        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusWip))]
+        //[Description("Has Leaderboard")]
+        Wip,
+
+        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusPending))]
+        Pending,
 
         [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusRanked))]
         Ranked,
+
+        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusLeaderboard))]
+        Leaderboard,
 
         [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusQualified))]
         Qualified,
 
         [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusLoved))]
+        //[Description("Pending & WIP")]
         Loved,
+
+        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusAny))]
+        Any,
 
         [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusFavourites))]
         Favourites,
 
-        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusPending))]
-        [Description("Pending & WIP")]
-        Pending,
-
-        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusWip))]
-        Wip,
-
-        [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusGraveyard))]
-        Graveyard,
-
         [LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusMine))]
-        [Description("My Maps")]
+        //[Description("My Maps")]
         Mine,
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusAny))]
+        //Any,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusLeaderboard))]
+        //[Description("Has Leaderboard")]
+        //Leaderboard,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusRanked))]
+        //Ranked,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusQualified))]
+        //Qualified,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusLoved))]
+        //Loved,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusFavourites))]
+        //Favourites,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusPending))]
+        //[Description("Pending & WIP")]
+        //Pending,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusWip))]
+        //Wip,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusGraveyard))]
+        //Graveyard,
+
+        //[LocalisableDescription(typeof(BeatmapsStrings), nameof(BeatmapsStrings.StatusMine))]
+        //[Description("My Maps")]
+        //Mine,
     }
 }

@@ -110,8 +110,9 @@ namespace osu.Game.Beatmaps.Drawables.Cards
         protected override void LoadComplete()
         {
             base.LoadComplete();
-            Expanded.BindValueChanged(_ => updateState(), true);
-            FinishTransforms(true);
+            //Expanded.BindValueChanged(_ => updateState(), true);
+            expanded.Value = true;
+            FinishTransforms(true); //hotiaTODO not that elegant but it works
         }
 
         private ScheduledDelegate? scheduledExpandedChange;
@@ -121,44 +122,44 @@ namespace osu.Game.Beatmaps.Drawables.Cards
         public void CancelExpand() => scheduledExpandedChange?.Cancel();
 
         private void updateFromHoverChange() =>
-            queueExpandedStateChange(content.IsHovered || dropdownContent.IsHovered, 100);
+            queueExpandedStateChange(content.IsHovered || dropdownContent.IsHovered, 100); //content.IsHovered || dropdownContent.IsHovered
 
         private void queueExpandedStateChange(bool newState, int delay = 0)
         {
-            if (Expanded.Disabled)
-                return;
+            //if (Expanded.Disabled)
+            //    return;
 
-            scheduledExpandedChange?.Cancel();
-            scheduledExpandedChange = Scheduler.AddDelayed(() => expanded.Value = newState, delay);
+            //scheduledExpandedChange?.Cancel();
+            //scheduledExpandedChange = Scheduler.AddDelayed(() => expanded.Value = newState, delay);
         }
 
         private void updateState()
         {
             // Scale value is intentionally chosen to fit in the spacing of listing displays, as to not overlap horizontally with adjacent cards.
             // This avoids depth issues where a hovered (scaled) card to the right of another card would be beneath the card to the left.
-            this.ScaleTo(Expanded.Value ? 1.03f : 1, 500, Easing.OutQuint);
+            //this.ScaleTo(Expanded.Value ? 1.03f : 1, 500, Easing.OutQuint);
 
             if (Expanded.Value)
             {
                 background.FadeIn(BeatmapCard.TRANSITION_DURATION, Easing.OutQuint);
-                dropdownContent.FadeIn(BeatmapCard.TRANSITION_DURATION, Easing.OutQuint);
-                borderContainer.FadeIn(BeatmapCard.TRANSITION_DURATION, Easing.OutQuint);
+                //dropdownContent.FadeIn(BeatmapCard.TRANSITION_DURATION, Easing.OutQuint);
+                //borderContainer.FadeIn(BeatmapCard.TRANSITION_DURATION, Easing.OutQuint);
             }
             else
             {
                 background.FadeOut(BeatmapCard.TRANSITION_DURATION / 3f, Easing.OutQuint);
-                dropdownContent.FadeOut(BeatmapCard.TRANSITION_DURATION / 3f, Easing.OutQuint);
-                borderContainer.FadeOut(BeatmapCard.TRANSITION_DURATION / 3f, Easing.OutQuint);
+                //dropdownContent.FadeOut(BeatmapCard.TRANSITION_DURATION / 3f, Easing.OutQuint);
+                //borderContainer.FadeOut(BeatmapCard.TRANSITION_DURATION / 3f, Easing.OutQuint);
             }
 
-            content.TweenEdgeEffectTo(new EdgeEffectParameters
-            {
-                Type = EdgeEffectType.Shadow,
-                Offset = new Vector2(0, 2),
-                Radius = 10,
-                Colour = Colour4.Black.Opacity(Expanded.Value ? 0.3f : 0f),
-                Hollow = true,
-            }, BeatmapCard.TRANSITION_DURATION, Easing.OutQuint);
+            //content.TweenEdgeEffectTo(new EdgeEffectParameters
+            //{
+            //    Type = EdgeEffectType.Shadow,
+            //    Offset = new Vector2(0, 2),
+            //    Radius = 10,
+            //    Colour = Colour4.Black.Opacity(Expanded.Value ? 0.3f : 0f),
+            //    Hollow = true,
+            //}, BeatmapCard.TRANSITION_DURATION, Easing.OutQuint);
         }
     }
 }

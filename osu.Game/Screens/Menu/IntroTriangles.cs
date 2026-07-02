@@ -306,13 +306,13 @@ namespace osu.Game.Screens.Menu
                         highlight = new LogoAnimation
                         {
                             RelativeSizeAxes = Axes.Both,
-                            //Texture = textures.Get(@"Intro/Triangles/logo-highlight"),
+                            Texture = textures.Get(@"Intro/Triangles/logo-highlight"),
                             Colour = Color4.White,
                         },
                         background = new LogoAnimation
                         {
                             RelativeSizeAxes = Axes.Both,
-                            //Texture = textures.Get(@"Intro/Triangles/logo-background"),
+                            Texture = textures.Get(@"Intro/Triangles/logo-background"),
                             Colour = OsuColour.Gray(0.6f),
                         },
                     };

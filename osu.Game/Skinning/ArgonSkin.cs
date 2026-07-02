@@ -26,8 +26,8 @@ namespace osu.Game.Skinning
         public static SkinInfo CreateInfo() => new SkinInfo
         {
             ID = Skinning.SkinInfo.ARGON_SKIN,
-            Name = "hotia! \"argon\" (2022)",
-            Creator = "team hotia!",
+            Name = "osu! \"argon\" (2022)",
+            Creator = "team osu!",
             Protected = true,
             InstantiationInfo = typeof(ArgonSkin).GetInvariantInstantiationInfo()
         };
@@ -92,7 +92,7 @@ namespace osu.Game.Skinning
         {
             // Temporary until default skin has a valid hit lighting.
             if ((lookup as SkinnableSprite.SpriteComponentLookup)?.LookupName == @"lighting") return Drawable.Empty();
-
+            //if ((lookup as SkinnableSprite.SpriteComponentLookup)?.LookupName == @"taiko-slider") return Drawable.Empty();
             switch (lookup)
             {
                 case GlobalSkinnableContainerLookup containerLookup:

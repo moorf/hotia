@@ -88,7 +88,13 @@ namespace osu.Game.Screens.Select
         {
             Masking = true;
             CornerRadius = corner_radius;
-
+            new ShearAligningWrapper(statusPill = new BeatmapSetOnlineStatusPill
+            {
+                Shear = -OsuGame.SHEAR,
+                ShowUnknownStatus = true,
+                TextSize = OsuFont.Style.Caption1.Size,
+                TextPadding = new MarginPadding { Horizontal = 6, Vertical = 1 },
+            });
             InternalChildren = new Drawable[]
             {
                 new WedgeBackground(),
@@ -105,13 +111,6 @@ namespace osu.Game.Screens.Select
                     Spacing = new Vector2(0f, 4f),
                     Children = new Drawable[]
                     {
-                        new ShearAligningWrapper(statusPill = new BeatmapSetOnlineStatusPill
-                        {
-                            Shear = -OsuGame.SHEAR,
-                            ShowUnknownStatus = true,
-                            TextSize = OsuFont.Style.Caption1.Size,
-                            TextPadding = new MarginPadding { Horizontal = 6, Vertical = 1 },
-                        }),
                         new ShearAligningWrapper(new Container
                         {
                             Shear = -OsuGame.SHEAR,

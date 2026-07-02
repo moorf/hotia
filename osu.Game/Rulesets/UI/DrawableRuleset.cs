@@ -56,7 +56,7 @@ namespace osu.Game.Rulesets.UI
         /// <summary>
         /// The key conversion input manager for this DrawableRuleset.
         /// </summary>
-        protected PassThroughInputManager KeyBindingInputManager { get; }
+        public PassThroughInputManager KeyBindingInputManager { get; }
 
         /// <summary>
         /// This configuration for this DrawableRuleset.
@@ -137,6 +137,9 @@ namespace osu.Game.Rulesets.UI
             Mods = mods?.ToArray() ?? Array.Empty<Mod>();
             bool hasAutoplay = Mods.Any(m => m is ModAutoplay);
             KeyBindingInputManager = CreateInputManager(!hasAutoplay);
+            KeyBindingInputManager.UseParentInput = true;
+            KeyBindingInputManager.parentInputManager = GetContainingInputManager();
+
             RelativeSizeAxes = Axes.Both;
 
             //KeyBindingInputManager = CreateInputManager();

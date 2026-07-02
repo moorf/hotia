@@ -229,7 +229,9 @@ namespace osu.Game.Overlays.BeatmapListing
         {
             getSetsRequest = new SearchBeatmapSetsRequestDirect(
                 searchControl.Query.Value,
-                searchControl.Ruleset.Value);
+                searchControl.Ruleset.Value,
+                null,
+                searchControl.Category.Value);
             //lastResponse?.Cursor,
             //searchControl.General,
             //searchControl.Category.Value,

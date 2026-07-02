@@ -162,13 +162,13 @@ namespace osu.Game.Overlays.Toolbar
                                         AutoSizeAxes = Axes.X,
                                         Children = new Drawable[]
                                         {
-                                            new ToolbarNewsButton(),
-                                            new ToolbarChangelogButton(),
-                                            new ToolbarWikiButton(),
-                                            new ToolbarRankingsButton(),
+                                            //new ToolbarNewsButton(),
+                                            //new ToolbarChangelogButton(),
+                                            //new ToolbarWikiButton(),
+                                            //new ToolbarRankingsButton(),
                                             new ToolbarBeatmapListingButton(),
-                                            new ToolbarChatButton(),
-                                            new ToolbarSocialButton(),
+                                            //new ToolbarChatButton(),
+                                            //new ToolbarSocialButton(),
                                             new ToolbarMusicButton(),
                                             //new ToolbarButton
                                             //{
