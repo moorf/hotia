@@ -14,7 +14,7 @@ namespace osu.Game.Overlays.BeatmapSet
         {
             BadgeText = BeatmapsetsStrings.SpotlightBadgeLabel;
             BadgeColour = colours.SpotlightColour;
-            // todo: add linking support to allow redirecting spotlight badge to https://osu.ppy.sh/wiki/en/Beatmap_Spotlights.
+            // todo: add linking support to allow redirecting spotlight badge to https://osu.hotia.org/wiki/en/Beatmap_Spotlights.
         }
     }
 }

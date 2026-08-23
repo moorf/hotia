@@ -22,8 +22,8 @@ namespace osu.Game.Skinning
         protected override bool UseCustomSampleBanks => true;
 
         // matches stable. references:
-        //  1. https://github.com/peppy/osu-stable-reference/blob/dc0994645801010d4b628fff5ff79cd3c286ca83/osu!/Graphics/Textures/TextureManager.cs#L115-L137 (beatmap skin textures lookup)
-        //  2. https://github.com/peppy/osu-stable-reference/blob/dc0994645801010d4b628fff5ff79cd3c286ca83/osu!/Graphics/Textures/TextureManager.cs#L158-L196 (user skin textures lookup)
+        //  1. https://github.com/peppy/osu-stable-reference/blob/dc0994645801010d4b628fff5ff79cd3c286ca83/hotia!/Graphics/Textures/TextureManager.cs#L115-L137 (beatmap skin textures lookup)
+        //  2. https://github.com/peppy/osu-stable-reference/blob/dc0994645801010d4b628fff5ff79cd3c286ca83/hotia!/Graphics/Textures/TextureManager.cs#L158-L196 (user skin textures lookup)
         protected override bool AllowHighResolutionSprites => false;
 
         public RealmBackedResourceStore<BeatmapSetInfo>? BeatmapSetResources => FallbackStore as RealmBackedResourceStore<BeatmapSetInfo>;

@@ -478,7 +478,7 @@ namespace osu.Game.Rulesets.Objects.Legacy
         {
             var path = new SliderPath(controlPoints, length);
 
-            // there are known instances of beatmaps (https://osu.ppy.sh/beatmapsets/594828#osu/1258033) which contain zero-length sliders with non-zero numbers of repeats.
+            // there are known instances of beatmaps (https://osu.hotia.org/beatmapsets/594828#osu/1258033) which contain zero-length sliders with non-zero numbers of repeats.
             // this was exploiting a bug in stable in which the slider repeats would be generated as objects but never actually judged as a hit *or* miss during gameplay,
             // therefore increasing the theoretical possible max combo to be gained from a slider while in practice never giving that extra combo.
             // due to lazer ensuring that an object has its nested part fully judged, this would result in broken behaviours
@@ -487,7 +487,7 @@ namespace osu.Game.Rulesets.Objects.Legacy
             // this technically *does not* match stable beatmap parsing or conversion, *does not* match in-gameplay behaviour of such broken sliders,
             // and *will* fail conversion mapping tests, but again, this is supposed to be a least-worst measure to prevent exploits.
             // it is also applied centrally to all rulesets rather than in specific ruleset converters because this failure scenario
-            // translates across rulesets (osu! and catch are both affected).
+            // translates across rulesets (hotia! and catch are both affected).
             if (Precision.AlmostEquals(path.Distance, 0))
             {
                 repeatCount = 0;
@@ -545,7 +545,7 @@ namespace osu.Game.Rulesets.Objects.Legacy
             {
                 soundTypes.Add(new LegacyHitSampleInfo(HitSampleInfo.HIT_NORMAL, bankInfo.BankForNormal, bankInfo.Volume, true, bankInfo.CustomSampleBank,
                     // if the sound type doesn't have the Normal flag set, attach it anyway as a layered sample.
-                    // None also counts as a normal non-layered sample: https://osu.ppy.sh/help/wiki/osu!_File_Formats/Osu_(file_format)#hitsounds
+                    // None also counts as a normal non-layered sample: https://osu.hotia.org/help/wiki/hotia!_File_Formats/Osu_(file_format)#hitsounds
                     type != LegacyHitSoundType.None && !type.HasFlag(LegacyHitSoundType.Normal)));
             }
             else
@@ -622,7 +622,7 @@ namespace osu.Game.Rulesets.Objects.Legacy
             /// Whether this hit sample is layered.
             /// </summary>
             /// <remarks>
-            /// Layered hit samples are automatically added in all modes (except osu!mania), but can be disabled
+            /// Layered hit samples are automatically added in all modes (except hotia!mania), but can be disabled
             /// using the <see cref="SkinConfiguration.LegacySetting.LayeredHitSounds"/> skin config option.
             /// </remarks>
             public readonly bool IsLayered;

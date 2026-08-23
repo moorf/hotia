@@ -18,7 +18,7 @@ namespace osu.Game.Tests.Chat
         public void OneTimeSetUp()
         {
             originalWebsiteRootUrl = MessageFormatter.WebsiteRootUrl;
-            MessageFormatter.WebsiteRootUrl = "dev.ppy.sh";
+            MessageFormatter.WebsiteRootUrl = "dev.hotia.org";
         }
 
         [OneTimeTearDown]
@@ -48,9 +48,9 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestSupportedProtocolLinkParsing()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "forgotspacehttps://dev.ppy.sh joinmyosump://12345 jointheosu://chan/#english" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "forgotspacehttps://dev.hotia.org joinmyosump://12345 jointheosu://chan/#english" });
 
-            ClassicAssert.AreEqual("https://dev.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://dev.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual("osump://12345", result.Links[1].Url);
             ClassicAssert.AreEqual("osu://chan/#english", result.Links[2].Url);
         }
@@ -67,15 +67,15 @@ namespace osu.Game.Tests.Chat
             ClassicAssert.AreEqual(36, result.Links[0].Length);
         }
 
-        [TestCase(LinkAction.OpenBeatmap, "456", "https://dev.ppy.sh/beatmapsets/123#osu/456")]
-        [TestCase(LinkAction.OpenBeatmap, "456", "https://dev.ppy.sh/beatmapsets/123#osu/456?whatever")]
-        [TestCase(LinkAction.OpenBeatmap, "456", "https://dev.ppy.sh/beatmapsets/123/456")]
-        [TestCase(LinkAction.External, "https://dev.ppy.sh/beatmapsets/abc/def", "https://dev.ppy.sh/beatmapsets/abc/def")]
-        [TestCase(LinkAction.OpenBeatmapSet, "123", "https://dev.ppy.sh/beatmapsets/123")]
-        [TestCase(LinkAction.OpenBeatmapSet, "123", "https://dev.ppy.sh/beatmapsets/123/whatever")]
-        [TestCase(LinkAction.External, "https://dev.ppy.sh/beatmapsets/abc", "https://dev.ppy.sh/beatmapsets/abc")]
-        [TestCase(LinkAction.External, "https://dev.ppy.sh/beatmapsets/discussions", "https://dev.ppy.sh/beatmapsets/discussions")]
-        [TestCase(LinkAction.External, "https://dev.ppy.sh/beatmapsets/discussions/123", "https://dev.ppy.sh/beatmapsets/discussions/123")]
+        [TestCase(LinkAction.OpenBeatmap, "456", "https://dev.hotia.org/beatmapsets/123#osu/456")]
+        [TestCase(LinkAction.OpenBeatmap, "456", "https://dev.hotia.org/beatmapsets/123#osu/456?whatever")]
+        [TestCase(LinkAction.OpenBeatmap, "456", "https://dev.hotia.org/beatmapsets/123/456")]
+        [TestCase(LinkAction.External, "https://dev.hotia.org/beatmapsets/abc/def", "https://dev.hotia.org/beatmapsets/abc/def")]
+        [TestCase(LinkAction.OpenBeatmapSet, "123", "https://dev.hotia.org/beatmapsets/123")]
+        [TestCase(LinkAction.OpenBeatmapSet, "123", "https://dev.hotia.org/beatmapsets/123/whatever")]
+        [TestCase(LinkAction.External, "https://dev.hotia.org/beatmapsets/abc", "https://dev.hotia.org/beatmapsets/abc")]
+        [TestCase(LinkAction.External, "https://dev.hotia.org/beatmapsets/discussions", "https://dev.hotia.org/beatmapsets/discussions")]
+        [TestCase(LinkAction.External, "https://dev.hotia.org/beatmapsets/discussions/123", "https://dev.hotia.org/beatmapsets/discussions/123")]
         public void TestBeatmapLinks(LinkAction expectedAction, string expectedArg, string link)
         {
             Message result = MessageFormatter.FormatMessage(new Message { Content = link });
@@ -151,7 +151,7 @@ namespace osu.Game.Tests.Chat
 
             ClassicAssert.AreEqual("This is a Wiki Link.", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://dev.ppy.sh/wiki/Wiki Link", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://dev.hotia.org/wiki/Wiki Link", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(9, result.Links[0].Length);
         }
@@ -164,15 +164,15 @@ namespace osu.Game.Tests.Chat
             ClassicAssert.AreEqual("This is a Wiki Link Wiki:LinkWiki.Link.", result.DisplayContent);
             ClassicAssert.AreEqual(3, result.Links.Count);
 
-            ClassicAssert.AreEqual("https://dev.ppy.sh/wiki/Wiki Link", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://dev.hotia.org/wiki/Wiki Link", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(9, result.Links[0].Length);
 
-            ClassicAssert.AreEqual("https://dev.ppy.sh/wiki/Wiki:Link", result.Links[1].Url);
+            ClassicAssert.AreEqual("https://dev.hotia.org/wiki/Wiki:Link", result.Links[1].Url);
             ClassicAssert.AreEqual(20, result.Links[1].Index);
             ClassicAssert.AreEqual(9, result.Links[1].Length);
 
-            ClassicAssert.AreEqual("https://dev.ppy.sh/wiki/Wiki.Link", result.Links[2].Url);
+            ClassicAssert.AreEqual("https://dev.hotia.org/wiki/Wiki.Link", result.Links[2].Url);
             ClassicAssert.AreEqual(29, result.Links[2].Index);
             ClassicAssert.AreEqual(9, result.Links[2].Length);
         }
@@ -180,11 +180,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestOldFormatLink()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a (simple test)[https://osu.ppy.sh] of links." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a (simple test)[https://osu.hotia.org] of links." });
 
             ClassicAssert.AreEqual("This is a simple test of links.", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(11, result.Links[0].Length);
         }
@@ -192,11 +192,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestOldFormatLinkWithBalancedBrackets()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a (tricky (one))[https://osu.ppy.sh]!" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a (tricky (one))[https://osu.hotia.org]!" });
 
             ClassicAssert.AreEqual("This is a tricky (one)!", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(12, result.Links[0].Length);
         }
@@ -204,11 +204,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestOldFormatLinkWithEscapedBrackets()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is (another loose bracket \\))[https://osu.ppy.sh]." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is (another loose bracket \\))[https://osu.hotia.org]." });
 
             ClassicAssert.AreEqual("This is another loose bracket ).", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(8, result.Links[0].Index);
             ClassicAssert.AreEqual(23, result.Links[0].Length);
         }
@@ -216,10 +216,10 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestOldFormatWithBackslashes()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This link (should end with a backslash \\)[https://osu.ppy.sh]." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This link (should end with a backslash \\)[https://osu.hotia.org]." });
             ClassicAssert.AreEqual("This link should end with a backslash \\.", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(29, result.Links[0].Length);
         }
@@ -227,11 +227,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestOldFormatLinkWithEscapedAndBalancedBrackets()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a (\\)super\\(\\( tricky (one))[https://osu.ppy.sh]!" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a (\\)super\\(\\( tricky (one))[https://osu.hotia.org]!" });
 
             ClassicAssert.AreEqual("This is a )super(( tricky (one)!", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(21, result.Links[0].Length);
         }
@@ -239,11 +239,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestNewFormatLink()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.ppy.sh simple test]." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.hotia.org simple test]." });
 
             ClassicAssert.AreEqual("This is a simple test.", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(11, result.Links[0].Length);
         }
@@ -251,11 +251,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestNewFormatLinkWithEscapedBrackets()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.ppy.sh nasty link with escaped brackets: \\] and \\[]" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.hotia.org nasty link with escaped brackets: \\] and \\[]" });
 
             ClassicAssert.AreEqual("This is a nasty link with escaped brackets: ] and [", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(41, result.Links[0].Length);
         }
@@ -263,11 +263,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestNewFormatLinkWithBackslashesInside()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.ppy.sh link \\ with \\ backslashes \\]" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.hotia.org link \\ with \\ backslashes \\]" });
 
             ClassicAssert.AreEqual("This is a link \\ with \\ backslashes \\", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(27, result.Links[0].Length);
         }
@@ -275,11 +275,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestNewFormatLinkWithEscapedAndBalancedBrackets()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.ppy.sh [link [with \\] too many brackets \\[ ]]]" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.hotia.org [link [with \\] too many brackets \\[ ]]]" });
 
             ClassicAssert.AreEqual("This is a [link [with ] too many brackets [ ]]", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(36, result.Links[0].Length);
         }
@@ -287,11 +287,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLink()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [simple test](https://osu.ppy.sh)." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [simple test](https://osu.hotia.org)." });
 
             ClassicAssert.AreEqual("This is a simple test.", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(11, result.Links[0].Length);
         }
@@ -299,11 +299,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLinkWithBalancedBrackets()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [tricky [one]](https://osu.ppy.sh)!" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [tricky [one]](https://osu.hotia.org)!" });
 
             ClassicAssert.AreEqual("This is a tricky [one]!", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(12, result.Links[0].Length);
         }
@@ -311,11 +311,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLinkWithEscapedBrackets()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is [another loose bracket \\]](https://osu.ppy.sh)." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is [another loose bracket \\]](https://osu.hotia.org)." });
 
             ClassicAssert.AreEqual("This is another loose bracket ].", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(8, result.Links[0].Index);
             ClassicAssert.AreEqual(23, result.Links[0].Length);
         }
@@ -323,10 +323,10 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatWithBackslashes()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This link [should end with a backslash \\](https://osu.ppy.sh)." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This link [should end with a backslash \\](https://osu.hotia.org)." });
             ClassicAssert.AreEqual("This link should end with a backslash \\.", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(29, result.Links[0].Length);
         }
@@ -334,11 +334,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLinkWithEscapedAndBalancedBrackets()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [\\]super\\[\\[ tricky [one]](https://osu.ppy.sh)!" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [\\]super\\[\\[ tricky [one]](https://osu.hotia.org)!" });
 
             ClassicAssert.AreEqual("This is a ]super[[ tricky [one]!", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(21, result.Links[0].Length);
         }
@@ -346,11 +346,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLinkWithInlineTitle()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [this link format](https://osu.ppy.sh \"osu!\") before..." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [this link format](https://osu.hotia.org \"hotia!\") before..." });
 
             ClassicAssert.AreEqual("I haven't seen this link format before...", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(15, result.Links[0].Index);
             ClassicAssert.AreEqual(16, result.Links[0].Length);
         }
@@ -358,11 +358,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLinkWithInlineTitleAndEscapedQuotes()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [this link format](https://osu.ppy.sh \"inner quote \\\" just to confuse \") before..." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [this link format](https://osu.hotia.org \"inner quote \\\" just to confuse \") before..." });
 
             ClassicAssert.AreEqual("I haven't seen this link format before...", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(15, result.Links[0].Index);
             ClassicAssert.AreEqual(16, result.Links[0].Length);
         }
@@ -370,11 +370,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLinkWithUrlInTextAndInlineTitle()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [https://osu.ppy.sh](https://osu.ppy.sh \"https://osu.ppy.sh\") before..." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [https://osu.hotia.org](https://osu.hotia.org \"https://osu.hotia.org\") before..." });
 
-            ClassicAssert.AreEqual("I haven't seen https://osu.ppy.sh before...", result.DisplayContent);
+            ClassicAssert.AreEqual("I haven't seen https://osu.hotia.org before...", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(15, result.Links[0].Index);
             ClassicAssert.AreEqual(18, result.Links[0].Length);
         }
@@ -382,11 +382,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLinkWithUrlAndTextInTitle()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [oh no, text here! https://osu.ppy.sh](https://osu.ppy.sh) before..." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [oh no, text here! https://osu.hotia.org](https://osu.hotia.org) before..." });
 
-            ClassicAssert.AreEqual("I haven't seen oh no, text here! https://osu.ppy.sh before...", result.DisplayContent);
+            ClassicAssert.AreEqual("I haven't seen oh no, text here! https://osu.hotia.org before...", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(15, result.Links[0].Index);
             ClassicAssert.AreEqual(36, result.Links[0].Length);
         }
@@ -394,11 +394,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestMarkdownFormatLinkWithMisleadingUrlInText()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [https://google.com](https://osu.ppy.sh) before..." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "I haven't seen [https://google.com](https://osu.hotia.org) before..." });
 
             ClassicAssert.AreEqual("I haven't seen https://google.com before...", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(15, result.Links[0].Index);
             ClassicAssert.AreEqual(18, result.Links[0].Length);
         }
@@ -408,7 +408,7 @@ namespace osu.Game.Tests.Chat
         {
             Message result = MessageFormatter.FormatMessage(new Message { Content = "super broken https://[osu.ppy](https://reddit.com).sh/" });
 
-            ClassicAssert.AreEqual("super broken https://osu.ppy.sh/", result.DisplayContent);
+            ClassicAssert.AreEqual("super broken https://osu.hotia.org/", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
             ClassicAssert.AreEqual("https://reddit.com", result.Links[0].Url);
             ClassicAssert.AreEqual(21, result.Links[0].Index);
@@ -419,16 +419,16 @@ namespace osu.Game.Tests.Chat
         public void TestMarkdownFormatLinkDirectlyNextToRawLink()
         {
             // the raw link has a port at the end of it, so that the raw link regex terminates at the port and doesn't consume display text from the formatted one
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "https://localhost:8080[https://osu.ppy.sh](https://osu.ppy.sh) should be two links" });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "https://localhost:8080[https://osu.hotia.org](https://osu.hotia.org) should be two links" });
 
-            ClassicAssert.AreEqual("https://localhost:8080https://osu.ppy.sh should be two links", result.DisplayContent);
+            ClassicAssert.AreEqual("https://localhost:8080https://osu.hotia.org should be two links", result.DisplayContent);
             ClassicAssert.AreEqual(2, result.Links.Count);
 
             ClassicAssert.AreEqual("https://localhost:8080", result.Links[0].Url);
             ClassicAssert.AreEqual(0, result.Links[0].Index);
             ClassicAssert.AreEqual(22, result.Links[0].Length);
 
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[1].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[1].Url);
             ClassicAssert.AreEqual(22, result.Links[1].Index);
             ClassicAssert.AreEqual(18, result.Links[1].Length);
         }
@@ -480,11 +480,11 @@ namespace osu.Game.Tests.Chat
         [Test]
         public void TestRecursiveBreaking()
         {
-            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.ppy.sh [[simple test]]]." });
+            Message result = MessageFormatter.FormatMessage(new Message { Content = "This is a [https://osu.hotia.org [[simple test]]]." });
 
             ClassicAssert.AreEqual("This is a [[simple test]].", result.DisplayContent);
             ClassicAssert.AreEqual(1, result.Links.Count);
-            ClassicAssert.AreEqual("https://osu.ppy.sh", result.Links[0].Url);
+            ClassicAssert.AreEqual("https://osu.hotia.org", result.Links[0].Url);
             ClassicAssert.AreEqual(10, result.Links[0].Index);
             ClassicAssert.AreEqual(15, result.Links[0].Length);
         }
@@ -494,13 +494,13 @@ namespace osu.Game.Tests.Chat
         {
             Message result = MessageFormatter.FormatMessage(new Message
             {
-                Content = "This is a [http://www.simple-test.com simple test] with some [traps] and [[wiki links]]. Don't forget to visit https://osu.ppy.sh (now!)[http://google.com]\uD83D\uDE12"
+                Content = "This is a [http://www.simple-test.com simple test] with some [traps] and [[wiki links]]. Don't forget to visit https://osu.hotia.org (now!)[http://google.com]\uD83D\uDE12"
             });
 
-            ClassicAssert.AreEqual("This is a simple test with some [traps] and wiki links. Don't forget to visit https://osu.ppy.sh now![emoji]", result.DisplayContent);
+            ClassicAssert.AreEqual("This is a simple test with some [traps] and wiki links. Don't forget to visit https://osu.hotia.org now![emoji]", result.DisplayContent);
             ClassicAssert.AreEqual(4, result.Links.Count);
 
-            Link f = result.Links.Find(l => l.Url == "https://dev.ppy.sh/wiki/wiki links");
+            Link f = result.Links.Find(l => l.Url == "https://dev.hotia.org/wiki/wiki links");
             Assert.That(f, Is.Not.Null);
             ClassicAssert.AreEqual(44, f.Index);
             ClassicAssert.AreEqual(10, f.Length);
@@ -515,7 +515,7 @@ namespace osu.Game.Tests.Chat
             ClassicAssert.AreEqual(97, f.Index);
             ClassicAssert.AreEqual(4, f.Length);
 
-            f = result.Links.Find(l => l.Url == "https://osu.ppy.sh");
+            f = result.Links.Find(l => l.Url == "https://osu.hotia.org");
             Assert.That(f, Is.Not.Null);
             ClassicAssert.AreEqual(78, f.Index);
             ClassicAssert.AreEqual(18, f.Length);
@@ -555,8 +555,8 @@ namespace osu.Game.Tests.Chat
             ClassicAssert.AreEqual("/relative", result.Argument);
         }
 
-        [TestCase("https://dev.ppy.sh/home/changelog", "")]
-        [TestCase("https://dev.ppy.sh/home/changelog/lazer/2021.1012", "lazer/2021.1012")]
+        [TestCase("https://dev.hotia.org/home/changelog", "")]
+        [TestCase("https://dev.hotia.org/home/changelog/lazer/2021.1012", "lazer/2021.1012")]
         public void TestChangelogLinks(string link, string expectedArg)
         {
             LinkDetails result = MessageFormatter.GetLinkDetails(link);

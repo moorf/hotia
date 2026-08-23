@@ -117,7 +117,7 @@ namespace osu.Game.Screens.Edit
             {
                 // when track is playing, seek a bit more than usual.
                 // the amount adjusted matches stable, because don't-break-what-works.
-                // https://github.com/peppy/osu-stable-reference/blob/7519cafd1823f1879c0d9c991ba0e5c7fd3bfa02/osu!/GameModes/Edit/Editor.cs#L1639-L1640
+                // https://github.com/peppy/osu-stable-reference/blob/7519cafd1823f1879c0d9c991ba0e5c7fd3bfa02/hotia!/GameModes/Edit/Editor.cs#L1639-L1640
                 //
                 // ReSharper disable once PossibleLossOfFraction
                 amount *= 1 + 250 / (int)timingPoint.BeatLength;

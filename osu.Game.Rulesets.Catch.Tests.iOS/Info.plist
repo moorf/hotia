@@ -5,7 +5,7 @@
 	<key>CFBundleName</key>
 	<string>osu.Game.Rulesets.Catch.Tests.iOS</string>
 	<key>CFBundleIdentifier</key>
-	<string>sh.ppy.catch-ruleset-tests</string>
+	<string>org.moorf.catch-ruleset-tests</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>

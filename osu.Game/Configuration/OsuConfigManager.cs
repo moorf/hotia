@@ -103,7 +103,7 @@ namespace osu.Game.Configuration
             // Audio
             SetDefault(OsuSetting.VolumeInactive, 0.25, 0, 1, 0.01);
 
-            SetDefault(OsuSetting.MenuVoice, true);
+            SetDefault(OsuSetting.MenuVoice, false); //true
             SetDefault(OsuSetting.MenuMusic, true);
             SetDefault(OsuSetting.MenuTips, true);
 
@@ -242,6 +242,7 @@ namespace osu.Game.Configuration
 
             SetDefault(OsuSetting.DashboardSortMode, UserSortCriteria.LastVisit);
             SetDefault(OsuSetting.DashboardDisplayStyle, OverlayPanelDisplayStyle.Card);
+            SetDefault(OsuSetting.SongSelectPreview, true); //hotiaTODO seems like true is okay even on android, i'll leave it on
         }
 
         protected override bool CheckLookupContainsPrivateInformation(OsuSetting lookup)
@@ -478,5 +479,6 @@ namespace osu.Game.Configuration
 
         DashboardSortMode,
         DashboardDisplayStyle,
+        SongSelectPreview
     }
 }

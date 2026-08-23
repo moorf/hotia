@@ -15,7 +15,7 @@ namespace osu.Game.Overlays.Profile.Sections.Recent
         private readonly string slug;
         private readonly Sprite sprite;
 
-        private string url => $@"https://s.ppy.sh/images/medals-client/{slug}@2x.png";
+        private string url => $@"https://s.hotia.org/images/medals-client/{slug}@2x.png";
 
         public MedalIcon(string slug)
         {

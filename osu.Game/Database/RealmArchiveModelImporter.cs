@@ -1,5 +1,9 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using System;
 using System.Collections.Generic;
@@ -366,15 +370,32 @@ namespace osu.Game.Database
 
                 if (archive != null)
                 {
+                    item.Hash = computeHashFast(archive);
+                    string itemDirectory = Files.Storage.GetFullPath(item.Hash, true);//Path.Combine(Files., item.Hash);
+                    Directory.CreateDirectory(itemDirectory);
                     // Import files to the disk store.
                     // We intentionally delay adding to realm to avoid blocking on a write during disk operations.
                     foreach (var filenames in getShortenedFilenames(archive))
                     {
+                        var fileHash = archive.GetStream(filenames.original).ComputeSHA2Hash(); //filenames.shortened;//
                         if (FilesystemSanityCheckHelpers.IncursPathTraversalRisk(filenames.shortened))
-                            throw new InvalidOperationException($@"Filename ""{filenames.original}"" is not allowed.");
+                            throw new InvalidOperationException(
+                                $@"Filename ""{filenames.original}"" is not allowed.");
 
-                        using (Stream s = archive.GetStream(filenames.original))
-                            files.Add(new RealmNamedFileUsage(Files.Add(s, realm, false, parameters.PreferHardLinks), filenames.shortened));
+                        string destinationPath = Path.Combine(itemDirectory, fileHash);//filenames.shortened
+                        Directory.CreateDirectory(Path.GetDirectoryName(destinationPath)!);
+
+                        using (Stream input = archive.GetStream(filenames.original))
+                        using (Stream output = File.Create(destinationPath))
+                            input.CopyTo(output);
+
+                        var realmFile = new RealmFile
+                        {
+                            Hash = fileHash,
+                            OwnerHash = item.Hash
+                        };
+
+                        files.Add(new RealmNamedFileUsage(realmFile, filenames.shortened));
                     }
                 }
 

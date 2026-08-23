@@ -1,13 +1,13 @@
 # Templates
 
-Templates for use when creating osu! dependent projects. Create a fully-testable (and ready for git) custom ruleset in just two lines.
+Templates for use when creating hotia! dependent projects. Create a fully-testable (and ready for git) custom ruleset in just two lines.
 
 ## Usage
 
 ```bash
 # install (or update) templates package.
 # this only needs to be done once
-dotnet new install ppy.osu.Game.Templates
+dotnet new install moorf.hotia.Game.Templates
 
 # create an empty freeform ruleset
 dotnet new ruleset -n MyCoolRuleset

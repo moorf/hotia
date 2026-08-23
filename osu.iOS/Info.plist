@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleIdentifier</key>
-	<string>sh.ppy.osulazer</string>
+	<string>org.moorf.hotialazer</string>
 	<key>CFBundleName</key>
-	<string>osu!</string>
+	<string>hotia!</string>
 	<key>CFBundleDisplayName</key>
-	<string>osu!</string>
+	<string>hotia!</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -82,19 +82,19 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeIdentifier</key>
-			<string>sh.ppy.osu.items</string>
+			<string>sh.moorf.hotia.items</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>sh.ppy.osu.items</string>
+				<string>sh.moorf.hotia.items</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>osu! replay</string>
+			<string>hotia! replay</string>
 			<key>UTTypeIdentifier</key>
-			<string>sh.ppy.osu.osr</string>
+			<string>sh.moorf.hotia.osr</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -104,12 +104,12 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>sh.ppy.osu.items</string>
+				<string>sh.moorf.hotia.items</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>osu! skin</string>
+			<string>hotia! skin</string>
 			<key>UTTypeIdentifier</key>
-			<string>sh.ppy.osu.osk</string>
+			<string>sh.moorf.hotia.osk</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -119,12 +119,12 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>sh.ppy.osu.items</string>
+				<string>sh.moorf.hotia.items</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>osu! beatmap</string>
+			<string>hotia! beatmap</string>
 			<key>UTTypeIdentifier</key>
-			<string>sh.ppy.osu.osz</string>
+			<string>sh.moorf.hotia.osz</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -134,12 +134,12 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>sh.ppy.osu.items</string>
+				<string>sh.moorf.hotia.items</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>osu! beatmap</string>
+			<string>hotia! beatmap</string>
 			<key>UTTypeIdentifier</key>
-			<string>sh.ppy.osu.olz</string>
+			<string>sh.moorf.hotia.olz</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -153,12 +153,12 @@
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>CFBundleTypeName</key>
-			<string>Supported osu! files</string>
+			<string>Supported hotia! files</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>sh.ppy.osu.items</string>
+				<string>sh.moorf.hotia.items</string>
 			</array>
 		</dict>
 	</array>

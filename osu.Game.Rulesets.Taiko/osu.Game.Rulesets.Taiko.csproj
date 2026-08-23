@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
-    <Title>osu!taiko (ruleset)</Title>
-    <PackageId>ppy.osu.Game.Rulesets.Taiko</PackageId>
+    <Title>hotia!taiko (ruleset)</Title>
+    <PackageId>moorf.hotia.Game.Rulesets.Taiko</PackageId>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 

@@ -245,49 +245,49 @@ namespace osu.Game.Overlays.BeatmapSet.Scores
 
         private void getScores()
         {
-            getScoresRequest?.Cancel();
-            getScoresRequest = null;
+            //getScoresRequest?.Cancel();
+            //getScoresRequest = null;
 
-            noScoresPlaceholder.Hide();
-            noTeamPlaceholder.Hide();
-            notSupporterPlaceholder.Hide();
+            //noScoresPlaceholder.Hide();
+            //noTeamPlaceholder.Hide();
+            //notSupporterPlaceholder.Hide();
 
-            if (Beatmap.Value == null || Beatmap.Value.OnlineID <= 0 || (Beatmap.Value.Status <= BeatmapOnlineStatus.Pending))
-            {
-                Scores = null;
-                Hide();
-                return;
-            }
+            //if (Beatmap.Value == null || Beatmap.Value.OnlineID <= 0 || (Beatmap.Value.Status <= BeatmapOnlineStatus.Pending))
+            //{
+            //    Scores = null;
+            //    Hide();
+            //    return;
+            //}
 
-            if ((scope.Value == BeatmapLeaderboardScope.Team) && user.Value.Team == null)
-            {
-                Scores = null;
-                noTeamPlaceholder.Show();
-                return;
-            }
+            //if ((scope.Value == BeatmapLeaderboardScope.Team) && user.Value.Team == null)
+            //{
+            //    Scores = null;
+            //    noTeamPlaceholder.Show();
+            //    return;
+            //}
 
-            if (scope.Value.RequiresSupporter(modSelector.SelectedMods.Count > 0) && !userIsSupporter)
-            {
-                Scores = null;
-                notSupporterPlaceholder.Show();
-                return;
-            }
+            //if (scope.Value.RequiresSupporter(modSelector.SelectedMods.Count > 0) && !userIsSupporter)
+            //{
+            //    Scores = null;
+            //    notSupporterPlaceholder.Show();
+            //    return;
+            //}
 
-            Show();
-            loading.Show();
+            //Show();
+            //loading.Show();
 
-            getScoresRequest = new GetScoresRequest(Beatmap.Value, Beatmap.Value.Ruleset, scope.Value, modSelector.SelectedMods);
-            getScoresRequest.Success += scores =>
-            {
-                Scores = scores;
+            //getScoresRequest = new GetScoresRequest(Beatmap.Value, Beatmap.Value.Ruleset, scope.Value, modSelector.SelectedMods);
+            //getScoresRequest.Success += scores =>
+            //{
+            //    Scores = scores;
 
-                if (!scores.Scores.Any())
-                    noScoresPlaceholder.ShowWithScope(scope.Value);
-            };
+            //    if (!scores.Scores.Any())
+            //        noScoresPlaceholder.ShowWithScope(scope.Value);
+            //};
 
-            api.Queue(getScoresRequest);
+            //api.Queue(getScoresRequest);
         }
 
-        private bool userIsSupporter => api.IsLoggedIn && api.LocalUser.Value.IsSupporter;
+        private bool userIsSupporter => true;// api.IsLoggedIn && api.LocalUser.Value.IsSupporter;
     }
 }

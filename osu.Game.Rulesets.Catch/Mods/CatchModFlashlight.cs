@@ -49,7 +49,7 @@ namespace osu.Game.Rulesets.Catch.Mods
             }
 
             // all sizings here match stable as per
-            // https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/osu!/GameModes/Play/Rulesets/Fruits/RulesetFruits.cs#L645-L655
+            // https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/hotia!/GameModes/Play/Rulesets/Fruits/RulesetFruits.cs#L645-L655
             // all "scale" quantities below are relative to the `targetScale` of the flashlight effect at 0 combo
 
             protected override float BreakTimeScale => 1.538f; // ≈ 8.0 / 5.2
@@ -71,7 +71,7 @@ namespace osu.Game.Rulesets.Catch.Mods
                 FlashlightPosition = playfield.CatcherArea.ToSpaceOfOtherDrawable(playfield.Catcher.DrawPosition, this);
             }
 
-            // as per https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/osu!/GameModes/Play/Rulesets/Fruits/RulesetFruits.cs#L657-L660,
+            // as per https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/hotia!/GameModes/Play/Rulesets/Fruits/RulesetFruits.cs#L657-L660,
             // stable's animation speed is 0.1 "units" per 1 frame at 60 fps
             // converting to local units here, this is:
             // (0.1 / 5.2) * (1 / 60 [s]) = 1.154 [1 / s] = (1.154 / 1000) [1 / ms]

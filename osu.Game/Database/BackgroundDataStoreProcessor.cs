@@ -247,7 +247,7 @@ namespace osu.Game.Database
                 //
                 // We may eventually consider making the Process call more specific (or avoid this in any number
                 // of other possible ways), but for now avoid queueing if the user isn't logged in at startup.
-                if (api.IsLoggedIn)
+                if (api.IsLoggedIn && api.State.Value == APIState.Online)
                 {
                     foreach (var b in r.All<BeatmapInfo>().Where(b => b.OnlineID > 0 && b.LastOnlineUpdate == null && b.BeatmapSet != null))
                         beatmapSetIds.Add(b.BeatmapSet!.ID);

@@ -41,7 +41,7 @@ namespace osu.Game.Rulesets.Osu.Tests
         private readonly OsuHitWindows referenceHitWindows;
 
         /// <summary>
-        /// This is provided as a convenience for testing note lock behaviour against osu!stable.
+        /// This is provided as a convenience for testing note lock behaviour against hotia!stable.
         /// Setting this field to a non-null path will cause beatmap files and replays used in all test cases
         /// to be exported to disk so that they can be cross-checked against stable.
         /// </summary>

@@ -49,7 +49,7 @@ namespace osu.Game.Skinning
 
                         break;
 
-                    // osu!catch section only has colour settings
+                    // hotia!catch section only has colour settings
                     // so no harm in handling the entire section
                     case Section.CatchTheBeat:
                         HandleColours(skin, line, true);

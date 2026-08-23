@@ -94,7 +94,7 @@ namespace osu.Game.Storyboards.Drawables
             base.Update();
 
             // In stable, alpha transforms exceeding values of 1 would result in sprites disappearing from view.
-            // See https://github.com/peppy/osu-stable-reference/blob/08e3dafd525934cf48880b08e91c24ce4ad8b761/osu!/Graphics/Sprites/pSprite.cs#L413-L414
+            // See https://github.com/peppy/osu-stable-reference/blob/08e3dafd525934cf48880b08e91c24ce4ad8b761/hotia!/Graphics/Sprites/pSprite.cs#L413-L414
             //
             // Over the years, storyboard(ers) have taken advantage of this to create "flicker" patterns.
             // This is quite a common technique, so we are reproducing it here for now.

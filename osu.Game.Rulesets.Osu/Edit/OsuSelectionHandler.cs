@@ -97,7 +97,7 @@ namespace osu.Game.Rulesets.Osu.Edit
             // as it turns out, adding the `EditorBeatmap.Update()` call at the end of this would cause stacked objects to jitter when moved around
             // (they would stack and then unstack every frame).
             // the reason for that is that the selection handling abstractions are not aware of the distinction between "displayed" and "actual" position
-            // which is unique to osu! due to stacking being applied as a post-processing step.
+            // which is unique to hotia! due to stacking being applied as a post-processing step.
             // therefore, the following loop would occur:
             // - on frame 1 the blueprint is snapped to the stack's baseline position. `EditorBeatmap.Update()` applies stacking successfully,
             //   the blueprint moves up the stack from its original drag position.
@@ -272,14 +272,14 @@ namespace osu.Game.Rulesets.Osu.Edit
         }
 
         /// <summary>
-        /// All osu! hitobjects which can be moved/rotated/scaled.
+        /// All hotia! hitobjects which can be moved/rotated/scaled.
         /// </summary>
         private OsuHitObject[] selectedMovableObjects => SelectedItems.OfType<OsuHitObject>()
                                                                       .Where(h => h is not Spinner)
                                                                       .ToArray();
 
         /// <summary>
-        /// All osu! hitobjects which can be merged.
+        /// All hotia! hitobjects which can be merged.
         /// </summary>
         private OsuHitObject[] selectedMergeableObjects => SelectedItems.OfType<OsuHitObject>()
                                                                         .Where(h => h is HitCircle or Slider)

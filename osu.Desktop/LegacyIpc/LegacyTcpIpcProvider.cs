@@ -18,7 +18,7 @@ using osu.Game.Rulesets.Taiko;
 namespace osu.Desktop.LegacyIpc
 {
     /// <summary>
-    /// Provides IPC to legacy osu! clients.
+    /// Provides IPC to legacy hotia! clients.
     /// </summary>
     public class LegacyTcpIpcProvider : TcpIpcProvider
     {

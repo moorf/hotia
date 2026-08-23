@@ -47,19 +47,19 @@ namespace osu.Game.Beatmaps.Formats
 
         private void encodeEvents(TextWriter writer, StoryboardElementSource target)
         {
-            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameModes/Edit/Modes/EditorModeDesign.cs#L189
-            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/Events/EventManager.cs#L368
+            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameModes/Edit/Modes/EditorModeDesign.cs#L189
+            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/Events/EventManager.cs#L368
             writer.WriteLine(@"// Background and Video events");
 
             if (target == StoryboardElementSource.Beatmap)
             {
-                // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManager_LoadSave.cs#L1499
+                // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManager_LoadSave.cs#L1499
                 writer.WriteLine(string.Format(CultureInfo.InvariantCulture,
                     @"{0},{1},""{2}"",{3},{4}",
                     (int)LegacyEventType.Background, 0, storyboard.BeatmapInfo.Metadata.BackgroundFile, storyboard.BackgroundOffset.X, storyboard.BackgroundOffset.Y));
             }
 
-            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManager_LoadSave.cs#L1496
+            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManager_LoadSave.cs#L1496
             foreach (var video in storyboard.GetLayer(@"Video").Elements.OfType<StoryboardVideo>().Where(v => v.Source == target))
             {
                 writer.WriteLine(string.Format(CultureInfo.InvariantCulture,
@@ -79,7 +79,7 @@ namespace osu.Game.Beatmaps.Formats
                 encodeSpritesFromLayer(writer, layer, target);
             }
 
-            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManager_LoadSave.cs#L1478-L1481
+            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManager_LoadSave.cs#L1478-L1481
             writer.WriteLine(@"// Storyboard Sound Samples");
 
             foreach (var legacyLayer in Enum.GetValues<LegacyStoryLayer>().Except(LegacyStoryLayer.Video.Yield()))
@@ -111,7 +111,7 @@ namespace osu.Game.Beatmaps.Formats
                     case StoryboardAnimation animation:
                     {
                         origin = convertOrigin(animation.Origin);
-                        // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManager_LoadSave.cs#L1505-L1507
+                        // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManager_LoadSave.cs#L1505-L1507
                         writer.WriteLine(string.Format(
                             CultureInfo.InvariantCulture,
                             @"{0},{1},{2},""{3}"",{4},{5},{6},{7},{8}",
@@ -132,7 +132,7 @@ namespace osu.Game.Beatmaps.Formats
                     case StoryboardSprite sprite:
                     {
                         origin = convertOrigin(sprite.Origin);
-                        // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManager_LoadSave.cs#L1502
+                        // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManager_LoadSave.cs#L1502
                         writer.WriteLine(string.Format(
                             CultureInfo.InvariantCulture,
                             @"{0},{1},{2},""{3}"",{4},{5}",
@@ -168,7 +168,7 @@ namespace osu.Game.Beatmaps.Formats
 
             foreach (var triggerGroup in sprite.TriggerGroups)
             {
-                // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManager_LoadSave.cs#L1564-L1572
+                // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManager_LoadSave.cs#L1564-L1572
                 writer.Write(string.Format(
                     CultureInfo.InvariantCulture,
                     @" T,{0}",
@@ -205,8 +205,8 @@ namespace osu.Game.Beatmaps.Formats
             if (command is IStoryboardLoopingCommand loopingCommand)
                 command = loopingCommand.OriginalCommand;
 
-            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManager_LoadSave.cs#L1546-L1550
-            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManager_LoadSave.cs#L1690-L1730
+            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManager_LoadSave.cs#L1546-L1550
+            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManager_LoadSave.cs#L1690-L1730
             switch (command)
             {
                 case StoryboardVectorScaleCommand vectorScale:

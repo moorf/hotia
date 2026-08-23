@@ -1,11 +1,17 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using osu.Framework.Bindables;
 using osu.Framework.Localisation;
+using osu.Game.Configuration;
 using osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects.Types;
 using osu.Game.Rulesets.Osu.Objects;
@@ -20,6 +26,16 @@ namespace osu.Game.Rulesets.Osu.Mods
 {
     public class OsuModRelax : ModRelax, IUpdatableByPlayfield, IApplicableToDrawableRuleset<OsuHitObject>, IApplicableToPlayer, IHasNoTimedInputs
     {
+        public enum DelayMode
+        {
+            None = 0,
+            Easy = 16,
+            Normal = 25,
+            Hard = 32,
+            Insane = 38,
+            Expert = 45,
+            Extreme = 50
+        }
         public override LocalisableString Description => @"You don't need to click. Give your clicking/tapping fingers a break from the heat of things.";
 
         public override Type[] IncompatibleMods =>
@@ -38,6 +54,10 @@ namespace osu.Game.Rulesets.Osu.Mods
         private ReplayState<OsuAction> state = null!;
         private double lastStateChangeTime;
 
+        [SettingSource("Minimum time inside hitobject", "How long the cursor must stay inside a hitobject before Relax clicks it.")]
+        public Bindable<DelayMode> DelayModeSetting { get; } = new Bindable<DelayMode>();
+
+        private readonly Dictionary<DrawableHitCircle, double> hoverStartTimes = new Dictionary<DrawableHitCircle, double>();
         private DrawableOsuRuleset ruleset = null!;
         private IPressHandler pressHandler = null!;
 
@@ -82,13 +102,22 @@ namespace osu.Game.Rulesets.Osu.Mods
 
             foreach (var h in playfield.HitObjectContainer.AliveObjects.OfType<DrawableOsuHitObject>())
             {
-                // we are not yet close enough to the object.
-                if (time < h.HitObject.StartTime - RELAX_LENIENCY)
+                bool tooEarly = time < h.HitObject.StartTime - RELAX_LENIENCY;
+
+                if (tooEarly && DelayModeSetting.Value == DelayMode.None)
                     break;
 
-                // already hit or beyond the hittable end time.
-                if (h.IsHit || (h.HitObject is IHasDuration hasEnd && time > hasEnd.EndTime))
+                if (h.IsHit || h.HitObject is IHasDuration hasEnd && time > hasEnd.EndTime)
+                {
+                    clearHoverTracking(h);
                     continue;
+                }
+
+                if (tooEarly)
+                {
+                    trackHover(h, time);
+                    continue;
+                }
 
                 switch (h)
                 {
@@ -100,6 +129,8 @@ namespace osu.Game.Rulesets.Osu.Mods
                         // Handles cases like "2B" beatmaps, where sliders may be overlapping and simply holding is not enough.
                         if (!slider.HeadCircle.IsHit)
                             handleHitCircle(slider.HeadCircle);
+                        else
+                            hoverStartTimes.Remove(slider.HeadCircle);
 
                         requiresHold |= slider.SliderInputManager.IsMouseInFollowArea(slider.Tracking.Value);
                         break;
@@ -120,15 +151,6 @@ namespace osu.Game.Rulesets.Osu.Mods
                 changeState(true);
             else if (isDownState && time - lastStateChangeTime > AutoGenerator.KEY_UP_DELAY)
                 changeState(false);
-
-            void handleHitCircle(DrawableHitCircle circle)
-            {
-                if (!circle.HitArea.IsHovered)
-                    return;
-
-                Debug.Assert(circle.HitObject.HitWindows != null);
-                requiresHit |= circle.HitObject.HitWindows.CanBeHit(time - circle.HitObject.StartTime);
-            }
 
             void changeState(bool down)
             {
@@ -152,6 +174,79 @@ namespace osu.Game.Rulesets.Osu.Mods
                 {
                     pressHandler.HandleRelease(wasLeft);
                 }
+            }
+
+            void handleHitCircle(DrawableHitCircle circle)
+            {
+                if (DelayModeSetting.Value == DelayMode.None)
+                {
+                    if (!circle.HitArea.IsHovered)
+                        return;
+
+                    Debug.Assert(circle.HitObject.HitWindows != null);
+                    requiresHit |= circle.HitObject.HitWindows.CanBeHit(time - circle.HitObject.StartTime);
+                    return;
+                }
+
+                if (!circle.HitArea.IsHovered)
+                {
+                    hoverStartTimes.Remove(circle);
+                    return;
+                }
+
+                if (!hoverStartTimes.TryGetValue(circle, out double hoverStartTime))
+                    hoverStartTimes[circle] = hoverStartTime = time;
+                var timeToHold = (int)DelayModeSetting.Value;
+                if (time - hoverStartTime < timeToHold)
+                    return;
+
+                // This is technically already guaranteed by the outer loop, but kept here for clarity/safety.
+                if (time < circle.HitObject.StartTime - RELAX_LENIENCY)
+                    return;
+
+                Debug.Assert(circle.HitObject.HitWindows != null);
+                requiresHit |= circle.HitObject.HitWindows.CanBeHit(time - circle.HitObject.StartTime);
+            }
+        }
+
+        private void trackHover(DrawableOsuHitObject drawableHitObject, double time)
+        {
+            switch (drawableHitObject)
+            {
+                case DrawableHitCircle circle:
+                    trackHover(circle, time);
+                    break;
+
+                case DrawableSlider slider:
+                    if (!slider.HeadCircle.IsHit)
+                        trackHover(slider.HeadCircle, time);
+                    break;
+            }
+        }
+
+        private void trackHover(DrawableHitCircle circle, double time)
+        {
+            if (!circle.HitArea.IsHovered)
+            {
+                hoverStartTimes.Remove(circle);
+                return;
+            }
+
+            if (!hoverStartTimes.ContainsKey(circle))
+                hoverStartTimes[circle] = time;
+        }
+
+        private void clearHoverTracking(DrawableOsuHitObject drawableHitObject)
+        {
+            switch (drawableHitObject)
+            {
+                case DrawableHitCircle circle:
+                    hoverStartTimes.Remove(circle);
+                    break;
+
+                case DrawableSlider slider:
+                    hoverStartTimes.Remove(slider.HeadCircle);
+                    break;
             }
         }
 

@@ -53,7 +53,7 @@ namespace osu.Game.Database
             {
                 string fullPath = storage.GetFullPath(ImportFromStablePath);
 
-                Logger.Log(@$"Folder ""{fullPath}"" not available in the target osu!stable installation to import {Importer.HumanisedModelName}s.", LoggingTarget.Information, LogLevel.Error);
+                Logger.Log(@$"Folder ""{fullPath}"" not available in the target hotia!stable installation to import {Importer.HumanisedModelName}s.", LoggingTarget.Information, LogLevel.Error);
                 return Task.CompletedTask;
             }
 

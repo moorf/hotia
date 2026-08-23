@@ -97,7 +97,7 @@ namespace osu.Game.Rulesets.Mods
                 Padding = new MarginPadding(-1),
                 Child = flashlight,
                 // Flashlight mods should always draw above any other mod adding overlays.
-                // NegativeInfinity is not used to allow one more thing drawn on top (used in replay analysis overlay in osu!).
+                // NegativeInfinity is not used to allow one more thing drawn on top (used in replay analysis overlay in hotia!).
                 Depth = float.MinValue,
             });
         }
@@ -182,7 +182,7 @@ namespace osu.Game.Rulesets.Mods
             }
 
             // all sizings here match stable as per
-            // https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/osu!/GameModes/Play/Rulesets/Ruleset.cs#L520-L530
+            // https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/hotia!/GameModes/Play/Rulesets/Ruleset.cs#L520-L530
             // all "scale" quantities below are relative to the `targetScale` of the flashlight effect at 0 combo
 
             protected virtual float BreakTimeScale => 2.5f; // = 8.0 / 3.2

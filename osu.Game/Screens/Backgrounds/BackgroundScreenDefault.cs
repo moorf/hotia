@@ -24,7 +24,7 @@ namespace osu.Game.Screens.Backgrounds
     public partial class BackgroundScreenDefault : BackgroundScreen
     {
         private Background background;
-
+        
         private int currentDisplay;
         private const int background_count = 8;
         private IBindable<APIUser> user;
@@ -55,14 +55,12 @@ namespace osu.Game.Screens.Backgrounds
         protected override void LoadComplete()
         {
             base.LoadComplete();
-
             user.ValueChanged += _ => Scheduler.AddOnce(next);
             skin.ValueChanged += _ => Scheduler.AddOnce(next);
             source.ValueChanged += _ => Scheduler.AddOnce(next);
             beatmap.ValueChanged += _ => Scheduler.AddOnce(next);
             introSequence.ValueChanged += _ => Scheduler.AddOnce(next);
             seasonalBackgroundLoader.SeasonalBackgroundChanged += () => Scheduler.AddOnce(next);
-
             currentDisplay = RNG.Next(0, background_count);
             Next();
 
@@ -109,7 +107,7 @@ namespace osu.Game.Screens.Backgrounds
             // in the case that the background hasn't changed, we want to avoid cancelling any tasks that could still be loading.
             if (nextBackground == background)
                 return false;
-
+            
             Logger.Log(@"🌅 Global background change queued");
 
             cancellationTokenSource?.Cancel();
@@ -138,7 +136,7 @@ namespace osu.Game.Screens.Backgrounds
         {
             // seasonal background loading gets highest priority.
             Background newBackground = seasonalBackgroundLoader.LoadNextBackground();
-
+            
             if (newBackground == null && user.Value?.IsSupporter == true)
             {
                 switch (source.Value)
@@ -165,6 +163,7 @@ namespace osu.Game.Screens.Backgrounds
 
                             default:
                                 newBackground = new SkinBackground(skin.Value, getBackgroundTextureName());
+
                                 break;
                         }
 
@@ -179,7 +178,7 @@ namespace osu.Game.Screens.Backgrounds
 
             newBackground ??= new Background(getBackgroundTextureName());
             newBackground.Depth = currentDisplay;
-
+            newBackground.Alpha = 0;
             return newBackground;
         }
 

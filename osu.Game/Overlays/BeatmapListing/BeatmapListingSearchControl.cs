@@ -146,7 +146,7 @@ namespace osu.Game.Overlays.BeatmapListing
             });
 
             generalFilter.Current.Add(SearchGeneral.FeaturedArtists);
-            categoryFilter.Current.Value = SearchCategory.Leaderboard;
+            categoryFilter.Current.Value = SearchCategory.Ranked;//SearchCategory.Leaderboard;
         }
 
         private IBindable<bool> allowExplicitContent = null!;

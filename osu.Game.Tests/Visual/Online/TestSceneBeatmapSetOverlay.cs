@@ -68,7 +68,7 @@ namespace osu.Game.Tests.Visual.Online
                         Username = @"BanchoBot",
                         Id = 3,
                     },
-                    Preview = @"https://b.ppy.sh/preview/12345.mp3",
+                    Preview = @"https://b.hotia.org/preview/12345.mp3",
                     PlayCount = 123,
                     FavouriteCount = 456,
                     NominationStatus = new BeatmapSetNominationStatus
@@ -161,7 +161,7 @@ namespace osu.Game.Tests.Visual.Online
                 set.Availability = new BeatmapSetOnlineAvailability
                 {
                     DownloadDisabled = true,
-                    ExternalLink = "https://osu.ppy.sh",
+                    ExternalLink = "https://osu.hotia.org",
                 };
 
                 overlay.ShowBeatmapSet(set);

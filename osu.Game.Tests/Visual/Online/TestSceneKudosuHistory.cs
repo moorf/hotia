@@ -61,12 +61,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 1",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username1",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -78,12 +78,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 2",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username2",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -95,12 +95,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 3",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username3",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -112,12 +112,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 4",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username4",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -129,12 +129,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 5",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username5",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -146,12 +146,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 6",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username6",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -163,12 +163,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 7",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username7",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -180,12 +180,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 8",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username8",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -197,12 +197,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 9",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username9",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -214,12 +214,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 10",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username10",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             },
             new APIKudosuHistory
@@ -231,12 +231,12 @@ namespace osu.Game.Tests.Visual.Online
                 Post = new APIKudosuHistory.ModdingPost
                 {
                     Title = @"Random post 11",
-                    Url = @"https://osu.ppy.sh/b/1234",
+                    Url = @"https://osu.hotia.org/b/1234",
                 },
                 Giver = new APIKudosuHistory.KudosuGiver
                 {
                     Username = @"Username11",
-                    Url = @"https://osu.ppy.sh/u/1234"
+                    Url = @"https://osu.hotia.org/u/1234"
                 }
             }
         };

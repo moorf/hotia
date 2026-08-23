@@ -30,9 +30,9 @@ namespace osu.Game.Localisation
         public static LocalisableString Cancel => new TranslatableString(getKey(@"cancel"), @"No! Abort mission");
 
         /// <summary>
-        /// "Failed to automatically locate an osu!stable installation."
+        /// "Failed to automatically locate an hotia!stable installation."
         /// </summary>
-        public static LocalisableString StableDirectoryLocationHeaderText => new TranslatableString(getKey(@"stable_directory_location_header_text"), @"Failed to automatically locate an osu!stable installation.");
+        public static LocalisableString StableDirectoryLocationHeaderText => new TranslatableString(getKey(@"stable_directory_location_header_text"), @"Failed to automatically locate an hotia!stable installation.");
 
         /// <summary>
         /// "An existing install could not be located. If you know where it is, you can help locate it."
@@ -45,9 +45,9 @@ namespace osu.Game.Localisation
         public static LocalisableString StableDirectoryLocationOkButton => new TranslatableString(getKey(@"stable_directory_location_ok_button"), @"Sure! I know where it is located!");
 
         /// <summary>
-        /// "Actually I don't have osu!stable installed."
+        /// "Actually I don't have hotia!stable installed."
         /// </summary>
-        public static LocalisableString StableDirectoryLocationCancelButton => new TranslatableString(getKey(@"stable_directory_location_cancel_button"), @"Actually I don't have osu!stable installed.");
+        public static LocalisableString StableDirectoryLocationCancelButton => new TranslatableString(getKey(@"stable_directory_location_cancel_button"), @"Actually I don't have hotia!stable installed.");
 
         /// <summary>
         /// "All local scores on {0}"
@@ -65,9 +65,9 @@ namespace osu.Game.Localisation
         public static LocalisableString ConfirmAbortMatchHeaderText => new TranslatableString(getKey(@"confirm_abort_match_header_text"), @"Are you sure you want to abort the match?");
 
         /// <summary>
-        /// "Are you sure you want to exit osu!?"
+        /// "Are you sure you want to exit hotia!?"
         /// </summary>
-        public static LocalisableString ConfirmExitHeaderText => new TranslatableString(getKey(@"confirm_exit_header_text"), @"Are you sure you want to exit osu!?");
+        public static LocalisableString ConfirmExitHeaderText => new TranslatableString(getKey(@"confirm_exit_header_text"), @"Are you sure you want to exit hotia!?");
 
         /// <summary>
         /// "Last chance to turn back"

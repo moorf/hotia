@@ -1,5 +1,9 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 #nullable disable
 
@@ -14,6 +18,8 @@ namespace osu.Game.Online.API
     {
         private string filename;
 
+        protected override string ApiVer { get; } = "";
+
         /// <summary>
         /// Used to set the extension of the file returned by this request.
         /// </summary>
@@ -24,13 +30,12 @@ namespace osu.Game.Online.API
             base.Success += () => Success?.Invoke(filename);
         }
 
-        protected override WebRequest CreateWebRequest()
+        protected override WebRequest CreateBeatmapWebRequest()
         {
             string file = Path.GetTempFileName();
 
             File.Move(file, filename = Path.ChangeExtension(file, FileExtension));
-
-            var request = new FileWebRequest(filename, Uri);
+            var request = new FileWebRequest(filename, BeatmapUri);
             request.DownloadProgress += request_Progress;
             return request;
         }

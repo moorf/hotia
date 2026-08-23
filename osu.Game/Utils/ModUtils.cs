@@ -306,7 +306,7 @@ namespace osu.Game.Utils
         /// </param>
         /// <param name="matchType">The type of match being played.</param>
         /// <param name="freestyle">Whether the target playlist item enables <see cref="MultiplayerPlaylistItem.Freestyle">freestyle</see> mode.</param>
-        /// <seealso href="https://github.com/ppy/osu-web/blob/40936b514c6485b874f6c6496d55d9e8b1b88fd4/app/Singletons/Mods.php#L95-L113">Related osu!web function.</seealso>
+        /// <seealso href="https://github.com/ppy/osu-web/blob/40936b514c6485b874f6c6496d55d9e8b1b88fd4/app/Singletons/Mods.php#L95-L113">Related hotia!web function.</seealso>
         public static bool IsValidModForMatch(Mod mod, bool required, MatchType matchType, bool freestyle)
         {
             if (mod.Type == ModType.System || !mod.UserPlayable || !mod.HasImplementation)

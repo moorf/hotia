@@ -67,7 +67,7 @@ namespace osu.Game.Tests.Visual.Online
         {
             new[] { "Plain", "This is plain comment" },
             new[] { "Pinned", "This is pinned comment" },
-            new[] { "Link", "Please visit https://osu.ppy.sh" },
+            new[] { "Link", "Please visit https://osu.hotia.org" },
             new[] { "Big Image", "![](Backgrounds/bg1 \"Big Image\")" },
             new[] { "Small Image", "![](Cursor/cursortrail)" },
             new[]
@@ -81,7 +81,7 @@ namespace osu.Game.Tests.Visual.Online
             },
 
             // Taken from https://github.com/ppy/osu/issues/13993#issuecomment-885994077
-            new[] { "Problematic", @"My tablet doesn't work :( It's a Huion 420 and it's apparently incompatible with OpenTablet Driver. The warning I get is: ""DeviceInUseException: Device is currently in use by another kernel module. To fix this issue, please follow the instructions from https://github.com/OpenTabletDriver/OpenTabletDriver/wiki/Linux-FAQ#arg    umentoutofrangeexception-value-0-15"" and it repeats 4 times on the notification before logging subsequent warnings. Checking the logs, it looks for other Huion tablets before sending the notification (e.g. ""2021-07-23 03:52:33 [verbose]: Detect: Searching for tablet 'Huion WH1409 V2' 20 2021-07-23 03:52:33 [error]: DeviceInUseException: Device is currently in use by another kernel module. To fix this     issue, please follow the instructions from https://github.com/OpenTabletDriver/OpenTabletDriver/wiki/Linux-FAQ#arg    umentoutofrangeexception-value-0-15"") I use an Arch based installation of Linux and the tablet runs perfectly with Digimend kernel driver, with area configuration, pen pressure, etc. On osu!lazer the cursor disappears until I set it to ""Borderless"" instead of ""Fullscreen"" and even after it shows up, it goes to the bottom left corner as soon as a map starts. I have honestly 0 idea of whats going on at this point.", },
+            new[] { "Problematic", @"My tablet doesn't work :( It's a Huion 420 and it's apparently incompatible with OpenTablet Driver. The warning I get is: ""DeviceInUseException: Device is currently in use by another kernel module. To fix this issue, please follow the instructions from https://github.com/OpenTabletDriver/OpenTabletDriver/wiki/Linux-FAQ#arg    umentoutofrangeexception-value-0-15"" and it repeats 4 times on the notification before logging subsequent warnings. Checking the logs, it looks for other Huion tablets before sending the notification (e.g. ""2021-07-23 03:52:33 [verbose]: Detect: Searching for tablet 'Huion WH1409 V2' 20 2021-07-23 03:52:33 [error]: DeviceInUseException: Device is currently in use by another kernel module. To fix this     issue, please follow the instructions from https://github.com/OpenTabletDriver/OpenTabletDriver/wiki/Linux-FAQ#arg    umentoutofrangeexception-value-0-15"") I use an Arch based installation of Linux and the tablet runs perfectly with Digimend kernel driver, with area configuration, pen pressure, etc. On hotia!lazer the cursor disappears until I set it to ""Borderless"" instead of ""Fullscreen"" and even after it shows up, it goes to the bottom left corner as soon as a map starts. I have honestly 0 idea of whats going on at this point.", },
             new[]
             {
                 "Code Block", @"User not found! ;_;

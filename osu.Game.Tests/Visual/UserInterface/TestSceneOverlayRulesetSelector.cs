@@ -58,8 +58,8 @@ namespace osu.Game.Tests.Visual.UserInterface
         [Test]
         public void TestSelection()
         {
-            AddStep("Select osu!", () => ruleset.Value = new OsuRuleset().RulesetInfo);
-            AddAssert("Check osu! selected", () => selector.Current.Value.Equals(new OsuRuleset().RulesetInfo));
+            AddStep("Select hotia!", () => ruleset.Value = new OsuRuleset().RulesetInfo);
+            AddAssert("Check hotia! selected", () => selector.Current.Value.Equals(new OsuRuleset().RulesetInfo));
 
             AddStep("Select mania", () => ruleset.Value = new ManiaRuleset().RulesetInfo);
             AddAssert("Check mania selected", () => selector.Current.Value.Equals(new ManiaRuleset().RulesetInfo));

@@ -22,6 +22,7 @@ using osu.Game.Rulesets.Configuration;
 using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Edit;
 using osu.Game.Rulesets.Mods;
+using osu.Game.Rulesets.Mods.osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects.Legacy;
 using osu.Game.Rulesets.Osu.Beatmaps;
 using osu.Game.Rulesets.Osu.Configuration;
@@ -238,7 +239,8 @@ namespace osu.Game.Rulesets.Osu
                         new OsuModBubbles(),
                         new OsuModSynesthesia(),
                         new OsuModDepth(),
-                        new OsuModBloom()
+                        new OsuModBloom(),
+                        new OsuModColouredHit()
                     };
 
                 case ModType.System:
@@ -271,7 +273,7 @@ namespace osu.Game.Rulesets.Osu
 
         public override IBeatmapVerifier CreateBeatmapVerifier() => new OsuBeatmapVerifier();
 
-        public override string Description => "osu!";
+        public override string Description => "hotia!";
 
         public override string ShortName => SHORT_NAME;
 

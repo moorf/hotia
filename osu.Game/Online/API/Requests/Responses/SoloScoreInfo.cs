@@ -168,7 +168,7 @@ namespace osu.Game.Online.API.Requests.Responses
         #endregion
 
         /// <summary>
-        /// Whether this <see cref="ScoreInfo"/> represents a legacy (osu!stable) score.
+        /// Whether this <see cref="ScoreInfo"/> represents a legacy (hotia!stable) score.
         /// </summary>
         [JsonIgnore]
         public bool IsLegacyScore => LegacyScoreId != null;

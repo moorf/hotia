@@ -79,12 +79,12 @@ namespace osu.Game.Overlays
 
             Children = new Drawable[]
             {
-                toastTray = new NotificationOverlayToastTray
-                {
-                    ForwardNotificationToPermanentStore = addPermanently,
-                    Origin = Anchor.TopRight,
-                },
-                mainContent = new Container
+            toastTray = new NotificationOverlayToastTray
+            {
+                ForwardNotificationToPermanentStore = addPermanently,
+                Origin = Anchor.TopRight,
+            },
+            mainContent = new Container
                 {
                     RelativeSizeAxes = Axes.Both,
                     Masking = true,

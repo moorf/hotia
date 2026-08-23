@@ -149,6 +149,8 @@ namespace osu.Game.Localisation
         /// </summary>
         public static LocalisableString ClassicScoreDisplay => new TranslatableString(getKey(@"classic_score_display"), @"Classic");
 
+        public static LocalisableString SongSelectPreview => new string("Preview Songs in SongSelect");
+
         private static string getKey(string key) => $@"{prefix}:{key}";
     }
 }

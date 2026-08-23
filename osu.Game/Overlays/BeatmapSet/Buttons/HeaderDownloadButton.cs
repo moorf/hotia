@@ -56,7 +56,7 @@ namespace osu.Game.Overlays.BeatmapSet.Buttons
         private void load(IAPIProvider api, BeatmapModelDownloader beatmaps)
         {
             FillFlowContainer textSprites;
-
+            
             InternalChildren = new Drawable[]
             {
                 shakeContainer = new ShakeContainer
@@ -167,7 +167,7 @@ namespace osu.Game.Overlays.BeatmapSet.Buttons
             }, true);
         }
 
-        private void userChanged(ValueChangedEvent<APIUser> e) => button.Enabled.Value = !(e.NewValue is GuestUser);
+        private void userChanged(ValueChangedEvent<APIUser> e) => button.Enabled.Value = true; //!(e.NewValue is GuestUser)
 
         private void enabledChanged(ValueChangedEvent<bool> e) => this.FadeColour(e.NewValue ? Color4.White : Color4.Gray, 200, Easing.OutQuint);
 

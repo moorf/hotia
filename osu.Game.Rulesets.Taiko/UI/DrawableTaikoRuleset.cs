@@ -115,7 +115,8 @@ namespace osu.Game.Rulesets.Taiko.UI
             LockPlayfieldAspectRange = { BindTarget = LockPlayfieldAspectRange }
         };
 
-        protected override PassThroughInputManager CreateInputManager() => new TaikoInputManager(Ruleset.RulesetInfo);
+        //protected override PassThroughInputManager CreateInputManager() => new TaikoInputManager(Ruleset.RulesetInfo);
+        protected override PassThroughInputManager CreateInputManager(bool careAboutMouse = true) => new TaikoInputManager(Ruleset.RulesetInfo, careAboutMouse);
 
         protected override Playfield CreatePlayfield() => new TaikoPlayfield();
 

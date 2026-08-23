@@ -179,7 +179,7 @@ namespace osu.Game.Screens.Select
                 }
 
                 // TODO: Add realm queries to hint at which ruleset results are available in (and allow clicking to switch).
-                // TODO: Make this message more certain by ensuring the osu! beatmaps exist before suggesting.
+                // TODO: Make this message more certain by ensuring the hotia! beatmaps exist before suggesting.
                 if (filter?.Ruleset?.OnlineID != 0 && filter?.AllowConvertedBeatmaps == false)
                 {
                     addBulletPoint();

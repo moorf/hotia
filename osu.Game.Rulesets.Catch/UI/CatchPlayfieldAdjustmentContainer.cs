@@ -89,7 +89,7 @@ namespace osu.Game.Rulesets.Catch.UI
                 base.Update();
 
                 // in stable, fruit fall vertically from 100 pixels above the playfield top down to the catcher's Y position (i.e. -100 to 340),
-                // see: https://github.com/peppy/osu-stable-reference/blob/1531237b63392e82c003c712faa028406073aa8f/osu!/GameplayElements/HitObjects/Fruits/HitCircleFruits.cs#L65
+                // see: https://github.com/peppy/osu-stable-reference/blob/1531237b63392e82c003c712faa028406073aa8f/hotia!/GameplayElements/HitObjects/Fruits/HitCircleFruits.cs#L65
                 // we already have the playfield positioned similar to stable (see CatchPlayfieldAdjustmentContainer constructor),
                 // so we only need to increase this container's height 100 pixels above the playfield, and offset it to have the bottom at 340 rather than 384.
                 const float stable_fruit_start_position = -100;

@@ -147,10 +147,10 @@ namespace osu.Game.Screens.Play
                         ? "Cannot start play"
                         : "Score will not be submitted";
 
-                    if (string.IsNullOrEmpty(exception.Message))
-                        notifications?.Post(new ScoreSubmissionFailureNotification(whatWillHappen, "Failed to retrieve a score submission token."));
-                    else
-                        notifications?.Post(new ScoreSubmissionFailureNotification(whatWillHappen, getUserFacingAPIError(exception)));
+                    //if (string.IsNullOrEmpty(exception.Message))
+                    //    notifications?.Post(new ScoreSubmissionFailureNotification(whatWillHappen, "Failed to retrieve a score submission token."));
+                    //else
+                    //    notifications?.Post(new ScoreSubmissionFailureNotification(whatWillHappen, getUserFacingAPIError(exception)));
                 }
 
                 if (shouldExit)

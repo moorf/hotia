@@ -40,7 +40,7 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
 
             // Cursor and cursor trail components are sourced from potentially different skin sources.
             // Stable always chooses cursor trail disjoint behaviour based on the cursor texture lookup source, so we need to fetch where that occurred.
-            // See https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/osu!/Graphics/Skinning/SkinManager.cs#L269
+            // See https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/hotia!/Graphics/Skinning/SkinManager.cs#L269
             var cursorProvider = skinSource.FindProvider(s => s.GetTexture("cursor") != null);
             DisjointTrail = cursorProvider?.GetTexture("cursormiddle") == null;
 

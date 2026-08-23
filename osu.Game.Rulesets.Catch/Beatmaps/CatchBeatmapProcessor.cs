@@ -81,9 +81,9 @@ namespace osu.Game.Rulesets.Catch.Beatmaps
                         foreach (var banana in bananaShower.NestedHitObjects.OfType<Banana>())
                         {
                             banana.XOffset = (float)(rng.NextDouble() * CatchPlayfield.WIDTH);
-                            rng.Next(); // osu!stable retrieved a random banana type
-                            rng.Next(); // osu!stable retrieved a random banana rotation
-                            rng.Next(); // osu!stable retrieved a random banana colour
+                            rng.Next(); // hotia!stable retrieved a random banana type
+                            rng.Next(); // hotia!stable retrieved a random banana rotation
+                            rng.Next(); // hotia!stable retrieved a random banana colour
                         }
 
                         break;
@@ -103,7 +103,7 @@ namespace osu.Game.Rulesets.Catch.Beatmaps
                             if (catchObject is TinyDroplet)
                                 catchObject.XOffset = Math.Clamp(rng.Next(-20, 20), -catchObject.OriginalX, CatchPlayfield.WIDTH - catchObject.OriginalX);
                             else if (catchObject is Droplet)
-                                rng.Next(); // osu!stable retrieved a random droplet rotation
+                                rng.Next(); // hotia!stable retrieved a random droplet rotation
                         }
 
                         break;
@@ -120,7 +120,7 @@ namespace osu.Game.Rulesets.Catch.Beatmaps
 
             if (lastPosition == null ||
                 // some objects can get assigned position zero, making stable incorrectly go inside this if branch on the next object. to maintain behaviour and compatibility, do the same here.
-                // reference: https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/osu!/GameplayElements/HitObjects/Fruits/HitFactoryFruits.cs#L45-L50
+                // reference: https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/hotia!/GameplayElements/HitObjects/Fruits/HitFactoryFruits.cs#L45-L50
                 // todo: should be revisited and corrected later probably.
                 lastPosition == 0)
             {
@@ -217,7 +217,7 @@ namespace osu.Game.Rulesets.Catch.Beatmaps
 
             double halfCatcherWidth = Catcher.CalculateCatchWidth(beatmap.Difficulty) / 2;
 
-            // Todo: This is wrong. osu!stable calculated hyperdashes using the full catcher size, excluding the margins.
+            // Todo: This is wrong. hotia!stable calculated hyperdashes using the full catcher size, excluding the margins.
             // This should theoretically cause impossible scenarios, but practically, likely due to the size of the playfield, it doesn't seem possible.
             // For now, to bring gameplay (and diffcalc!) completely in-line with stable, this code also uses the full catcher size.
             halfCatcherWidth /= Catcher.ALLOWED_CATCH_RANGE;
@@ -236,7 +236,7 @@ namespace osu.Game.Rulesets.Catch.Beatmaps
 
                 int thisDirection = nextObject.EffectiveX > currentObject.EffectiveX ? 1 : -1;
 
-                // Int truncation added to match osu!stable.
+                // Int truncation added to match hotia!stable.
                 double timeToNext = (int)nextObject.StartTime - (int)currentObject.StartTime - 1000f / 60f / 4; // 1/4th of a frame of grace time, taken from osu-stable
                 double distanceToNext = Math.Abs(nextObject.EffectiveX - currentObject.EffectiveX) - (lastDirection == thisDirection ? lastExcess : halfCatcherWidth);
                 float distanceToHyper = (float)(timeToNext * Catcher.BASE_DASH_SPEED - distanceToNext);

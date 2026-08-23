@@ -37,7 +37,7 @@ namespace osu.Game.Tests.Visual.Online
             Id = 2,
             Name = "mom?",
             ShortName = "MOM",
-            FlagUrl = @"https://assets.ppy.sh/teams/flag/1/b46fb10dbfd8a35dc50e6c00296c0dc6172dffc3ed3d3a4b379277ba498399fe.png",
+            FlagUrl = @"https://assets.hotia.org/teams/flag/1/b46fb10dbfd8a35dc50e6c00296c0dc6172dffc3ed3d3a4b379277ba498399fe.png",
         };
     }
 }

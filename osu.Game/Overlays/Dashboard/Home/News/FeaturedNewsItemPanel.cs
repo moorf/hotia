@@ -131,7 +131,7 @@ namespace osu.Game.Overlays.Dashboard.Home.News
                 };
 
                 TooltipText = CommonStrings.ViewInBrowser;
-                Action = () => host.OpenUrlExternally("https://osu.ppy.sh/home/news/" + post.Slug);
+                Action = () => host.OpenUrlExternally("https://osu.hotia.org/home/news/" + post.Slug);
 
                 HoverColour = Color4.White;
             }

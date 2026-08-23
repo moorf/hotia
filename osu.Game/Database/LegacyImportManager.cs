@@ -74,7 +74,7 @@ namespace osu.Game.Database
 
             // A full stable installation will have a configuration file present.
             // This is the best case scenario, as it may contain a custom beatmap directory we need to traverse to.
-            if (directory.GetFiles(@"osu!.*.cfg").Any())
+            if (directory.GetFiles(@"hotia!.*.cfg").Any())
             {
                 stableRoot = directory;
                 return true;

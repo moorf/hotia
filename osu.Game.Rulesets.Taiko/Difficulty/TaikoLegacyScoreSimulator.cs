@@ -67,7 +67,7 @@ namespace osu.Game.Rulesets.Taiko.Difficulty
             }
 
             var alteredDifficulty = baseBeatmap.Difficulty.Clone();
-            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjectManagerTaiko.cs#L78
+            // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjectManagerTaiko.cs#L78
             alteredDifficulty.CircleSize = 2;
 
             difficultyPeppyStars = LegacyRulesetExtensions.CalculateDifficultyPeppyStars(alteredDifficulty, objectCount, drainLength);
@@ -153,13 +153,13 @@ namespace osu.Game.Rulesets.Taiko.Difficulty
                     double minHitDelay = getSliderTaikoMinHitDelay(drumRoll);
 
                     // source for `HittableEndTime`:
-                    // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjects/Taiko/SliderTaiko.cs#L157
-                    // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjects/Taiko/SliderTaiko.cs#L225-L228
+                    // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjects/Taiko/SliderTaiko.cs#L157
+                    // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjects/Taiko/SliderTaiko.cs#L225-L228
                     double? nextObjectHittableStartTime = nextHitObject is DrumRoll nextDrumRoll ? nextDrumRoll.StartTime - getSliderTaikoMinHitDelay(nextDrumRoll) : nextHitObject?.StartTime;
                     bool endpointHittable = nextObjectHittableStartTime == null || nextObjectHittableStartTime - (drumRoll.EndTime + (int)minHitDelay) > (int)minHitDelay;
                     double hittableEndTime = endpointHittable ? drumRoll.EndTime + (int)minHitDelay : drumRoll.EndTime;
 
-                    // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjects/Taiko/SliderTaiko.cs#L288
+                    // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjects/Taiko/SliderTaiko.cs#L288
                     for (double i = drumRoll.StartTime; i < hittableEndTime; i += minHitDelay)
                         simulateHit(new DrumRollTick(drumRoll) { IsStrong = drumRoll.IsStrong }, null, ref attributes);
                     return;
@@ -227,7 +227,7 @@ namespace osu.Game.Rulesets.Taiko.Difficulty
                 combo++;
         }
 
-        // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/osu!/GameplayElements/HitObjects/Taiko/SliderTaiko.cs#L74-L92
+        // https://github.com/peppy/osu-stable-reference/blob/c34a74fb61c17c5667486a12548485d1f03baa2e/hotia!/GameplayElements/HitObjects/Taiko/SliderTaiko.cs#L74-L92
         private double getSliderTaikoMinHitDelay(DrumRoll drumRoll)
         {
             double maxRate;

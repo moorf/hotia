@@ -5,6 +5,7 @@ using System.IO;
 using osu.Game.Beatmaps;
 using osu.Game.Database;
 using osu.Game.IO;
+using osu.Game.Models;
 using osu.Game.Online.API.Requests.Responses;
 using osu.Game.Rulesets;
 using osu.Game.Scoring;
@@ -16,12 +17,17 @@ namespace osu.Game.Extensions
     public static class ModelExtensions
     {
         /// <summary>
-        /// Get the relative path in osu! storage for this file.
+        /// Get the relative path in hotia! storage for this file.
         /// </summary>
         /// <param name="fileInfo">The file info.</param>
         /// <returns>A relative file path.</returns>
-        public static string GetStoragePath(this IFileInfo fileInfo) => Path.Combine(fileInfo.Hash.Remove(1), fileInfo.Hash.Remove(2), fileInfo.Hash);
+        public static string GetStoragePath(this IFileInfo fileInfo)
+        {
+            if (fileInfo is RealmFile rf && !string.IsNullOrEmpty(rf.OwnerHash))
+                return Path.Combine(rf.OwnerHash, rf.Hash);
 
+            return fileInfo.Hash;
+        }
         /// <summary>
         /// Returns a user-facing string representing the <paramref name="model"/>.
         /// </summary>
@@ -71,7 +77,7 @@ namespace osu.Game.Extensions
         }
 
         /// <summary>
-        /// Check whether this <see cref="IRulesetInfo"/>'s online ID is within the range that defines it as a legacy ruleset (ie. either osu!, osu!taiko, osu!catch or osu!mania).
+        /// Check whether this <see cref="IRulesetInfo"/>'s online ID is within the range that defines it as a legacy ruleset (ie. either hotia!, hotia!taiko, hotia!catch or hotia!mania).
         /// </summary>
         public static bool IsLegacyRuleset(this IRulesetInfo ruleset) => ruleset.OnlineID >= 0 && ruleset.OnlineID <= ILegacyRuleset.MAX_LEGACY_RULESET_ID;
 
@@ -175,7 +181,7 @@ namespace osu.Game.Extensions
         /// DO NOT CHANGE THE SEMANTICS OF THIS METHOD unless you know well what you are doing.
         /// </para>
         /// </remarks>
-        /// <seealso href="https://github.com/peppy/osu-stable-reference/blob/67795dba3c308e7d0493b296149dcb073ca47ecb/osu!common/Helpers/GeneralHelper.cs#L41-L46"/>
+        /// <seealso href="https://github.com/peppy/osu-stable-reference/blob/67795dba3c308e7d0493b296149dcb073ca47ecb/hotia!common/Helpers/GeneralHelper.cs#L41-L46"/>
         public static string GetValidFilename(this string filename)
         {
             foreach (char c in invalid_filename_chars)

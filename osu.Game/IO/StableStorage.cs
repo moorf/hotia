@@ -36,7 +36,7 @@ namespace osu.Game.IO
 
         private string locateSongsDirectory()
         {
-            var configurationFiles = GetFiles(".", $"osu!.{Environment.UserName}.cfg");
+            var configurationFiles = GetFiles(".", $"hotia!.{Environment.UserName}.cfg");
 
             // GetFiles returns case insensitive results, so multiple files could exist.
             // Prefer a case-correct match, but fallback to any available.

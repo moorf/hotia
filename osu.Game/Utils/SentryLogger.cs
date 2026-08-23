@@ -53,7 +53,7 @@ namespace osu.Game.Utils
             if (DebugUtils.IsNUnitRunning)
                 return;
 
-            if (!game.IsDeployedBuild || !game.CreateEndpoints().WebsiteUrl.EndsWith(@".ppy.sh", StringComparison.Ordinal))
+            if (!game.IsDeployedBuild || !game.CreateEndpoints().WebsiteUrl.EndsWith(@".hotia.org", StringComparison.Ordinal))
                 return;
 
             sentrySession = SentrySdk.Init(options =>

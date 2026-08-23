@@ -79,7 +79,7 @@ namespace osu.Game.Tests.Visual.Menus
                 {
                     new APIMenuImage
                     {
-                        Image = @"https://assets.ppy.sh/main-menu/project-loved-2@2x.png",
+                        Image = @"https://assets.hotia.org/main-menu/project-loved-2@2x.png",
                         Url = $@"{API.Endpoints.WebsiteUrl}/home/news/2023-12-21-project-loved-december-2023",
                     }
                 }
@@ -108,7 +108,7 @@ namespace osu.Game.Tests.Visual.Menus
                 {
                     new APIMenuImage
                     {
-                        Image = @"https://assets.ppy.sh/main-menu/project-loved-2@2x.png",
+                        Image = @"https://assets.hotia.org/main-menu/project-loved-2@2x.png",
                         Url = @"https://google.com",
                     }
                 }

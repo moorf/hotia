@@ -8,9 +8,9 @@ $ANDROID_PROPS="osu.Android.props"
 $IOS_PROPS="osu.iOS.props"
 $SLN="osu.sln"
 
-dotnet remove $GAME_CSPROJ reference ppy.osu.Framework;
-dotnet remove $ANDROID_PROPS reference ppy.osu.Framework.Android;
-dotnet remove $IOS_PROPS reference ppy.osu.Framework.iOS;
+dotnet remove $GAME_CSPROJ reference moorf.hotia.Framework;
+dotnet remove $ANDROID_PROPS reference moorf.hotia.Framework.Android;
+dotnet remove $IOS_PROPS reference moorf.hotia.Framework.iOS;
 
 dotnet sln $SLN add ../osu-framework/osu.Framework/osu.Framework.csproj `
     ../osu-framework/osu.Framework.NativeLibs/osu.Framework.NativeLibs.csproj `
@@ -22,8 +22,8 @@ dotnet add $ANDROID_PROPS reference ../osu-framework/osu.Framework.Android/osu.F
 dotnet add $IOS_PROPS reference ../osu-framework/osu.Framework.iOS/osu.Framework.iOS.csproj;
 
 # workaround for dotnet add not inserting $(MSBuildThisFileDirectory) on props files
-(Get-Content "osu.Android.props") -replace "`"..\\osu-framework", "`"`$(MSBuildThisFileDirectory)..\osu-framework" | Set-Content "osu.Android.props"
-(Get-Content "osu.iOS.props") -replace "`"..\\osu-framework", "`"`$(MSBuildThisFileDirectory)..\osu-framework" | Set-Content "osu.iOS.props"
+(Get-Content "osu.Android.props") -replace "`"..\\osu-framework", "`"`$(MSBuildThisFileDirectory)..\hotia-framework" | Set-Content "osu.Android.props"
+(Get-Content "osu.iOS.props") -replace "`"..\\osu-framework", "`"`$(MSBuildThisFileDirectory)..\hotia-framework" | Set-Content "osu.iOS.props"
 
 # needed because iOS framework nupkg includes a set of properties to work around certain issues during building,
 # and those get ignored when referencing framework via project, threfore we have to manually include it via props reference.

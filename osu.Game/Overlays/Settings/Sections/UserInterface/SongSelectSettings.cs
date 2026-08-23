@@ -55,6 +55,11 @@ namespace osu.Game.Overlays.Settings.Sections.UserInterface
                     Caption = GameplaySettingsStrings.BackgroundBlur,
                     Current = config.GetBindable<bool>(OsuSetting.SongSelectBackgroundBlur),
                 }),
+                new SettingsItemV2(new FormCheckBox
+                {
+                    Caption = GameplaySettingsStrings.SongSelectPreview,
+                    Current = config.GetBindable<bool>(OsuSetting.SongSelectPreview),
+                }),
             };
         }
     }

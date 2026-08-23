@@ -46,7 +46,7 @@ namespace osu.Game.Rulesets.Taiko.Tests
     public struct ConvertValue : IEquatable<ConvertValue>
     {
         /// <summary>
-        /// A sane value to account for osu!stable using ints everywhere.
+        /// A sane value to account for hotia!stable using ints everywhere.
         /// </summary>
         private const float conversion_lenience = 2;
 

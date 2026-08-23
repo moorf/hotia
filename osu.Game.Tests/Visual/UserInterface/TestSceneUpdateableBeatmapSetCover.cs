@@ -121,7 +121,7 @@ namespace osu.Game.Tests.Visual.UserInterface
 
             AddStep("setup cover", () => Child = updateableCover = new TestUpdateableOnlineBeatmapSetCover(0)
             {
-                OnlineInfo = createBeatmapWithCover("https://assets.ppy.sh/beatmaps/1189904/covers/cover.jpg"),
+                OnlineInfo = createBeatmapWithCover("https://assets.hotia.org/beatmaps/1189904/covers/cover.jpg"),
                 RelativeSizeAxes = Axes.Both,
                 Masking = true,
                 Alpha = 0.4f
@@ -132,7 +132,7 @@ namespace osu.Game.Tests.Visual.UserInterface
             AddUntilStep("wait for fade complete", () => initialCover.Alpha == 1);
 
             AddStep("switch beatmap",
-                () => updateableCover.OnlineInfo = createBeatmapWithCover("https://assets.ppy.sh/beatmaps/1079428/covers/cover.jpg"));
+                () => updateableCover.OnlineInfo = createBeatmapWithCover("https://assets.hotia.org/beatmaps/1079428/covers/cover.jpg"));
             AddUntilStep("new cover loaded", () => updateableCover.ChildrenOfType<OnlineBeatmapSetCover>().Except(new[] { initialCover }).Any());
         }
 

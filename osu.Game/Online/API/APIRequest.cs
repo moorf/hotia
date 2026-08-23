@@ -1,5 +1,9 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using System;
 using System.Diagnostics;
@@ -21,6 +25,7 @@ namespace osu.Game.Online.API
     {
         protected override WebRequest CreateWebRequest() => new OsuJsonWebRequest<T>(Uri);
 
+        protected override WebRequest CreateBeatmapWebRequest() => new OsuJsonWebRequest<T>(BeatmapUri);
         /// <summary>
         /// The deserialised response object. May be null if the request or deserialisation failed.
         /// </summary>
@@ -69,10 +74,11 @@ namespace osu.Game.Online.API
     {
         protected abstract string Target { get; }
 
+        protected virtual string ApiVer { get; } = "/v2";
         protected virtual WebRequest CreateWebRequest() => new OsuWebRequest(Uri);
-
+        protected virtual WebRequest CreateBeatmapWebRequest() => new OsuWebRequest(BeatmapUri);
         protected virtual string Uri => $@"{API!.Endpoints.APIUrl}/api/v2/{Target}";
-
+        protected virtual string BeatmapUri => $@"{API!.Endpoints.BeatmapUrl}/api{ApiVer}/{Target}";
         protected IAPIProvider? API;
 
         protected WebRequest? WebRequest;
@@ -127,7 +133,7 @@ namespace osu.Game.Online.API
             User = API.LocalUser.Value;
 
             if (isFailing) return;
-
+            
             WebRequest = CreateWebRequest();
             WebRequest.Failed += Fail;
             WebRequest.AllowRetryOnTimeout = false;

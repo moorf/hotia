@@ -1,5 +1,9 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using osu.Framework.IO.Network;
 using osu.Game.Beatmaps;
@@ -15,16 +19,15 @@ namespace osu.Game.Online.API.Requests
         {
             this.noVideo = noVideo;
         }
-
         protected override WebRequest CreateWebRequest()
         {
-            var req = base.CreateWebRequest();
+            var req = base.CreateBeatmapWebRequest();
             req.Timeout = 60000;
             return req;
         }
 
         protected override string FileExtension => ".osz";
 
-        protected override string Target => $@"beatmapsets/{Model.OnlineID}/download{(noVideo ? "?noVideo=1" : "")}";
+        protected override string Target => $@"d/{Model.OnlineID}{(noVideo ? "?noVideo=1" : "")}";
     }
 }

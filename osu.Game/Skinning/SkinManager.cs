@@ -61,7 +61,7 @@ namespace osu.Game.Skinning
 
         private readonly IResourceStore<byte[]> userFiles;
 
-        private Skin argonSkin { get; }
+        public Skin argonSkin { get; }
 
         private Skin trianglesSkin { get; }
 

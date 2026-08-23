@@ -21,7 +21,7 @@ namespace osu.Game.Rulesets.Mania.Mods
     public partial class ManiaModHidden : ManiaModWithPlayfieldCover, IApplicableToPlayer, IUpdatableByPlayfield
     {
         /// <summary>
-        /// osu!stable is referenced to 768px.
+        /// hotia!stable is referenced to 768px.
         /// </summary>
         private const float reference_playfield_height = 768;
 
@@ -93,7 +93,7 @@ namespace osu.Game.Rulesets.Mania.Mods
 
             protected override float GetHeight(float coverage)
             {
-                // In osu!stable, the cover is applied in absolute (x768) coordinates from the hit position.
+                // In hotia!stable, the cover is applied in absolute (x768) coordinates from the hit position.
                 float availablePlayfieldHeight = Math.Abs(reference_playfield_height - (hitPosition?.Value ?? Stage.HIT_TARGET_POSITION));
 
                 if (availablePlayfieldHeight == 0)

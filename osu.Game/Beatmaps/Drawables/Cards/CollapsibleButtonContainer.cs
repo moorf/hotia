@@ -99,21 +99,21 @@ namespace osu.Game.Beatmaps.Drawables.Cards
                         RelativeSizeAxes = Axes.Both,
                         Children = new BeatmapCardIconButton[]
                         {
-                            new FavouriteButton(beatmapSet)
-                            {
-                                Current = FavouriteState,
-                                Anchor = Anchor.TopCentre,
-                                Origin = Anchor.TopCentre,
-                                RelativeSizeAxes = Axes.Both,
-                                Height = 0.5f,
-                            },
+                            //new FavouriteButton(beatmapSet)
+                            //{
+                            //    Current = FavouriteState,
+                            //    Anchor = Anchor.TopCentre,
+                            //    Origin = Anchor.TopCentre,
+                            //    RelativeSizeAxes = Axes.Both,
+                            //    Height = 0.5f,
+                            //},
                             new DownloadButton(beatmapSet)
                             {
                                 Anchor = Anchor.BottomCentre,
                                 Origin = Anchor.BottomCentre,
                                 State = { BindTarget = downloadTracker.State },
                                 RelativeSizeAxes = Axes.Both,
-                                Height = 0.5f,
+                                Height = 1.0f, //0.5
                             },
                         }
                     }
@@ -150,7 +150,7 @@ namespace osu.Game.Beatmaps.Drawables.Cards
                 Origin = Anchor.BottomCentre,
                 State = { BindTarget = downloadTracker.State },
                 RelativeSizeAxes = Axes.Both,
-                Height = 0.5f,
+                Height = 1.0f, //0.5
             });
         }
 

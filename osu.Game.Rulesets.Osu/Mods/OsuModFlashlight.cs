@@ -82,7 +82,7 @@ namespace osu.Game.Rulesets.Osu.Mods
                 return base.OnMouseMove(e);
             }
 
-            // as per https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/osu!/GameModes/Play/Rulesets/Ruleset.cs#L532-L535,
+            // as per https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/hotia!/GameModes/Play/Rulesets/Ruleset.cs#L532-L535,
             // stable's animation speed is 0.1 "units" per 1 frame at 60 fps
             // converting to local units here, this is:
             // (0.1 / 3.2) * (1 / 60 [s]) = 1.875 [1 / s] = (1.875 / 1000) [1 / ms]

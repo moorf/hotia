@@ -157,7 +157,7 @@ namespace osu.Game.Rulesets.Catch.Objects
 
         public void UpdateComboInformation(IHasComboInformation? lastObj)
         {
-            // Note that this implementation is shared with the osu! ruleset's implementation.
+            // Note that this implementation is shared with the hotia! ruleset's implementation.
             // If a change is made here, OsuHitObject.cs should also be updated.
             int index = lastObj?.ComboIndex ?? 0;
             int indexWithOffsets = lastObj?.ComboIndexWithOffsets ?? 0;
@@ -185,7 +185,7 @@ namespace osu.Game.Rulesets.Catch.Objects
 
         #region Hit object conversion
 
-        // The half of the height of the osu! playfield.
+        // The half of the height of the hotia! playfield.
         public const float DEFAULT_LEGACY_CONVERT_Y = 192;
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace osu.Game.Rulesets.Catch.Objects
         public static readonly DifficultyRange PREEMPT_RANGE = new DifficultyRange(PREEMPT_MAX, PREEMPT_MID, PREEMPT_MIN);
 
         /// <summary>
-        /// The Y position of the hit object is not used in the normal osu!catch gameplay.
+        /// The Y position of the hit object is not used in the normal hotia!catch gameplay.
         /// It is preserved to maximize the backward compatibility with the legacy editor, in which the mappers use the Y position to organize the patterns.
         /// </summary>
         public float LegacyConvertedY { get; set; } = DEFAULT_LEGACY_CONVERT_Y;

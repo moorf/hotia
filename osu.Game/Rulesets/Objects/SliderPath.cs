@@ -375,7 +375,7 @@ namespace osu.Game.Rulesets.Objects
                     if (!OptimiseCatmull)
                         return subPath;
 
-                    // At draw time, osu!stable optimises paths by only keeping piecewise segments that are 6px apart.
+                    // At draw time, hotia!stable optimises paths by only keeping piecewise segments that are 6px apart.
                     // For the most part we don't care about this optimisation, and its additional heuristics are hard to reproduce in every implementation.
                     //
                     // However, it matters for Catmull paths which form "bulbs" around sequential knots with identical positions,

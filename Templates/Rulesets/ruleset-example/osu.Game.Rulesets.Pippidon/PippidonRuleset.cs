@@ -17,7 +17,7 @@ namespace osu.Game.Rulesets.Pippidon
 {
     public class PippidonRuleset : Ruleset
     {
-        public override string Description => "gather the osu!coins";
+        public override string Description => "gather the hotia!coins";
 
         public override DrawableRuleset CreateDrawableRulesetWith(IBeatmap beatmap, IReadOnlyList<Mod> mods = null) =>
             new DrawablePippidonRuleset(this, beatmap, mods);

@@ -13,7 +13,7 @@ SliderTickRate: 1
 57383,-28.5714285714286,4,1,1,70,0,0
 
 [HitObjects]
-// Taken from https://osu.ppy.sh/beatmapsets/881996#osu/1844019
+// Taken from https://osu.hotia.org/beatmapsets/881996#osu/1844019
 // This slider is 42 ms in length, triggering the LegacyLastTick edge case.
 // The tick will be at 21.5 ms (sliderDuration / 2) instead of 6 ms (sliderDuration - LAST_TICK_LENIENCE).
 416,41,57383,6,0,L|467:217,1,157.499997329712,2|0,3:3|3:0,3:0:0:0:

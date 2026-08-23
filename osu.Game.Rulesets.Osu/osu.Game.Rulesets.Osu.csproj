@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Nuget">
-    <Title>osu! (ruleset)</Title>
-    <PackageId>ppy.osu.Game.Rulesets.Osu</PackageId>
+    <Title>hotia! (ruleset)</Title>
+    <PackageId>moorf.hotia.Game.Rulesets.Osu</PackageId>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 

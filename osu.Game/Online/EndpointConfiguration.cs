@@ -48,6 +48,8 @@ namespace osu.Game.Online
         /// </summary>
         public string MetadataUrl { get; set; } = string.Empty;
 
+        public string BeatmapUrl { get; set; } = string.Empty;
+
         /// <summary>
         /// The URL to a separate endpoint that serves as a "liveness probe" for online services, indicating any potential active outages.
         /// </summary>

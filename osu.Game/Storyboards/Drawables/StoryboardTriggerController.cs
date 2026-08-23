@@ -135,7 +135,7 @@ namespace osu.Game.Storyboards.Drawables
                 string? bank2 = match.Groups[@"bank2"].Success ? match.Groups[@"bank2"].Value : null;
                 string? suffix = match.Groups[@"suffix"].Success ? match.Groups[@"suffix"].Value : null;
 
-                // https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/osu!/GameplayElements/Events/Trigger/EventTriggerHitSound.cs#L70-L80
+                // https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/hotia!/GameplayElements/Events/Trigger/EventTriggerHitSound.cs#L70-L80
                 bool bank1IsAddition = bank1 != null && bank2 == null && name != null;
 
                 // remap names from the regex onto `HitSampleInfo` constants.

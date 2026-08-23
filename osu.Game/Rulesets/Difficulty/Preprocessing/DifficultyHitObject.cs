@@ -97,7 +97,7 @@ namespace osu.Game.Rulesets.Difficulty.Preprocessing
         private double getRawHitWindow(HitResult hitResult)
         {
             // Try to get HitWindows from nested hit objects
-            // This is important for objects such as Slider in osu! where the object itself has HitWindows set to Empty, but the nested SliderHead has proper hit windows
+            // This is important for objects such as Slider in hotia! where the object itself has HitWindows set to Empty, but the nested SliderHead has proper hit windows
             if (BaseObject.HitWindows != HitWindows.Empty)
                 return BaseObject.HitWindows.WindowFor(hitResult);
 

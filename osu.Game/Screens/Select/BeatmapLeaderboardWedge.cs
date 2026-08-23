@@ -125,7 +125,7 @@ namespace osu.Game.Screens.Select
                                 Left = 80f,
                                 // Bottom padding ensures the last entry's full width is displayed
                                 // (ie it is fully on screen after shear is considered).
-                                Bottom = BeatmapLeaderboardScore.HEIGHT * 3
+                                Bottom = BeatmapLeaderboardScore.HEIGHT * 3 * 4
                             },
                         },
                     },

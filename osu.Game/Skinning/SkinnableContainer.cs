@@ -112,6 +112,8 @@ namespace osu.Game.Skinning
 
             Reload();
         }
+        public void Suspend() => content?.Suspend();
+        public void Resume() => content?.Resume();
 
         protected override void Dispose(bool isDisposing)
         {

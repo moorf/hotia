@@ -21,9 +21,9 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
         public const float SPRITE_SCALE = 0.625f;
 
         /// <remarks>
-        /// All constants are in osu!stable's gamefield space, which is shifted 16px downwards.
+        /// All constants are in hotia!stable's gamefield space, which is shifted 16px downwards.
         /// This offset is negated to bring all constants into window-space.
-        /// Note: SPINNER_Y_CENTRE + SPINNER_TOP_OFFSET - Position.Y = 240 (=480/2, or half the window-space in osu!stable)
+        /// Note: SPINNER_Y_CENTRE + SPINNER_TOP_OFFSET - Position.Y = 240 (=480/2, or half the window-space in hotia!stable)
         /// </remarks>
         protected const float SPINNER_TOP_OFFSET = 45f - 16f;
 
@@ -49,7 +49,7 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
 
-            // osu!stable positions spinner components in window-space (as opposed to gamefield-space). This is a 640x480 area taking up the entire screen.
+            // hotia!stable positions spinner components in window-space (as opposed to gamefield-space). This is a 640x480 area taking up the entire screen.
             // In lazer, the gamefield-space positional transformation is applied in OsuPlayfieldAdjustmentContainer, which is inverted here to make this area take up the entire window space.
             Size = new Vector2(640, 480);
             Position = new Vector2(0, -8f);

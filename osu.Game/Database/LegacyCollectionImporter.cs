@@ -48,7 +48,7 @@ namespace osu.Game.Database
             if (!storage.Exists(database_name))
             {
                 // This handles situations like when the user does not have a collections.db file
-                Logger.Log($"No {database_name} available in osu!stable installation", LoggingTarget.Information, LogLevel.Error);
+                Logger.Log($"No {database_name} available in hotia!stable installation", LoggingTarget.Information, LogLevel.Error);
                 return Task.CompletedTask;
             }
 

@@ -152,7 +152,7 @@ namespace osu.Game.Rulesets.Osu.Beatmaps
                         double endTime = objectN.GetEndTime();
 
                         // truncation to integer is required to match stable
-                        // compare https://github.com/peppy/osu-stable-reference/blob/08e3dafd525934cf48880b08e91c24ce4ad8b761/osu!/GameplayElements/HitObjectManager.cs#L1725
+                        // compare https://github.com/peppy/osu-stable-reference/blob/08e3dafd525934cf48880b08e91c24ce4ad8b761/hotia!/GameplayElements/HitObjectManager.cs#L1725
                         // - both quantities being subtracted there are integers
                         if ((int)objectI.StartTime - (int)endTime > stackThreshold)
                             // We are no longer within stacking range of the previous object.
@@ -249,7 +249,7 @@ namespace osu.Game.Rulesets.Osu.Beatmaps
                     // This is because in the stable implementation, `UpdateCalculations` is not called on the inner-loop hitobject (j)
                     // and therefore it does not have a correct `EndTime`, but instead the default of `EndTime = StartTime`.
                     //
-                    // Effects of this can be seen on https://osu.ppy.sh/beatmapsets/243#osu/1146 at sliders around 86647 ms, where
+                    // Effects of this can be seen on https://osu.hotia.org/beatmapsets/243#osu/1146 at sliders around 86647 ms, where
                     // if we use `EndTime` here it would result in unexpected stacking.
 
                     if (Vector2Extensions.Distance(hitObjects[j].Position, currHitObject.Position) < STACK_DISTANCE)
@@ -270,7 +270,7 @@ namespace osu.Game.Rulesets.Osu.Beatmaps
 
         /// <remarks>
         /// Truncation of <see cref="OsuHitObject.TimePreempt"/> to <see cref="int"/>, as well as keeping the result as <see cref="float"/>, are both done
-        /// <a href="https://github.com/peppy/osu-stable-reference/blob/08e3dafd525934cf48880b08e91c24ce4ad8b761/osu!/GameplayElements/HitObjectManager.cs#L1652">
+        /// <a href="https://github.com/peppy/osu-stable-reference/blob/08e3dafd525934cf48880b08e91c24ce4ad8b761/hotia!/GameplayElements/HitObjectManager.cs#L1652">
         /// for the purposes of stable compatibility
         /// </a>.
         /// Note that for top-level objects <see cref="OsuHitObject.TimePreempt"/> is supposed to be integral anyway;

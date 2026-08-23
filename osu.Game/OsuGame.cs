@@ -1,5 +1,9 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 #nullable disable
 
@@ -89,7 +93,7 @@ using MatchType = osu.Game.Online.Rooms.MatchType;
 namespace osu.Game
 {
     /// <summary>
-    /// The full osu! experience. Builds on top of <see cref="OsuGameBase"/> to add menus and binding logic
+    /// The full hotia! experience. Builds on top of <see cref="OsuGameBase"/> to add menus and binding logic
     /// for initial components that are generally retrieved via DI.
     /// </summary>
     [Cached(typeof(OsuGame))]
@@ -156,6 +160,7 @@ namespace osu.Game
         private Container leftFloatingOverlayContent;
 
         private Container topMostOverlayContent;
+        private Container fpsOverlayContent;
 
         private Container footerBasedOverlayContent;
 
@@ -184,8 +189,11 @@ namespace osu.Game
 
         public virtual StableStorage GetStorageForStableInstall() => null;
 
-        private float toolbarOffset => (Toolbar?.Position.Y ?? 0) + (Toolbar?.DrawHeight ?? 0);
-
+        //private float toolbarOffset => (Toolbar?.Position.Y ?? 0) + (Toolbar?.DrawHeight ?? 0);
+        private float toolbarOffset =>
+        Toolbar?.State.Value == Visibility.Visible
+        ? Toolbar.Position.Y + Toolbar.DrawHeight
+        : 0;
         private IdleTracker idleTracker;
 
         /// <summary>
@@ -336,7 +344,7 @@ namespace osu.Game
         public void CloseAllOverlays(bool hideToolbar = true)
         {
             foreach (var overlay in focusedOverlays)
-                overlay.Hide();
+            { overlay.Hide(); }
 
             ScreenFooter.ActiveOverlay?.Hide();
 
@@ -1049,7 +1057,7 @@ namespace osu.Game
         {
             return new Dictionary<FrameworkSetting, object>
             {
-                // General expectation that osu! starts in fullscreen by default (also gives the most predictable performance).
+                // General expectation that hotia! starts in fullscreen by default (also gives the most predictable performance).
                 // However, macOS is bound to have issues when using exclusive fullscreen as it takes full control away from OS, therefore borderless is default there.
                 { FrameworkSetting.WindowMode, RuntimeInfo.OS == RuntimeInfo.Platform.macOS ? WindowMode.Borderless : WindowMode.Fullscreen },
                 { FrameworkSetting.VolumeUniversal, 0.6 },
@@ -1153,10 +1161,10 @@ namespace osu.Game
                     }
                 },
                 topMostOverlayContent = new Container { RelativeSizeAxes = Axes.Both },
+                fpsOverlayContent = new Container { RelativeSizeAxes = Axes.Both },
                 idleTracker,
                 new ConfineMouseTracker()
             });
-
             dependencies.Cache(ScreenFooter);
 
             ScreenStack.ScreenPushed += screenPushed;
@@ -1167,7 +1175,7 @@ namespace osu.Game
                 Anchor = Anchor.BottomRight,
                 Origin = Anchor.BottomRight,
                 Margin = new MarginPadding(5),
-            }, topMostOverlayContent.Add);
+            }, fpsOverlayContent.Add);
 
             if (!IsDeployedBuild)
                 loadComponentSingleFile(devBuildBanner = new DevBuildBanner(), ScreenContainer.Add);
@@ -1204,7 +1212,7 @@ namespace osu.Game
             onScreenDisplay.BeginTracking(this, LocalConfig);
 
             loadComponentSingleFile(onScreenDisplay, Add, true);
-
+            Container dummy = new Container();
             loadComponentSingleFile<INotificationOverlay>(Notifications.With(d =>
             {
                 d.Anchor = Anchor.TopRight;
@@ -1217,7 +1225,7 @@ namespace osu.Game
 
             // dependency on notification overlay, dependent by settings overlay
             loadComponentSingleFile(CreateUpdateManager(), Add, true);
-
+            
             // overlay elements
             loadComponentSingleFile(FirstRunOverlay = new FirstRunSetupOverlay(), footerBasedOverlayContent.Add, true);
             loadComponentSingleFile(new ManageCollectionsDialog(), overlayContent.Add, true);
@@ -1321,6 +1329,42 @@ namespace osu.Game
             // this MUST happen after `applyConfigMigrations()` call, as it relies on comparing the previous version.
             // debug / local compilations will reset to a non-release string.
             LocalConfig.SetValue(OsuSetting.Version, version);
+
+            //skibidi!
+            ScreenStack.ScreenPushed += (_, newScreen) =>
+            {
+                if (newScreen is Player)
+                {
+                    if (Settings.IsLoaded) Settings.FinishTransforms(true);
+                    if (Notifications.IsLoaded) Notifications.FinishTransforms(true);
+                    if (Toolbar.IsLoaded) Toolbar.FinishTransforms(true);
+                    overlayContent.FinishTransforms(true);
+                    overlayContent.Suspend();
+                    ///overlayOffsetContainer.Suspend();
+                    topMostOverlayContent.Suspend();
+                    leftFloatingOverlayContent.Suspend();
+                    //Scheduler.AddDelayed(() => rightFloatingOverlayContent.Suspend(), 5000);
+                    //rightFloatingOverlayContent.Suspend();
+                    footerBasedOverlayContent.Suspend();
+                    logoContainer.Suspend();
+                    dummy.Suspend();
+                }
+            };
+
+            ScreenStack.ScreenExited += (exitedScreen, _) =>
+            {
+                if (exitedScreen is Player)
+                {
+                    overlayContent.Resume();
+                    ///overlayOffsetContainer.Resume();
+                    topMostOverlayContent.Resume();
+                    leftFloatingOverlayContent.Resume();
+                    //rightFloatingOverlayContent.Resume(); //ENABLES INGAME NOTIFICATIONS
+                    footerBasedOverlayContent.Resume();
+                    logoContainer.Resume();
+                    dummy.Resume();
+                }
+            };
         }
 
         /// <summary>
@@ -1431,7 +1475,7 @@ namespace osu.Game
                 return;
 
             // Show above all other overlays.
-            if (overlay.IsLoaded)
+            if (overlay.IsLoaded && overlayContent.Contains(overlay))
                 overlayContent.ChangeChildDepth(overlay, (float)-Clock.CurrentTime);
             else
                 overlay.Depth = (float)-Clock.CurrentTime;
@@ -1646,7 +1690,7 @@ namespace osu.Game
 
                 case GlobalAction.RandomSkin:
                     // Don't allow random skin selection while in the skin editor.
-                    // This is mainly to stop many "osu! default (modified)" skins being created via the SkinManager.EnsureMutableSkin() path.
+                    // This is mainly to stop many "hotia! default (modified)" skins being created via the SkinManager.EnsureMutableSkin() path.
                     // If people want this to work we can potentially avoid selecting default skins when the editor is open, or allow a maximum of one mutable skin somehow.
                     if (skinEditor.State.Value == Visibility.Visible)
                         return false;

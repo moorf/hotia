@@ -297,7 +297,7 @@ namespace osu.Game.Rulesets.Osu.Objects.Drawables
 
             if (HitObject.ClassicSliderBehaviour)
             {
-                // Classic behaviour means a slider is judged proportionally to the number of nested hitobjects hit. This is the classic osu!stable scoring.
+                // Classic behaviour means a slider is judged proportionally to the number of nested hitobjects hit. This is the classic hotia!stable scoring.
                 ApplyResult(static (r, hitObject) =>
                 {
                     int totalTicks = hitObject.NestedHitObjects.Count;

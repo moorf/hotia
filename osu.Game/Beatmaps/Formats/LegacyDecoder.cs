@@ -25,8 +25,8 @@ namespace osu.Game.Beatmaps.Formats
         /// <summary>
         /// The .osu format (beatmap) version.
         ///
-        /// osu!stable's versions end at <see cref="LATEST_VERSION"/>.
-        /// osu!lazer's versions starts at <see cref="LegacyBeatmapEncoder.FIRST_LAZER_VERSION"/>.
+        /// hotia!stable's versions end at <see cref="LATEST_VERSION"/>.
+        /// hotia!lazer's versions starts at <see cref="LegacyBeatmapEncoder.FIRST_LAZER_VERSION"/>.
         /// </summary>
         protected readonly int FormatVersion;
 

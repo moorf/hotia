@@ -64,7 +64,7 @@ namespace osu.Desktop
 
         private string? getStableInstallPath()
         {
-            static bool checkExists(string p) => Directory.Exists(Path.Combine(p, "Songs")) || File.Exists(Path.Combine(p, "osu!.cfg"));
+            static bool checkExists(string p) => Directory.Exists(Path.Combine(p, "Songs")) || File.Exists(Path.Combine(p, "hotia!.cfg"));
 
             string? stableInstallPath;
 
@@ -77,7 +77,7 @@ namespace osu.Desktop
                     if (!string.IsNullOrEmpty(stableInstallPath) && checkExists(stableInstallPath))
                         return stableInstallPath;
 
-                    stableInstallPath = getStableInstallPathFromRegistry("osu!");
+                    stableInstallPath = getStableInstallPathFromRegistry("hotia!");
 
                     if (!string.IsNullOrEmpty(stableInstallPath) && checkExists(stableInstallPath))
                         return stableInstallPath;
@@ -87,7 +87,7 @@ namespace osu.Desktop
                 }
             }
 
-            stableInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"osu!");
+            stableInstallPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"hotia!");
             if (checkExists(stableInstallPath))
                 return stableInstallPath;
 
@@ -102,7 +102,7 @@ namespace osu.Desktop
         private string? getStableInstallPathFromRegistry(string progId)
         {
             using (RegistryKey? key = Registry.ClassesRoot.OpenSubKey(progId))
-                return key?.OpenSubKey(WindowsAssociationManager.SHELL_OPEN_COMMAND)?.GetValue(string.Empty)?.ToString()?.Split('"')[1].Replace("osu!.exe", "");
+                return key?.OpenSubKey(WindowsAssociationManager.SHELL_OPEN_COMMAND)?.GetValue(string.Empty)?.ToString()?.Split('"')[1].Replace("hotia!.exe", "");
         }
 
         public static bool IsPackageManaged => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("OSU_EXTERNAL_UPDATE_PROVIDER"));

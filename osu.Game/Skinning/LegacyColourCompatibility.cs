@@ -7,7 +7,7 @@ using osuTK.Graphics;
 namespace osu.Game.Skinning
 {
     /// <summary>
-    /// Compatibility methods to apply osu!stable quirks to colours. Should be used for legacy skins only.
+    /// Compatibility methods to apply hotia!stable quirks to colours. Should be used for legacy skins only.
     /// </summary>
     public static class LegacyColourCompatibility
     {
@@ -15,7 +15,7 @@ namespace osu.Game.Skinning
         /// Forces an alpha of 1 if a given <see cref="Color4"/> is fully transparent.
         /// </summary>
         /// <remarks>
-        /// This is equivalent to setting colour post-constructor in osu!stable.
+        /// This is equivalent to setting colour post-constructor in hotia!stable.
         /// </remarks>
         /// <param name="colour">The <see cref="Color4"/> to disallow zero alpha on.</param>
         /// <returns>The resultant <see cref="Color4"/>.</returns>
@@ -30,7 +30,7 @@ namespace osu.Game.Skinning
         /// Applies a <see cref="Color4"/> to a <see cref="Drawable"/>, doubling the alpha value into the <see cref="Drawable.Alpha"/> property.
         /// </summary>
         /// <remarks>
-        /// This is equivalent to setting colour in the constructor in osu!stable.
+        /// This is equivalent to setting colour in the constructor in hotia!stable.
         /// </remarks>
         /// <param name="drawable">The <see cref="Drawable"/> to apply the colour to.</param>
         /// <param name="colour">The <see cref="Color4"/> to apply.</param>

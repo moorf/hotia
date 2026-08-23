@@ -153,8 +153,8 @@ namespace osu.Game.Overlays.Changelog
                 },
             };
 
-            supportLinkText.AddText("Support further development of osu! and ");
-            supportLinkText.AddLink("become an osu!supporter", @"https://osu.ppy.sh/home/support", t => t.Font = t.Font.With(weight: FontWeight.Bold));
+            supportLinkText.AddText("Support further development of hotia! and ");
+            supportLinkText.AddLink("become an hotia!supporter", @"https://osu.hotia.org/home/support", t => t.Font = t.Font.With(weight: FontWeight.Bold));
             supportLinkText.AddText(" today!");
         }
 

@@ -817,14 +817,14 @@ namespace osu.Game.Tests.Visual.Navigation
 
             AddStep("Show mods overlay", () => modSelect.Show());
 
-            AddStep("Change ruleset to osu!taiko", () =>
+            AddStep("Change ruleset to hotia!taiko", () =>
             {
                 InputManager.PressKey(Key.ControlLeft);
                 InputManager.Key(Key.Number2);
                 InputManager.ReleaseKey(Key.ControlLeft);
             });
 
-            AddAssert("Ruleset changed to osu!taiko", () => Game.Toolbar.ChildrenOfType<ToolbarRulesetSelector>().Single().Current.Value.OnlineID == 1);
+            AddAssert("Ruleset changed to hotia!taiko", () => Game.Toolbar.ChildrenOfType<ToolbarRulesetSelector>().Single().Current.Value.OnlineID == 1);
 
             AddAssert("Mods overlay still visible", () => modSelect.State.Value == Visibility.Visible);
         }
@@ -843,14 +843,14 @@ namespace osu.Game.Tests.Visual.Navigation
             AddStep("Show options overlay", () => InputManager.Key(Key.F3));
             AddUntilStep("Options overlay visible", () => this.ChildrenOfType<FooterButtonOptions.Popover>().SingleOrDefault()?.State.Value == Visibility.Visible);
 
-            AddStep("Change ruleset to osu!taiko", () =>
+            AddStep("Change ruleset to hotia!taiko", () =>
             {
                 InputManager.PressKey(Key.ControlLeft);
                 InputManager.Key(Key.Number2);
                 InputManager.ReleaseKey(Key.ControlLeft);
             });
 
-            AddAssert("Ruleset changed to osu!taiko", () => Game.Toolbar.ChildrenOfType<ToolbarRulesetSelector>().Single().Current.Value.OnlineID == 1);
+            AddAssert("Ruleset changed to hotia!taiko", () => Game.Toolbar.ChildrenOfType<ToolbarRulesetSelector>().Single().Current.Value.OnlineID == 1);
 
             AddAssert("Options overlay still visible", () => this.ChildrenOfType<FooterButtonOptions.Popover>().Single().State.Value == Visibility.Visible);
         }
@@ -1127,7 +1127,7 @@ namespace osu.Game.Tests.Visual.Navigation
             PushAndConfirm(() => new SoloSongSelect());
             exitViaEscapeAndConfirm();
 
-            pushEscape(); // returns to osu! logo
+            pushEscape(); // returns to hotia! logo
 
             AddStep("Hold escape", () => InputManager.PressKey(Key.Escape));
             AddUntilStep("Wait for intro", () => Game.ScreenStack.CurrentScreen is IntroScreen);
@@ -1201,7 +1201,7 @@ namespace osu.Game.Tests.Visual.Navigation
             AddUntilStep("wait for song select", () => (songSelect = Game.ScreenStack.CurrentScreen as Screens.Select.SongSelect) != null);
             AddUntilStep("wait for beatmap sets loaded", () => songSelect.CarouselItemsPresented);
 
-            AddStep("switch to osu! ruleset", () =>
+            AddStep("switch to hotia! ruleset", () =>
             {
                 InputManager.PressKey(Key.LControl);
                 InputManager.Key(Key.Number1);
@@ -1232,7 +1232,7 @@ namespace osu.Game.Tests.Visual.Navigation
             });
             AddUntilStep("touch device mod not activated", () => Game.SelectedMods.Value, () => Has.None.InstanceOf<ModTouchDevice>());
 
-            AddStep("switch to osu! ruleset", () =>
+            AddStep("switch to hotia! ruleset", () =>
             {
                 InputManager.PressKey(Key.LControl);
                 InputManager.Key(Key.Number1);

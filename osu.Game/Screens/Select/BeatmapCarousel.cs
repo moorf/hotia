@@ -97,7 +97,7 @@ namespace osu.Game.Screens.Select
             DebounceDelay = 100;
             DistanceOffscreenToPreload = 100;
 
-            // Account for the osu! logo being in the way.
+            // Account for the hotia! logo being in the way.
             Scroll.ScrollbarPaddingBottom = 70;
 
             Filters = new ICarouselFilter[]

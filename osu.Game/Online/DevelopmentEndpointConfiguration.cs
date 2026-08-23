@@ -7,7 +7,7 @@ namespace osu.Game.Online
     {
         public DevelopmentEndpointConfiguration()
         {
-            WebsiteUrl = APIUrl = @"https://dev.ppy.sh";
+            WebsiteUrl = APIUrl = @"https://dev.hotia.org";
             APIClientSecret = @"3LP2mhUrV89xxzD1YKNndXHEhWWCRLPNKioZ9ymT";
             APIClientID = "5";
             SpectatorUrl = $@"{APIUrl}/signalr/spectator";

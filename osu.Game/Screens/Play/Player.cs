@@ -679,7 +679,7 @@ namespace osu.Game.Screens.Play
         /// <returns>Whether this call resulted in a final exit.</returns>
         protected bool PerformExit(bool skipTransition = false)
         {
-            // Matching osu!stable behaviour, if the results screen is pending and the user requests an exit,
+            // Matching hotia!stable behaviour, if the results screen is pending and the user requests an exit,
             // show the results instead.
             if (GameplayState.HasPassed && !isRestarting)
             {

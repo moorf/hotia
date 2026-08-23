@@ -10,7 +10,7 @@ namespace osu.Desktop.LegacyIpc
     /// An <see cref="IpcMessage"/> that can be used to communicate to and from legacy clients.
     /// <para>
     /// In order to deserialise types at either end, types must be serialised as their <see cref="System.Type.AssemblyQualifiedName"/>,
-    /// however this cannot be done since osu!stable and osu!lazer live in two different assemblies.
+    /// however this cannot be done since hotia!stable and hotia!lazer live in two different assemblies.
     /// <br />
     /// To get around this, this class exists which serialises a payload (<see cref="LegacyIpcMessage.Data"/>) as an <see cref="System.Object"/> type,
     /// which can be deserialised at either end because it is part of the core library (mscorlib / System.Private.CorLib).

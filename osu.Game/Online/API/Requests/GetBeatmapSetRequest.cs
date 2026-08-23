@@ -1,6 +1,11 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
+using osu.Framework.IO.Network;
 using osu.Game.Online.API.Requests.Responses;
 
 namespace osu.Game.Online.API.Requests
@@ -9,6 +14,11 @@ namespace osu.Game.Online.API.Requests
     {
         public readonly int ID;
         public readonly BeatmapSetLookupType Type;
+        protected override WebRequest CreateWebRequest()
+        {
+            var req = base.CreateBeatmapWebRequest();
+            return req;
+        }
 
         public GetBeatmapSetRequest(int id, BeatmapSetLookupType type = BeatmapSetLookupType.SetId)
         {
@@ -16,7 +26,10 @@ namespace osu.Game.Online.API.Requests
             Type = type;
         }
 
-        protected override string Target => Type == BeatmapSetLookupType.SetId ? $@"beatmapsets/{ID}" : $@"beatmapsets/lookup?beatmap_id={ID}";
+        protected override string Target =>
+            Type == BeatmapSetLookupType.SetId
+                ? $"s/{ID}"
+                : $"b/{ID}/set";
     }
 
     public enum BeatmapSetLookupType

@@ -13,7 +13,7 @@ namespace osu.Game.Overlays.Volume
     /// Add to a container or screen to make scrolling anywhere in the container cause the global game volume to be adjusted.
     /// </summary>
     /// <remarks>
-    /// This is generally expected behaviour in many locations in osu!stable.
+    /// This is generally expected behaviour in many locations in hotia!stable.
     /// </remarks>
     public partial class GlobalScrollAdjustsVolume : Container
     {

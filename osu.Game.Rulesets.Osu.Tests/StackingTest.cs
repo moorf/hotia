@@ -67,7 +67,7 @@ SliderTickRate:0.5
         {
             using (var stream = new MemoryStream(@"
 osu file format v14
-// extracted from https://osu.ppy.sh/beatmapsets/365006#osu/801165
+// extracted from https://osu.hotia.org/beatmapsets/365006#osu/801165
 
 [General]
 StackLeniency: 0.2

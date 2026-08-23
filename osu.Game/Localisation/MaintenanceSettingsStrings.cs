@@ -40,9 +40,9 @@ namespace osu.Game.Localisation
         public static LocalisableString SelectNewLocation => new TranslatableString(getKey(@"select_new_location"), @"Please select a new location");
 
         /// <summary>
-        /// "The target directory already seems to have an osu! install. Use that data instead? osu! will restart."
+        /// "The target directory already seems to have an hotia! install. Use that data instead? hotia! will restart."
         /// </summary>
-        public static LocalisableString TargetDirectoryAlreadyInstalledOsu => new TranslatableString(getKey(@"target_directory_already_installed_osu"), @"The target directory already seems to have an osu! install. Use that data instead? osu! will restart.");
+        public static LocalisableString TargetDirectoryAlreadyInstalledOsu => new TranslatableString(getKey(@"target_directory_already_installed_osu"), @"The target directory already seems to have an hotia! install. Use that data instead? hotia! will restart.");
 
         /// <summary>
         /// "Delete ALL beatmaps"
@@ -125,9 +125,9 @@ namespace osu.Game.Localisation
         public static LocalisableString NoModPresetsFoundToRestore => new TranslatableString(getKey(@"no_mod_presets_found_to_restore"), @"No mod presets found to restore!");
 
         /// <summary>
-        /// "Please select your osu!stable install location"
+        /// "Please select your hotia!stable install location"
         /// </summary>
-        public static LocalisableString StableDirectorySelectHeader => new TranslatableString(getKey(@"stable_directory_select_header"), @"Please select your osu!stable install location");
+        public static LocalisableString StableDirectorySelectHeader => new TranslatableString(getKey(@"stable_directory_select_header"), @"Please select your hotia!stable install location");
 
         /// <summary>
         /// "All offsets have been reset!"

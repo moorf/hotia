@@ -122,7 +122,7 @@ namespace osu.Game.Beatmaps.Drawables
 
             public class BundledBeatmapDownloadRequest : DownloadBeatmapSetRequest
             {
-                protected override string Uri => $"https://assets.ppy.sh/client-resources/bundled/{Model.OnlineID}.osz";
+                protected override string Uri => $"https://assets.hotia.org/client-resources/bundled/{Model.OnlineID}.osz";
 
                 public BundledBeatmapDownloadRequest(IBeatmapSetInfo beatmapSetInfo, bool minimiseDownloadSize)
                     : base(beatmapSetInfo, minimiseDownloadSize)
@@ -141,7 +141,7 @@ namespace osu.Game.Beatmaps.Drawables
          *
          *  manual:
          *  - bg is explicitly permitted as okay to use. lots of artists say some variation of "it's ok for personal use/non-commercial use/with credit"
-         *    (which is prob fine when maps are presented as user-generated content), but for a new osu! player, it's easy to assume bundled maps are
+         *    (which is prob fine when maps are presented as user-generated content), but for a new hotia! player, it's easy to assume bundled maps are
          *     commercial content like other rhythm games, so it's best to be cautious about using not-explicitly-permitted artwork.
          *
          *  - no ai/thirst bgs
@@ -158,36 +158,36 @@ namespace osu.Game.Beatmaps.Drawables
         /// </summary>
         private static readonly string[] always_bundled_beatmaps =
         {
-            // winner of https://osu.ppy.sh/home/news/2013-09-06-osu-monthly-beatmapping-contest-1
+            // winner of https://osu.hotia.org/home/news/2013-09-06-osu-monthly-beatmapping-contest-1
             @"123593 Rostik - Liquid (Paul Rosenthal Remix).osz",
-            // winner of https://osu.ppy.sh/home/news/2013-10-28-monthly-beatmapping-contest-2-submissions-open
+            // winner of https://osu.hotia.org/home/news/2013-10-28-monthly-beatmapping-contest-2-submissions-open
             @"140662 cYsmix feat. Emmy - Tear Rain.osz",
-            // winner of https://osu.ppy.sh/home/news/2013-12-15-monthly-beatmapping-contest-3-submissions-open
+            // winner of https://osu.hotia.org/home/news/2013-12-15-monthly-beatmapping-contest-3-submissions-open
             @"151878 Chasers - Lost.osz",
-            // winner of https://osu.ppy.sh/home/news/2014-02-14-monthly-beatmapping-contest-4-submissions-now
+            // winner of https://osu.hotia.org/home/news/2014-02-14-monthly-beatmapping-contest-4-submissions-now
             @"163112 Kuba Oms - My Love.osz",
-            // winner of https://osu.ppy.sh/home/news/2014-05-07-monthly-beatmapping-contest-5-submissions-now
+            // winner of https://osu.hotia.org/home/news/2014-05-07-monthly-beatmapping-contest-5-submissions-now
             @"190390 Rameses B - Flaklypa.osz",
-            // winner of https://osu.ppy.sh/home/news/2014-09-24-monthly-beatmapping-contest-7
+            // winner of https://osu.hotia.org/home/news/2014-09-24-monthly-beatmapping-contest-7
             @"241526 Soleily - Renatus.osz",
-            // winner of https://osu.ppy.sh/home/news/2015-02-11-monthly-beatmapping-contest-8
+            // winner of https://osu.hotia.org/home/news/2015-02-11-monthly-beatmapping-contest-8
             @"299224 raja - the light.osz",
-            // winner of https://osu.ppy.sh/home/news/2015-04-13-monthly-beatmapping-contest-9-taiko-only
+            // winner of https://osu.hotia.org/home/news/2015-04-13-monthly-beatmapping-contest-9-taiko-only
             @"319473 Furries in a Blender - Storm World.osz",
-            // winner of https://osu.ppy.sh/home/news/2015-06-15-monthly-beatmapping-contest-10-ctb-only
+            // winner of https://osu.hotia.org/home/news/2015-06-15-monthly-beatmapping-contest-10-ctb-only
             @"342751 Hylian Lemon - Foresight Is for Losers.osz",
-            // winner of https://osu.ppy.sh/home/news/2015-08-22-monthly-beatmapping-contest-11-mania-only
+            // winner of https://osu.hotia.org/home/news/2015-08-22-monthly-beatmapping-contest-11-mania-only
             @"385056 Toni Leys - Dragon Valley (Toni Leys Remix feat. Esteban Bellucci).osz",
-            // winner of https://osu.ppy.sh/home/news/2016-03-04-beatmapping-contest-12-osu
+            // winner of https://osu.hotia.org/home/news/2016-03-04-beatmapping-contest-12-osu
             @"456054 IAHN - Candy Luv (Short Ver.).osz",
-            // winner of https://osu.ppy.sh/home/news/2020-11-30-a-labour-of-love
+            // winner of https://osu.hotia.org/home/news/2020-11-30-a-labour-of-love
             // (this thing is 40mb, I'm not sure if we want it here...)
             @"1388906 Raphlesia & BilliumMoto - My Love.osz",
-            // winner of https://osu.ppy.sh/home/news/2022-05-31-triangles
+            // winner of https://osu.hotia.org/home/news/2022-05-31-triangles
             @"1841885 cYsmix - triangles.osz",
-            // winner of https://osu.ppy.sh/home/news/2023-02-01-twin-trials-contest-beatmapping-phase
+            // winner of https://osu.hotia.org/home/news/2023-02-01-twin-trials-contest-beatmapping-phase
             @"1971987 James Landino - Aresene's Bazaar.osz",
-            // locus 2025 https://osu.ppy.sh/home/news/2025-08-21-locus-2025-results
+            // locus 2025 https://osu.hotia.org/home/news/2025-08-21-locus-2025-results
             "2412244 Kry.exe - Rift Walker.osz",
             "2412260 Koto Spirit - Locus of Hexagram.osz",
             "2412232 Will Stetson - Of Our Time.osz",
@@ -288,7 +288,7 @@ namespace osu.Game.Beatmaps.Drawables
         {
             "1048153 Chroma - [@__@].osz",
             "1229307 Venetian Snares - Shaky Sometimes.osz",
-            "1236083 meganeko - Sirius A (osu! edit).osz",
+            "1236083 meganeko - Sirius A (hotia! edit).osz",
             "1248594 Noisia - Anomaly.osz",
             "1272851 siqlo - One Way Street.osz",
             "1290736 Kola Kid - good old times.osz",
@@ -299,7 +299,7 @@ namespace osu.Game.Beatmaps.Drawables
             "1407228 II-L - VANGUARD-1.osz",
             "1422686 II-L - VANGUARD-2.osz",
             "1429217 Street - Phi.osz",
-            "1442235 2ToneDisco x Cosmicosmo - Shoelaces (feat. Puniden).osz", // set is not marked as FA, but track is listed in https://osu.ppy.sh/beatmaps/artists/157
+            "1442235 2ToneDisco x Cosmicosmo - Shoelaces (feat. Puniden).osz", // set is not marked as FA, but track is listed in https://osu.hotia.org/beatmaps/artists/157
             "1447478 Cres. - End Time.osz",
             "1449942 m108 - Crescent Sakura.osz",
             "1463778 MuryokuP - A tree without a branch.osz",
@@ -337,14 +337,14 @@ namespace osu.Game.Beatmaps.Drawables
             "1799285 Origami Angel - 666 Flags.osz",
             "1812415 nanobii - Rainbow Road.osz",
             "1814682 NIWASHI - Y.osz",
-            "1818361 meganeko - Feral (osu! edit).osz",
+            "1818361 meganeko - Feral (hotia! edit).osz",
             "1818924 fiend - Disconnect.osz",
             "1838730 Pegboard Nerds - Disconnected.osz",
             "1854710 Blaster & Extra Terra - Spacecraft (Cut Ver.).osz",
             "1859322 Hino Isuka - Delightness Brightness.osz",
             "1884102 Maduk - Go (feat. Lachi) (Cut Ver.).osz",
-            "1884578 Neko Hacker - People People feat. Nanahira.osz", // set is not marked as FA, but track is listed in https://osu.ppy.sh/beatmaps/artists/266
-            "1897902 uma vs. Morimori Atsushi - Re: End of a Dream.osz", // set is not marked as FA, but track is listed in https://osu.ppy.sh/beatmaps/artists/108
+            "1884578 Neko Hacker - People People feat. Nanahira.osz", // set is not marked as FA, but track is listed in https://osu.hotia.org/beatmaps/artists/266
+            "1897902 uma vs. Morimori Atsushi - Re: End of a Dream.osz", // set is not marked as FA, but track is listed in https://osu.hotia.org/beatmaps/artists/108
             "1905582 KINEMA106 - Fly Away (Cut Ver.).osz",
             "1934686 ARForest - Rainbow Magic!!.osz",
             "1963076 METAROOM - S.N.U.F.F.Y.osz",

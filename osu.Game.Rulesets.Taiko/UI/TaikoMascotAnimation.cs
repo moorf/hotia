@@ -27,7 +27,7 @@ namespace osu.Game.Rulesets.Taiko.UI
             InternalChild = textureAnimation = createTextureAnimation(state).With(animation =>
             {
                 animation.Origin = animation.Anchor = Anchor.BottomLeft;
-                // matches stable (https://github.com/peppy/osu-stable-reference/blob/e53980dd76857ee899f66ce519ba1597e7874f28/osu!/GameModes/Play/Rulesets/Taiko/TaikoMascot.cs#L34)
+                // matches stable (https://github.com/peppy/osu-stable-reference/blob/e53980dd76857ee899f66ce519ba1597e7874f28/hotia!/GameModes/Play/Rulesets/Taiko/TaikoMascot.cs#L34)
                 animation.Scale = new Vector2(0.6f);
             });
 
@@ -128,7 +128,7 @@ namespace osu.Game.Rulesets.Taiko.UI
                     var texture = getAnimationFrame(skin, TaikoMascotAnimationState.Clear, frameIndex);
 
                     if (texture == null)
-                        // as per https://osu.ppy.sh/help/wiki/Skinning/osu!taiko#pippidon
+                        // as per https://osu.hotia.org/help/wiki/Skinning/hotia!taiko#pippidon
                         break;
 
                     AddFrame(texture);

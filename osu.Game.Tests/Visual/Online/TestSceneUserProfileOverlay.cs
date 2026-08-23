@@ -323,22 +323,22 @@ namespace osu.Game.Tests.Visual.Online
                 {
                     Id = 15588,
                     TournamentId = 41,
-                    ImageLowRes = "https://assets.ppy.sh/tournament-banners/official/owc2023/profile/supporter_CN.jpg",
-                    Image = "https://assets.ppy.sh/tournament-banners/official/owc2023/profile/supporter_CN@2x.jpg"
+                    ImageLowRes = "https://assets.hotia.org/tournament-banners/official/owc2023/profile/supporter_CN.jpg",
+                    Image = "https://assets.hotia.org/tournament-banners/official/owc2023/profile/supporter_CN@2x.jpg"
                 },
                 new TournamentBanner
                 {
                     Id = 15589,
                     TournamentId = 41,
-                    ImageLowRes = "https://assets.ppy.sh/tournament-banners/official/owc2023/profile/supporter_PH.jpg",
-                    Image = "https://assets.ppy.sh/tournament-banners/official/owc2023/profile/supporter_PH@2x.jpg"
+                    ImageLowRes = "https://assets.hotia.org/tournament-banners/official/owc2023/profile/supporter_PH.jpg",
+                    Image = "https://assets.hotia.org/tournament-banners/official/owc2023/profile/supporter_PH@2x.jpg"
                 },
                 new TournamentBanner
                 {
                     Id = 15590,
                     TournamentId = 41,
-                    ImageLowRes = "https://assets.ppy.sh/tournament-banners/official/owc2023/profile/supporter_CL.jpg",
-                    Image = "https://assets.ppy.sh/tournament-banners/official/owc2023/profile/supporter_CL@2x.jpg"
+                    ImageLowRes = "https://assets.hotia.org/tournament-banners/official/owc2023/profile/supporter_CL.jpg",
+                    Image = "https://assets.hotia.org/tournament-banners/official/owc2023/profile/supporter_CL@2x.jpg"
                 }
             },
             Badges = new[]
@@ -347,16 +347,16 @@ namespace osu.Game.Tests.Visual.Online
                 {
                     AwardedAt = DateTimeOffset.FromUnixTimeSeconds(1505741569),
                     Description = "Outstanding help by being a voluntary test subject.",
-                    ImageUrl = "https://assets.ppy.sh/profile-badges/contributor-new@2x.png",
-                    ImageUrlLowRes = "https://assets.ppy.sh/profile-badges/contributor-new.png",
-                    Url = "https://osu.ppy.sh/wiki/en/People/Community_Contributors",
+                    ImageUrl = "https://assets.hotia.org/profile-badges/contributor-new@2x.png",
+                    ImageUrlLowRes = "https://assets.hotia.org/profile-badges/contributor-new.png",
+                    Url = "https://osu.hotia.org/wiki/en/People/Community_Contributors",
                 },
                 new Badge
                 {
                     AwardedAt = DateTimeOffset.FromUnixTimeSeconds(1505741569),
                     Description = "Badge without a url.",
-                    ImageUrl = "https://assets.ppy.sh/profile-badges/contributor@2x.png",
-                    ImageUrlLowRes = "https://assets.ppy.sh/profile-badges/contributor.png",
+                    ImageUrl = "https://assets.hotia.org/profile-badges/contributor@2x.png",
+                    ImageUrlLowRes = "https://assets.hotia.org/profile-badges/contributor.png",
                 },
             },
             DailyChallengeStatistics = new APIUserDailyChallengeStatistics
@@ -376,7 +376,7 @@ namespace osu.Game.Tests.Visual.Online
                     Pool = new APIMatchmakingPool
                     {
                         Active = true,
-                        Name = "osu!",
+                        Name = "hotia!",
                     },
                     Rating = 1234,
                     Rank = 333,
@@ -385,7 +385,7 @@ namespace osu.Game.Tests.Visual.Online
                     TotalPoints = 5555,
                 }
             ],
-            Title = "osu!volunteer",
+            Title = "hotia!volunteer",
             Colour = "ff0000",
             Achievements = Array.Empty<APIUserAchievement>(),
             PlayMode = "osu",
@@ -406,7 +406,7 @@ namespace osu.Game.Tests.Visual.Online
                 Id = 1,
                 Name = "Collective Wangs",
                 ShortName = "WANG",
-                FlagUrl = "https://assets.ppy.sh/teams/flag/1/wanglogo.jpg",
+                FlagUrl = "https://assets.hotia.org/teams/flag/1/wanglogo.jpg",
             }
         };
     }

@@ -49,7 +49,7 @@ namespace osu.Game.Overlays.Settings.Sections.Maintenance
 
                 if (directoryInfos.Length > 0 || fileInfos.Length > 0 || target.Parent == null)
                 {
-                    // Quick test for whether there's already an osu! install at the target path.
+                    // Quick test for whether there's already an hotia! install at the target path.
                     if (fileInfos.Any(f => f.Name == OsuGameBase.CLIENT_DATABASE_FILENAME))
                     {
                         dialogOverlay.Push(new ConfirmDialog(MaintenanceSettingsStrings.TargetDirectoryAlreadyInstalledOsu, () =>

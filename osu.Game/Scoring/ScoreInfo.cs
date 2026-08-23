@@ -139,7 +139,7 @@ namespace osu.Game.Scoring
         /// </summary>
         /// <remarks>
         /// In the osu-web database, this ID (if present) comes from the legacy <c>osu_scores_*_high</c> tables.
-        /// This ID is also stored to replays set on osu!stable.
+        /// This ID is also stored to replays set on hotia!stable.
         /// </remarks>
         [Indexed]
         public long LegacyOnlineID { get; set; } = -1;
@@ -258,7 +258,7 @@ namespace osu.Game.Scoring
         public LocalisableString DisplayAccuracy => Accuracy.FormatAccuracy();
 
         /// <summary>
-        /// Whether this <see cref="ScoreInfo"/> represents a legacy (osu!stable) score.
+        /// Whether this <see cref="ScoreInfo"/> represents a legacy (hotia!stable) score.
         /// </summary>
         public bool IsLegacyScore { get; set; }
 

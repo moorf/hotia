@@ -2,17 +2,22 @@
 // See the LICENCE file in the repository root for full licence text.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Pooling;
 using osu.Framework.Logging;
+using osu.Game.Rulesets.Mods;
+using osu.Game.Rulesets.Mods.osu.Game.Rulesets.Mods;
 using osu.Game.Rulesets.Objects;
 using osu.Game.Rulesets.Objects.Drawables;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Skinning;
 using osuTK;
+
 
 namespace osu.Game.Rulesets.Judgements
 {
@@ -34,7 +39,10 @@ namespace osu.Game.Rulesets.Judgements
         private readonly Container aboveHitObjectsContent;
 
         private readonly Lazy<Drawable> proxiedAboveHitObjectsContent;
+        [Resolved]
+        protected IReadOnlyList<Mod> Mods { get; private set; }
         public Drawable ProxiedAboveHitObjectsContent => proxiedAboveHitObjectsContent.Value;
+
 
         public DrawableJudgement()
         {
@@ -46,7 +54,7 @@ namespace osu.Game.Rulesets.Judgements
                 Depth = float.MinValue,
                 RelativeSizeAxes = Axes.Both
             });
-
+            
             proxiedAboveHitObjectsContent = new Lazy<Drawable>(() => aboveHitObjectsContent.CreateProxy());
         }
 
@@ -55,7 +63,14 @@ namespace osu.Game.Rulesets.Judgements
         {
             prepareDrawables();
         }
+        private void applyJudgementMods(IReadOnlyList<Mod> mods)
+        {
+            if (mods == null)
+                return;
 
+            foreach (var mod in mods.OfType<IApplicableToDrawableJudgement>())
+                mod.ApplyToDrawableJudgement(this);
+        }
         /// <summary>
         /// Apply top-level animations to the current judgement when successfully hit.
         /// If displaying components which require lifetime extensions, manually adjusting <see cref="Drawable.LifetimeEnd"/> is required.
@@ -112,6 +127,7 @@ namespace osu.Game.Rulesets.Judgements
 
         private void runAnimation()
         {
+            
             // undo any transforms applies in ApplyMissAnimations/ApplyHitAnimations to get a sane initial state.
             ApplyTransformsAt(double.MinValue, true);
             ClearTransforms(true);
@@ -139,8 +155,10 @@ namespace osu.Game.Rulesets.Judgements
                 }
 
                 if (JudgementBody.Drawable is IAnimatableJudgement animatable)
+                {
+                    applyJudgementMods(Mods);
                     animatable.PlayAnimation();
-
+                }
                 // a derived version of DrawableJudgement may be proposing a lifetime.
                 // if not adjusted (or the skinned portion requires greater bounds than calculated) use the skinned source's lifetime.
                 double lastTransformTime = JudgementBody.Drawable.LatestTransformEndTime;

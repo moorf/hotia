@@ -30,7 +30,7 @@ namespace osu.Game.Rulesets.Osu.Skinning.Legacy
                 Color4 outerColour = AccentColour.Darken(0.1f);
                 Color4 innerColour = lighten(AccentColour, 0.5f);
 
-                // https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/osu!/Graphics/Renderers/MmSliderRendererGL.cs#L59-L70
+                // https://github.com/peppy/osu-stable-reference/blob/3ea48705eb67172c430371dcfc8a16a002ed0d3d/hotia!/Graphics/Renderers/MmSliderRendererGL.cs#L59-L70
                 const float shadow_portion = 1 - (OsuLegacySkinTransformer.LEGACY_CIRCLE_RADIUS / OsuHitObject.OBJECT_RADIUS);
                 const float border_portion = 0.1875f;
 

@@ -29,7 +29,7 @@ namespace osu.Game.Beatmaps.ControlPoints
 
         /// <summary>
         /// Whether or not slider ticks should be generated at this control point.
-        /// This exists for backwards compatibility with maps that abuse NaN slider velocity behavior on osu!stable (e.g. /b/2628991).
+        /// This exists for backwards compatibility with maps that abuse NaN slider velocity behavior on hotia!stable (e.g. /b/2628991).
         /// </summary>
         public bool GenerateTicks { get; set; } = true;
 

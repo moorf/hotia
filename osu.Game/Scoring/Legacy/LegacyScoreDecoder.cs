@@ -56,7 +56,7 @@ namespace osu.Game.Scoring.Legacy
                 scoreInfo.IsLegacyScore = version < LegacyScoreEncoder.FIRST_LAZER_VERSION;
 
                 // TotalScoreVersion gets initialised to LATEST_VERSION.
-                // In the case where the incoming score has either an osu!stable or old lazer version, we need
+                // In the case where the incoming score has either an hotia!stable or old lazer version, we need
                 // to mark it with the correct version increment to trigger reprocessing to new standardised scoring.
                 scoreInfo.TotalScoreVersion = version < 30000002 ? 30000001 : version;
 
@@ -243,7 +243,7 @@ namespace osu.Game.Scoring.Legacy
                 return;
 
 #pragma warning disable CS0618
-            // In osu! and osu!mania, some judgements affect combo but aren't stored to scores.
+            // In hotia! and hotia!mania, some judgements affect combo but aren't stored to scores.
             // A special hit result is used to pad out the combo value to match, based on the max combo from the difficulty attributes.
             var calculator = rulesetInstance.CreateDifficultyCalculator(workingBeatmap);
             var attributes = calculator.Calculate(score.Mods);
@@ -316,14 +316,14 @@ namespace osu.Game.Scoring.Legacy
                     (ReplayButtonState)Parsing.ParseInt(split[3])));
             }
 
-            // https://github.com/peppy/osu-stable-reference/blob/e53980dd76857ee899f66ce519ba1597e7874f28/osu!/GameModes/Play/ReplayWatcher.cs#L62-L67
+            // https://github.com/peppy/osu-stable-reference/blob/e53980dd76857ee899f66ce519ba1597e7874f28/hotia!/GameModes/Play/ReplayWatcher.cs#L62-L67
             if (legacyFrames.Count >= 2 && legacyFrames[1].Time < legacyFrames[0].Time)
             {
                 legacyFrames[1].Time = legacyFrames[0].Time;
                 legacyFrames[0].Time = 0;
             }
 
-            // https://github.com/peppy/osu-stable-reference/blob/e53980dd76857ee899f66ce519ba1597e7874f28/osu!/GameModes/Play/ReplayWatcher.cs#L69-L71
+            // https://github.com/peppy/osu-stable-reference/blob/e53980dd76857ee899f66ce519ba1597e7874f28/hotia!/GameModes/Play/ReplayWatcher.cs#L69-L71
             if (legacyFrames.Count >= 3 && legacyFrames[0].Time > legacyFrames[2].Time)
                 legacyFrames[0].Time = legacyFrames[1].Time = legacyFrames[2].Time;
 

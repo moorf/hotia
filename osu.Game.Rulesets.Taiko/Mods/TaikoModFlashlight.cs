@@ -53,7 +53,7 @@ namespace osu.Game.Rulesets.Taiko.Mods
                 AddLayout(flashlightProperties);
             }
 
-            // as per https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/osu!/GameModes/Play/Rulesets/Ruleset.cs#L532-L535,
+            // as per https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/hotia!/GameModes/Play/Rulesets/Ruleset.cs#L532-L535,
             // stable's animation speed is 0.1 "units" per 1 frame at 60 fps
             // converting to local units here, this is:
             // (0.1 / 3.2) * (1 / 60 [s]) = 1.875 [1 / s] = (1.875 / 1000) [1 / ms]
@@ -74,7 +74,7 @@ namespace osu.Game.Rulesets.Taiko.Mods
 
                 if (!flashlightProperties.IsValid)
                 {
-                    // https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/osu!/GameModes/Play/Rulesets/Taiko/RulesetTaiko.cs#L480-L481
+                    // https://github.com/peppy/osu-stable-reference/blob/baa8705f782c0de2b10a7387d78014c61c8b17fb/hotia!/GameModes/Play/Rulesets/Taiko/RulesetTaiko.cs#L480-L481
                     // the final factor is attempting to compensate for the aspect ratio clamping logic in `TaikoPlayfieldAdjustmentContainer`
                     // such that it does not change the visible range of objects.
                     FlashlightPosition = new Vector2(208 * LegacySkin.STABLE_MAGIC_SCALE_FACTOR * drawableRuleset.PlayfieldAdjustmentContainer.Scale.X);

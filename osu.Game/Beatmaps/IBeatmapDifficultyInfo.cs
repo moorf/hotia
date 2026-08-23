@@ -97,7 +97,7 @@ namespace osu.Game.Beatmaps
 
         /// <summary>
         /// Maps a difficulty value [0, 10] to a two-piece linear range of values.
-        /// Floors the value to `int`, usually to match osu!stable spec.
+        /// Floors the value to `int`, usually to match hotia!stable spec.
         /// </summary>
         /// <param name="difficulty">The difficulty value to be mapped.</param>
         /// <param name="range">The values that define the two linear ranges.

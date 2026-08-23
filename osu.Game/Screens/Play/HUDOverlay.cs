@@ -1,5 +1,9 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 #nullable disable
 
@@ -355,6 +359,24 @@ namespace osu.Game.Screens.Play
                 case HUDVisibilityMode.Always:
                     ShowHud.Value = true;
                     break;
+            }
+            if (ShowHud.Value == false)
+            {
+                //Suspend();
+                TopRightElements.Suspend();
+                //BottomRightElements.Suspend();
+                TopLeftElements.Suspend();
+                rulesetComponents.Suspend();
+                mainComponents.Suspend();
+            }
+            else
+            {
+               TopRightElements.Resume();
+                //BottomRightElements.Resume();
+                TopLeftElements.Resume();
+                rulesetComponents.Resume();
+                mainComponents.Resume();
+                //Resume();
             }
         }
 

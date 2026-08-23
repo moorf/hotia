@@ -114,7 +114,7 @@ namespace osu.Game.Tests.Visual.Online
                     new APIChangelogEntry
                     {
                         Type = ChangelogEntryType.Fix,
-                        Category = "osu!",
+                        Category = "hotia!",
                         Title = "Fix thing",
                         MessageHtml = "Additional info goes here.",
                         Repository = "osu",
@@ -128,7 +128,7 @@ namespace osu.Game.Tests.Visual.Online
                     new APIChangelogEntry
                     {
                         Type = ChangelogEntryType.Add,
-                        Category = "osu!",
+                        Category = "hotia!",
                         Title = "Add thing",
                         Major = true,
                         Repository = "ppy/osu-framework",
@@ -158,9 +158,9 @@ namespace osu.Game.Tests.Visual.Online
                     new APIChangelogEntry
                     {
                         Type = ChangelogEntryType.Add,
-                        Category = "osu!",
+                        Category = "hotia!",
                         Title = "Add entry with news url",
-                        Url = "https://osu.ppy.sh/home/news/2023-07-27-summer-splash"
+                        Url = "https://osu.hotia.org/home/news/2023-07-27-summer-splash"
                     },
                 }
             });
@@ -221,9 +221,9 @@ namespace osu.Game.Tests.Visual.Online
                     {
                         Category = "Markdown",
                         Title = "Testing markdown container in changelog",
-                        Message = @"This paragraph [has a link](https://osu.ppy.sh) to osu! website.
+                        Message = @"This paragraph [has a link](https://osu.hotia.org) to hotia! website.
 
-![](https://i.ppy.sh/e8b1f3cafa284aa347dd96b3977ceedd0e42d3c0/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f6e6577732f323032362d30362d30332d6d6f642d6d756c7469706c696572732d7375727665792d726573756c74732f6d6f642d6d756c7469706c696572732e706e673f32)
+![](https://i.hotia.org/e8b1f3cafa284aa347dd96b3977ceedd0e42d3c0/68747470733a2f2f6f73752e7070792e73682f77696b692f696d616765732f7368617265642f6e6577732f323032362d30362d30332d6d6f642d6d756c7469706c696572732d7375727665792d726573756c74732f6d6f642d6d756c7469706c696572732e706e673f32)
 
 There is mod multiplayer image above.
 
