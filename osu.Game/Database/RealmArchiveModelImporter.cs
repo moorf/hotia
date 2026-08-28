@@ -377,7 +377,7 @@ namespace osu.Game.Database
                     // We intentionally delay adding to realm to avoid blocking on a write during disk operations.
                     foreach (var filenames in getShortenedFilenames(archive))
                     {
-                        var fileHash = archive.GetStream(filenames.original).ComputeSHA2Hash(); //filenames.shortened;//
+                        var fileHash = filenames.shortened;//archive.GetStream(filenames.original).ComputeSHA2Hash(); //filenames.shortened;//
                         if (FilesystemSanityCheckHelpers.IncursPathTraversalRisk(filenames.shortened))
                             throw new InvalidOperationException(
                                 $@"Filename ""{filenames.original}"" is not allowed.");
@@ -391,7 +391,7 @@ namespace osu.Game.Database
 
                         var realmFile = new RealmFile
                         {
-                            Hash = fileHash,
+                            Hash = item.Hash+fileHash,
                             OwnerHash = item.Hash
                         };
 

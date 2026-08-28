@@ -388,7 +388,7 @@ namespace osu.Game.Beatmaps
                         decoded = Decoder.GetDecoder<Beatmap>(lineReader).Decode(lineReader);
                     }
 
-                    string hash = memoryStream.ComputeSHA2Hash();//file.Filename;
+                    string hash = file.File.Hash;//memoryStream.ComputeSHA2Hash();//file.Filename;
 
                     if (beatmaps.Any(b => b.Hash == hash))
                     {

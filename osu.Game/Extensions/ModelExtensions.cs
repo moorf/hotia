@@ -1,5 +1,9 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using System.IO;
 using osu.Game.Beatmaps;
@@ -24,7 +28,11 @@ namespace osu.Game.Extensions
         public static string GetStoragePath(this IFileInfo fileInfo)
         {
             if (fileInfo is RealmFile rf && !string.IsNullOrEmpty(rf.OwnerHash))
-                return Path.Combine(rf.OwnerHash, rf.Hash);
+            {
+                string cutHash = rf.Hash.Substring(rf.OwnerHash.Length);
+                
+                return Path.Combine(rf.OwnerHash, cutHash);
+            }//Path.Combine(rf.OwnerHash, rf.Hash);
 
             return fileInfo.Hash;
         }
