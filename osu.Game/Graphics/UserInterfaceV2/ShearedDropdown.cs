@@ -138,7 +138,8 @@ namespace osu.Game.Graphics.UserInterfaceV2
                                     Depth = float.MaxValue,
                                     CornerRadius = ShearedButton.CORNER_RADIUS,
                                     Masking = true,
-                                    AutoSizeAxes = Axes.Both,
+                                    AutoSizeAxes = Axes.X,
+                                    Height = 30f,
                                     Children = new Drawable[]
                                     {
                                         labelBox = new Box

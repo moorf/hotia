@@ -113,7 +113,6 @@ namespace osu.Game.Screens.Select
                     {
                         RelativeSizeAxes = Axes.Both,
                         ScrollbarVisible = false,
-                        Shear = OsuGame.SHEAR,
                         Child = scoresContainer = new Container
                         {
                             RelativeSizeAxes = Axes.X,
@@ -122,10 +121,9 @@ namespace osu.Game.Screens.Select
                             {
                                 Top = 5,
                                 // Left padding offsets the shear to create a visually appealing list display.
-                                Left = 80f,
                                 // Bottom padding ensures the last entry's full width is displayed
                                 // (ie it is fully on screen after shear is considered).
-                                Bottom = BeatmapLeaderboardScore.HEIGHT * 3 * 4
+                                Bottom = BeatmapLeaderboardScore.HEIGHT * 3 * 2
                             },
                         },
                     },
@@ -135,7 +133,6 @@ namespace osu.Game.Screens.Select
                         Origin = Anchor.BottomLeft,
                         RelativeSizeAxes = Axes.X,
                         Height = personal_best_height,
-                        Shear = OsuGame.SHEAR,
                         Margin = new MarginPadding
                         {
                             Left = -40f,
@@ -153,7 +150,6 @@ namespace osu.Game.Screens.Select
                             // to the main context menu container above.
                             new OsuContextMenuContainer
                             {
-                                Shear = -OsuGame.SHEAR,
                                 RelativeSizeAxes = Axes.Both,
                                 Child = new Container
                                 {
@@ -258,13 +254,13 @@ namespace osu.Game.Screens.Select
                     fetchedScores.BindTo(leaderboardManager.Scores);
 
                     // Schedule is important here to avoid handling changes after this drawable is disposed.
-                    fetchedScores.BindValueChanged(_ => Schedule(updateScores), true);
+                    fetchedScores.BindValueChanged(_ => Schedule(updateScores, fetchSorting), true);
                     initialFetchComplete = true;
                 }
             }, initialFetchComplete && fetchScope != BeatmapLeaderboardScope.Local ? 300 : 0);
         }
 
-        private void updateScores()
+        private void updateScores(LeaderboardSortMode leaderboardSortMode)
         {
             var scores = fetchedScores.Value;
 
@@ -279,10 +275,10 @@ namespace osu.Game.Screens.Select
             if (scores.FailState != null)
                 SetState((LeaderboardState)scores.FailState);
             else
-                SetScores(scores.TopScores, scores.UserScore, scores.TotalScores);
+                SetScores(scores.TopScores, scores.UserScore, scores.TotalScores, leaderboardSortMode);
         }
 
-        protected void SetScores(IEnumerable<ScoreInfo> scores, ScoreInfo? userScore = null, int? totalCount = null)
+        protected void SetScores(IEnumerable<ScoreInfo> scores, ScoreInfo? userScore = null, int? totalCount = null, LeaderboardSortMode leaderboardSortMode = LeaderboardSortMode.Score)
         {
             cancellationTokenSource?.Cancel();
             cancellationTokenSource = new CancellationTokenSource();
@@ -305,7 +301,7 @@ namespace osu.Game.Screens.Select
                 else if (api.LocalUserState.Friends.Any(r => r.TargetID == s.UserID) && Scope.Value != BeatmapLeaderboardScope.Friend)
                     highlightType = BeatmapLeaderboardScore.HighlightType.Friend;
 
-                return new BeatmapLeaderboardScore(s)
+                return new BeatmapLeaderboardScore(s, false, Scope.Value == BeatmapLeaderboardScope.Local ? Sorting.Value : LeaderboardSortMode.Score)
                 {
                     Rank = i + 1,
                     Highlight = highlightType,

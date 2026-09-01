@@ -86,7 +86,7 @@ namespace osu.Game.Screens.Select
         private const float username_min_width = 120;
         private const float statistics_regular_min_width = 165;
         private const float statistics_compact_min_width = 90;
-        private const float rank_label_width = 40;
+        private const float rank_label_width = 70;
 
         private const int corner_radius = 10;
         private const int transition_duration = 200;
@@ -117,6 +117,8 @@ namespace osu.Game.Screens.Select
         private Container rankLabelStandalone = null!;
         private Container rankLabelOverlay = null!;
 
+        private OsuSpriteText totalScoreText = null!;
+        private Bindable<LeaderboardSortMode> leaderboardSortMode = new Bindable<LeaderboardSortMode>(LeaderboardSortMode.Score);
         private readonly bool sheared;
 
         public override bool ReceivePositionalInputAt(Vector2 screenSpacePos)
@@ -128,12 +130,12 @@ namespace osu.Game.Screens.Select
             return inputRectangle.Contains(ToLocalSpace(screenSpacePos));
         }
 
-        public BeatmapLeaderboardScore(ScoreInfo score, bool sheared = true)
+        public BeatmapLeaderboardScore(ScoreInfo score, bool sheared = true, LeaderboardSortMode leaderboardSortMode = LeaderboardSortMode.Score)
         {
             Score = score;
 
             this.sheared = sheared;
-
+            this.leaderboardSortMode.Value = leaderboardSortMode;
             Shear = sheared ? OsuGame.SHEAR : Vector2.Zero;
             RelativeSizeAxes = Axes.X;
             Height = HEIGHT;
@@ -144,8 +146,8 @@ namespace osu.Game.Screens.Select
         {
             foregroundColour = colourProvider.Background5;
             backgroundColour = colourProvider.Background3;
+            backgroundColour = Colour4.FromHSL(0, 0, 0.15f);
             totalScoreBackgroundGradient = ColourInfo.GradientHorizontal(backgroundColour.Opacity(0), backgroundColour);
-
             Child = new Container
             {
                 Masking = true,
@@ -155,7 +157,7 @@ namespace osu.Game.Screens.Select
                 {
                     background = new Box
                     {
-                        Alpha = 0.4f,
+                        Alpha = 0.6f,
                         RelativeSizeAxes = Axes.Both,
                         Colour = backgroundColour
                     },
@@ -192,7 +194,7 @@ namespace osu.Game.Screens.Select
                             {
                                 foreground = new Box
                                 {
-                                    Alpha = 0.4f,
+                                    Alpha = 0.0f,
                                     RelativeSizeAxes = Axes.Both,
                                     Colour = foregroundColour
                                 },
@@ -246,7 +248,7 @@ namespace osu.Game.Screens.Select
                                                             new Box
                                                             {
                                                                 RelativeSizeAxes = Axes.Both,
-                                                                Colour = Colour4.Black.Opacity(0.5f),
+                                                                Colour =Colour4.Black.Opacity(0.5f),
                                                             },
                                                             new RankLabel(Rank, sheared, false)
                                                             {
@@ -430,17 +432,16 @@ namespace osu.Game.Screens.Select
                                                 Origin = Anchor.CentreRight,
                                                 Direction = FillDirection.Vertical,
                                                 Padding = new MarginPadding { Horizontal = corner_radius },
-                                                Spacing = new Vector2(0f, -2f),
+                                                Spacing = new Vector2(0f, 0f),//-2
                                                 Children = new Drawable[]
                                                 {
-                                                    new OsuSpriteText
+                                                    totalScoreText = new OsuSpriteText
                                                     {
                                                         Anchor = Anchor.TopRight,
                                                         Origin = Anchor.TopRight,
                                                         UseFullGlyphHeight = false,
-                                                        Current = scoreManager.GetBindableTotalScoreString(Score),
                                                         Spacing = new Vector2(-1.5f),
-                                                        Font = OsuFont.Style.Subtitle.With(weight: FontWeight.Light, fixedWidth: true),
+                                                        Font = OsuFont.Style.Body.With(weight: FontWeight.Regular, fixedWidth: true),
                                                         Shear = sheared ? -OsuGame.SHEAR : Vector2.Zero,
                                                     },
                                                     modsContainer = new FillFlowContainer<Drawable>
@@ -490,15 +491,21 @@ namespace osu.Game.Screens.Select
                 switch (s.NewValue)
                 {
                     case ScoringMode.Standardised:
-                        rightContent.Width = 170;
+                        rightContent.Width = 170 - 40;
                         break;
 
                     case ScoringMode.Classic:
-                        rightContent.Width = expanded_right_content_width;
+                        rightContent.Width = expanded_right_content_width - 40;
                         break;
                 }
 
                 updateModDisplay();
+            }, true);
+            leaderboardSortMode.BindValueChanged(sortMode =>
+            {
+                totalScoreText.Text = sortMode.NewValue is LeaderboardSortMode.Accuracy or LeaderboardSortMode.MaxCombo
+                    ? $@"{Score.MaxCombo}x  {Score.DisplayAccuracy}"
+                    : scoreManager.GetBindableTotalScoreString(Score).Value;
             }, true);
         }
 
@@ -563,7 +570,7 @@ namespace osu.Game.Screens.Select
             centreContent.Padding = new MarginPadding
             {
                 Left = rankLabelStandalone.DrawWidth,
-                Right = rightContent.DrawWidth,
+                Right = rightContent.DrawWidth - 40,
             };
         }
 

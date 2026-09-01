@@ -36,7 +36,7 @@ namespace osu.Game.Screens.Select
                                                                           .Prepend((0.0f, OsuColour.STAR_DIFFICULTY_SPECTRUM.ElementAt(1).Item2)).ToArray();
 
             public DifficultyRangeSlider()
-                : base(BeatmapsetsStrings.ShowStatsStars)
+                : base("")//BeatmapsetsStrings.ShowStatsStars
             {
                 NubWidth = ShearedNub.HEIGHT * 1.16f;
                 DefaultStringUpperBound = "∞";

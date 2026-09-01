@@ -4,7 +4,6 @@
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
-using osu.Game.Graphics.Containers;
 
 namespace osu.Game.Screens.Select
 {
@@ -29,19 +28,15 @@ namespace osu.Game.Screens.Select
 
             InternalChildren = new Drawable[]
             {
-                new ShearAligningWrapper(header = new Header
+                header = new Header
                 {
-                    Shear = -OsuGame.SHEAR,
                     RelativeSizeAxes = Axes.X,
                     Height = header_height,
-                }),
-                new ShearAligningWrapper(contentContainer = new Container
+                },
+                contentContainer = new Container
                 {
-                    Shear = -OsuGame.SHEAR,
                     Padding = new MarginPadding { Top = header_height },
                     RelativeSizeAxes = Axes.Both,
-                })
-                {
                     Depth = 1f,
                 },
             };

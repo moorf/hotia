@@ -1,20 +1,23 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using System;
 using osu.Framework.Allocation;
-using osu.Framework.Bindables;
-using osu.Framework.Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Localisation;
+using osuTK;
+using osu.Framework.Bindables;
+using osu.Framework.Extensions;
 using osu.Game.Configuration;
 using osu.Game.Graphics.UserInterface;
-using osu.Game.Graphics.UserInterfaceV2;
 using osu.Game.Localisation;
 using osu.Game.Online.Leaderboards;
 using osu.Game.Screens.Play.Leaderboards;
-using osuTK;
 
 namespace osu.Game.Screens.Select
 {
@@ -22,14 +25,16 @@ namespace osu.Game.Screens.Select
     {
         public partial class Header : CompositeDrawable
         {
-            private WedgeSelector<Selection> tabControl = null!;
+            private ToggleButton detailsToggle = null!;
             private FillFlowContainer leaderboardControls = null!;
 
-            private ShearedDropdown<BeatmapLeaderboardScope> scopeDropdown = null!;
-            private ShearedDropdown<LeaderboardSortMode> sortDropdown = null!;
-            private ShearedToggleButton selectedModsToggle = null!;
+            private HotiaDropdown<BeatmapLeaderboardScope> scopeDropdown = null!;
+            private HotiaDropdown<LeaderboardSortMode> sortDropdown = null!;
+            private ToggleButton selectedModsToggle = null!;
 
-            public IBindable<Selection> Type => tabControl.Current;
+            private readonly Bindable<Selection> currentSelection = new Bindable<Selection>();
+
+            public IBindable<Selection> Type => currentSelection;
 
             public IBindable<BeatmapLeaderboardScope> Scope => scopeDropdown.Current;
 
@@ -46,56 +51,45 @@ namespace osu.Game.Screens.Select
             {
                 InternalChildren = new Drawable[]
                 {
-                    new Container
+                    new FillFlowContainer
                     {
                         RelativeSizeAxes = Axes.Both,
-                        Padding = new MarginPadding { Left = SongSelect.WEDGE_CONTENT_MARGIN, Right = 5f },
+                        Direction = FillDirection.Horizontal,
                         Children = new Drawable[]
                         {
-                            tabControl = new WedgeSelector<Selection>(20f)
+                            detailsToggle = new ToggleButton
                             {
-                                Anchor = Anchor.CentreLeft,
-                                Origin = Anchor.CentreLeft,
-                                Width = 200,
-                                Height = 22,
-                                Margin = new MarginPadding { Top = 2f },
-                                IsSwitchable = true,
+                                RelativeSizeAxes = Axes.X,
+                                Width = 0.2f,
+                                Height = 30,
+                                Text = "Details",
                             },
                             leaderboardControls = new FillFlowContainer
                             {
-                                Anchor = Anchor.CentreRight,
-                                Origin = Anchor.CentreRight,
                                 RelativeSizeAxes = Axes.X,
-                                Height = 30,
-                                Spacing = new Vector2(5f, 0f),
+                                Position = new Vector2(0.2f,0f),
                                 Direction = FillDirection.Horizontal,
-                                Padding = new MarginPadding { Left = 258 },
                                 Children = new Drawable[]
                                 {
-                                    selectedModsToggle = new ShearedToggleButton
+                                    selectedModsToggle = new ToggleButton
                                     {
-                                        Anchor = Anchor.CentreRight,
-                                        Origin = Anchor.CentreRight,
-                                        AutoSizeAxes = Axes.X,
-                                        Text = UserInterfaceStrings.SelectedMods,
+                                        RelativeSizeAxes = Axes.X,
+                                        Width = 0.2f,
+                                        Text = "Mods",
                                         Height = 30f,
                                         // Eyeballed to make spacing match. Because shear is silly and implemented in different ways between dropdown and button.
-                                        Margin = new MarginPadding { Left = -9.2f },
+                                        //Margin = new MarginPadding { Left = -9.2f },
                                     },
-                                    sortDropdown = new ShearedDropdown<LeaderboardSortMode>(BeatmapLeaderboardWedgeStrings.Sort)
+                                    sortDropdown = new HotiaDropdown<LeaderboardSortMode>()
                                     {
-                                        Anchor = Anchor.TopRight,
-                                        Origin = Anchor.TopRight,
                                         RelativeSizeAxes = Axes.X,
-                                        Width = 0.4f,
+                                        Width = 0.3f,
                                         Items = Enum.GetValues<LeaderboardSortMode>(),
                                     },
                                     scopeDropdown = new ScopeDropdown
                                     {
-                                        Anchor = Anchor.TopRight,
-                                        Origin = Anchor.TopRight,
                                         RelativeSizeAxes = Axes.X,
-                                        Width = 0.4f,
+                                        Width = 0.3f,
                                         Current = { Value = BeatmapLeaderboardScope.Global },
                                     },
                                 },
@@ -116,8 +110,13 @@ namespace osu.Game.Screens.Select
                 scopeDropdown.Current.Value = tryMapDetailTabToLeaderboardScope(configDetailTab.Value) ?? scopeDropdown.Current.Value;
                 scopeDropdown.Current.BindValueChanged(_ => updateConfigDetailTab());
 
-                tabControl.Current.Value = configDetailTab.Value == BeatmapDetailTab.Details ? Selection.Details : Selection.Ranking;
-                tabControl.Current.BindValueChanged(v =>
+                detailsToggle.Active.Value = configDetailTab.Value == BeatmapDetailTab.Details;
+                detailsToggle.Active.BindValueChanged(active =>
+                {
+                    currentSelection.Value = active.NewValue ? Selection.Details : Selection.Ranking;
+                }, true);
+
+                currentSelection.BindValueChanged(v =>
                 {
                     leaderboardControls.FadeTo(v.NewValue == Selection.Ranking ? 1 : 0, 300, Easing.OutQuint);
                     updateConfigDetailTab();
@@ -145,7 +144,7 @@ namespace osu.Game.Screens.Select
 
             private void updateConfigDetailTab()
             {
-                switch (tabControl.Current.Value)
+                switch (currentSelection.Value)
                 {
                     case Selection.Details:
                         configDetailTab.Value = BeatmapDetailTab.Details;
@@ -156,7 +155,7 @@ namespace osu.Game.Screens.Select
                         return;
 
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(tabControl.Current.Value), tabControl.Current.Value, null);
+                        throw new ArgumentOutOfRangeException(nameof(currentSelection.Value), currentSelection.Value, null);
                 }
             }
 
@@ -219,10 +218,10 @@ namespace osu.Game.Screens.Select
                 Ranking,
             }
 
-            private partial class ScopeDropdown : ShearedDropdown<BeatmapLeaderboardScope>
+            private partial class ScopeDropdown : HotiaDropdown<BeatmapLeaderboardScope>
             {
                 public ScopeDropdown()
-                    : base(BeatmapLeaderboardWedgeStrings.Scope)
+                    : base()
                 {
                     Items = Enum.GetValues<BeatmapLeaderboardScope>();
                 }

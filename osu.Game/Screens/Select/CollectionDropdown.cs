@@ -50,7 +50,7 @@ namespace osu.Game.Screens.Select
         private readonly CollectionFilterMenuItem allBeatmapsItem = new AllBeatmapsCollectionFilterMenuItem();
 
         public CollectionDropdown()
-            : base(CollectionsStrings.Collection)
+            : base("")//CollectionsStrings.Collection
         {
             ItemSource = filters;
 

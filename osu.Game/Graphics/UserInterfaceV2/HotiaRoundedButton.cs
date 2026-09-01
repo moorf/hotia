@@ -1,10 +1,13 @@
-// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
+﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using System.Collections.Generic;
 using System.Diagnostics;
 using osu.Framework.Allocation;
-using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Colour;
 using osu.Framework.Graphics.Containers;
@@ -17,10 +20,11 @@ using osu.Game.Graphics.Sprites;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Overlays;
 using osuTK.Graphics;
+using osu.Framework.Extensions.Color4Extensions;
 
 namespace osu.Game.Graphics.UserInterfaceV2
 {
-    public partial class RoundedButton : OsuButton, IFilterable, IHasTooltip
+    public partial class HotiaRoundedButton : OsuButton, IFilterable, IHasTooltip
     {
         protected TrianglesV2? Triangles { get; private set; }
 
@@ -39,7 +43,7 @@ namespace osu.Game.Graphics.UserInterfaceV2
             }
         }
         private float cornerRadius = 5f;
-        public RoundedButton(float cornerRadius = 5)
+        public HotiaRoundedButton(float cornerRadius = 5)
         {
             this.cornerRadius = cornerRadius;
         }
@@ -65,6 +69,7 @@ namespace osu.Game.Graphics.UserInterfaceV2
                 SpawnRatio = 0.6f,
                 RelativeSizeAxes = Axes.Both,
                 Depth = float.MaxValue,
+                Alpha = 0.5f,
             });
 
             updateColours();
@@ -104,5 +109,14 @@ namespace osu.Game.Graphics.UserInterfaceV2
         public bool FilteringActive { get; set; }
 
         public virtual LocalisableString TooltipText { get; set; }
+
+        protected override SpriteText CreateText() => new OsuSpriteText
+        {
+            Depth = -1,
+            Origin = Anchor.Centre,
+            Anchor = Anchor.Centre,
+            Font = OsuFont.Style.Heading2.With(weight: FontWeight.SemiBold),
+            Colour = new Colour4(220, 220, 220, 255),
+        };
     }
 }

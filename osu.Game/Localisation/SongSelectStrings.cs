@@ -275,9 +275,9 @@ namespace osu.Game.Localisation
         public static LocalisableString TemporarilyShowingAllBeatmapsIn => new TranslatableString(getKey(@"temporarily_showing_all_beatmaps_in"), @"Temporarily showing all beatmaps in");
 
         /// <summary>
-        /// "mostly {0}"
+        /// "~{0}"
         /// </summary>
-        public static LocalisableString MostlyBPM(int mostCommonBPM) => new TranslatableString(getKey(@"mostly_bpm"), @"mostly {0}", mostCommonBPM);
+        public static LocalisableString MostlyBPM(int mostCommonBPM) => new TranslatableString(getKey(@"mostly_bpm"), @"~{0}", mostCommonBPM);
 
         /// <summary>
         /// "{0:#,0} match|{0:#,0} matches"

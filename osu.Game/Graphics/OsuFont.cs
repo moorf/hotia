@@ -41,6 +41,11 @@ namespace osu.Game.Graphics
             public static FontUsage Heading2 => GetFont(size: 18, weight: FontWeight.SemiBold);
 
             /// <summary>
+            /// Torus with 18px size and semi-bold weight.
+            /// </summary>
+            public static FontUsage Heading3 => GetFont(size: 16, weight: FontWeight.SemiBold);
+
+            /// <summary>
             /// Torus with 16px size and regular weight.
             /// </summary>
             public static FontUsage Body => GetFont(size: DEFAULT_FONT_SIZE, weight: FontWeight.Regular);

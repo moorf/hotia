@@ -1,5 +1,9 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
@@ -25,8 +29,9 @@ namespace osu.Game.Screens.Select
             private readonly bool background;
             private readonly float leftPadding;
             private readonly float? minSize;
+            private readonly float maxSize;
 
-            private OsuSpriteText valueText = null!;
+            private TruncatingSpriteText valueText = null!;
             private LoadingSpinner loading = null!;
 
             private LocalisableString? text;
@@ -43,14 +48,15 @@ namespace osu.Game.Screens.Select
 
             public LocalisableString TooltipText { get; set; }
 
-            public Statistic(IconUsage icon, bool background = false, float leftPadding = 10f, float? minSize = null)
+            public Statistic(IconUsage icon = default, bool background = false, float leftPadding = 10f, float? minSize = null, float maxSize = 0.5f)
             {
                 this.icon = icon;
                 this.background = background;
                 this.leftPadding = leftPadding;
                 this.minSize = minSize;
-
-                AutoSizeAxes = Axes.Both;
+                this.maxSize = maxSize;
+                RelativeSizeAxes = Axes.X;
+                AutoSizeAxes = Axes.Y;
             }
 
             [BackgroundDependencyLoader]
@@ -72,27 +78,30 @@ namespace osu.Game.Screens.Select
                     {
                         Anchor = Anchor.CentreLeft,
                         Origin = Anchor.CentreLeft,
-                        AutoSizeAxes = Axes.Both,
+                        RelativeSizeAxes = Axes.X,
+                        AutoSizeAxes = Axes.Y,
                         Direction = FillDirection.Horizontal,
-                        Margin = new MarginPadding { Left = background ? leftPadding : 0, Right = background ? 10f : 0f, Vertical = 5f },
+                        Margin = new MarginPadding { Left = background ? leftPadding : 0, Right = background ? 10f : 0f, Vertical = 6f },
+                        Padding = new MarginPadding { Right = 14f },
                         Spacing = new Vector2(4f, 0f),
                         Shear = background ? -OsuGame.SHEAR : Vector2.Zero,
                         Children = new Drawable[]
                         {
-                            new SpriteIcon
+
+                            icon.Icon != default(IconUsage).Icon ? new SpriteIcon
                             {
                                 Anchor = Anchor.CentreLeft,
                                 Origin = Anchor.CentreLeft,
                                 Icon = icon,
                                 Size = new Vector2(OsuFont.Style.Heading2.Size),
                                 Colour = colourProvider.Content2,
-                            },
+                            } : Empty(),
                             new Container
                             {
                                 Anchor = Anchor.CentreLeft,
                                 Origin = Anchor.CentreLeft,
-                                AutoSizeAxes = Axes.X,
-                                Height = 20,
+                                RelativeSizeAxes = Axes.X,
+                                AutoSizeAxes = Axes.Y,
                                 Children = new Drawable[]
                                 {
                                     loading = new LoadingSpinner
@@ -102,36 +111,28 @@ namespace osu.Game.Screens.Select
                                         Size = new Vector2(14f),
                                         State = { Value = Visibility.Visible },
                                     },
-                                    new GridContainer
+                                    new Container
                                     {
                                         Anchor = Anchor.CentreLeft,
                                         Origin = Anchor.CentreLeft,
-                                        AutoSizeAxes = Axes.Both,
-                                        RowDimensions = new[] { new Dimension(GridSizeMode.AutoSize) },
-                                        ColumnDimensions = new[]
+                                        RelativeSizeAxes = Axes.X,
+                                        AutoSizeAxes = Axes.Y,
+                                        Child = valueText = new TruncatingSpriteText
                                         {
-                                            new Dimension(GridSizeMode.AutoSize, minSize: minSize ?? 0),
+                                            RelativeSizeAxes = Axes.X,
+                                            Anchor = Anchor.CentreLeft,
+                                            Origin = Anchor.CentreLeft,
+                                            Font = OsuFont.Style.Heading2,
+                                            Colour = new Colour4(200,200,200,255),
+                                            Margin = new MarginPadding { Bottom = 2f },
+                                            AlwaysPresent = true,
+                                            MaxWidth = maxSize,
                                         },
-                                        Content = new[]
-                                        {
-                                            new[]
-                                            {
-                                                valueText = new OsuSpriteText
-                                                {
-                                                    Anchor = Anchor.Centre,
-                                                    Origin = Anchor.Centre,
-                                                    Font = OsuFont.Style.Heading2,
-                                                    Colour = colourProvider.Content2,
-                                                    Margin = new MarginPadding { Bottom = 2f },
-                                                    AlwaysPresent = true,
-                                                },
-                                            }
-                                        }
-                                    },
-                                },
+                                    }
+                                }
                             },
                         },
-                    }
+                    },
                 };
             }
 

@@ -53,6 +53,13 @@ namespace osu.Game.Overlays
         public Color4 Background5 => getColour(0.1f, 0.15f);
         public Color4 Background6 => getColour(0.1f, 0.1f);
 
+        public Color4 HotiaBackground3 => new Color4(48, 48, 48, 255);
+        public Color4 HotiaBackground1 => new Color4(200, 200, 200, 255);
+        public Color4 HotiaBackground6 => new Color4(19, 19, 19, 255);
+        public Color4 HotiaHighlight1 => new Color4(129, 135, 53, 255);
+        public Color4 HotiaColour0 => new Color4(170, 180, 70, 255);
+
+        public Color4 HotiaContent1 => Color4.WhiteSmoke;
         /// <summary>
         /// Changes the <see cref="Hue"/> to a different degree.
         /// Note that this does not trigger any kind of signal to any drawable that received colours from here, all drawables need to be updated manually.

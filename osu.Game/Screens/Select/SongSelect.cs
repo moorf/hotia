@@ -38,7 +38,6 @@ using osu.Game.Collections;
 using osu.Game.Configuration;
 using osu.Game.Database;
 using osu.Game.Graphics.Carousel;
-using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.Cursor;
 using osu.Game.Graphics.UserInterface;
 using osu.Game.Input.Bindings;
@@ -140,6 +139,8 @@ namespace osu.Game.Screens.Select
 
         private NoResultsPlaceholder noResultsPlaceholder = null!;
 
+        private Graphics.UserInterfaceV2.HotiaRoundedButton showPreviewbutton = null!;
+
         public override bool? ApplyModTrackAdjustments => true;
 
         public override bool ShowFooter => true;
@@ -195,28 +196,15 @@ namespace osu.Game.Screens.Select
             }
         }
 
+        private const float song_select_height = 0.3f;
+
+        private readonly (float hidden, float visible) preview_vis = (0.01f, 1f);
+
         [BackgroundDependencyLoader]
         private void load(AudioManager audio, OsuConfigManager config)
         {
             errorSample = audio.Samples.Get(@"UI/generic-error");
-            innerContainer.Shear = -OsuGame.SHEAR;
             configBeatmapPreview = config.GetBindable<bool>(OsuSetting.SongSelectPreview);
-            float creationHeight = 0.01f;
-            if (configBeatmapPreview.Value)
-                creationHeight = 0.4f;
-            configBeatmapPreview.BindValueChanged(e =>
-            {
-                if (!configBeatmapPreview.Value)
-                {
-                    innerContainer.Height = 0f;
-                    innerContainer.Children = Array.Empty<Drawable>();
-                }
-                else
-                {
-                    innerContainer.Height = 0.4f;
-                    showPreview();
-                }
-            });
             AddRangeInternal(new Drawable[]
             {
                 new GlobalScrollAdjustsVolume(),
@@ -235,12 +223,12 @@ namespace osu.Game.Screens.Select
                             RelativeSizeAxes = Axes.Both,
                             Children = new Drawable[]
                             {
-                                new Box
-                                {
-                                    RelativeSizeAxes = Axes.Both,
-                                    Width = 0.6f,
-                                    Colour = ColourInfo.GradientHorizontal(Color4.Black.Opacity(0.3f), Color4.Black.Opacity(0f)),
-                                },
+                                //new Box
+                                //{
+                                //    RelativeSizeAxes = Axes.Both,
+                                //    Width = 0.6f,
+                                //    Colour = ColourInfo.GradientHorizontal(Color4.Black.Opacity(0.3f), Color4.Black.Opacity(0f)),
+                                //}, // hotiatodo: think more about this
                                 mainGridContainer = new GridContainer // used for max width implementation
                                 {
                                     RelativeSizeAxes = Axes.Both,
@@ -255,11 +243,10 @@ namespace osu.Game.Screens.Select
                                                 // but more importantly, for input purposes to allow the scroll-to-selection logic to override carousel's
                                                 // screen-wide scroll handling.
                                                 Depth = float.MinValue,
-                                                Shear = OsuGame.SHEAR,
                                                 Padding = new MarginPadding
                                                 {
-                                                    Top = -CORNER_RADIUS_HIDE_OFFSET,
-                                                    Left = -CORNER_RADIUS_HIDE_OFFSET,
+                                                    Top = CORNER_RADIUS_HIDE_OFFSET,
+                                                    Left = CORNER_RADIUS_HIDE_OFFSET,
                                                 },
                                                 Children = new Drawable[]
                                                 {
@@ -280,12 +267,11 @@ namespace osu.Game.Screens.Select
                                                         Direction = FillDirection.Vertical,
                                                         Children = new Drawable[]
                                                         {
-                                                            new ShearAligningWrapper(titleWedge = new BeatmapTitleWedge
+                                                            titleWedge = new BeatmapTitleWedge
                                                             {
-                                                                TopPadding = TopPadding,
-                                                            }),
-
-                                                            new Graphics.UserInterfaceV2.RoundedButton()
+                                                                TopPadding = 0,
+                                                            },
+                                                            showPreviewbutton = new Graphics.UserInterfaceV2.HotiaRoundedButton(cornerRadius: 12)
                                                             .With(b =>
                                                             {
                                                                 b.Action = () => config.SetValue<bool>(OsuSetting.SongSelectPreview, !configBeatmapPreview.Value);
@@ -294,23 +280,20 @@ namespace osu.Game.Screens.Select
                                                                 b.Masking = true;
                                                                 b.Padding = new MarginPadding{Top = TopPadding};
                                                                 b.BorderThickness = 2;
-                                                                b.CornerRadius = 5f;
-                                                                //b.Alpha = 0.6f;
-                                                                b.Colour = colourProvider.Colour4; //colourProvider.Content2
-                                                                b.Text = "Show preview";
-                                                                b.BackgroundColour = Colour4.Black.Opacity(0.4f);
+                                                                b.Colour = colourProvider.Colour4.Opacity(0.2f); //colourProvider.Content2
+                                                                b.Text = configBeatmapPreview.Value ? "Hide preview" : "Show preview";
+                                                                b.BackgroundColour = Colour4.Black.Opacity(0.5f);
                                                             }),
-                                                            innerContainer.With(ic =>
-                                                            {
-                                                                ic.RelativeSizeAxes = Axes.Both;
-                                                                ic.Height = creationHeight;
-                                                            }),
-                                                            new ShearAligningWrapper(detailsArea = new BeatmapDetailsArea()),
+                                                            detailsArea = new BeatmapDetailsArea(),
                                                         },
                                                     },
                                                 }
                                             },
                                             Empty(),
+                                            innerContainer.With(ic =>
+                                            {
+                                                ic.RelativeSizeAxes = Axes.Both;
+                                            }),
                                             new Container
                                             {
                                                 RelativeSizeAxes = Axes.Both,
@@ -320,7 +303,7 @@ namespace osu.Game.Screens.Select
                                                     {
                                                         Anchor = Anchor.TopRight,
                                                         Origin = Anchor.TopRight,
-                                                        Colour = ColourInfo.GradientHorizontal(Color4.Black.Opacity(0.0f), Color4.Black.Opacity(0.5f)),
+                                                        Colour = ColourInfo.GradientHorizontal(Color4.Black.Opacity(0.0f), Color4.Black.Opacity(0.01f)),
                                                         RelativeSizeAxes = Axes.Both,
                                                     },
                                                     new Container
@@ -330,6 +313,7 @@ namespace osu.Game.Screens.Select
                                                         {
                                                             Top = FilterControl.HEIGHT_FROM_SCREEN_TOP + 5,
                                                             Bottom = 5,
+                                                            Left = -50f,
                                                         },
                                                         Children = new Drawable[]
                                                         {
@@ -354,6 +338,7 @@ namespace osu.Game.Screens.Select
                                                         Anchor = Anchor.TopRight,
                                                         Origin = Anchor.TopRight,
                                                         RelativeSizeAxes = Axes.X,
+                                                        Width = 0.7f,
                                                         ScopedBeatmapSet = { BindTarget = ScopedBeatmapSet },
                                                     },
                                                 }
@@ -459,6 +444,24 @@ namespace osu.Game.Screens.Select
                 if (ShowOsuLogo)
                     logo?.FadeTo(v.NewValue == Visibility.Visible ? 0f : 1f, 200, Easing.OutQuint);
             });
+
+            configBeatmapPreview.BindValueChanged(e =>
+            {
+                if (!configBeatmapPreview.Value)
+                {
+                    innerContainer.Height = 0.01f;
+                    innerContainer.Alpha = 0.01f;
+                    innerContainer.Children = Array.Empty<Drawable>();
+                    showPreviewbutton.Text = "Show preview";
+                }
+                else
+                {
+                    innerContainer.Height = 1f;
+                    innerContainer.Alpha = 1f;
+                    showPreviewbutton.Text = "Hide preview";
+                    showPreview();
+                }
+            });
         }
 
         protected override void Update()
@@ -471,9 +474,10 @@ namespace osu.Game.Screens.Select
 
             mainGridContainer.ColumnDimensions = new[]
             {
-                new Dimension(GridSizeMode.Relative, 0.5f, maxSize: 700 + widescreenBonusWidth * 100),
+                new Dimension(GridSizeMode.Relative, 0.2f, maxSize: 700 + widescreenBonusWidth * 100),
+                new Dimension(GridSizeMode.Relative, 0.1f, maxSize: 700 + widescreenBonusWidth * 100),
                 new Dimension(),
-                new Dimension(GridSizeMode.Relative, 0.5f, minSize: 500, maxSize: 700 + widescreenBonusWidth * 300),
+                new Dimension(GridSizeMode.Relative, 0.3f, minSize: 0, maxSize: 700 + widescreenBonusWidth * 300), //500
             };
 
             if (this.IsCurrentScreen())
@@ -711,18 +715,19 @@ namespace osu.Game.Screens.Select
         {
             if (Beatmap == null || Beatmap.Value.BeatmapInfo.Ruleset.Name == "dummy") return;
 
-            Ruleset? rulesetInstance = Ruleset.Value.CreateInstance();//Beatmap.Value.BeatmapInfo.Ruleset.CreateInstance();
+            Ruleset? rulesetInstance = Ruleset.Value.CreateInstance();
             ModAutoplay? createModAutoplay = rulesetInstance.CreateMod<ModAutoplay>();
             if (createModAutoplay == null) return;
             Mod[]? autoplayMods = new Mod[] { createModAutoplay };
             IBeatmap? playableBeatmap = Beatmap.Value.GetPlayableBeatmap(rulesetInstance.RulesetInfo, autoplayMods);
             DrawableRuleset? drawableRuleset = rulesetInstance.CreateDrawableRulesetWith(playableBeatmap, autoplayMods);
             drawableRuleset.Audio.AddAdjustment(AdjustableProperty.Volume, new BindableDouble(0));
+
             foreach (var item in drawableRuleset.Objects)
-            {
                 item.Samples.Clear();
-            }
-            if (playableBeatmap == null || drawableRuleset == null || Beatmap.Value.Beatmap == null) return;
+
+            if (playableBeatmap == null || drawableRuleset == null || Beatmap.Value.Beatmap == null)
+                return;
 
             GameplayClockContainer clockContainer = new MasterGameplayClockContainer(Beatmap.Value, Beatmap.Value.BeatmapInfo.Metadata.PreviewTime);
             if (SkinManager != null)
@@ -732,18 +737,8 @@ namespace osu.Game.Screens.Select
                 if (currentSkin != null)
                 {
                     var rsp = new RulesetSkinProvidingContainer(rulesetInstance, playableBeatmap, currentSkin);
-                    if (!(rulesetInstance.RulesetInfo.ShortName == "taiko"))
-                    {
-                        clockContainer.Add(rsp);
-                        rsp.Add(drawableRuleset);
-                    }
-                    else
-                    {
-                        clockContainer.Add(rsp);
-                        rsp.Add(drawableRuleset);
-                        //clockContainer.Add(drawableRuleset);
-                    }
-                     //hotiaTODO not sure if it's really correct
+                    clockContainer.Add(rsp);
+                    rsp.Add(drawableRuleset);
                 }
 
             }
@@ -751,76 +746,50 @@ namespace osu.Game.Screens.Select
             Score? score = createModAutoplay.CreateScoreFromReplayData(gameplay.Beatmap, [createModAutoplay]);
             drawableRuleset.FrameStablePlayback = true;
             drawableRuleset.Cursor?.Dispose();
-            //(Clock as IGameplayClock)?.IsRewinding
-            var aabb = drawableRuleset.ScreenSpaceDrawQuad.AABB;
-            switch (rulesetInstance.RulesetInfo.ShortName)
-            {
-                case "osu":
-                    break;
-                case "taiko":
-                    //drawableRuleset.Scale = new Vector2(0.96f);
-                    break;
-                case "mania":
-                    break;
-                case "fruits":
-                    drawableRuleset.Scale = new Vector2(0.4f);
-                    drawableRuleset.Anchor = Anchor.Centre;
-                    break;
-                default:
-                    break;
-            }
-            int ski = score.Replay.Frames.RemoveAll(f => f.Time <= Beatmap.Value.BeatmapInfo.Metadata.PreviewTime);
+
+            if (rulesetInstance.RulesetInfo.ShortName == "fruits")
+                drawableRuleset.Anchor = Anchor.TopLeft;
+
+            score.Replay.Frames.RemoveAll(f => f.Time <= Beatmap.Value.BeatmapInfo.Metadata.PreviewTime);
             Schedule(() => drawableRuleset.Cursor?.Hide());
-            //clockContainer.Add(drawableRuleset);
-            var z = clockContainer.Children;
+
             innerContainer.Children = new Drawable[]
             {
-                new ShearAligningWrapper(new Container
+                new Container
                     {
                         RelativeSizeAxes = Axes.Both,
-                        Shear = OsuGame.SHEAR,
                         Masking = true,
                         CornerRadius = 5,
-                        BorderThickness = 2,
-                        BorderColour = Color4.Black,
+                        BorderThickness = 1,
+                        BorderColour = Color4.Black.Opacity(0.2f),
                         Children = new Drawable[]
                         {
                             new Box {
                                 RelativeSizeAxes = Axes.Both,
                                 Colour = Color4.Black,
-                                Alpha = 0.4f,
+                                Alpha = 0.2f,
                             },
                             new Container
                             {
                                 RelativeSizeAxes = Axes.Both,
-                                //Scale = new Vector2(0.8f,0.8f),
-                                Width = 0.8f,
-                                Shear = -OsuGame.SHEAR,
+                                //Width = 0.8f, //hotiaTODO can be useful
                                 Anchor = Anchor.TopLeft,
-                                RelativeAnchorPosition = new Vector2(0.1f, 0),
+                                Origin = Anchor.TopLeft,
                                 Masking = true, //limits taiko-slider to this container
                                 Children = new Drawable[]
                                 {
-                                new Box {
-                                    RelativeSizeAxes = Axes.Both,
-                                    Colour = Color4.Red,
-                                    Alpha = 0f,
-                                },
                                 clockContainer
-                                //.With(c=>c.Colour = ColourInfo.GradientHorizontal(
-                                //                                    Color4.White,
-                                //                                    Color4.White.Opacity(0)
-                                //                                ))
                                 }
                             }
-                            //clockContainer//.With(cc => {cc.Shear = -OsuGame.SHEAR; }),// hotiaTODO hitobjects dopnt respect shear
                         }
-                    }),
-                    //clockContainer,
+                    },
             };
-            drawableRuleset.SetReplayScore(score);
-            //Scheduler.AddDelayed(() => drawableRuleset.SetReplayScore(score), 10);
-            drawableRuleset.Show();
+            drawableRuleset.SetReplayScore(score); //hotiaTODO: consider Scheduler.AddDelayed(() => drawableRuleset.SetReplayScore(score), 10);
+            drawableRuleset.FrameStableClock.IsCatchingUp.BindValueChanged(dr =>
+            {
+                //hotiaTODO: what a weird way to prevent a possible infsize crash
+                innerContainer.Alpha = dr.NewValue ? preview_vis.hidden : preview_vis.visible;
+            }, true);
         }
 
         private bool checkBeatmapValidForSelection(BeatmapInfo beatmap)
