@@ -230,13 +230,16 @@ namespace osu.Game.Overlays.BeatmapListing
             getSetsRequest = new SearchBeatmapSetsRequestDirect(
                 searchControl.Query.Value,
                 searchControl.Ruleset.Value,
+                CurrentPage,
+                lastResponse != null ? lastResponse.Count : 0,
                 null,
-                searchControl.Category.Value);
-            //lastResponse?.Cursor,
+                searchControl.Category.Value,
+                sortControl.Current.Value,
+                sortControl.SortDirection.Value);
+            //
             //searchControl.General,
             //searchControl.Category.Value,
-            //sortControl.Current.Value,
-            //sortControl.SortDirection.Value,
+
             //searchControl.Genre.Value,
             //searchControl.Language.Value,
             //searchControl.Extra,
@@ -248,8 +251,8 @@ namespace osu.Game.Overlays.BeatmapListing
                 //var sets = response.BeatmapSets.ToList();
                 var sets = response;
                 // If the previous request returned a null cursor, the API is indicating we can't paginate further (maybe there are no more beatmaps left).
-                //if (sets.Count == 0 || response.Cursor == null)
-                noMoreResults = true;
+                if (sets.Count == 0)
+                    noMoreResults = true;
 
                 if (CurrentPage == 0)
                     searchControl.BeatmapSet = sets.FirstOrDefault();

@@ -1,8 +1,13 @@
 ﻿// Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
+//
+// Copyright (c) moorf. Modified 2026.
+// Modifications released under the GNU General Public License v3.0.
+// See the LICENCE.GPL3 file in the repository root for full licence text.
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
@@ -111,10 +116,10 @@ namespace osu.Game.Online.API.Requests
             //if (Played != SearchPlayed.Any)
             //    req.AddParameter("played", Played.ToString().ToLowerInvariant());
 
-            req.AddParameter("nsfw", ExplicitContent == SearchExplicit.Show ? "true" : "false");
+            //req.AddParameter("nsfw", ExplicitContent == SearchExplicit.Show ? "true" : "false");
 
-            //if (cursor != null)
-            //    req.AddCursor(cursor);
+            if (cursor != null)
+                req.AddCursor(cursor);
             return req;
         }
 
@@ -147,15 +152,20 @@ namespace osu.Game.Online.API.Requests
         [CanBeNull]
         public IReadOnlyCollection<ScoreRank> Ranks { get; }
 
+        public int Offset;
+
+        public int LastResponseCount;
+
         private readonly string query;
         private readonly RulesetInfo ruleset;
-        private readonly Cursor cursor;
 
         private string directionString => SortDirection == SortDirection.Descending ? @"desc" : @"asc";
 
         public SearchBeatmapSetsRequestDirect(
             string query,
             RulesetInfo ruleset,
+            int currentPage = 0,
+            int lastResponseCount = 0,
             IReadOnlyCollection<SearchGeneral> general = null,
             SearchCategory searchCategory = SearchCategory.Any,
             SortCriteria sortCriteria = SortCriteria.Ranked,
@@ -170,7 +180,6 @@ namespace osu.Game.Online.API.Requests
             this.query = query;
             this.ruleset = ruleset;
 
-
             General = general;
             SearchCategory = searchCategory;
             SortCriteria = sortCriteria;
@@ -181,6 +190,8 @@ namespace osu.Game.Online.API.Requests
             Ranks = ranks;
             Played = played;
             ExplicitContent = explicitContent;
+            Offset = currentPage;
+            LastResponseCount = lastResponseCount;
         }
 
         protected override WebRequest CreateWebRequest()
@@ -205,8 +216,33 @@ namespace osu.Game.Online.API.Requests
 
             //if (Language != SearchLanguage.Any)
             //    req.AddParameter("l", ((int)Language).ToString());
-
-            ////req.AddParameter("sort", $"{SortCriteria.ToString().ToLowerInvariant()}_{directionString}");
+            string criteria = "";
+            switch (SortCriteria)
+            {
+                case SortCriteria.Plays:
+                    criteria = "beatmaps.playcount";
+                    break;
+                case SortCriteria.Title:
+                    criteria = "title";
+                    break;
+                case SortCriteria.Artist:
+                    criteria = "artist";
+                    break;
+                case SortCriteria.Favourites:
+                    criteria = "favourite_count";
+                    break;
+                case SortCriteria.Updated:
+                    criteria = "last_updated";
+                    break;
+                case SortCriteria.Ranked:
+                    criteria = "ranked_date";
+                    break;
+                case SortCriteria.Difficulty:
+                    criteria = "beatmaps.difficulty_rating";
+                    break;
+            }
+            if (criteria.Length > 0)
+                req.AddParameter("sort", $"{criteria}:{directionString}");
 
             //if (Extra != null && Extra.Any())
             //    req.AddParameter("e", string.Join('.', Extra.Select(e => e.ToString().ToLowerInvariant())));
@@ -217,7 +253,10 @@ namespace osu.Game.Online.API.Requests
             //if (Played != SearchPlayed.Any)
             //    req.AddParameter("played", Played.ToString().ToLowerInvariant());
 
-            req.AddParameter("nsfw", ExplicitContent == SearchExplicit.Show ? "true" : "false");
+            //req.AddParameter("nsfw", ExplicitContent == SearchExplicit.Show ? "true" : "false");
+
+            req.AddParameter("offset", ((int)(Offset * Math.Max(LastResponseCount, 1))).ToString());
+            //hotiaTODO: accumulate "LastResponseCount"s
 
             //if (cursor != null)
             //    req.AddCursor(cursor);
