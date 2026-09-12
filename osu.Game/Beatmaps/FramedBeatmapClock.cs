@@ -132,12 +132,17 @@ namespace osu.Game.Beatmaps
         /// Audio timings in general with newer BASS versions don't match stable.
         /// This only seems to be required on windows. We need to eventually figure out why, with a bit of luck.
         /// </summary>
-        public const double WINDOWS_BASE_AUDIO_OFFSET = 15;
+        public const double WINDOWS_BASE_AUDIO_OFFSET = 0;
 
         /// <summary>
         /// An additional offset applied to account for experimental mode being much better.
+        /// hotia: after careful consideration i'm inclined to remove all fixed offsets hidden from the user
+        /// the fact that i learned about this hidden constant offset only now makes me mad, this shouldn't even be the case
+        /// it is redundant when there is an offset option already in the game
+        /// moreover, this offset is effectively hidden from the rest of the audio implementation.
+        /// the functionaly is BASS specific, but this class isn't necessarily dependant on BASS.
         /// </summary>
-        public const double WINDOWS_EXPERIMENTAL_AUDIO_OFFSET = -25;
+        public const double WINDOWS_EXPERIMENTAL_AUDIO_OFFSET = 0;
 
         private void updatePlatformOffset()
         {
