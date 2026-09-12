@@ -63,8 +63,8 @@ namespace osu.Game.Screens.Footer
                 }
             };
 
-            DarkerColour = Color4Extensions.FromHex("#DE31AE");
-            LighterColour = Color4Extensions.FromHex("#FF86DD");
+            DarkerColour = Color4Extensions.FromHex("#993333");
+            LighterColour = Color4Extensions.FromHex("#c63939");
             TextColour = Color4.White;
         }
     }

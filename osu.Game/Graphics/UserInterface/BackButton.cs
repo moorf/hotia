@@ -43,8 +43,8 @@ namespace osu.Game.Graphics.UserInterface
         [BackgroundDependencyLoader]
         private void load(OsuColour colours)
         {
-            button.BackgroundColour = colours.Pink;
-            button.HoverColour = colours.PinkDark;
+            button.BackgroundColour = colours.Red;
+            button.HoverColour = colours.RedDark;
         }
 
         protected override void PopIn()
