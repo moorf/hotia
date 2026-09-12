@@ -15,6 +15,7 @@ using osu.Framework.Graphics.Shapes;
 using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Input.Events;
 using osu.Framework.IO.Stores;
+using osu.Game.Graphics.Backgrounds;
 using osu.Game.Rulesets;
 using osuTK;
 using osuTK.Graphics;
@@ -35,6 +36,10 @@ namespace osu.Game.Overlays.Toolbar
 
         private ISampleStore samples;
 
+        [Resolved]
+        private OverlayColourProvider colourProvider { get; set; }
+        private Container background;
+
         public ToolbarRulesetSelector()
         {
             RelativeSizeAxes = Axes.Y;
@@ -46,10 +51,24 @@ namespace osu.Game.Overlays.Toolbar
         {
             AddRangeInternal(new[]
             {
-                new OpaqueBackground
+                background = new Container
                 {
                     Depth = 1,
                     Masking = true,
+                    Children = new Drawable[]
+                    {
+                        new Box
+                        {
+                            RelativeSizeAxes = Axes.Both,
+                            Colour = colourProvider.Background5,
+                        },
+                        new Triangles
+                        {
+                            RelativeSizeAxes = Axes.Both,
+                            ColourLight = colourProvider.Background5,
+                            ColourDark = colourProvider.Background6,
+                        },
+                    }
                 },
                 ModeButtonLine = new Container
                 {
@@ -68,7 +87,6 @@ namespace osu.Game.Overlays.Toolbar
                     }
                 },
             });
-
             var store = new ResourceStore<byte[]>(game.Resources);
             samples = audio.GetSampleStore(new NamespacedResourceStore<byte[]>(store, "Samples"), audio.SampleMixer);
 

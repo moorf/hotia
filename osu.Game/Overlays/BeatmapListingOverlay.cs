@@ -47,7 +47,7 @@ namespace osu.Game.Overlays
         private BeatmapListingFilterControl filterControl => Header.FilterControl;
 
         public BeatmapListingOverlay()
-            : base(OverlayColourScheme.Blue)
+            : base(OverlayColourScheme.Red)
         {
         }
 

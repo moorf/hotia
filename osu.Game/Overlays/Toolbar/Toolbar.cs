@@ -39,6 +39,10 @@ namespace osu.Game.Overlays.Toolbar
 
         private const double transition_time = 500;
 
+        [Cached]
+        private readonly OverlayColourProvider colourProvider = new OverlayColourProvider(OverlayColourScheme.Red);
+
+
         protected readonly IBindable<OverlayActivation> OverlayActivationMode = new Bindable<OverlayActivation>(OverlayActivation.All);
 
         // Toolbar and its components need keyboard input even when hidden.
@@ -94,7 +98,7 @@ namespace osu.Game.Overlays.Toolbar
                                 {
                                     new Box
                                     {
-                                        Colour = OsuColour.Gray(0.1f),
+                                        Colour = colourProvider.Background5,
                                         RelativeSizeAxes = Axes.Both,
                                     },
                                     new FillFlowContainer
@@ -131,7 +135,7 @@ namespace osu.Game.Overlays.Toolbar
                                     },
                                     new Box
                                     {
-                                        Colour = ColourInfo.GradientHorizontal(OsuColour.Gray(0.1f).Opacity(0), OsuColour.Gray(0.1f)),
+                                        Colour = ColourInfo.GradientHorizontal(colourProvider.Background6.Opacity(0), colourProvider.Background6),
                                         Width = 50,
                                         RelativeSizeAxes = Axes.Y,
                                         Anchor = Anchor.TopRight,
@@ -208,16 +212,19 @@ namespace osu.Game.Overlays.Toolbar
             public Bindable<bool> ShowGradient { get; } = new BindableBool();
 
             private readonly Box gradientBackground;
+            private readonly Box mainBackground;
+
+            [Resolved]
+            private OverlayColourProvider colourProvider { get; set; }
 
             public ToolbarBackground()
             {
                 RelativeSizeAxes = Axes.Both;
                 Children = new Drawable[]
                 {
-                    new Box
+                    mainBackground = new Box
                     {
                         RelativeSizeAxes = Axes.Both,
-                        Colour = OsuColour.Gray(0.1f),
                     },
                     gradientBackground = new Box
                     {
@@ -229,6 +236,12 @@ namespace osu.Game.Overlays.Toolbar
                             OsuColour.Gray(0f).Opacity(0.7f), OsuColour.Gray(0).Opacity(0)),
                     },
                 };
+            }
+
+            [BackgroundDependencyLoader]
+            private void load()
+            {
+                mainBackground.Colour = colourProvider.Background5;
             }
 
             protected override void LoadComplete()

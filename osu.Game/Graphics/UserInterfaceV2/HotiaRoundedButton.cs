@@ -116,7 +116,7 @@ namespace osu.Game.Graphics.UserInterfaceV2
             Origin = Anchor.Centre,
             Anchor = Anchor.Centre,
             Font = OsuFont.Style.Heading2.With(weight: FontWeight.SemiBold),
-            Colour = new Colour4(220, 220, 220, 255),
+            //Colour = new Colour4(220, 220, 220, 255),
         };
     }
 }

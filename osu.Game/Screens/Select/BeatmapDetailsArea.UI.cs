@@ -71,9 +71,9 @@ namespace osu.Game.Graphics.UserInterface
 
         protected virtual void UpdateActiveState()
         {
-            DarkerColour = Active.Value ? ColourProvider.HotiaHighlight1 : ColourProvider.HotiaBackground3;
-            LighterColour = Active.Value ? ColourProvider.HotiaColour0 : ColourProvider.HotiaBackground1;
-            TextColour = Active.Value ? ColourProvider.HotiaBackground6 : ColourProvider.HotiaContent1;
+            DarkerColour = Active.Value ? ColourProvider.Highlight1 : ColourProvider.Background3;
+            LighterColour = Active.Value ? ColourProvider.Colour0 : ColourProvider.Background1;
+            TextColour = Active.Value ? ColourProvider.Background6 : ColourProvider.Content1;
         }
 
         private void playSample()
@@ -249,9 +249,9 @@ namespace osu.Game.Graphics.UserInterface
 
         private void updateState()
         {
-            var colourDark = darkerColour ?? ColourProvider.HotiaBackground3;
-            var colourLight = lighterColour ?? ColourProvider.HotiaBackground1;
-            var colourContent = textColour ?? ColourProvider.HotiaContent1;
+            var colourDark = darkerColour ?? ColourProvider.Background3;
+            var colourLight = lighterColour ?? ColourProvider.Background1;
+            var colourContent = textColour ?? ColourProvider.Content1;
 
             if (!Enabled.Value)
             {

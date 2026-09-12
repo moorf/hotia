@@ -62,7 +62,7 @@ namespace osu.Game.Screens.Footer
         //
         // For now it's locked to Blue to match song select (the most prominent usage).
         [Cached]
-        private readonly OverlayColourProvider colourProvider = new OverlayColourProvider(OverlayColourScheme.Blue);
+        private readonly OverlayColourProvider colourProvider = new OverlayColourProvider(OverlayColourScheme.Red);
 
         public ScreenFooter(BackReceptor? receptor = null)
         {

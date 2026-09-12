@@ -122,7 +122,7 @@ namespace osu.Game.Screens.Select
         // Purple makes the most sense to match the "gameplay" flow, but it's a bit too strong for the current design.
         // TODO: Colour scheme choice should probably be customisable by the user.
         [Cached]
-        private readonly OverlayColourProvider colourProvider = new OverlayColourProvider(OverlayColourScheme.Blue);
+        private OverlayColourProvider colourProvider = new OverlayColourProvider(OverlayColourScheme.Red);
 
         private BeatmapCarousel carousel = null!;
 

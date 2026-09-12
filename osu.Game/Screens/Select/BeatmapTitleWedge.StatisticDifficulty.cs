@@ -45,6 +45,8 @@ namespace osu.Game.Screens.Select
 
             //private readonly OsuSpriteText labelText;
             private readonly OsuSpriteText valueText;
+
+            private Box labelBg;
             //private readonly SpriteIcon valueIcon;
             private readonly Container bars;
 
@@ -80,7 +82,7 @@ namespace osu.Game.Screens.Select
                         CornerRadius = 10f,
                         Children = new Drawable[]
                         {
-                            new Box
+                            labelBg = new Box
                             {
                                 RelativeSizeAxes = Axes.Both,
                                 Colour = new Colour4(18,18,18,255),
@@ -114,8 +116,9 @@ namespace osu.Game.Screens.Select
             [BackgroundDependencyLoader]
             private void load(OverlayColourProvider colourProvider)
             {
-                labelText.Colour = colourProvider.Content1;
+                labelText.Colour = colourProvider.Content2;
                 valueText.Colour = colourProvider.Content1;
+                labelBg.Colour = colourProvider.Background1;
             }
 
             protected override void LoadComplete()

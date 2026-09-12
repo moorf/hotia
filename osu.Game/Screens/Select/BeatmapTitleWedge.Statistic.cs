@@ -123,7 +123,7 @@ namespace osu.Game.Screens.Select
                                             Anchor = Anchor.CentreLeft,
                                             Origin = Anchor.CentreLeft,
                                             Font = OsuFont.Style.Heading2,
-                                            Colour = new Colour4(200,200,200,255),
+                                            Colour = colourProvider.Content1,
                                             Margin = new MarginPadding { Bottom = 2f },
                                             AlwaysPresent = true,
                                             MaxWidth = maxSize,

@@ -101,7 +101,7 @@ namespace osu.Game.Screens.Select
         private ILinkHandler? linkHandler { get; set; }
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(OverlayColourProvider colourProvider)
         {
             playCount = new StatisticPlayCount(background: true, leftPadding: SongSelect.WEDGE_CONTENT_MARGIN, minSize: 50f)
             {
@@ -116,7 +116,7 @@ namespace osu.Game.Screens.Select
             });
             Masking = true;
             CornerRadius = corner_radius + 2;
-            BorderColour = Colour4.Black;
+            BorderColour = colourProvider.Background5;
             BorderThickness = 2f;
             InternalChildren = new Drawable[]
             {
@@ -124,7 +124,7 @@ namespace osu.Game.Screens.Select
                 {
                     RelativeSizeAxes = Axes.Both,
                     Alpha = 0.8f,
-                    Colour = new Colour4(34,34,34, 255),
+                    Colour = colourProvider.Background4,
                 },
                 new FillFlowContainer
                 {
@@ -140,7 +140,7 @@ namespace osu.Game.Screens.Select
                                     RelativeSizeAxes = Axes.X,
                                     Height = OsuFont.Style.Heading2.Size,
                                     Margin = new MarginPadding { Left = 1f },
-                                    Colour = new Colour4(185,185,185,255),
+                                    Colour = colourProvider.Content2,
                                     Child = artistLink = new OsuHoverContainer
                                     {
                                         RelativeSizeAxes = Axes.X,
@@ -170,7 +170,7 @@ namespace osu.Game.Screens.Select
                                 {
                                     RelativeSizeAxes = Axes.X,
                                     AutoSizeAxes = Axes.Y,
-                                    Colour = new Colour4(140, 140, 140, 255),
+                                    Colour = colourProvider.Content2,
                                     Direction = FillDirection.Horizontal,
                                     Margin = new MarginPadding { Top = 8f, Bottom = 2f },
                                     Children = new Drawable[]
@@ -220,14 +220,14 @@ namespace osu.Game.Screens.Select
                                         AutoSizeAxes = Axes.Y,
                                         Masking = true,
                                         CornerRadius = 16,
-                                        BorderColour = Colour4.Black,
+                                        BorderColour = colourProvider.Background5,
                                         BorderThickness = 2f,
                                         Children = new Drawable[]
                                         {
                                             new Box
                                             {
                                                 RelativeSizeAxes = Axes.Both,
-                                                Colour = new Colour4(50, 50, 50, 255),
+                                                Colour = colourProvider.Background3,
                                             },
                                             statisticsFlow = new FillFlowContainer
                                             {
@@ -248,14 +248,14 @@ namespace osu.Game.Screens.Select
                                         AutoSizeAxes = Axes.Y,
                                         Masking = true,
                                         CornerRadius = 16,
-                                        BorderColour = Colour4.Black,
+                                        BorderColour = colourProvider.Background5,
                                         BorderThickness = 2f,
                                         Children = new Drawable[]
                                         {
                                             new Box
                                             {
                                                 RelativeSizeAxes = Axes.Both,
-                                                Colour = new Colour4(50, 50, 50, 255),
+                                                Colour = colourProvider.Background3,
                                             },
                                             lengthStatistic = new Statistic(leftPadding: 10, maxSize: 0.46f)
                                             {
@@ -278,7 +278,7 @@ namespace osu.Game.Screens.Select
                                                         Width = 1f,
                                                         Shear = OsuGame.SHEAR,
                                                         EdgeSmoothness = new Vector2(1f),
-                                                        Colour = new Colour4(0,0,0, 255),
+                                                        Colour = colourProvider.Background5,
                                                     }),
                                                     bpmStatistic = new Statistic()
                                                     {

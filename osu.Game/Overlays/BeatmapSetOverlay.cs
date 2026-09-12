@@ -37,7 +37,7 @@ namespace osu.Game.Overlays
         private (BeatmapSetLookupType type, int id)? lastLookup;
 
         public BeatmapSetOverlay()
-            : base(OverlayColourScheme.Blue)
+            : base(OverlayColourScheme.Red)
         {
             Info info;
             CommentsSection comments;

@@ -11,6 +11,7 @@ using osu.Framework.Graphics.Sprites;
 using osu.Framework.Graphics.UserInterface;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
+using osu.Game.Overlays;
 using osu.Game.Utils;
 using osuTK;
 using osuTK.Graphics;
@@ -108,7 +109,7 @@ namespace osu.Game.Beatmaps.Drawables
                         ColumnDimensions = new[]
                         {
                             new Dimension(GridSizeMode.AutoSize),
-                            new Dimension(GridSizeMode.Absolute, 3f),
+                            new Dimension(GridSizeMode.Absolute, 6f),
                             new Dimension(GridSizeMode.AutoSize, minSize: 25f),
                         },
                         RowDimensions = new[] { new Dimension(GridSizeMode.AutoSize) },
@@ -122,7 +123,7 @@ namespace osu.Game.Beatmaps.Drawables
                                     Origin = Anchor.CentreLeft,
                                     Icon = FontAwesome.Solid.Star,
                                     Size = new Vector2(8f),
-                                    Colour = new Colour4(200,200,200,255),
+                                    //Colour = OsuColour.ForStarDifficulty(starDifficulty.Stars),
                                 },
                                 Empty(),
                                 starsText = new TruncatingSpriteText
@@ -132,13 +133,20 @@ namespace osu.Game.Beatmaps.Drawables
                                     Margin = new MarginPadding { Bottom = 1.5f },
                                     Font = OsuFont.Style.Heading2,
                                     Shadow = false,
-                                    Colour = new Colour4(200,200,200,255),
+                                    //Colour = new Colour4(200,200,200,255),
                                 },
                             }
                         }
                     },
                 }
             };
+        }
+
+        [BackgroundDependencyLoader]
+        private void load(OverlayColourProvider colourProvider)
+        {
+            starIcon.Colour = colourProvider.Content2;
+            starsText.Colour = colourProvider.Content1;
         }
 
         protected override void LoadComplete()
