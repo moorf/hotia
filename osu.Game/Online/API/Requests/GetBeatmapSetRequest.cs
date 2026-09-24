@@ -30,6 +30,18 @@ namespace osu.Game.Online.API.Requests
             Type == BeatmapSetLookupType.SetId
                 ? $"s/{ID}"
                 : $"b/{ID}/set";
+
+        protected override void PostProcess()
+        {
+            base.PostProcess();
+
+            if (Response != null)
+            {
+                // set up backlinks to the set model from individual beatmaps so that consumers can freely traverse in both directions.
+                foreach (var beatmap in Response.Beatmaps)
+                    beatmap.BeatmapSet = Response;
+            }
+        }
     }
 
     public enum BeatmapSetLookupType

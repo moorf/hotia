@@ -243,6 +243,8 @@ namespace osu.Game.Configuration
             SetDefault(OsuSetting.DashboardSortMode, UserSortCriteria.LastVisit);
             SetDefault(OsuSetting.DashboardDisplayStyle, OverlayPanelDisplayStyle.Card);
             SetDefault(OsuSetting.SongSelectPreview, true); //hotiaTODO seems like true is okay even on android, i'll leave it on
+
+            SetDefault(OsuSetting.PMFriendsOnly, false);
         }
 
         protected override bool CheckLookupContainsPrivateInformation(OsuSetting lookup)
@@ -479,6 +481,11 @@ namespace osu.Game.Configuration
 
         DashboardSortMode,
         DashboardDisplayStyle,
-        SongSelectPreview
+        SongSelectPreview,
+
+        /// <summary>
+        /// Blocks private messages, multiplayer room invites, and duel requests from people not on the user's friends list.
+        /// </summary>
+        PMFriendsOnly,
     }
 }
