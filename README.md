@@ -1,9 +1,11 @@
 <p align="center">
   <img width="500" alt="hotia! logo" src="assets/hotia.png">
 </p>
-Hotia - independent fork of osu!lazer with performance in mind. Hotia is NOT IN ANY WAY affiliated or endorsed by either osu!, ppy, or osu! developers.
+Hotia - independent fork of osu!lazer. Hotia is NOT IN ANY WAY affiliated or endorsed by either osu!, ppy, or osu! developers.
 
-Small changes done with the main goal - *making it run good on mobile*. Get up to 2x performance now!
+<p align="center">
+  <img width="700" alt="hotia! logo" src="assets/preview.jpg">
+</p>
 
 ## Features
 - better performance
@@ -14,8 +16,6 @@ Small changes done with the main goal - *making it run good on mobile*. Get up t
 	- coloured judgements (to help Neiman know if he's rushing or dragging)
 	- relax difficulties (cursor must stay in a circle for specific amount of time)
 - storage decoupled from the database file (portability in the future, but the storage is a bit unstable for now)
-
-### try running it w/o hud too
 
 [**Latest release**](https://github.com/moorf/hotia/releases/latest)
 
