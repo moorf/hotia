@@ -55,6 +55,9 @@ namespace osu.Game.Rulesets.Osu.UI
                 // Let's wait for someone to report an issue before spending too much time on it.
                 cursorHideEnabled.BindValueChanged(enabled => Playfield.Cursor.FadeTo(enabled.NewValue ? 0 : 1), true);
             }
+            var layer = ((OsuPlayfield)Playfield).JudgementAboveHitObjectLayer;
+            layer.Depth = float.NegativeInfinity;
+            Overlays.Add(layer);
         }
 
         public override DrawableHitObject<OsuHitObject>? CreateDrawableRepresentation(OsuHitObject h) => null;

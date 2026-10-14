@@ -37,6 +37,8 @@ namespace osu.Game.Rulesets.Osu.UI
 
         private readonly JudgementPooler<DrawableOsuJudgement> judgementPooler;
 
+        public Container JudgementAboveHitObjectLayer => judgementAboveHitObjectLayer;
+
         // For hotia! gameplay, everything is always on screen.
         // Skipping masking calculations improves performance in intense beatmaps (ie. https://osu.hotia.org/beatmapsets/150945#osu/372245)
         public override bool UpdateSubTreeMasking() => false;
@@ -50,7 +52,7 @@ namespace osu.Game.Rulesets.Osu.UI
 
         public override Quad SkinnableComponentScreenSpaceDrawQuad => playfieldBorder.ScreenSpaceDrawQuad;
 
-        private readonly Container judgementAboveHitObjectLayer;
+        private readonly Container judgementAboveHitObjectLayer = new Container { RelativeSizeAxes = Axes.Both };
 
         public OsuPlayfield()
         {
@@ -69,7 +71,7 @@ namespace osu.Game.Rulesets.Osu.UI
                 FollowPoints = new FollowPointRenderer { RelativeSizeAxes = Axes.Both },
                 judgementLayer = new JudgementContainer<DrawableOsuJudgement> { RelativeSizeAxes = Axes.Both },
                 HitObjectContainer,
-                judgementAboveHitObjectLayer = new Container { RelativeSizeAxes = Axes.Both },
+                //judgementAboveHitObjectLayer = new Container { RelativeSizeAxes = Axes.Both },
                 approachCircles = new ProxyContainer { RelativeSizeAxes = Axes.Both },
             };
 
