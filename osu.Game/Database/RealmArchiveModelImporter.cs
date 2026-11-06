@@ -379,12 +379,12 @@ namespace osu.Game.Database
                     // We intentionally delay adding to realm to avoid blocking on a write during disk operations.
                     foreach (var filenames in getShortenedFilenames(archive))
                     {
-                        var fileHash = filenames.shortened;//archive.GetStream(filenames.original).ComputeSHA2Hash(); //filenames.shortened;//
+                        string filename = filenames.shortened;//archive.GetStream(filenames.original).ComputeSHA2Hash(); //filenames.shortened;//
                         if (FilesystemSanityCheckHelpers.IncursPathTraversalRisk(filenames.shortened))
                             throw new InvalidOperationException(
                                 $@"Filename ""{filenames.original}"" is not allowed.");
 
-                        string destinationPath = Path.Combine(itemDirectory, fileHash);//filenames.shortened
+                        string destinationPath = Path.Combine(itemDirectory, filename);//filenames.shortened
                         Directory.CreateDirectory(Path.GetDirectoryName(destinationPath)!);
 
                         using (Stream input = archive.GetStream(filenames.original))
@@ -393,7 +393,7 @@ namespace osu.Game.Database
 
                         var realmFile = new RealmFile
                         {
-                            Hash = item.Hash+fileHash,
+                            Hash = item.Hash + filename,
                             OwnerHash = item.Hash
                         };
 
@@ -689,5 +689,191 @@ namespace osu.Game.Database
         }
 
         public virtual string HumanisedModelName => $"{typeof(TModel).Name.Replace(@"Info", "").ToLowerInvariant()}";
+        public Task<IEnumerable<Live<TModel>>> Reimport()
+        {
+            var notification = new ProgressNotification
+            {
+                State = ProgressNotificationState.Active,
+                Text = $"{HumanisedModelName.Humanize(LetterCasing.Title)} reimport is initialising...",
+            };
+
+            PostNotification?.Invoke(notification);
+
+            return Reimport(notification, notification.CancellationToken);
+        }
+
+        public async Task<IEnumerable<Live<TModel>>> Reimport(ProgressNotification notification, CancellationToken cancellationToken = default)
+        {
+            string root = Files.Storage.GetFullPath(string.Empty);
+            string[] directories = Directory.Exists(root) ? Directory.GetDirectories(root) : Array.Empty<string>();
+
+            var imported = new List<Live<TModel>>();
+
+            if (directories.Length == 0)
+            {
+                notification.CompletionText = $"No {HumanisedModelName}s were found to reimport!";
+                notification.State = ProgressNotificationState.Completed;
+                return imported;
+            }
+
+            int current = 0;
+
+            notification.Progress = 0;
+            notification.State = ProgressNotificationState.Active;
+
+            try
+            {
+                foreach (string directory in directories)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    try
+                    {
+                        var model = await Task.Factory.StartNew(() => reimportDirectory(directory, cancellationToken),
+                            cancellationToken,
+                            TaskCreationOptions.HideScheduler,
+                            import_scheduler_batch).ConfigureAwait(false);
+
+                        if (model != null)
+                            imported.Add(model);
+                    }
+                    catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+                    {
+                        throw;
+                    }
+                    catch (Exception e)
+                    {
+                        Logger.Error(e, $@"Could not reimport directory ({Path.GetFileName(directory)})", LoggingTarget.Database);
+                    }
+                    current++;
+                    notification.Text = $"Reimporting {HumanisedModelName}s: {imported.Count} imported ({current} of {directories.Length} directories checked)";
+                    notification.Progress = (float)current / directories.Length;
+                }
+            }
+            finally
+            {
+                if (cancellationToken.IsCancellationRequested)
+                    notification.State = ProgressNotificationState.Cancelled;
+                else
+                {
+                    notification.CompletionText = $"Reimported {imported.Count} {HumanisedModelName}s.";
+                    notification.State = ProgressNotificationState.Completed;
+                }
+            }
+
+            return imported;
+        }
+
+        private Live<TModel>? reimportDirectory(string directory, CancellationToken cancellationToken) //hotiaTODO: bit of copypaste but it just werks
+        {
+            string ownerHash = Path.GetFileName(directory);
+
+            string[] filenames = Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories)
+                                          .Select(f => Path.GetRelativePath(directory, f).ToStandardisedPath()).Order().ToArray(); //order?
+
+
+            bool isHashable(string f) => HashableFileTypes.Any(ext => f.EndsWith(ext, StringComparison.OrdinalIgnoreCase));
+
+            if (!filenames.Any(f => !f.Contains('/') && isHashable(f)))
+                return null;
+
+            //hotiaTODO: it would be a good idea to rename dir to ownerhash, but i won't until i decide to thoroughly test this
+
+            var parameters = new ImportParameters { Batch = true };
+
+            return Realm.Run(realm =>
+            {
+                using (var archive = new DirectoryArchiveReader(directory))
+                {
+                    TModel? item;
+
+                    try
+                    {
+                        item = CreateModel(archive, parameters);
+                    }
+                    catch (Exception e)
+                    {
+                        LogForModel(null, $@"Model creation of {directory} failed.", e);
+                        return null;
+                    }
+
+                    if (item == null)
+                        return null;
+
+                    item.Hash = ownerHash;
+
+                    var existing = CheckForExisting(item, realm);
+
+                    if (existing != null)
+                    {
+                        LogForModel(item, $@"Found existing {HumanisedModelName} (ID {existing.ID}) – skipping reimport.");
+
+                        if (existing.DeletePending)
+                        {
+                            using (var transaction = realm.BeginWrite())
+                            {
+                                UndeleteForReuse(existing);
+                                transaction.Commit();
+                            }
+                        }
+
+                        return existing.ToLive(Realm);
+                    }
+
+                    try
+                    {
+                        LogForModel(item, $@"Beginning reimport from {directory}...");
+
+                        // register the files from disk
+                        // RealmFile.Hash = ownerHash + filename, dir {ownerHash}/{filename}
+                        var files = filenames.Select(name => new RealmNamedFileUsage(new RealmFile
+                        {
+                            Hash = ownerHash + name,
+                            OwnerHash = ownerHash,
+                        }, name)).ToList();
+
+                        using (var transaction = realm.BeginWrite())
+                        {
+                            foreach (var file in files)
+                            {
+                                if (!file.File.IsManaged)
+                                    realm.Add(file.File, true);
+                            }
+
+                            transaction.Commit();
+                        }
+
+                        item.Files.AddRange(files);
+                        item.Hash = ComputeHash(item);
+
+                        if (!string.Equals(item.Hash, ownerHash, StringComparison.OrdinalIgnoreCase))
+                            throw new InvalidOperationException($@"Hash computed from the file store ({item.Hash}) does not match directory name ({ownerHash}).");
+
+                        using (var transaction = realm.BeginWrite())
+                        {
+                            Populate(item, archive, realm, cancellationToken);
+
+                            PreImport(item, realm);
+
+                            realm.Add(item);
+
+                            PostImport(item, realm, parameters);
+
+                            transaction.Commit();
+                        }
+
+                        LogForModel(item, @"Reimport successfully completed!");
+                    }
+                    catch (Exception e)
+                    {
+                        if (!(e is TaskCanceledException))
+                            LogForModel(item, @"Database reimport or population failed and has been rolled back.", e);
+
+                        throw;
+                    }
+
+                    return (Live<TModel>?)item.ToLive(Realm);
+                }
+            });
+        }
     }
 }

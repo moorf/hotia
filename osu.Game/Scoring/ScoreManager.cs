@@ -188,7 +188,7 @@ namespace osu.Game.Scoring
                 Delete(beatmapScores, silent);
             });
         }
-
+        public Task Reimport() => scoreImporter.Reimport();
         public Task Import(params string[] paths) => scoreImporter.Import(paths);
 
         public Task Import(ImportTask[] imports, ImportParameters parameters = default) => scoreImporter.Import(imports, parameters);

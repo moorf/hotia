@@ -15,6 +15,8 @@ namespace osu.Game.Overlays.Settings.Sections.Maintenance
 
         private SettingsButtonV2 deleteScoresButton = null!;
 
+        private SettingsButtonV2 reimportButton = null!;
+
         [BackgroundDependencyLoader]
         private void load(ScoreManager scores, IDialogOverlay? dialogOverlay)
         {
@@ -28,6 +30,18 @@ namespace osu.Game.Overlays.Settings.Sections.Maintenance
                         deleteScoresButton.Enabled.Value = false;
                         Task.Run(() => scores.Delete()).ContinueWith(_ => Schedule(() => deleteScoresButton.Enabled.Value = true));
                     }, DeleteConfirmationContentStrings.Scores));
+                }
+            });
+
+            Add(reimportButton = new DangerousSettingsButtonV2
+            {
+                Text = "Reimport scores",
+                Action = () =>
+                {
+                    dialogOverlay?.Push(new MassDeleteConfirmationDialog(() =>
+                    {
+                        scores.Reimport();
+                    }, "This will take time and reimport all scores. Are you sure?"));
                 }
             });
         }

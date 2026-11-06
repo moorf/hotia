@@ -621,6 +621,8 @@ namespace osu.Game.Beatmaps
 
         public Task Import(params string[] paths) => beatmapImporter.Import(paths);
 
+        public Task Reimport(params string[] paths) => beatmapImporter.Reimport();
+
         public Task Import(ImportTask[] tasks, ImportParameters parameters = default) => beatmapImporter.Import(tasks, parameters);
 
         public Task<IEnumerable<Live<BeatmapSetInfo>>> Import(ProgressNotification notification, ImportTask[] tasks, ImportParameters parameters = default) =>

@@ -7,6 +7,8 @@ using osu.Framework.Graphics;
 using osu.Framework.Localisation;
 using osu.Game.Beatmaps;
 using osu.Game.Localisation;
+using osu.Game.Scoring;
+using osu.Game.Database;
 
 namespace osu.Game.Overlays.Settings.Sections.Maintenance
 {
@@ -19,6 +21,8 @@ namespace osu.Game.Overlays.Settings.Sections.Maintenance
         private SettingsButtonV2 resetOffsetsButton = null!;
         private SettingsButtonV2 restoreButton = null!;
         private SettingsButtonV2 undeleteButton = null!;
+
+        private SettingsButtonV2 reimportButton = null!;
 
         [BackgroundDependencyLoader]
         private void load(BeatmapManager beatmaps, IDialogOverlay? dialogOverlay)
@@ -81,6 +85,18 @@ namespace osu.Game.Overlays.Settings.Sections.Maintenance
                         undeleteButton.Enabled.Value = false;
                         Task.Run(beatmaps.UndeleteAll).ContinueWith(_ => Schedule(() => undeleteButton.Enabled.Value = true));
                     }
+                }
+            });
+
+            Add(reimportButton = new DangerousSettingsButtonV2
+            {
+                Text = "Reimport beatmaps",
+                Action = () =>
+                {
+                    dialogOverlay?.Push(new MassDeleteConfirmationDialog(() =>
+                    {
+                        beatmaps.Reimport();
+                    }, "This will take time and reimport all beatmaps. Are you sure?"));
                 }
             });
         }
