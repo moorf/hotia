@@ -1339,15 +1339,18 @@ namespace osu.Game
                     if (Notifications.IsLoaded) Notifications.FinishTransforms(true);
                     if (Toolbar.IsLoaded) Toolbar.FinishTransforms(true);
                     overlayContent.FinishTransforms(true);
-                    overlayContent.Suspend();
-                    ///overlayOffsetContainer.Suspend();
-                    topMostOverlayContent.Suspend();
-                    leftFloatingOverlayContent.Suspend();
-                    //Scheduler.AddDelayed(() => rightFloatingOverlayContent.Suspend(), 5000);
-                    //rightFloatingOverlayContent.Suspend();
-                    footerBasedOverlayContent.Suspend();
-                    logoContainer.Suspend();
-                    dummy.Suspend();
+                    if (RuntimeInfo.OS == RuntimeInfo.Platform.Android)
+                    {
+                        overlayContent.Suspend();
+                        ///overlayOffsetContainer.Suspend();
+                        topMostOverlayContent.Suspend();
+                        leftFloatingOverlayContent.Suspend();
+                        //Scheduler.AddDelayed(() => rightFloatingOverlayContent.Suspend(), 5000);
+                        //rightFloatingOverlayContent.Suspend();
+                        footerBasedOverlayContent.Suspend();
+                        logoContainer.Suspend();
+                        dummy.Suspend();
+                    }
                 }
             };
 
@@ -1355,14 +1358,17 @@ namespace osu.Game
             {
                 if (exitedScreen is Player)
                 {
-                    overlayContent.Resume();
-                    ///overlayOffsetContainer.Resume();
-                    topMostOverlayContent.Resume();
-                    leftFloatingOverlayContent.Resume();
-                    //rightFloatingOverlayContent.Resume(); //ENABLES INGAME NOTIFICATIONS
-                    footerBasedOverlayContent.Resume();
-                    logoContainer.Resume();
-                    dummy.Resume();
+                    if (RuntimeInfo.OS == RuntimeInfo.Platform.Android)
+                    {
+                        overlayContent.Resume();
+                        ///overlayOffsetContainer.Resume();
+                        topMostOverlayContent.Resume();
+                        leftFloatingOverlayContent.Resume();
+                        //rightFloatingOverlayContent.Resume(); //ENABLES INGAME NOTIFICATIONS
+                        footerBasedOverlayContent.Resume();
+                        logoContainer.Resume();
+                        dummy.Resume();
+                     }
                 }
             };
         }
