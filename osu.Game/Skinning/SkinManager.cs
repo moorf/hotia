@@ -65,6 +65,7 @@ namespace osu.Game.Skinning
 
         private Skin trianglesSkin { get; }
 
+        private Skin hotiaSkin { get; }
         private Skin retroSkin { get; }
 
         private static readonly Live<SkinInfo> random_skin_info = new SkinInfo
@@ -105,6 +106,7 @@ namespace osu.Game.Skinning
                 trianglesSkin = new TrianglesSkin(this),
                 argonSkin = new ArgonSkin(this),
                 new ArgonProSkin(this),
+                hotiaSkin = new HotiaSkin(this),
             };
 
             // Ensure the default entries are present.
@@ -153,7 +155,7 @@ namespace osu.Game.Skinning
                 skins.Add(realm.Find<SkinInfo>(SkinInfo.TRIANGLES_SKIN).ToLive(Realm));
                 skins.Add(realm.Find<SkinInfo>(SkinInfo.CLASSIC_SKIN).ToLive(Realm));
                 skins.Add(realm.Find<SkinInfo>(SkinInfo.RETRO_SKIN).ToLive(Realm));
-
+                skins.Add(realm.Find<SkinInfo>(SkinInfo.HOTIA_SKIN).ToLive(Realm));
                 skins.Add(random_skin_info);
 
                 var userSkins = realm.All<SkinInfo>()
@@ -448,6 +450,9 @@ namespace osu.Game.Skinning
 
                 if (guid == SkinInfo.RETRO_SKIN)
                     skinInfo = retroSkin.SkinInfo;
+
+                if (guid == SkinInfo.HOTIA_SKIN)
+                    skinInfo = hotiaSkin.SkinInfo;
             }
 
             CurrentSkinInfo.Value = skinInfo ?? trianglesSkin.SkinInfo;
