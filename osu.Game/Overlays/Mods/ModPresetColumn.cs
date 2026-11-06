@@ -76,7 +76,7 @@ namespace osu.Game.Overlays.Mods
 
             bool hasPresets = presets.Any();
 
-            this.ResizeWidthTo(hasPresets ? WIDTH : contracted_width, 200, Easing.OutQuint);
+            this.ResizeWidthTo(hasPresets ? contracted_width : contracted_width, 200, Easing.OutQuint);
 
             if (!hasPresets)
             {

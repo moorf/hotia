@@ -54,7 +54,7 @@ namespace osu.Game.Overlays.Mods
         protected virtual Colour4 ForegroundColour => Active.Value ? AccentColour : ColourProvider.Background2;
         protected virtual Colour4 TextColour => Active.Value ? ColourProvider.Background6 : Colour4.White;
 
-        protected const double TRANSITION_DURATION = 150;
+        protected const double TRANSITION_DURATION = 10;
 
         protected readonly Box Background;
         protected readonly Container SwitchContainer;
@@ -86,7 +86,7 @@ namespace osu.Game.Overlays.Mods
             Content.CornerRadius = CORNER_RADIUS;
             Content.BorderThickness = 2;
 
-            Shear = OsuGame.SHEAR;
+            //Shear = OsuGame.SHEAR;
 
             Children = new Drawable[]
             {
@@ -127,7 +127,7 @@ namespace osu.Game.Overlays.Mods
                                     {
                                         Font = OsuFont.TorusAlternate.With(size: 18, weight: FontWeight.SemiBold),
                                         RelativeSizeAxes = Axes.X,
-                                        Shear = -OsuGame.SHEAR,
+                                        //Shear = -OsuGame.SHEAR,
                                         Margin = new MarginPadding
                                         {
                                             Left = -18 * OsuGame.SHEAR.X
@@ -138,7 +138,7 @@ namespace osu.Game.Overlays.Mods
                                     {
                                         Font = OsuFont.Default.With(size: 12),
                                         RelativeSizeAxes = Axes.X,
-                                        Shear = -OsuGame.SHEAR,
+                                        //Shear = -OsuGame.SHEAR,
                                         ShowTooltip = false, // Tooltip is handled by `IncompatibilityDisplayingModPanel`.
                                     }
                                 }

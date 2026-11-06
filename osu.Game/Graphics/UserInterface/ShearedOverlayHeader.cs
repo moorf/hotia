@@ -37,8 +37,8 @@ namespace osu.Game.Graphics.UserInterface
             set => closeButton.Action = value;
         }
 
-        private const float corner_radius = 14;
-        private const float main_area_height = 70;
+        private const float corner_radius = 0;
+        private const float main_area_height = 10;
 
         private readonly Container underlayContainer;
         private readonly Box underlayBackground;

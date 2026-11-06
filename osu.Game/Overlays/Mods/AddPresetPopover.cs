@@ -27,7 +27,7 @@ namespace osu.Game.Overlays.Mods
 
         private readonly LabelledTextBox nameTextBox;
         private readonly LabelledTextBox descriptionTextBox;
-        private readonly ShearedButton createButton;
+        private readonly UnshearedButton createButton;
 
         [Resolved]
         private Bindable<RulesetInfo> ruleset { get; set; } = null!;
@@ -74,7 +74,7 @@ namespace osu.Game.Overlays.Mods
                         Direction = FillDirection.Vertical,
                         Children = new Drawable[]
                         {
-                            createButton = new ShearedButton
+                            createButton = new UnshearedButton
                             {
                                 // todo: for some very odd reason, this needs to be anchored to topright for the fill flow to be correctly sized to the AABB of the sheared button
                                 Anchor = Anchor.TopRight,

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Humanizer;
 using osu.Framework.Allocation;
 using osu.Framework.Audio;
 using osu.Framework.Audio.Sample;
@@ -127,7 +128,7 @@ namespace osu.Game.Overlays.Mods
         [Resolved]
         private ScreenFooter? footer { get; set; }
 
-        public ModSelectOverlay(OverlayColourScheme colourScheme = OverlayColourScheme.Green)
+        public ModSelectOverlay(OverlayColourScheme colourScheme = OverlayColourScheme.Red)
             : base(colourScheme)
         {
         }
@@ -135,11 +136,16 @@ namespace osu.Game.Overlays.Mods
         [BackgroundDependencyLoader]
         private void load(OsuGameBase game, OsuColour colours, AudioManager audio, OsuConfigManager configManager)
         {
+            Header.Hide();
             Header.Title = ModSelectOverlayStrings.ModSelectTitle;
             Header.Description = ModSelectOverlayStrings.ModSelectDescription;
 
             columnAppearSample = audio.Samples.Get(@"SongSelect/mod-column-pop-in");
-
+            MainAreaContent.Padding = new MarginPadding
+            {
+                Top = 0,
+                Bottom = ScreenFooter.HEIGHT + PADDING,
+            };
             MainAreaContent.Add(new OsuContextMenuContainer
             {
                 RelativeSizeAxes = Axes.Both,
@@ -170,7 +176,6 @@ namespace osu.Game.Overlays.Mods
                                         Anchor = Anchor.BottomLeft,
                                         Origin = Anchor.BottomLeft,
                                         Direction = FillDirection.Horizontal,
-                                        Shear = OsuGame.SHEAR,
                                         RelativeSizeAxes = Axes.Y,
                                         AutoSizeAxes = Axes.X,
                                         Margin = new MarginPadding { Horizontal = 70 },

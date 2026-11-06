@@ -16,7 +16,7 @@ namespace osu.Game.Overlays.Mods
     {
         private ModSpeedHotkeyHandler modSpeedHotkeyHandler = null!;
 
-        public UserModSelectOverlay(OverlayColourScheme colourScheme = OverlayColourScheme.Green)
+        public UserModSelectOverlay(OverlayColourScheme colourScheme = OverlayColourScheme.Red)
             : base(colourScheme)
         {
         }

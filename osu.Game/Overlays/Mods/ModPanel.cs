@@ -37,7 +37,7 @@ namespace osu.Game.Overlays.Mods
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 Active = { BindTarget = Active },
-                Shear = -OsuGame.SHEAR,
+                //Shear = -OsuGame.SHEAR,
                 Scale = new Vector2(HEIGHT / ModSwitchSmall.DEFAULT_SIZE)
             };
         }
