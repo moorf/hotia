@@ -55,7 +55,7 @@ namespace osu.Game.Screens.Select
         [BackgroundDependencyLoader]
         private void load(AudioManager audio)
         {
-            sampleConfirmSelection = audio.Samples.Get(@"SongSelect/confirm-selection");
+            sampleConfirmSelection = audio.Samples.Get(@"SongSelect/select-expand");//confirm-selection");
 
             AddInternal(new SongSelectTouchInputDetector());
         }
