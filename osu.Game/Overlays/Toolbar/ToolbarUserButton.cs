@@ -112,7 +112,7 @@ namespace osu.Game.Overlays.Toolbar
 
         private void onlineStateChanged(ValueChangedEvent<APIState> state) => Schedule(() =>
         {
-            failingIcon.FadeTo(state.NewValue == APIState.Failing || state.NewValue == APIState.RequiresSecondFactorAuth ? 1 : 0, 200, Easing.OutQuint);
+            //failingIcon.FadeTo(state.NewValue == APIState.Failing || state.NewValue == APIState.RequiresSecondFactorAuth ? 1 : 0, 200, Easing.OutQuint);
 
             switch (state.NewValue)
             {
@@ -122,9 +122,11 @@ namespace osu.Game.Overlays.Toolbar
                     break;
 
                 case APIState.Failing:
-                    TooltipText = ToolbarStrings.AttemptingToReconnect;
-                    spinner.Show();
-                    failingIcon.Icon = FontAwesome.Solid.ExclamationTriangle;
+                    TooltipText = string.Empty;
+                    spinner.Hide();
+                    //TooltipText = ToolbarStrings.AttemptingToReconnect;
+                    //spinner.Show();
+                    //failingIcon.Icon = FontAwesome.Solid.ExclamationTriangle;
                     break;
 
                 case APIState.RequiresSecondFactorAuth:

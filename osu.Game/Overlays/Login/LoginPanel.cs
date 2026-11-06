@@ -81,6 +81,8 @@ namespace osu.Game.Overlays.Login
 
             switch (state.NewValue)
             {
+                case APIState.Failing:
+                case APIState.Connecting:
                 case APIState.Offline:
                     Child = form = new LoginForm
                     {
@@ -91,64 +93,6 @@ namespace osu.Game.Overlays.Login
                 case APIState.RequiresSecondFactorAuth:
                     Child = form = new SecondFactorAuthForm();
                     break;
-
-                case APIState.Failing:
-                case APIState.Connecting:
-                    LinkFlowContainer linkFlow;
-
-                    Child = new FillFlowContainer
-                    {
-                        RelativeSizeAxes = Axes.X,
-                        AutoSizeAxes = Axes.Y,
-                        Padding = new MarginPadding { Horizontal = SettingsPanel.CONTENT_MARGINS },
-                        Direction = FillDirection.Vertical,
-                        Spacing = new Vector2(0f, SettingsSection.ITEM_SPACING),
-                        Children = new Drawable[]
-                        {
-                            new LoadingSpinner
-                            {
-                                State = { Value = Visibility.Visible },
-                                Anchor = Anchor.TopCentre,
-                                Origin = Anchor.TopCentre,
-                            },
-                            linkFlow = new LinkFlowContainer
-                            {
-                                Anchor = Anchor.TopCentre,
-                                Origin = Anchor.TopCentre,
-                                TextAnchor = Anchor.TopCentre,
-                                AutoSizeAxes = Axes.Both,
-                            },
-                        },
-                    };
-
-                    if (!string.IsNullOrEmpty(api.UserFacingOutageMessage.Value))
-                    {
-                        linkFlow.AddText("Server outage in progress".ToUpperInvariant(), s =>
-                        {
-                            s.Font = OsuFont.Style.Caption2.With(weight: FontWeight.Bold);
-                            s.Colour = Colour4.Orange;
-                        });
-
-                        linkFlow.AddParagraph(api.UserFacingOutageMessage.Value, s => s.Font = OsuFont.Style.Caption1);
-                    }
-                    else if (state.NewValue == APIState.Failing)
-                    {
-                        linkFlow.AddParagraph(state.NewValue == APIState.Failing ? ToolbarStrings.AttemptingToReconnect : ToolbarStrings.Connecting, s =>
-                        {
-                            s.Font = OsuFont.Style.Caption2.With(weight: FontWeight.Bold);
-                            s.Colour = Colour4.Orange;
-                        });
-                    }
-                    else
-                    {
-                        linkFlow.AddParagraph(ToolbarStrings.Connecting, s =>
-                            s.Font = OsuFont.Style.Caption2.With(weight: FontWeight.Bold));
-                    }
-
-                    linkFlow.NewParagraph();
-                    linkFlow.AddLink(LoginPanelStrings.SignOut, api.Logout, string.Empty, s => s.Font = OsuFont.Style.Caption2);
-                    break;
-
                 case APIState.Online:
                     Child = new FillFlowContainer
                     {
