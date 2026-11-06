@@ -50,7 +50,8 @@ namespace osu.Game.Screens.Select
                 case "stars":
                 case "sr":
                     return TryUpdateCriteriaRange(ref criteria.StarDifficulty, op, value, 0);
-
+                case "pp":
+                    return TryUpdateCriteriaRange(ref criteria.MaxPP, op, value, 0);
                 case "ar":
                     return TryUpdateCriteriaRange(ref criteria.ApproachRate, op, value);
 

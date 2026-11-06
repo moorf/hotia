@@ -68,7 +68,7 @@ namespace osu.Game.Overlays.BeatmapListing
 
         //private SearchBeatmapSetsRequest getSetsRequest;
         private SearchBeatmapSetsRequestDirect getSetsRequest;
-        private List<APIBeatmapSet> lastResponse;
+        private SearchBeatmapSetsResponseDirect lastResponse;
 
         [Resolved]
         private IAPIProvider api { get; set; }
@@ -231,7 +231,7 @@ namespace osu.Game.Overlays.BeatmapListing
                 searchControl.Query.Value,
                 searchControl.Ruleset.Value,
                 CurrentPage,
-                lastResponse != null ? lastResponse.Count : 0,
+                lastResponse != null ? lastResponse.BeatmapSets.Count() : 0,
                 null,
                 searchControl.Category.Value,
                 sortControl.Current.Value,
@@ -248,8 +248,8 @@ namespace osu.Game.Overlays.BeatmapListing
             //searchControl.ExplicitContent.Value);
             getSetsRequest.Success += response =>
             {
-                //var sets = response.BeatmapSets.ToList();
-                var sets = response;
+                var sets = response.BeatmapSets.ToList();
+                //var sets = response;
                 // If the previous request returned a null cursor, the API is indicating we can't paginate further (maybe there are no more beatmaps left).
                 if (sets.Count == 0)
                     noMoreResults = true;

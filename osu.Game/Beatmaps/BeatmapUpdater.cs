@@ -1,6 +1,7 @@
 // Copyright (c) ppy Pty Ltd <contact@ppy.sh>. Licensed under the MIT Licence.
 // See the LICENCE file in the repository root for full licence text.
 
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,7 +11,11 @@ using osu.Framework.Platform;
 using osu.Framework.Threading;
 using osu.Game.Database;
 using osu.Game.Online.API;
+using osu.Game.Rulesets.Difficulty;
 using osu.Game.Rulesets.Objects.Types;
+using osu.Game.Rulesets.Scoring;
+using osu.Game.Scoring;
+using osuTK.Input;
 
 namespace osu.Game.Beatmaps
 {
@@ -59,8 +64,27 @@ namespace osu.Game.Beatmaps
 
                     var ruleset = working.BeatmapInfo.Ruleset.CreateInstance();
                     var calculator = ruleset.CreateDifficultyCalculator(working);
+                    var difficulty = calculator.Calculate();
+                    beatmap.StarRating = difficulty.StarRating;
+                    var performanceCalculator = ruleset.CreatePerformanceCalculator();
+                    if (performanceCalculator != null)
+                    {
+                        ScoreProcessor scoreProcessor = ruleset.CreateScoreProcessor();
+                        scoreProcessor.ApplyBeatmap(working.GetPlayableBeatmap(ruleset.RulesetInfo));
+                        ScoreInfo perfectScore = new ScoreInfo(beatmap, ruleset.RulesetInfo)
+                        {
+                            Passed = true,
+                            Accuracy = 1,
+                            MaxCombo = scoreProcessor.MaximumCombo,
+                            Combo = scoreProcessor.MaximumCombo,
+                            TotalScore = scoreProcessor.MaximumTotalScore,
+                            Statistics = scoreProcessor.MaximumStatistics,
+                            MaximumStatistics = scoreProcessor.MaximumStatistics
+                        };
 
-                    beatmap.StarRating = calculator.Calculate().StarRating;
+                        var performance = performanceCalculator.Calculate(perfectScore, difficulty);
+                        beatmap.MaxPP = performance.Total;
+                    }
                     beatmap.UpdateStatisticsFromBeatmap(working.Beatmap);
                 }
 
