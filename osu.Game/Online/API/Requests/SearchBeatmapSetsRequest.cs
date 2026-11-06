@@ -127,7 +127,7 @@ namespace osu.Game.Online.API.Requests
     }
 
 
-    public class SearchBeatmapSetsRequestDirect : APIRequest<List<APIBeatmapSet>>
+    public class SearchBeatmapSetsRequestDirect : APIRequest<SearchBeatmapSetsResponseDirect>
     {
         [CanBeNull]
         public IReadOnlyCollection<SearchGeneral> General { get; }
@@ -205,22 +205,41 @@ namespace osu.Game.Online.API.Requests
             //    req.AddParameter("c", string.Join('.', General.Select(e => e.ToString().ToSnakeCase())));
 
             if (ruleset.OnlineID >= 0)
-                req.AddParameter("mode", ruleset.OnlineID.ToString());
+                req.AddParameter("mode", ruleset.ShortName.ToString());
 
-            var searchCategory = (int)SearchCategory;
-            if(searchCategory < 7)
-                req.AddParameter("status", (searchCategory - 2).ToString()); //ToString().ToLowerInvariant()
-
+            //ranked, approved, loved, qualified, pending, wip, graveyard
+            switch (SearchCategory)
+            {
+                case SearchCategory.Ranked:
+                    req.AddParameter("status", "ranked"); break;
+                case SearchCategory.Leaderboard:
+                    req.AddParameter("status", "approved"); break;
+                case SearchCategory.Loved:
+                    req.AddParameter("status", "loved"); break;
+                case SearchCategory.Qualified:
+                    req.AddParameter("status", "qualified"); break;
+                case SearchCategory.Pending:
+                    req.AddParameter("status", "pending"); break;
+                case SearchCategory.Wip:
+                    req.AddParameter("status", "wip"); break;
+                case SearchCategory.Graveyard:
+                    req.AddParameter("status", "graveyard"); break;
+                case SearchCategory.Any:
+                    break;
+                default:
+                    req.AddParameter("status", "ranked"); break;
+            }
             //if (Genre != SearchGenre.Any)
             //    req.AddParameter("g", ((int)Genre).ToString());
 
             //if (Language != SearchLanguage.Any)
             //    req.AddParameter("l", ((int)Language).ToString());
             string criteria = "";
+            //id, title, artist, creator, bpm, updated, ranked, submitted, favourites, difficulty
             switch (SortCriteria)
             {
                 case SortCriteria.Plays:
-                    criteria = "beatmaps.playcount";
+                    criteria = "favourites";
                     break;
                 case SortCriteria.Title:
                     criteria = "title";
@@ -229,20 +248,21 @@ namespace osu.Game.Online.API.Requests
                     criteria = "artist";
                     break;
                 case SortCriteria.Favourites:
-                    criteria = "favourite_count";
+                    criteria = "favourites";
                     break;
                 case SortCriteria.Updated:
-                    criteria = "last_updated";
+                    criteria = "updated";
                     break;
                 case SortCriteria.Ranked:
-                    criteria = "ranked_date";
+                    criteria = "ranked";
                     break;
                 case SortCriteria.Difficulty:
-                    criteria = "beatmaps.difficulty_rating";
+                    criteria = "difficulty";
                     break;
             }
             if (criteria.Length > 0)
-                req.AddParameter("sort", $"{criteria}:{directionString}");
+                req.AddParameter("sort", $"{criteria}");
+            req.AddParameter("order", $"{directionString}");
 
             //if (Extra != null && Extra.Any())
             //    req.AddParameter("e", string.Join('.', Extra.Select(e => e.ToString().ToLowerInvariant())));
@@ -255,7 +275,7 @@ namespace osu.Game.Online.API.Requests
 
             //req.AddParameter("nsfw", ExplicitContent == SearchExplicit.Show ? "true" : "false");
 
-            req.AddParameter("offset", ((int)(Offset * Math.Max(LastResponseCount, 1))).ToString());
+            req.AddParameter("page", ((int)(Offset * Math.Max(LastResponseCount, 1))).ToString());
             //hotiaTODO: accumulate "LastResponseCount"s
 
             //if (cursor != null)

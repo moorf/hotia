@@ -722,6 +722,11 @@ namespace osu.Game.Online.API
             Username = @"Guest";
             Id = SYSTEM_USER_ID;
         }
+        public GuestUser(string username)
+        {
+            Username = username;
+            Id = SYSTEM_USER_ID;
+        }
     }
 
     public enum APIState

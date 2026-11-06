@@ -7,13 +7,14 @@ namespace osu.Game.Online
     {
         public DevelopmentEndpointConfiguration()
         {
-            WebsiteUrl = APIUrl = @"https://dev.hotia.org";
+            WebsiteUrl = APIUrl = @"https://localhost";
             APIClientSecret = @"3LP2mhUrV89xxzD1YKNndXHEhWWCRLPNKioZ9ymT";
             APIClientID = "5";
             SpectatorUrl = $@"{APIUrl}/signalr/spectator";
             MultiplayerUrl = $@"{APIUrl}/signalr/multiplayer";
             MetadataUrl = $@"{APIUrl}/signalr/metadata";
             BeatmapSubmissionServiceUrl = $@"{APIUrl}/beatmap-submission";
+            BeatmapUrl = @"https://osu.direct";
         }
     }
 }

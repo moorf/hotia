@@ -26,10 +26,15 @@ namespace osu.Game.Online.API.Requests
             Type = type;
         }
 
+        //protected override string Target =>
+        //    Type == BeatmapSetLookupType.SetId
+        //        ? $"s/{ID}"
+        //        : $"b/{ID}/set"; //osu.direct
+
         protected override string Target =>
-            Type == BeatmapSetLookupType.SetId
-                ? $"s/{ID}"
-                : $"b/{ID}/set";
+        Type == BeatmapSetLookupType.SetId
+            ? $"beatmapset/{ID}"
+            : $"beatmap/{ID}"; //nekoha
 
         protected override void PostProcess()
         {

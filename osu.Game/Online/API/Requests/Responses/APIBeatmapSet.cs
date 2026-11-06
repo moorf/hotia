@@ -29,9 +29,11 @@ namespace osu.Game.Online.API.Requests.Responses
         public bool HasFavourited { get; set; }
 
         [JsonProperty(@"play_count")]
+        [JsonConverter(typeof(NullToZeroIntConverter))]
         public int PlayCount { get; set; }
 
         [JsonProperty(@"favourite_count")]
+        [JsonConverter(typeof(NullToZeroIntConverter))]
         public int FavouriteCount { get; set; }
 
         [JsonProperty(@"bpm")]
@@ -193,5 +195,28 @@ namespace osu.Game.Online.API.Requests.Responses
 
         // ReSharper disable once NonReadonlyMemberInGetHashCode
         public override int GetHashCode() => OnlineID.GetHashCode();
+    }
+}
+public class NullToZeroIntConverter : JsonConverter<int>
+{
+    public override int ReadJson(
+        JsonReader reader,
+        Type objectType,
+        int existingValue,
+        bool hasExistingValue,
+        JsonSerializer serializer)
+    {
+        if (reader.TokenType == JsonToken.Null)
+            return 0;
+
+        return Convert.ToInt32(reader.Value);
+    }
+
+    public override void WriteJson(
+        JsonWriter writer,
+        int value,
+        JsonSerializer serializer)
+    {
+        writer.WriteValue(value);
     }
 }

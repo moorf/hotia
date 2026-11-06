@@ -7,14 +7,14 @@ namespace osu.Game.Online
     {
         public ProductionEndpointConfiguration()
         {
-            WebsiteUrl = APIUrl = @"https://osu.hotia.org";//osu.hotia.org
+            WebsiteUrl = APIUrl = @"https://localhost";//osu.hotia.org
             APIClientSecret = @"FGc9GAtyHzeQDshWP5Ah7dega8hJACAJpQtw6OXk";
             APIClientID = "5";
-            SpectatorUrl = "https://spectator.osu.hotia.org/spectator";
-            MultiplayerUrl = "https://spectator.osu.hotia.org/multiplayer";
-            MetadataUrl = "https://spectator.osu.hotia.org/metadata";
-            BeatmapSubmissionServiceUrl = "https://bss.hotia.org";
-            BeatmapUrl = @"https://osu.direct";
+            SpectatorUrl = "https://localhost";
+            MultiplayerUrl = "https://localhost";
+            MetadataUrl = "https://localhost";
+            BeatmapSubmissionServiceUrl = "https://localhost";
+            BeatmapUrl = @"https://mirror.nekoha.moe";
         }
     }
 }

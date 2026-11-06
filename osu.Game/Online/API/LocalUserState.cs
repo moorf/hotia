@@ -24,8 +24,7 @@ namespace osu.Game.Online.API
         public IBindableList<int> FavouriteBeatmapSets => favouriteBeatmapSets;
 
         private readonly IAPIProvider api;
-
-        private readonly Bindable<APIUser> localUser = new Bindable<APIUser>(createGuestUser());
+        private Bindable<APIUser> localUser = new Bindable<APIUser>();
         private readonly BindableList<APIRelation> friends = new BindableList<APIRelation>();
         private readonly BindableList<APIRelation> blocks = new BindableList<APIRelation>();
         private readonly BindableList<int> favouriteBeatmapSets = new BindableList<int>();
@@ -46,14 +45,15 @@ namespace osu.Game.Online.API
 
             config.BindWith(OsuSetting.UserOnlineStatus, configStatus);
             config.BindWith(OsuSetting.WasSupporter, configSupporter);
-
+            localUser.Value = createGuestUser(config.Get<string>(OsuSetting.Username));
             config.BindWith(OsuSetting.PMFriendsOnly, configPMFriendsOnly);
             configPMFriendsOnly.BindValueChanged(_ => scheduleSettingSyncToWeb());
         }
 
         #region Logging in / out
 
-        private static APIUser createGuestUser() => new GuestUser();
+        private APIUser createGuestUser() => new GuestUser();
+        private APIUser createGuestUser(string username) => new GuestUser(username);
 
         /// <summary>
         /// Show a placeholder user if saved credentials are available.

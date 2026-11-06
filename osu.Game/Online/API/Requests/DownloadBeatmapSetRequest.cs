@@ -28,6 +28,7 @@ namespace osu.Game.Online.API.Requests
 
         protected override string FileExtension => ".osz";
 
-        protected override string Target => $@"d/{Model.OnlineID}{(noVideo ? "?noVideo=1" : "")}";
+        //protected override string Target => $@"d/{Model.OnlineID}{(noVideo ? "?noVideo=1" : "")}"; //direct
+        protected override string Target => $@"download/{Model.OnlineID}{(noVideo ? "?noVideo=1" : "")}"; //nekoha
     }
 }

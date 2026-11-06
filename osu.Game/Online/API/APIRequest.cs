@@ -79,7 +79,8 @@ namespace osu.Game.Online.API
         protected virtual WebRequest CreateWebRequest() => new OsuWebRequest(Uri);
         protected virtual WebRequest CreateBeatmapWebRequest() => new OsuWebRequest(BeatmapUri);
         protected virtual string Uri => $@"{API!.Endpoints.APIUrl}/api/v2/{Target}";
-        protected virtual string BeatmapUri => $@"{API!.Endpoints.BeatmapUrl}/api{ApiVer}/{Target}";
+        //protected virtual string BeatmapUri => $@"{API!.Endpoints.BeatmapUrl}/api{ApiVer}/{Target}"; //osu.direct
+		protected virtual string BeatmapUri => $@"{API!.Endpoints.BeatmapUrl}/api/{Target}"; //nekoha
         protected IAPIProvider? API;
 
         protected WebRequest? WebRequest;
