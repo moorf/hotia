@@ -8,7 +8,7 @@ namespace osu.Game.Online.API.Requests
     public class GetMenuContentRequest : OsuJsonWebRequest<APIMenuContent>
     {
         public GetMenuContentRequest()
-            : base(@"https://assets.hotia.org/menu-content.json")
+            : base(@"https://127.0.0.1/menu-content.json")
         {
         }
     }

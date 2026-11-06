@@ -122,7 +122,7 @@ namespace osu.Game.Beatmaps.Drawables
 
             public class BundledBeatmapDownloadRequest : DownloadBeatmapSetRequest
             {
-                protected override string Uri => $"https://assets.hotia.org/client-resources/bundled/{Model.OnlineID}.osz";
+                protected override string Uri => $"https://127.0.0.1/client-resources/bundled/{Model.OnlineID}.osz";
 
                 public BundledBeatmapDownloadRequest(IBeatmapSetInfo beatmapSetInfo, bool minimiseDownloadSize)
                     : base(beatmapSetInfo, minimiseDownloadSize)
