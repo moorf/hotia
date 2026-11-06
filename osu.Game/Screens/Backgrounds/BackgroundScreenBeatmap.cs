@@ -8,6 +8,7 @@ using System.Threading;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Shapes;
 using osu.Game.Beatmaps;
 using osu.Game.Configuration;
 using osu.Game.Graphics.Backgrounds;
@@ -55,14 +56,27 @@ namespace osu.Game.Screens.Backgrounds
 
         private readonly DimmableBackground dimmable;
 
+        private readonly Box colorOverlay;
+
+        protected Bindable<Colour4> BackgroundColor = new Bindable<Colour4>(Colour4.Black);
+
+        protected Bindable<double> DimLevel = new Bindable<double>();
+
         protected virtual DimmableBackground CreateFadeContainer() => new DimmableBackground { RelativeSizeAxes = Axes.Both };
 
         public BackgroundScreenBeatmap(WorkingBeatmap beatmap = null)
         {
             Beatmap = beatmap;
 
-            InternalChild = dimmable = CreateFadeContainer();
-
+            InternalChildren = new Drawable[]
+            {
+                    dimmable = CreateFadeContainer(),
+                    colorOverlay = new Box
+                    {
+                        RelativeSizeAxes = Axes.Both,
+                        Colour = BackgroundColor.Value,
+                    },
+            };
             dimmable.StoryboardReplacesBackground.BindTo(StoryboardReplacesBackground);
             dimmable.IgnoreUserSettings.BindTo(IgnoreUserSettings);
             dimmable.IsBreakTime.BindTo(IsBreakTime);
@@ -71,11 +85,21 @@ namespace osu.Game.Screens.Backgrounds
         }
 
         [BackgroundDependencyLoader]
-        private void load()
+        private void load(OsuConfigManager config)
         {
             var background = new BeatmapBackground(beatmap);
             LoadComponent(background);
             switchBackground(background);
+            BackgroundColor = config.GetBindable<Colour4>(OsuSetting.BackgroundColor);
+            BackgroundColor.BindValueChanged(
+                c => colorOverlay.Colour = c.NewValue
+                , true);
+            DimLevel = config.GetBindable<double>(OsuSetting.DimLevel);
+            DimLevel.BindValueChanged(c =>
+            {
+                if (!IgnoreUserSettings.Value) colorOverlay.Alpha = (float)c.NewValue;
+            }, true);
+            IgnoreUserSettings.BindValueChanged(c => colorOverlay.Alpha = !c.NewValue ? (float)DimLevel.Value : 0, true);
         }
 
         private CancellationTokenSource cancellationSource;

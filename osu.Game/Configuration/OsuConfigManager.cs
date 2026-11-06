@@ -8,6 +8,7 @@ using osu.Framework.Configuration;
 using osu.Framework.Configuration.Tracking;
 using osu.Framework.Extensions;
 using osu.Framework.Extensions.LocalisationExtensions;
+using osu.Framework.Graphics;
 using osu.Framework.Localisation;
 using osu.Framework.Platform;
 using osu.Game.Beatmaps.Drawables.Cards;
@@ -25,6 +26,7 @@ using osu.Game.Screens.Select;
 using osu.Game.Screens.Select.Filter;
 using osu.Game.Skinning;
 using osu.Game.Users;
+using osuTK.Graphics;
 
 namespace osu.Game.Configuration
 {
@@ -39,7 +41,7 @@ namespace osu.Game.Configuration
         {
             // UI/selection defaults
             SetDefault(OsuSetting.Ruleset, string.Empty);
-            SetDefault(OsuSetting.Skin, SkinInfo.ARGON_SKIN.ToString());
+            SetDefault(OsuSetting.Skin, SkinInfo.HOTIA_SKIN.ToString());
 
             SetDefault(OsuSetting.BeatmapDetailTab, BeatmapDetailTab.Local);
             SetDefault(OsuSetting.BeatmapLeaderboardSortMode, LeaderboardSortMode.Score);
@@ -245,6 +247,8 @@ namespace osu.Game.Configuration
             SetDefault(OsuSetting.SongSelectPreview, true); //hotiaTODO seems like true is okay even on android, i'll leave it on
 
             SetDefault(OsuSetting.PMFriendsOnly, false);
+
+            SetDefault(OsuSetting.BackgroundColor, Colour4.Black);
         }
 
         protected override bool CheckLookupContainsPrivateInformation(OsuSetting lookup)
@@ -487,5 +491,7 @@ namespace osu.Game.Configuration
         /// Blocks private messages, multiplayer room invites, and duel requests from people not on the user's friends list.
         /// </summary>
         PMFriendsOnly,
+
+        BackgroundColor
     }
 }

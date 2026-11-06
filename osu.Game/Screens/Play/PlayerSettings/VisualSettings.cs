@@ -3,8 +3,12 @@
 
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.UserInterface;
 using osu.Game.Configuration;
+using osu.Game.Graphics.UserInterface;
+using osu.Game.Graphics.UserInterfaceV2;
 using osu.Game.Localisation;
+using osuTK.Graphics;
 
 namespace osu.Game.Screens.Play.PlayerSettings
 {
@@ -17,6 +21,8 @@ namespace osu.Game.Screens.Play.PlayerSettings
         private readonly PlayerCheckbox beatmapSkinsToggle;
         private readonly PlayerCheckbox beatmapColorsToggle;
 
+        private readonly OsuColourPicker backgroundColor;
+
         public VisualSettings()
             : base(PlayerSettingsOverlayStrings.VisualSettingsTitle)
         {
@@ -26,6 +32,10 @@ namespace osu.Game.Screens.Play.PlayerSettings
                 {
                     LabelText = GameplaySettingsStrings.BackgroundDim,
                     DisplayAsPercentage = true
+                },
+                backgroundColor = new OsuColourPicker
+                {
+                    Scale = new osuTK.Vector2(0.8f)
                 },
                 blurSliderBar = new PlayerSliderBar<double>
                 {
@@ -52,6 +62,7 @@ namespace osu.Game.Screens.Play.PlayerSettings
             beatmapSkinsToggle.Current = config.GetBindable<bool>(OsuSetting.BeatmapSkins);
             beatmapColorsToggle.Current = config.GetBindable<bool>(OsuSetting.BeatmapColours);
             comboColourNormalisationSliderBar.Current = config.GetBindable<float>(OsuSetting.ComboColourNormalisationAmount);
+            backgroundColor.Current = config.GetBindable<Colour4>(OsuSetting.BackgroundColor);
         }
     }
 }
