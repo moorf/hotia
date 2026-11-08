@@ -5,6 +5,8 @@
 // Modifications released under the GNU General Public License v3.0.
 // See the LICENCE.GPL3 file in the repository root for full licence text.
 
+using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
 using osu.Framework.Graphics;
@@ -13,8 +15,11 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osu.Game.Beatmaps;
 using osu.Game.Graphics;
+using osu.Game.Rulesets.Mods;
+using osu.Game.Screens.Play;
 using osu.Game.Skinning;
 using osuTK;
+using osuTK.Input;
 
 namespace osu.Game.Rulesets.Osu.Skinning.Hotia
 {
@@ -25,6 +30,9 @@ namespace osu.Game.Rulesets.Osu.Skinning.Hotia
 
         [Resolved]
         private IBindable<WorkingBeatmap> beatmap { get; set; }
+
+        [Resolved(canBeNull: true)]
+        private GameplayState? gameplayState { get; set; }
 
         private readonly IBindable<double> animationStartTime = new Bindable<double>();
 
@@ -51,7 +59,12 @@ namespace osu.Game.Rulesets.Osu.Skinning.Hotia
             if (animationTimeReference != null)
                 animationStartTime.BindTo(animationTimeReference.AnimationStartTime);
             animationStartTime.BindValueChanged(_ => restartAnimation(), true);
-            Scale = new Vector2(1.75f + (beatmap.Value.Beatmap.Difficulty.CircleSize - 4) / 4.0f, 0.7f);
+
+            var currentBeatmap = gameplayState != null ? gameplayState.Beatmap : beatmap.Value.Beatmap;
+            float cs = currentBeatmap.Difficulty.CircleSize;
+            //hotiaTODO: i absolutely don't know what i'm doing but who cares weeeeeeeeew \d^-^b/
+            var circleSizeFactor = 0.9272f + cs * (0.25298f + cs * (-0.018235f + cs * (-0.002309f + cs * 0.000648f)));
+            Scale = new Vector2(circleSizeFactor, 1f); //, 0.7f //1.75
         }
 
         private void restartAnimation()
