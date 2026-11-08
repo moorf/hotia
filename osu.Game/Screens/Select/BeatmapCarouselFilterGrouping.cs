@@ -157,6 +157,8 @@ namespace osu.Game.Screens.Select
             // where it's more relevant or convenient to view them as individual items.
             if (criteria.Sort == SortMode.Difficulty || criteria.Group == GroupMode.Difficulty)
                 return false;
+            if (criteria.Sort == SortMode.MaxPP || criteria.Group == GroupMode.MaxPP)
+                return false;
             if (criteria.Sort == SortMode.LastPlayed && criteria.Group == GroupMode.LastPlayed)
                 return false;
             if (criteria.Group == GroupMode.RankAchieved)
@@ -207,6 +209,9 @@ namespace osu.Game.Screens.Select
 
                 case GroupMode.Difficulty:
                     return getGroupsBy(b => defineGroupByStars(b.StarRating), items);
+
+                case GroupMode.MaxPP:
+                    return getGroupsBy(b => defineGroupByPP(b.MaxPP), items);
 
                 case GroupMode.Length:
                     return getGroupsBy(b => defineGroupByLength(b.Length), items);
@@ -379,6 +384,16 @@ namespace osu.Game.Screens.Select
                 return new StarDifficultyGroupDefinition(starInt, BeatmapCarouselFilterGroupingStrings.Stars(starInt), starDifficulty).Yield();
 
             return new StarDifficultyGroupDefinition(15, BeatmapCarouselFilterGroupingStrings.OverStars(15), new StarDifficulty(15, 0)).Yield();
+        }
+
+        private IEnumerable<GroupDefinition> defineGroupByPP(double pp)
+        {
+            for (int i = 1; i < 30; i++)
+            {
+                if (pp <= i * 100)
+                    return new GroupDefinition(i, $"pp: {i * 100 - 100}-{i * 100}").Yield();
+            }
+            return new GroupDefinition(30, $"pp: >3000").Yield();
         }
 
         private IEnumerable<GroupDefinition> defineGroupByLength(double length)

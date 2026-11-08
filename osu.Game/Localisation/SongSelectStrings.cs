@@ -225,6 +225,11 @@ namespace osu.Game.Localisation
         public static LocalisableString Difficulty => new TranslatableString(getKey(@"difficulty"), @"Difficulty");
 
         /// <summary>
+        /// "Max PP"
+        /// </summary>
+        public static LocalisableString MaxPP => new TranslatableString(getKey(@"max_pp"), @"Max PP");
+
+        /// <summary>
         /// "Length"
         /// </summary>
         public static LocalisableString Length => new TranslatableString(getKey(@"length"), @"Length");

@@ -29,6 +29,9 @@ namespace osu.Game.Screens.Select.Filter
         [LocalisableDescription(typeof(SongSelectStrings), nameof(SongSelectStrings.Difficulty))]
         Difficulty,
 
+        [LocalisableDescription(typeof(SongSelectStrings), nameof(SongSelectStrings.MaxPP))]
+        MaxPP,
+
         [LocalisableDescription(typeof(SongSelectStrings), nameof(SongSelectStrings.LastPlayed))]
         LastPlayed,
 

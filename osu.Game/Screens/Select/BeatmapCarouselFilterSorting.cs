@@ -74,6 +74,10 @@ namespace osu.Game.Screens.Select
                     comparison = OrdinalSortByCaseStringComparer.DEFAULT.Compare(a.BeatmapSet!.Metadata.Source, b.BeatmapSet!.Metadata.Source);
                     break;
 
+                case SortMode.MaxPP:
+                    comparison = a.MaxPP.CompareTo(b.MaxPP);
+                    break;
+
                 case SortMode.Difficulty:
                     comparison = a.StarRating.CompareTo(b.StarRating);
                     break;
