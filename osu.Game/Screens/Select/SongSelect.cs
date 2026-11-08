@@ -177,6 +177,9 @@ namespace osu.Game.Screens.Select
         [Resolved]
         private ISkinSource? SkinManager { get; set; }
 
+        [Resolved]
+        private Bindable<IReadOnlyList<Mod>> selectedMods { get; set; } = null!;
+
         private InputManager inputManager = null!;
 
         private readonly RealmPopulatingOnlineLookupSource onlineLookupSource = new RealmPopulatingOnlineLookupSource();
@@ -462,6 +465,11 @@ namespace osu.Game.Screens.Select
                     showPreview();
                 }
             });
+            selectedMods.BindValueChanged(e =>
+            {
+                if (configBeatmapPreview.Value)
+                    showPreview();
+            });
         }
 
         protected override void Update()
@@ -718,7 +726,8 @@ namespace osu.Game.Screens.Select
             Ruleset? rulesetInstance = Ruleset.Value.CreateInstance();
             ModAutoplay? createModAutoplay = rulesetInstance.CreateMod<ModAutoplay>();
             if (createModAutoplay == null) return;
-            Mod[]? autoplayMods = new Mod[] { createModAutoplay };
+            //hotiaTODO: some mods may crash this
+            Mod[]? autoplayMods = selectedMods.Value.Where(e => e is ModEasy or ModHardRock or ModMirror or ModDifficultyAdjust).Prepend(createModAutoplay).ToArray();
             IBeatmap? playableBeatmap = Beatmap.Value.GetPlayableBeatmap(rulesetInstance.RulesetInfo, autoplayMods);
             DrawableRuleset? drawableRuleset = rulesetInstance.CreateDrawableRulesetWith(playableBeatmap, autoplayMods);
             drawableRuleset.Audio.AddAdjustment(AdjustableProperty.Volume, new BindableDouble(0));
