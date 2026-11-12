@@ -66,6 +66,7 @@ using osu.Game.Rulesets.Mods;
 using osu.Game.Scoring;
 using osu.Game.Skinning;
 using osu.Game.Utils;
+using osu.Game.Ai;
 using RuntimeInfo = osu.Framework.RuntimeInfo;
 
 namespace osu.Game
@@ -162,6 +163,8 @@ namespace osu.Game
         protected ScoreModelDownloader ScoreDownloader { get; private set; }
 
         protected SkinManager SkinManager { get; private set; }
+
+        protected IAiManager AiManager { get; set; }
 
         protected RealmRulesetStore RulesetStore { get; private set; }
 
@@ -368,6 +371,21 @@ namespace osu.Game
             RegisterImportHandler(BeatmapManager);
             RegisterImportHandler(ScoreManager);
             RegisterImportHandler(SkinManager);
+
+            var aiStore = new AiManagerStore(Storage);
+
+            if (aiStore.Manager is IAiManager manager)
+            {
+                dependencies.CacheAs(AiManager = manager);
+
+                if (AiManager != null)
+                {
+                    RegisterImportHandler(AiManager);
+
+                    AiManager.Generated += (result => BeatmapManager.Import(result));
+                }
+            }
+
 
             // drop track volume game-wide to leave some head-room for UI effects / samples.
             // this means that for the time being, gameplay sample playback is louder relative to the audio track, compared to stable.

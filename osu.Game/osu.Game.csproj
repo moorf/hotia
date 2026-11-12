@@ -54,16 +54,4 @@
     <ProjectReference Include="..\..\hotia-framework\osu.Framework\osu.Framework.csproj" />
     <ProjectReference Include="..\..\hotia-resources\osu.Game.Resources\osu.Game.Resources.csproj" />
   </ItemGroup>
-  <Target Name="MoveSatelliteAssemblies" AfterTargets="Build">
-    <ItemGroup>
-      <SatelliteAssemblies Include="$(OutputPath)**\*.resources.dll" />
-    </ItemGroup>
-
-    <Copy
-      SourceFiles="%(SatelliteAssemblies.FullPath)"
-      DestinationFolder="$(OutputPath)locales\%(SatelliteAssemblies.DirectoryName)"
-      SkipUnchangedFiles="true" />
-
-    <Delete Files="%(SatelliteAssemblies.FullPath)" />
-  </Target>
 </Project>

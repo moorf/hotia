@@ -8,14 +8,15 @@ Hotia - independent fork of osu!lazer. Hotia is NOT IN ANY WAY affiliated or end
 </p>
 
 ## Features
-- better performance
-- downloading beatmaps w/o login
 - beatmap preview in the song select
+- *AI map generator*, built-in, local, supports CUDA and CPU. to try: drag and drop the mp3!
+- storage decoupled from the database file, with database restoration capabilities
+- downloading beatmaps w/o login
 - ASIO support
 - cool mods for std: 
 	- coloured judgements (to help Neiman know if he's rushing or dragging)
 	- relax difficulties (cursor must stay in a circle for specific amount of time)
-- storage decoupled from the database file (portability in the future, but the storage is a bit unstable for now)
+- a bit better performance (not focused on it now)
 
 [**Latest release**](https://github.com/moorf/hotia/releases/latest)
 

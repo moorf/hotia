@@ -1092,6 +1092,9 @@ namespace osu.Game
             MultiplayerClient.PostNotification = n => Notifications.Post(n);
             MultiplayerClient.PresentMatch = PresentMultiplayerMatch;
 
+            if (AiManager != null)
+                AiManager.PostNotification = n => Notifications.Post(n);
+
             if (API is APIAccess api)
                 api.PostNotification = n => Notifications.Post(n);
 
