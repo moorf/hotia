@@ -36,7 +36,7 @@ namespace osu.Game.Ai
 
         protected FormSliderBar<double> TargetStarRatingNumberBox = null!;
         protected FormNumberBox YearNumberBox = null!;
-        protected FormNumberBox MapperIdNumberBox = null!;
+        protected FormDropdown<string> MapperDropdown = null!;
         protected FormCheckBox HitsoundedCheckBox = null!;
         protected FormMultiSelect DescriptorsSelect = null!;
         protected FormMultiSelect NegativeDescriptorsSelect = null!;
@@ -46,6 +46,7 @@ namespace osu.Game.Ai
         protected FormCheckBox VerifyDecoderCacheCheckBox = null!;
 
         [BackgroundDependencyLoader]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "OLOC001:String can be localised", Justification = "<Pending>")]
         private void load()
         {
             GenerationOptions genOptions = new GenerationOptions();
@@ -170,25 +171,16 @@ namespace osu.Game.Ai
                                 Precision = 0.1,
                             },
                         }),
+                        padded(SliderTickRateTextBox = new FormNumberBox
+                        {
+                            Caption = nameof(GenerationOptions.SliderTickRate),
+                            Current = new Bindable<string>(genOptions.SliderTickRate.ToString()),
+                        }),
                         padded(YearNumberBox = new FormNumberBox
                         {
                             Caption = nameof(GenerationOptions.Year),
                             Current = new Bindable<string>(genOptions.Year.ToString()),
                         }),
-                        padded(MapperIdNumberBox = new FormNumberBox
-                        {
-                            Caption = nameof(GenerationOptions.MapperId),
-                            Current = new Bindable<string>((genOptions.MapperId ?? 4452992).ToString()),
-                        }),
-                        padded(HitsoundedCheckBox = new FormCheckBox
-                        {
-                            Caption = nameof(GenerationOptions.Hitsounded),
-                            Current = new Bindable<bool>(genOptions.Hitsounded),
-                            ExtendedHeight = true
-                        }),
-                    },
-                    new Drawable[]
-                    {
                         padded(SliderMultiplierTextBox = new FormSliderBar<double>
                         {
                             Caption = nameof(GenerationOptions.SliderMultiplier),
@@ -199,10 +191,14 @@ namespace osu.Game.Ai
                                 Precision = 0.01,
                             },
                         }),
-                        padded(SliderTickRateTextBox = new FormNumberBox
+                    },
+                    new Drawable[]
+                    {
+                        padded(HitsoundedCheckBox = new FormCheckBox
                         {
-                            Caption = nameof(GenerationOptions.SliderTickRate),
-                            Current = new Bindable<string>(genOptions.SliderTickRate.ToString()),
+                            Caption = nameof(GenerationOptions.Hitsounded),
+                            Current = new Bindable<bool>(genOptions.Hitsounded),
+                            ExtendedHeight = true
                         }),
                         padded(SeedTextBox = new FormNumberBox
                         {
@@ -214,21 +210,27 @@ namespace osu.Game.Ai
                             Caption = nameof(GenerationOptions.CfgScale),
                             Current = new Bindable<string>(genOptions.CfgScale.ToString(CultureInfo.InvariantCulture)),
                         }),
+                        Empty(),
                     },
                     new Drawable[]
                     {
 
-                        DescriptorsSelect = new FormMultiSelect(nameof(GenerationOptions.Descriptors),
-                                GenerationOptions.DESCRIPTOR_IDX.Keys) { Width = 2f },
-                        Empty(),
-                        NegativeDescriptorsSelect = new FormMultiSelect(nameof(GenerationOptions.NegativeDescriptors),
-                            GenerationOptions.DESCRIPTOR_IDX.Keys) { Width = 2f },
+                        padded(DescriptorsSelect = new FormMultiSelect(nameof(GenerationOptions.Descriptors),
+                                GenerationOptions.DESCRIPTOR_IDX.Keys) { Width = 1f }),
+                        padded(NegativeDescriptorsSelect = new FormMultiSelect(nameof(GenerationOptions.NegativeDescriptors),
+                            GenerationOptions.DESCRIPTOR_IDX.Keys) { Width = 1f }),
+                        padded(MapperDropdown = new FormDropdown<string>
+                        {
+                            Caption = "Mapper",
+                            Current = new Bindable<string>("Sotarks"),
+                            Items = GenerationOptions.MAPPER_IDS.Keys //hotiaTODO: allow custom ids
+                        }),
                     },
             };
             foreach (var textBox in new FormTextBox[]
             {
                     TitleTextBox, ArtistTextBox, CreatorTextBox, DifficultyNameTextBox,
-                    YearNumberBox, MapperIdNumberBox,
+                    YearNumberBox,
                     SliderTickRateTextBox, SeedTextBox, CfgScaleNumberBox,
             })
             {
@@ -271,7 +273,11 @@ namespace osu.Game.Ai
 
             options.TargetStarRating = TargetStarRatingNumberBox.Current.Value;
             options.Year = parseInt(YearNumberBox, options.Year);
-            options.MapperId = parseNullableInt(MapperIdNumberBox);
+
+            if (!GenerationOptions.MAPPER_IDS.TryGetValue(MapperDropdown.Current.Value, out int mapperId))
+                mapperId = new GenerationOptions().MapperId ?? 4452992;
+            options.MapperId = mapperId;
+
             options.Hitsounded = HitsoundedCheckBox.Current.Value;
 
             foreach (string d in DescriptorsSelect.Selected) options.Descriptors.Add(d);
