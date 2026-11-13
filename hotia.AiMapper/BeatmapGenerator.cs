@@ -222,7 +222,8 @@ namespace hotia.AiMapper
                     throw new ArgumentException("CFG scale must be between 1 and 10.");
 
                 if (options.CfgScale == 1 && options.NegativeDescriptors.Count > 0)
-                    throw new ArgumentException("Negative descriptors require CFG scale greater than 1.");
+                    options.CfgScale += 1;
+                //throw new ArgumentException("Negative descriptors require CFG scale greater than 1.");
 
                 if (options.MapperId is <= 0)
                     throw new ArgumentException("Mapper ID must be a positive osu! user ID.");
@@ -310,7 +311,7 @@ namespace hotia.AiMapper
                             verificationWindow.Length));
 
                     var hidden = Inference.OnnxInferenceDiagnostics.EncodeWindow(encoder, verificationWindow);
-
+                    
                     Log("Loading full decoder for parity verification...");
 
                     using (var fullDecoder = new InferenceSession(decoderPath, sessionOptions))

@@ -71,7 +71,8 @@ namespace hotia.AiMapper
 
                 string archivePath = await BeatmapGenerator.Generate(
                     progressNotification: notification,
-                    generationOptions)
+                    generationOptions,
+                    notification.CancellationToken)
                     ?? throw new InvalidOperationException("Generation finished without producing an archive.");
 
                 Generated?.Invoke(archivePath);
