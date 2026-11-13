@@ -11,6 +11,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.UserInterface;
 using osu.Framework.Localisation;
+using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.UserInterfaceV2;
 
 namespace osu.Game.Ai
@@ -37,8 +38,8 @@ namespace osu.Game.Ai
         protected FormNumberBox YearNumberBox = null!;
         protected FormNumberBox MapperIdNumberBox = null!;
         protected FormCheckBox HitsoundedCheckBox = null!;
-        protected LabelledDropdown<string> DescriptorsDropdown = null!;
-        protected LabelledDropdown<string> NegativeDescriptorsDropdown = null!;
+        protected FormMultiSelect DescriptorsSelect = null!;
+        protected FormMultiSelect NegativeDescriptorsSelect = null!;
         protected FormNumberBox CfgScaleNumberBox = null!;
         protected FormCheckBox DoSampleCheckBox = null!;
         protected FormNumberBox CudaDeviceIdNumberBox = null!;
@@ -50,6 +51,7 @@ namespace osu.Game.Ai
             GenerationOptions genOptions = new GenerationOptions();
             RelativeSizeAxes = Axes.X;
             AutoSizeAxes = Axes.Y;
+            Padding = new MarginPadding() { Bottom = 240f }; //matches FormMultiSelect scroll
             AudioPathTextBox = new FormTextBox
             {
                 Caption = nameof(GenerationOptions.AudioPath),
@@ -92,30 +94,30 @@ namespace osu.Game.Ai
             {
                     new Drawable[]
                     {
-                        TitleTextBox = new FormTextBox
+                        padded(TitleTextBox = new FormTextBox
                         {
                             Caption = nameof(GenerationOptions.Title),
                             Current = new Bindable<string>(genOptions.Title),
-                        },
-                        ArtistTextBox = new FormTextBox
+                        }),
+                        padded(ArtistTextBox = new FormTextBox
                         {
                             Caption = nameof(GenerationOptions.Artist),
                             Current = new Bindable<string>(genOptions.Artist),
-                        },
-                        CreatorTextBox = new FormTextBox
+                        }),
+                        padded(CreatorTextBox = new FormTextBox
                         {
                             Caption = nameof(GenerationOptions.Creator),
                             Current = new Bindable<string>(genOptions.Creator),
-                        },
-                        DifficultyNameTextBox = new FormTextBox
+                        }),
+                        padded(DifficultyNameTextBox = new FormTextBox
                         {
                             Caption = nameof(GenerationOptions.DifficultyName),
                             Current = new Bindable<string>(genOptions.DifficultyName),
-                        }
+                        })
                     },
                     new Drawable[]
                     {
-                        OverallDifficultyTextBox = new FormSliderBar<double>
+                        padded(OverallDifficultyTextBox = new FormSliderBar<double>
                         {
                             Caption = nameof(GenerationOptions.OverallDifficulty),
                             Current = new BindableDouble(genOptions.OverallDifficulty)
@@ -124,8 +126,8 @@ namespace osu.Game.Ai
                                 MaxValue = 10,
                                 Precision = 0.1,
                             },
-                        },
-                        ApproachRateTextBox = new FormSliderBar<double>
+                        }),
+                        padded(ApproachRateTextBox = new FormSliderBar<double>
                         {
                             Caption = nameof(GenerationOptions.ApproachRate),
                             Current = new BindableDouble(genOptions.ApproachRate)
@@ -134,8 +136,8 @@ namespace osu.Game.Ai
                                 MaxValue = 10,
                                 Precision = 0.1,
                             },
-                        },
-                        CircleSizeTextBox = new FormSliderBar<double>
+                        }),
+                        padded(CircleSizeTextBox = new FormSliderBar<double>
                         {
                             Caption = nameof(GenerationOptions.CircleSize),
                             Current = new BindableDouble(genOptions.CircleSize)
@@ -144,8 +146,8 @@ namespace osu.Game.Ai
                                 MaxValue = 10,
                                 Precision = 0.1,
                             },
-                        },
-                        HpDrainRateTextBox = new FormSliderBar<double>
+                        }),
+                        padded(HpDrainRateTextBox = new FormSliderBar<double>
                         {
                             Caption = nameof(GenerationOptions.HpDrainRate),
                             Current = new BindableDouble(genOptions.HpDrainRate)
@@ -154,11 +156,11 @@ namespace osu.Game.Ai
                                 MaxValue = 10,
                                 Precision = 0.1,
                             },
-                        },
+                        }),
                     },
                     new Drawable[]
                     {
-                        TargetStarRatingNumberBox = new FormSliderBar<double>
+                        padded(TargetStarRatingNumberBox = new FormSliderBar<double>
                         {
                             Caption = nameof(GenerationOptions.TargetStarRating),
                             Current = new BindableDouble(genOptions.TargetStarRating ?? 5.3)
@@ -167,27 +169,27 @@ namespace osu.Game.Ai
                                 MaxValue = 12,
                                 Precision = 0.1,
                             },
-                        },
-                        YearNumberBox = new FormNumberBox
+                        }),
+                        padded(YearNumberBox = new FormNumberBox
                         {
                             Caption = nameof(GenerationOptions.Year),
                             Current = new Bindable<string>(genOptions.Year.ToString()),
-                        },
-                        MapperIdNumberBox = new FormNumberBox
+                        }),
+                        padded(MapperIdNumberBox = new FormNumberBox
                         {
                             Caption = nameof(GenerationOptions.MapperId),
                             Current = new Bindable<string>((genOptions.MapperId ?? 4452992).ToString()),
-                        },
-                        HitsoundedCheckBox = new FormCheckBox
+                        }),
+                        padded(HitsoundedCheckBox = new FormCheckBox
                         {
                             Caption = nameof(GenerationOptions.Hitsounded),
                             Current = new Bindable<bool>(genOptions.Hitsounded),
                             ExtendedHeight = true
-                        },
+                        }),
                     },
                     new Drawable[]
                     {
-                        SliderMultiplierTextBox = new FormSliderBar<double>
+                        padded(SliderMultiplierTextBox = new FormSliderBar<double>
                         {
                             Caption = nameof(GenerationOptions.SliderMultiplier),
                             Current = new BindableDouble(genOptions.SliderMultiplier)
@@ -196,40 +198,31 @@ namespace osu.Game.Ai
                                 MaxValue = 3.6,
                                 Precision = 0.01,
                             },
-                        },
-                        SliderTickRateTextBox = new FormNumberBox
+                        }),
+                        padded(SliderTickRateTextBox = new FormNumberBox
                         {
                             Caption = nameof(GenerationOptions.SliderTickRate),
                             Current = new Bindable<string>(genOptions.SliderTickRate.ToString()),
-                        },
-                        SeedTextBox = new FormNumberBox
+                        }),
+                        padded(SeedTextBox = new FormNumberBox
                         {
                             Caption = nameof(GenerationOptions.Seed),
                             Current = new Bindable<string>((genOptions.Seed ?? ((int)new Random().NextInt64())).ToString()),
-                        },
-                        CfgScaleNumberBox = new FormNumberBox(allowDecimals: true)
+                        }),
+                        padded(CfgScaleNumberBox = new FormNumberBox(allowDecimals: true)
                         {
                             Caption = nameof(GenerationOptions.CfgScale),
                             Current = new Bindable<string>(genOptions.CfgScale.ToString(CultureInfo.InvariantCulture)),
-                        },
+                        }),
                     },
                     new Drawable[]
                     {
-                        DescriptorsDropdown = new LabelledDropdown<string>(true)
-                        {
-                            Label = new LocalisableString(nameof(GenerationOptions.Descriptors)),
-                            RelativeSizeAxes = Axes.X,
-                            Items = GenerationOptions.DESCRIPTOR_IDX.Keys,
-                            Width = 2f,
-                        },
+
+                        DescriptorsSelect = new FormMultiSelect(nameof(GenerationOptions.Descriptors),
+                                GenerationOptions.DESCRIPTOR_IDX.Keys) { Width = 2f },
                         Empty(),
-                        NegativeDescriptorsDropdown = new LabelledDropdown<string>(true)
-                        {
-                            Label = new LocalisableString(nameof(GenerationOptions.NegativeDescriptors)),
-                            RelativeSizeAxes = Axes.X,
-                            Items = GenerationOptions.DESCRIPTOR_IDX.Keys,
-                            Width = 2f,
-                        },
+                        NegativeDescriptorsSelect = new FormMultiSelect(nameof(GenerationOptions.NegativeDescriptors),
+                            GenerationOptions.DESCRIPTOR_IDX.Keys) { Width = 2f },
                     },
             };
             foreach (var textBox in new FormTextBox[]
@@ -250,6 +243,13 @@ namespace osu.Game.Ai
                 sliderBar.TabbableContentContainer = this;
             }
         }
+
+        private static Drawable padded(Drawable child, float padding = 5) => new Container
+        {
+            RelativeSizeAxes = Axes.Both,
+            Padding = new MarginPadding(padding),
+            Child = child,
+        };
 
         public void ApplyTo(GenerationOptions options)
         {
@@ -274,10 +274,8 @@ namespace osu.Game.Ai
             options.MapperId = parseNullableInt(MapperIdNumberBox);
             options.Hitsounded = HitsoundedCheckBox.Current.Value;
 
-            if (!string.IsNullOrEmpty(DescriptorsDropdown.Current.Value))
-                options.Descriptors.Add(DescriptorsDropdown.Current.Value);//selectedAsList(DescriptorsDropdown.);
-            if (!string.IsNullOrEmpty(NegativeDescriptorsDropdown.Current.Value))
-                options.NegativeDescriptors.Add(NegativeDescriptorsDropdown.Current.Value);//selectedAsList(NegativeDescriptorsDropdown);
+            foreach (string d in DescriptorsSelect.Selected) options.Descriptors.Add(d);
+            foreach (string d in NegativeDescriptorsSelect.Selected) options.NegativeDescriptors.Add(d);
 
             options.CfgScale = parseDouble(CfgScaleNumberBox, options.CfgScale);
             options.DoSample = DoSampleCheckBox.Current.Value;

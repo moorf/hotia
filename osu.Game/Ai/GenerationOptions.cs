@@ -42,7 +42,6 @@ namespace osu.Game.Ai
 
         public static readonly Dictionary<string, int> DESCRIPTOR_IDX = new Dictionary<string, int>
         {
-            [""] = 0,
             ["style/messy"] = 1,
             ["expression/simple"] = 2,
             ["expression/chaotic"] = 3,

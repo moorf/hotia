@@ -6,11 +6,14 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Input.Events;
+using osu.Framework.IO.Stores;
 using osu.Framework.Localisation;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Containers;
+using osu.Game.Graphics.Sprites;
 using osu.Game.Graphics.UserInterfaceV2;
 using osu.Game.Overlays;
+using osu.Game.Screens.OnlinePlay;
 using osuTK;
 
 namespace osu.Game.Ai
@@ -20,9 +23,9 @@ namespace osu.Game.Ai
         private const string prefix = @"osu.Game.Resources.Localisation.AiScreen";
 
         /// <summary>
-        /// "Generation wizard"
+        /// "Beatmap generation wizard"
         /// </summary>
-        public static LocalisableString Header => new TranslatableString(getKey(@"header"), @"Generation wizard");
+        public static LocalisableString Header => new TranslatableString(getKey(@"header"), @"Beatmap generation wizard");
 
         private static string getKey(string key) => $@"{prefix}:{key}";
     }
@@ -52,59 +55,57 @@ namespace osu.Game.Ai
         [BackgroundDependencyLoader]
         private void load()
         {
-            Anchor = Anchor.Centre;
-            Origin = Anchor.Centre;
-            //Header.Title = AiScreenStrings.Header;
-            //Header.Description = AiScreenStrings.Header;
+            RelativeSizeAxes = Axes.Both;
             Content.Add(new Container
             {
                 Anchor = Anchor.Centre,
                 Origin = Anchor.Centre,
                 RelativeSizeAxes = Axes.Both,
                 Masking = true,
-                Size = new Vector2(0.7f, 0.7f),
-                Child = new InputBlockingContainer
+                Size = new Vector2(0.95f, 0.8f),
+                Children = new Drawable[]
                 {
-                    Anchor = Anchor.Centre,
-                    Origin = Anchor.Centre,
-                    RelativeSizeAxes = Axes.Both,
-                    Masking = true,
-                    CornerRadius = 14,
-                    Children = new Drawable[]
-                    {
-                    new Box
+                    new InputBlockingContainer
                     {
                         RelativeSizeAxes = Axes.Both,
-                        Colour = ColourProvider.Background6
-                    },
-                    new OsuScrollContainer(Direction.Vertical)
-                    {
-                        RelativeSizeAxes = Axes.Both,
-                        Padding = new MarginPadding { Vertical = 20 },
-                        ScrollbarVisible = false,
-                        Child = new FillFlowContainer
+                        Masking = true,
+                        CornerRadius = 14,
+                        Children = new Drawable[]
                         {
-                            Direction = FillDirection.Vertical,
-                            RelativeSizeAxes = Axes.X,
-                            AutoSizeAxes = Axes.Y,
-                            Spacing = new Vector2(5),
-                            Children = new Drawable[]
+                            new Box
                             {
-                                startGeneratingButton = new RoundedButton
+                                RelativeSizeAxes = Axes.Both,
+                                Colour = ColourProvider.Background6
+                            },
+                            new OsuScrollContainer(Direction.Vertical)
+                            {
+                                RelativeSizeAxes = Axes.Both,
+                                Padding = new MarginPadding { Vertical = 20 },
+                                ScrollbarVisible = false,
+                                Child = new FillFlowContainer
                                 {
+                                    Direction = FillDirection.Vertical,
                                     RelativeSizeAxes = Axes.X,
-                                    Size = new Vector2(1f, 60f),
-                                    Text = "Start generating",
-                                    Action = () => {
-                                        genOptionsForm.ApplyTo(generationOptions);
-                                        game.AiManager.Generate(generationOptions);
-                                        Hide();
+                                    AutoSizeAxes = Axes.Y,
+                                    Spacing = new Vector2(5),
+                                    Children = new Drawable[]
+                                    {
+                                        startGeneratingButton = new RoundedButton
+                                        {
+                                            RelativeSizeAxes = Axes.X,
+                                            Size = new Vector2(1f, 60f),
+                                            Text = "Start generating",
+                                            Action = () => {
+                                                genOptionsForm.ApplyTo(generationOptions);
+                                                game.AiManager.Generate(generationOptions);
+                                                Hide();
+                                            }
+                                        },
+                                        genOptionsForm = new GenerationOptionsForm(),
                                     }
-                                },
-                                genOptionsForm = new GenerationOptionsForm(),
-                            }
+                                }
+                            },
                         }
-                    },
                     }
                 }
             });
