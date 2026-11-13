@@ -164,7 +164,7 @@ namespace osu.Game
 
         protected SkinManager SkinManager { get; private set; }
 
-        protected IAiManager AiManager { get; set; }
+        public IAiManager AiManager { get; private set; }
 
         protected RealmRulesetStore RulesetStore { get; private set; }
 
@@ -381,7 +381,6 @@ namespace osu.Game
                 if (AiManager != null)
                 {
                     RegisterImportHandler(AiManager);
-
                     AiManager.Generated += (result => BeatmapManager.Import(result));
                 }
             }

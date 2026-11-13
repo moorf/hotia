@@ -4,46 +4,11 @@
 using System.IO.Compression;
 using Microsoft.ML.OnnxRuntime;
 using osu.Framework.Extensions;
+using osu.Game.Ai;
 using osu.Game.Overlays.Notifications;
 
 namespace hotia.AiMapper
 {
-    public sealed class GenerationOptions
-    {
-        public string AudioPath { get; set; } = "";
-        public string ModelDirectory { get; set; } = "";
-
-        public string Title { get; set; } = "";
-        public string Artist { get; set; } = "";
-
-        public string Creator { get; set; } = "Mapperatorinator";
-        public string DifficultyName { get; set; } = "Normal";
-        public string GameMode { get; set; } = "osu!standard";
-
-        public double OverallDifficulty { get; set; } = 8.0;
-        public double ApproachRate { get; set; } = 9.0;
-        public double CircleSize { get; set; } = 4.0;
-        public double HpDrainRate { get; set; } = 5.0;
-        public double SliderMultiplier { get; set; } = 1.6;
-        public double SliderTickRate { get; set; } = 1.0;
-        public int? Seed { get; set; }
-
-        public double? TargetStarRating { get; set; } = 5.3;
-        public int Year { get; set; } = 2024;
-        public int? MapperId { get; set; } = 4452992;
-        public bool Hitsounded { get; set; } = true;
-
-        public List<string> Descriptors { get; set; } = new();
-        public List<string> NegativeDescriptors { get; set; } = new();
-
-        public double CfgScale { get; set; } = 1.0;
-        public bool DoSample { get; set; } = true;
-
-        public int CudaDeviceId { get; set; } = 0;
-
-        public bool VerifyDecoderCache { get; set; } = true;
-    }
-
     public sealed class GeneratedOsuFile
     {
         public string FileName { get; }
@@ -70,50 +35,26 @@ namespace hotia.AiMapper
     public static class BeatmapGenerator
     {
         public static async Task<string> Generate(
-            string audioPath,
-            ProgressNotification progressNotification,
-            string? modelDirectory = null,
-            string title = "",
-            string artist = "",
-            string creator = "Mapperatorinator",
-            string difficultyName = "Normal",
-            string gameMode = "osu!standard",
-            double overallDifficulty = 8,
-            double approachRate = 9,
-            double circleSize = 4,
-            double hpDrainRate = 5,
-            double sliderMultiplier = 1.6,
-            double sliderTickRate = 1,
-            double targetStarRating = 5.3,
-            int year = 2024,
-            int? mapperId = 4452992,
-            bool hitsounded = true,
-            string? descriptors = null,
-            string? negativeDescriptors = null,
-            double cfgScale = 1,
-            int? seed = null,
-            bool archive = false,
-            bool doSample = true,
-            int cudaDeviceId = 0,
-            bool verifyDecoderCache = true,
-            CancellationToken cancellationToken = default)
+        ProgressNotification progressNotification,
+        GenerationOptions options,
+        CancellationToken cancellationToken = default)
         {
 
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                if (string.IsNullOrWhiteSpace(audioPath))
-                    throw new ArgumentException("Audio path was not provided.", nameof(audioPath));
+                if (string.IsNullOrWhiteSpace(options.AudioPath))
+                    throw new ArgumentException("Audio path was not provided.", nameof(options.AudioPath));
 
-                audioPath = Path.GetFullPath(audioPath);
+                options.AudioPath = Path.GetFullPath(options.AudioPath);
 
-                if (!File.Exists(audioPath))
-                    throw new FileNotFoundException("The audio file was not found.", audioPath);
+                if (!File.Exists(options.AudioPath))
+                    throw new FileNotFoundException("The audio file was not found.", options.AudioPath);
 
                 string resolvedModels;
 
-                if (string.IsNullOrWhiteSpace(modelDirectory))
+                if (string.IsNullOrWhiteSpace(options.ModelDirectory))
                 {
                     resolvedModels = HuggingFaceModel.DefaultDirectory;
 
@@ -129,59 +70,26 @@ namespace hotia.AiMapper
                 }
                 else
                 {
-                    resolvedModels = Path.GetFullPath(modelDirectory);
+                    resolvedModels = Path.GetFullPath(options.ModelDirectory);
                     progressNotification.Text = ("Using model files: " + resolvedModels);
                 }
-
+                options.ModelDirectory = resolvedModels;
                 cancellationToken.ThrowIfCancellationRequested();
 
-                if (title.Length == 0) title = DateTime.Now.ToString();
-                if (artist.Length == 0) artist = Guid.NewGuid().ToString().ComputeSHA2Hash().Substring(0, 15);
-
-                var options = new GenerationOptions
-                {
-                    AudioPath = audioPath,
-                    ModelDirectory = resolvedModels,
-
-                    Title = title,
-                    Artist = artist,
-                    Creator = creator,
-                    DifficultyName = difficultyName,
-                    GameMode = gameMode,
-
-                    OverallDifficulty = overallDifficulty,
-                    ApproachRate = approachRate,
-                    CircleSize = circleSize,
-                    HpDrainRate = hpDrainRate,
-                    SliderMultiplier = sliderMultiplier,
-                    SliderTickRate = sliderTickRate,
-
-                    TargetStarRating = targetStarRating,
-                    Year = year,
-                    MapperId = mapperId,
-                    Hitsounded = hitsounded,
-
-                    Descriptors = parseDescriptors(descriptors),
-                    NegativeDescriptors = parseDescriptors(negativeDescriptors),
-
-                    CfgScale = cfgScale,
-                    Seed = seed,
-                    DoSample = doSample,
-                    CudaDeviceId = cudaDeviceId,
-                    VerifyDecoderCache = verifyDecoderCache
-                };
+                if (options.Title.Length == 0) options.Title = DateTime.Now.ToString();
+                if (options.Artist.Length == 0) options.Artist = Guid.NewGuid().ToString().ComputeSHA2Hash().Substring(0, 15);
 
                 GeneratedOsuFile result = await GenerateAsync(options, progressNotification, cancellationToken).ConfigureAwait(false);
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                if (archive)
+                if (true) //archive
                 {
                     progressNotification.Text = "Packaging beatmap and audio...";
                     progressNotification.Progress = 0.97f;
 
                     string archivePath = await Task.Run(() =>
-                    writeArchiveAsync(result, audioPath, cancellationToken),
+                    writeArchiveAsync(result, options.AudioPath, cancellationToken),
                         cancellationToken).ConfigureAwait(true);
 
                     result = new GeneratedOsuFile(

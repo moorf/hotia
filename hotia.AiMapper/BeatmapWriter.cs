@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using System.Text;
+using osu.Game.Ai;
 
 namespace hotia.AiMapper
 {

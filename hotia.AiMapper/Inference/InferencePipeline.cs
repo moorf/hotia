@@ -4,6 +4,7 @@
 using System.Text;
 using Microsoft.ML.OnnxRuntime;
 using Microsoft.ML.OnnxRuntime.Tensors;
+using osu.Game.Ai;
 
 namespace hotia.AiMapper.Inference
 {

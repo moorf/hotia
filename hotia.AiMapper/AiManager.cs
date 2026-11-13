@@ -1,14 +1,20 @@
 ﻿// Copyright (c) moorf 2026. Licensed under the GNU General Public License v3.0.
 // See the LICENCE.GPL3 file in the repository root for full licence text.
 
-using osu.Game.Database;
-using osu.Game.Overlays.Notifications;
+using osu.Framework.Allocation;
+using osu.Framework.Graphics;
+using osu.Framework.Graphics.Lines;
+using osu.Framework.Screens;
 using osu.Game.Ai;
+using osu.Game.Configuration;
+using osu.Game.Database;
+using osu.Game.Overlays;
+using osu.Game.Overlays.Notifications;
 using osu.Game.Utils;
 
 namespace hotia.AiMapper
 {
-    public sealed class AiManager : IAiManager
+    public partial class AiManager : Drawable, IAiManager
     {
         public Action<Notification>? PostNotification { get; set; }
 
@@ -16,6 +22,11 @@ namespace hotia.AiMapper
         /// Receives the generated .osz path.
         /// </summary>
         public Action<string>? Generated { get; set; }
+
+        /// <summary>
+        /// Saves path for needed for generation
+        /// </summary>
+        public Action<string>? PathSaved { get; set; }
 
         /// <summary>
         /// If null: uses the generator's automatic model cache/download.
@@ -28,7 +39,10 @@ namespace hotia.AiMapper
 
         public IEnumerable<string> HandledExtensions { get; } = SupportedExtensions.AUDIO_EXTENSIONS;
 
+        private string currentPath { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2007:Consider calling ConfigureAwait on the awaited task", Justification = "<Pending>")]
+
         public async Task Import(params string[] paths)
         {
             ArgumentNullException.ThrowIfNull(paths);
@@ -36,28 +50,31 @@ namespace hotia.AiMapper
             if (!Archive)
                 throw new InvalidOperationException("Archive must be enabled for now.");
 
-            await importLock.WaitAsync();
+            if (paths.Length < 0)
+                throw new InvalidOperationException("No audio path given for generation.");
+            currentPath = paths.First();
 
+            PathSaved?.Invoke(currentPath);
+        }
+
+        public async Task Generate(GenerationOptions generationOptions)
+        {
+            await importLock.WaitAsync();
             try
             {
-                foreach (string path in paths)
+                var notification = new ProgressNotification
                 {
-                    var notification = new ProgressNotification
-                    {
-                        Text = "Preparing beatmap generation..."
-                    };
+                    Text = "Preparing beatmap generation..."
+                };
 
-                    PostNotification?.Invoke(notification);
+                PostNotification?.Invoke(notification);
 
-                    string archivePath = await BeatmapGenerator.Generate(
-                        audioPath: path,
-                        progressNotification: notification,
-                        modelDirectory: ModelDirectory,
-                        archive: true)
-                        ?? throw new InvalidOperationException("Generation finished without producing an archive.");
+                string archivePath = await BeatmapGenerator.Generate(
+                    progressNotification: notification,
+                    generationOptions)
+                    ?? throw new InvalidOperationException("Generation finished without producing an archive.");
 
-                    Generated?.Invoke(archivePath);
-                }
+                Generated?.Invoke(archivePath);
             }
             finally
             {

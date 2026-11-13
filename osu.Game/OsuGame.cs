@@ -39,6 +39,7 @@ using osu.Framework.Platform;
 using osu.Framework.Screens;
 using osu.Framework.Threading;
 using osu.Framework.Utils;
+using osu.Game.Ai;
 using osu.Game.Beatmaps;
 using osu.Game.Collections;
 using osu.Game.Configuration;
@@ -152,6 +153,8 @@ namespace osu.Game
         private ChangelogOverlay changelogOverlay;
 
         private SkinEditorOverlay skinEditor;
+
+        private AiManagerOverlay aiManagerOverlay;
 
         private Container overlayContent;
 
@@ -1265,6 +1268,12 @@ namespace osu.Game
             loadComponentSingleFile(new BackgroundDataStoreProcessor(), Add);
             loadComponentSingleFile<BeatmapStore>(detachedBeatmapStore = new RealmDetachedBeatmapStore(), Add, true);
             loadComponentSingleFile(new QueueController(), Add, true);
+            loadComponentSingleFile(aiManagerOverlay = new AiManagerOverlay(), Add, true);
+
+            AiManager.PathSaved += (path =>
+            {
+                Schedule(() => aiManagerOverlay.UpdatePath(path));
+            });
 
             Add(externalLinkOpener = new ExternalLinkOpener());
             Add(new MusicKeyBindingHandler());
@@ -1336,6 +1345,7 @@ namespace osu.Game
             //skibidi!
             ScreenStack.ScreenPushed += (_, newScreen) =>
             {
+                //if (newScreen is SoloSongSelect) aiManagerOverlay.Show();
                 if (newScreen is Player)
                 {
                     if (Settings.IsLoaded) Settings.FinishTransforms(true);

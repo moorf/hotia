@@ -2,8 +2,9 @@
 // See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using System;
-using osu.Game.Overlays.Notifications;
+using System.Threading.Tasks;
 using osu.Game.Database;
+using osu.Game.Overlays.Notifications;
 
 namespace osu.Game.Ai
 {
@@ -11,5 +12,9 @@ namespace osu.Game.Ai
     {
         Action<Notification>? PostNotification { get; set; }
         Action<string>? Generated { get; set; }
+
+        Action<string>? PathSaved { get; set; }
+
+        Task Generate(GenerationOptions generationOptions);
     }
 }
