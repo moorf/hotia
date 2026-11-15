@@ -732,8 +732,8 @@ namespace osu.Game.Screens.Select
             DrawableRuleset? drawableRuleset = rulesetInstance.CreateDrawableRulesetWith(playableBeatmap, autoplayMods);
             drawableRuleset.Audio.AddAdjustment(AdjustableProperty.Volume, new BindableDouble(0));
 
-            foreach (var item in drawableRuleset.Objects)
-                item.Samples.Clear();
+            //foreach (var item in drawableRuleset.Objects)
+            //    item.Samples.Clear();
 
             if (playableBeatmap == null || drawableRuleset == null || Beatmap.Value.Beatmap == null)
                 return;
@@ -757,7 +757,11 @@ namespace osu.Game.Screens.Select
             drawableRuleset.Cursor?.Dispose();
 
             if (rulesetInstance.RulesetInfo.ShortName == "fruits")
+            {
                 drawableRuleset.Anchor = Anchor.TopLeft;
+                drawableRuleset.Scale *= 0.5f;
+                drawableRuleset.Size *= 2f;
+            }
 
             score.Replay.Frames.RemoveAll(f => f.Time <= Beatmap.Value.BeatmapInfo.Metadata.PreviewTime);
             Schedule(() => drawableRuleset.Cursor?.Hide());
