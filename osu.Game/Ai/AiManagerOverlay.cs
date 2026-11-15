@@ -2,6 +2,7 @@
 // See the LICENCE.GPL3 file in the repository root for full licence text.
 
 using osu.Framework.Allocation;
+using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Shapes;
@@ -105,11 +106,16 @@ namespace osu.Game.Ai
                                     }
                                 }
                             },
+                            genOptionsForm.AudioPathText = new OsuSpriteText
+                            {
+                                Current = new Bindable<string>(path),
+                                Alpha = 0.33f,
+                                Padding = new MarginPadding { Left = 14f }
+                            },
                         }
                     }
                 }
             });
-
         }
 
         protected override bool OnClick(ClickEvent e)
@@ -148,7 +154,7 @@ namespace osu.Game.Ai
         public override void Show()
         {
             base.Show();
-            genOptionsForm.AudioPathTextBox.Current.Value = path;
+            genOptionsForm.AudioPathText.Current.Value = path;
             //hotiaTODO: shortcut to show overlay, show audio path in onscreen notification when changed
         }
     }

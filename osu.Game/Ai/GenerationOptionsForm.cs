@@ -10,13 +10,14 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.UserInterface;
+using osu.Game.Graphics.Sprites;
 using osu.Game.Graphics.UserInterfaceV2;
 
 namespace osu.Game.Ai
 {
     public partial class GenerationOptionsForm : GridContainer
     {
-        public FormTextBox AudioPathTextBox = null!;
+        public OsuSpriteText AudioPathText = null!;
         protected FormTextBox ModelDirectoryTextBox = null!;
         protected FormTextBox TitleTextBox = null!;
         protected FormTextBox ArtistTextBox = null!;
@@ -51,11 +52,7 @@ namespace osu.Game.Ai
             RelativeSizeAxes = Axes.X;
             AutoSizeAxes = Axes.Y;
             Padding = new MarginPadding() { Bottom = 240f }; //matches FormMultiSelect scroll
-            AudioPathTextBox = new FormTextBox
-            {
-                Caption = nameof(GenerationOptions.AudioPath),
-                Current = new Bindable<string>(genOptions.AudioPath),
-            };
+
             ModelDirectoryTextBox = new FormTextBox
             {
                 Caption = nameof(GenerationOptions.ModelDirectory),
@@ -268,7 +265,7 @@ namespace osu.Game.Ai
 
         public void ApplyTo(GenerationOptions options)
         {
-            options.AudioPath = AudioPathTextBox.Current.Value;
+            options.AudioPath = AudioPathText.Current.Value;
             options.ModelDirectory = ModelDirectoryTextBox.Current.Value;
             options.Title = TitleTextBox.Current.Value;
             options.Artist = ArtistTextBox.Current.Value;
