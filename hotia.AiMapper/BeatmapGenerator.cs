@@ -209,9 +209,6 @@ namespace hotia.AiMapper
                 if (!File.Exists(options.AudioPath))
                     throw new FileNotFoundException("Select a valid audio file.", options.AudioPath);
 
-                if (options.GameMode != "osu!standard" && options.GameMode != "0")
-                    throw new NotSupportedException("hotiaTODO: test for non osu!std");
-
                 if (options.TargetStarRating is not double stars || !double.IsFinite(stars) || stars < 0 || stars > 12)
                     throw new ArgumentException("Star rating must be between 0 and 12.");
 
@@ -311,7 +308,7 @@ namespace hotia.AiMapper
                             verificationWindow.Length));
 
                     var hidden = Inference.OnnxInferenceDiagnostics.EncodeWindow(encoder, verificationWindow);
-                    
+
                     Log("Loading full decoder for parity verification...");
 
                     using (var fullDecoder = new InferenceSession(decoderPath, sessionOptions))
@@ -370,6 +367,7 @@ namespace hotia.AiMapper
             {
                 // GPU
                 options.AppendExecutionProvider_CUDA(deviceId);
+                // hotiaTODO: consider switching to Windows ML for AMD ^^
 
                 return (options, "GPU");
             }

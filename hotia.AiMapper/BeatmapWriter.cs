@@ -753,7 +753,7 @@ namespace hotia.AiMapper
             text.AppendLine("Countdown: 0");
             text.AppendLine("SampleSet: All");
             text.AppendLine("StackLeniency: 0.7");
-            text.AppendLine("Mode: 0");
+            text.AppendLine($"Mode: {options.GameMode}");
             text.AppendLine("LetterboxInBreaks: 0");
             text.AppendLine("WidescreenStoryboard: 1");
             text.AppendLine();
@@ -766,7 +766,7 @@ namespace hotia.AiMapper
             text.AppendLine($"Creator:{clean(options.Creator)}");
             text.AppendLine($"Version:{clean(options.DifficultyName)}");
             text.AppendLine("Source:");
-            text.AppendLine("Tags:Mapperatorinator -csharp");
+            text.AppendLine("Tags:Mapperatorinator hotia");
             text.AppendLine();
 
             text.AppendLine("[Difficulty]");

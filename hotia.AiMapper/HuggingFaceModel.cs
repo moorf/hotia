@@ -20,7 +20,7 @@ namespace hotia.AiMapper
         };
 
         public static string DefaultDirectory =>
-            Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mapperatorinator", "Models");
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mapperatorinator", "Models");
 
         public static bool IsDownloaded(string directory)
         {

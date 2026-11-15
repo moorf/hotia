@@ -145,7 +145,7 @@ namespace hotia.AiMapper.Inference
                     "Unexpected full decoder logits shape.");
             }
 
-            var last = new float[4097];
+            float[] last = new float[4097];
 
             for (int token = 0; token < last.Length; token++)
                 last[token] = logits[0, prefix.Count - 1, token];

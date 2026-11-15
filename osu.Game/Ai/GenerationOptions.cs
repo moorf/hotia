@@ -15,7 +15,7 @@ namespace osu.Game.Ai
 
         public string Creator { get; set; } = "Mapperatorinator";
         public string DifficultyName { get; set; } = "Extra";
-        public string GameMode { get; set; } = "osu!standard";
+        public int GameMode { get; set; } = 0;
 
         public double OverallDifficulty { get; set; } = 8.0;
         public double ApproachRate { get; set; } = 9.0;
@@ -342,6 +342,14 @@ namespace osu.Game.Ai
             ["Mashley"] = 41481, // 148
             ["ZiRoX"] = 200768, // 148
             ["Asuka_-"] = 7905848, // 148
+        };
+
+        public static readonly Dictionary<string, int> GAMEMODES = new Dictionary<string, int>
+        {
+            ["standard"] = 0,
+            ["taiko"] = 1,
+            ["catch"] = 2,
+            ["mania"] = 3
         };
 
         public static readonly Dictionary<string, int> DESCRIPTOR_IDX = new Dictionary<string, int>

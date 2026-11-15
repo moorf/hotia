@@ -10,8 +10,6 @@ using osu.Framework.Bindables;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.UserInterface;
-using osu.Framework.Localisation;
-using osu.Game.Graphics.Containers;
 using osu.Game.Graphics.UserInterfaceV2;
 
 namespace osu.Game.Ai
@@ -24,7 +22,7 @@ namespace osu.Game.Ai
         protected FormTextBox ArtistTextBox = null!;
         protected FormTextBox CreatorTextBox = null!;
         protected FormTextBox DifficultyNameTextBox = null!;
-        protected FormTextBox GameModeTextBox = null!;
+        protected FormDropdown<string> GameModeDropdown = null!;
 
         protected FormSliderBar<double> OverallDifficultyTextBox = null!;
         protected FormSliderBar<double> ApproachRateTextBox = null!;
@@ -62,11 +60,6 @@ namespace osu.Game.Ai
             {
                 Caption = nameof(GenerationOptions.ModelDirectory),
                 Current = new Bindable<string>(genOptions.ModelDirectory),
-            };
-            GameModeTextBox = new FormTextBox
-            {
-                Caption = nameof(GenerationOptions.GameMode),
-                Current = new Bindable<string>(genOptions.GameMode),
             };
             DoSampleCheckBox = new FormCheckBox
             {
@@ -222,11 +215,31 @@ namespace osu.Game.Ai
                         padded(MapperDropdown = new FormDropdown<string>
                         {
                             Caption = "Mapper",
-                            Current = new Bindable<string>("Sotarks"),
+                            Current = new Bindable<string>("Sotarks"), //Nwolf, Kukkai
                             Items = GenerationOptions.MAPPER_IDS.Keys //hotiaTODO: allow custom ids
+                        }),
+                        padded(GameModeDropdown = new FormDropdown<string>
+                        {
+                            Caption = nameof(GenerationOptions.GameMode),
+                            Current = new Bindable<string>(GenerationOptions.GAMEMODES.Keys.First()),
+                            Items = GenerationOptions.GAMEMODES.Keys,
                         }),
                     },
             };
+
+            GameModeDropdown.Current.ValueChanged += (gameMode) =>
+            {
+                GenerationOptions.GAMEMODES.TryGetValue(gameMode.NewValue, out int gameModeIdx);
+                MapperDropdown.Current.Value = gameModeIdx switch
+                {
+                    0 => "Sotarks",
+                    1 => "Nwolf",
+                    2 => "Kukkai",
+                    3 => "-mint-",
+                    _ => "Sotarks"
+                };
+            };
+
             foreach (var textBox in new FormTextBox[]
             {
                     TitleTextBox, ArtistTextBox, CreatorTextBox, DifficultyNameTextBox,
@@ -261,7 +274,6 @@ namespace osu.Game.Ai
             options.Artist = ArtistTextBox.Current.Value;
             options.Creator = CreatorTextBox.Current.Value;
             options.DifficultyName = DifficultyNameTextBox.Current.Value;
-            options.GameMode = GameModeTextBox.Current.Value;
 
             options.OverallDifficulty = OverallDifficultyTextBox.Current.Value;
             options.ApproachRate = ApproachRateTextBox.Current.Value;
@@ -278,8 +290,13 @@ namespace osu.Game.Ai
                 mapperId = new GenerationOptions().MapperId ?? 4452992;
             options.MapperId = mapperId;
 
-            options.Hitsounded = HitsoundedCheckBox.Current.Value;
+            if (!GenerationOptions.GAMEMODES.TryGetValue(GameModeDropdown.Current.Value, out int gameMode))
+                gameMode = new GenerationOptions().GameMode;
+            options.GameMode = gameMode;
 
+            options.Hitsounded = HitsoundedCheckBox.Current.Value;
+            //hotiaTODO: make sure negativedescriptor count == desc count
+            //Make sure the number of negative descriptors is equal to the number of descriptors.
             foreach (string d in DescriptorsSelect.Selected) options.Descriptors.Add(d);
             foreach (string d in NegativeDescriptorsSelect.Selected) options.NegativeDescriptors.Add(d);
 

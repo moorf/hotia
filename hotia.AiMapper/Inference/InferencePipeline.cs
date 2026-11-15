@@ -110,21 +110,18 @@ namespace hotia.AiMapper.Inference
 
             Log($"Decoded {timing.Events.Count} timing events and {mapEvents.Count} map events.");
 
-            string content = BeatmapWriter.Write(
-                mapEvents, timing.Events, options, Log);
+            string content = BeatmapWriter.Write(mapEvents, timing.Events, options, Log);
 
             cancellation.ThrowIfCancellationRequested();
 
             string fileName = $"beatmap-{Guid.NewGuid():N}.osu";
 
-            var encoding = new UTF8Encoding(
-                encoderShouldEmitUTF8Identifier: true);
+            var encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: true);
 
             byte[] preamble = encoding.GetPreamble();
             byte[] textBytes = encoding.GetBytes(content);
 
-            byte[] fileBytes = new byte[
-                checked(preamble.Length + textBytes.Length)];
+            byte[] fileBytes = new byte[checked(preamble.Length + textBytes.Length)];
 
             Buffer.BlockCopy(
                 preamble, 0,
@@ -144,20 +141,16 @@ namespace hotia.AiMapper.Inference
 
         private DenseTensor<float> encode(float[] window)
         {
-            var frames = new DenseTensor<float>(
-                window, new[] { 1, window.Length });
+            var frames = new DenseTensor<float>(window, new[] { 1, window.Length });
 
             using var outputs = encoder.Run(new[]
             {
                 NamedOnnxValue.CreateFromTensor("frames", frames)
             });
 
-            var hidden = outputs
-                .First(x => x.Name == "encoder_hidden_states")
-                .AsTensor<float>();
+            var hidden = outputs.First(x => x.Name == "encoder_hidden_states").AsTensor<float>();
 
-            return new DenseTensor<float>(
-                hidden.ToArray(), hidden.Dimensions.ToArray());
+            return new DenseTensor<float>(hidden.ToArray(), hidden.Dimensions.ToArray());
         }
 
         private void generateContext(
@@ -213,8 +206,7 @@ namespace hotia.AiMapper.Inference
                 var history = new List<long>(prompt);
                 var generated = new List<long>();
 
-                HashSet<long> stops = getStops(
-                    contextType, trimLookback, trimLookahead);
+                HashSet<long> stops = getStops(contextType, trimLookback, trimLookahead);
 
                 while (history.Count < maximum_tokens)
                 {
@@ -239,20 +231,15 @@ namespace hotia.AiMapper.Inference
                         }
                     }
 
-                    processLogits(
-                        history, logits,
-                        trimLookback ? lookback * window_ms : 0);
+                    processLogits(history, logits,trimLookback ? lookback * window_ms : 0);
 
                     int token = selectToken(logits);
 
                     generated.Add(token);
                     history.Add(token);
 
-                    if (stops.Contains(token) ||
-                        history.Count == maximum_tokens)
-                    {
+                    if (stops.Contains(token) || history.Count == maximum_tokens)
                         break;
-                    }
 
                     cursor.Step(token);
                     negativeCursor?.Step(token);
@@ -260,9 +247,7 @@ namespace hotia.AiMapper.Inference
 
                 int contextEnd = tokenizer.ContextEos[contextType];
 
-                while (generated.Count > 0 &&
-                       (generated[^1] == Tokenizer.EOS_ID ||
-                        generated[^1] == contextEnd))
+                while (generated.Count > 0 && (generated[^1] == Tokenizer.EOS_ID || generated[^1] == contextEnd))
                 {
                     generated.RemoveAt(generated.Count - 1);
                 }
@@ -291,17 +276,13 @@ namespace hotia.AiMapper.Inference
                         generated.RemoveAt(generated.Count - 1);
                 }
 
-                current.Events.AddRange(
-                    tokenizer.DecodeWindow(generated, frameTime));
+                current.Events.AddRange(tokenizer.DecodeWindow(generated, frameTime));
 
-                updateEventTimes(
-                    current.Events, current.Times,
-                    frameTime + window_ms);
+                updateEventTimes(current.Events, current.Times, frameTime + window_ms);
 
                 if (trimLookahead)
                 {
-                    double cutoff =
-                        frameTime + (1 - lookahead) * window_ms;
+                    double cutoff = frameTime + (1 - lookahead) * window_ms;
 
                     for (int i = current.Events.Count - 1; i >= 0; i--)
                     {
@@ -339,8 +320,7 @@ namespace hotia.AiMapper.Inference
             {
                 for (int i = current.Events.Count - 1; i >= 0; i--)
                 {
-                    if (current.Events[i].Type == "scroll_speed" &&
-                        current.Times[i] < frameTime)
+                    if (current.Events[i].Type == "scroll_speed" && current.Times[i] < frameTime)
                     {
                         lastSv = current.Events[i].Value;
                         break;
@@ -357,11 +337,9 @@ namespace hotia.AiMapper.Inference
                 ? -1
                 : ratio >= 1
                     ? 101
-                    : Math.Clamp((int)Math.Round(
-                        ratio * 100, MidpointRounding.ToEven), 0, 100);
+                    : Math.Clamp((int)Math.Round(ratio * 100, MidpointRounding.ToEven), 0, 100);
 
-            classTokens.Add(tokenizer.Encode(
-                new Event("song_position", songPosition)));
+            classTokens.Add(tokenizer.Encode(new Event("song_position", songPosition)));
 
             List<long> encodeContext(Context context)
             {
@@ -372,8 +350,7 @@ namespace hotia.AiMapper.Inference
                     if (context.Times[i] >= frameTime &&
                         context.Times[i] < frameTime + window_ms)
                     {
-                        tokens.Add(tokenizer.EncodeForWindow(
-                            context.Events[i], frameTime));
+                        tokens.Add(tokenizer.EncodeForWindow(context.Events[i], frameTime));
                     }
                 }
 
@@ -381,9 +358,7 @@ namespace hotia.AiMapper.Inference
             }
 
             var ownTokens = encodeContext(current);
-            var timingTokens = timing is null
-                ? new List<long>()
-                : encodeContext(timing);
+            var timingTokens = timing is null ? new List<long>() : encodeContext(timing);
 
             int maximumContextTokens = maximum_tokens;
 
@@ -417,18 +392,14 @@ namespace hotia.AiMapper.Inference
             double songLengthMs,
             bool negative)
         {
-            long token(string type, int value) =>
-                tokenizer.Encode(new Event(type, value));
+            long token(string type, int value) => tokenizer.Encode(new Event(type, value));
 
-            int unknown(string type) =>
-                tokenizer.GetRange(type).MaxValue;
+            int unknown(string type) => tokenizer.GetRange(type).MaxValue;
 
             double stars = options.TargetStarRating
-                ?? throw new InvalidOperationException(
-                    "Provide a target star rating.");
+                ?? throw new InvalidOperationException("Provide a target star rating.");
 
-            int difficulty = Math.Clamp(
-                (int)(stars * 24 / 12), 0, 23);
+            int difficulty = Math.Clamp((int)(stars * 24 / 12), 0, 23);
 
             bool hasDescriptors =
                 options.Descriptors.Count > 0 ||
@@ -442,47 +413,38 @@ namespace hotia.AiMapper.Inference
             int mapperIndex = unknown("mapper");
 
             if (requestedMapper.HasValue &&
-                tokenizer.MapperIndices.TryGetValue(
-                    requestedMapper.Value, out int knownIndex))
+                tokenizer.MapperIndices.TryGetValue(requestedMapper.Value, out int knownIndex))
             {
                 mapperIndex = knownIndex;
             }
 
             var result = new List<long>
         {
-            token("gamemode", 0),
+            token("gamemode", options.GameMode),
             token("difficulty", difficulty),
             token("mapper", mapperIndex),
             token("year", options.Year),
             token("hitsounded", options.Hitsounded ? 1 : 0),
 
-            token("song_length",
-                Math.Clamp((int)(songLengthMs / 10000), 0, 60)),
+            token("song_length",Math.Clamp((int)(songLengthMs / 10000), 0, 60)),
 
             token("global_sv",
                 (int)Math.Round(
                     Math.Clamp(options.SliderMultiplier, 0.4, 3.6) * 100,
                     MidpointRounding.ToEven)),
 
-            token("cs",
-                Math.Clamp(
-                    (int)(options.CircleSize * 20 / 10), 0, 20))
+            token("cs", Math.Clamp((int)(options.CircleSize * 20 / 10), 0, 20))
         };
 
-            var descriptors = negative
-                ? options.NegativeDescriptors
-                : options.Descriptors;
+            var descriptors = negative ? options.NegativeDescriptors : options.Descriptors;
 
             bool addedDescriptor = false;
 
             foreach (string name in descriptors.Distinct(StringComparer.Ordinal))
             {
-                if (!tokenizer.DescriptorIndices.TryGetValue(
-                        name, out int descriptorIndex))
+                if (!tokenizer.DescriptorIndices.TryGetValue(name, out int descriptorIndex))
                 {
-                    throw new ArgumentException(
-                        $"Unknown descriptor '{name}'. " +
-                        "Choose a descriptor from this model's tokenizer.");
+                    throw new ArgumentException($"Descriptor '{name}' not in this model's tokenizer.");
                 }
 
                 result.Add(token("descriptor", descriptorIndex));
@@ -505,8 +467,7 @@ namespace hotia.AiMapper.Inference
 
             if (trimLookback)
             {
-                int end = timeRange.StartId +
-                    (int)(lookback * window_ms / 10);
+                int end = timeRange.StartId + (int)(lookback * window_ms / 10);
 
                 for (int id = timeRange.StartId; id < end; id++)
                     stops.Add(id);
@@ -514,8 +475,7 @@ namespace hotia.AiMapper.Inference
 
             if (trimLookahead)
             {
-                int start = timeRange.EndIdExclusive -
-                    (int)(lookahead * window_ms / 10);
+                int start = timeRange.EndIdExclusive - (int)(lookahead * window_ms / 10);
 
                 for (int id = start; id < timeRange.EndIdExclusive; id++)
                     stops.Add(id);
@@ -538,8 +498,7 @@ namespace hotia.AiMapper.Inference
                 if (startIds.Contains(id))
                     break;
 
-                if (id >= timeRange.StartId &&
-                    id < timeRange.EndIdExclusive)
+                if (id >= timeRange.StartId && id < timeRange.EndIdExclusive)
                 {
                     latestTime = id;
                     break;
@@ -559,14 +518,11 @@ namespace hotia.AiMapper.Inference
             if (lookbackMs <= 0)
                 return;
 
-            int allowedStart = tokenizer.Encode(
-                new Event("t", (int)(lookbackMs / 10)));
+            int allowedStart = tokenizer.Encode(new Event("t", (int)(lookbackMs / 10)));
 
-            double timeMass = logSumExp(
-                scores, timeRange.StartId, timeRange.EndIdExclusive);
+            double timeMass = logSumExp(scores, timeRange.StartId, timeRange.EndIdExclusive);
 
-            double allowedMass = logSumExp(
-                scores, allowedStart, timeRange.EndIdExclusive);
+            double allowedMass = logSumExp(scores, allowedStart, timeRange.EndIdExclusive);
 
             if (double.IsFinite(allowedMass))
             {
@@ -577,8 +533,7 @@ namespace hotia.AiMapper.Inference
             }
             else
             {
-                scores[Tokenizer.EOS_ID] = (float)logAdd(
-                    scores[Tokenizer.EOS_ID], timeMass);
+                scores[Tokenizer.EOS_ID] = (float)logAdd(scores[Tokenizer.EOS_ID], timeMass);
             }
 
             for (int id = timeRange.StartId; id < allowedStart; id++)
@@ -587,9 +542,7 @@ namespace hotia.AiMapper.Inference
 
         private int selectToken(float[] scores)
         {
-            int[] order = Enumerable.Range(0, scores.Length)
-                .OrderByDescending(i => scores[i])
-                .ToArray();
+            int[] order = Enumerable.Range(0, scores.Length).OrderByDescending(i => scores[i]).ToArray();
 
             if (!float.IsFinite(scores[order[0]]))
                 throw new InvalidDataException("All decoder logits are invalid.");
@@ -653,8 +606,7 @@ namespace hotia.AiMapper.Inference
             if (double.IsNegativeInfinity(b)) return a;
 
             double maximum = Math.Max(a, b);
-            return maximum + Math.Log(
-                Math.Exp(a - maximum) + Math.Exp(b - maximum));
+            return maximum + Math.Log(Math.Exp(a - maximum) + Math.Exp(b - maximum));
         }
 
         private static readonly HashSet<string> non_timed = new() { "bezier_anchor", "perfect_anchor", "catmull_anchor", "red_anchor" };
@@ -733,16 +685,13 @@ namespace hotia.AiMapper.Inference
                 if (j < 0)
                     otherTime = 0;
 
-                interpolationTime = (int)(
-                    (interpolationTime - otherTime) /
-                    (count + 1) * count + otherTime);
+                interpolationTime = (int)((interpolationTime - otherTime) / (count + 1) * count + otherTime);
 
                 times[i] = (int)interpolationTime;
             }
         }
 
-        private static List<Event> unpackPositions(
-            IReadOnlyList<Event> events)
+        private static List<Event> unpackPositions(IReadOnlyList<Event> events)
         {
             var result = new List<Event>();
 
@@ -763,11 +712,9 @@ namespace hotia.AiMapper.Inference
                         offsetY = refinement / 16 * 2;
                     }
 
-                    result.Add(new Event(
-                        "pos_x", (item.Value % 33 - 8) * 32 + offsetX));
+                    result.Add(new Event("pos_x", (item.Value % 33 - 8) * 32 + offsetX));
 
-                    result.Add(new Event(
-                        "pos_y", (item.Value / 33 - 8) * 32 + offsetY));
+                    result.Add(new Event("pos_y", (item.Value / 33 - 8) * 32 + offsetY));
                 }
                 else
                     result.Add(item);

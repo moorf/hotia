@@ -1,14 +1,9 @@
 ﻿// Copyright (c) moorf 2026. Licensed under the GNU General Public License v3.0.
 // See the LICENCE.GPL3 file in the repository root for full licence text.
 
-using osu.Framework.Allocation;
 using osu.Framework.Graphics;
-using osu.Framework.Graphics.Lines;
-using osu.Framework.Screens;
 using osu.Game.Ai;
-using osu.Game.Configuration;
 using osu.Game.Database;
-using osu.Game.Overlays;
 using osu.Game.Overlays.Notifications;
 using osu.Game.Utils;
 
@@ -59,7 +54,7 @@ namespace hotia.AiMapper
 
         public async Task Generate(GenerationOptions generationOptions)
         {
-            await importLock.WaitAsync();
+            await importLock.WaitAsync().ConfigureAwait(false);
             try
             {
                 var notification = new ProgressNotification
@@ -72,7 +67,7 @@ namespace hotia.AiMapper
                 string archivePath = await BeatmapGenerator.Generate(
                     progressNotification: notification,
                     generationOptions,
-                    notification.CancellationToken)
+                    notification.CancellationToken).ConfigureAwait(false)
                     ?? throw new InvalidOperationException("Generation finished without producing an archive.");
 
                 Generated?.Invoke(archivePath);
